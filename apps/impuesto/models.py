@@ -3,6 +3,10 @@ from django.db import models
 
 # Create your models here.
 class Vencimiento(models.Model):
+    """"
+    Clase vencimiento que almacena las fechas de vencimiento de la multa
+    dependiendo del noveno digito de cédula
+    """
     id = models.AutoField(primary_key=True)
     digito = models.IntegerField('Noveno dígito de cédula', blank=True, null=True)
     no_obligado = models.DateField('No obligado', blank=True, null=True)
@@ -10,6 +14,11 @@ class Vencimiento(models.Model):
 
 
 class Impuesto(models.Model):
+    """
+    Clase impuesto que almacena valores correspondientes a las
+    fracciones basicas y excedentes para calcular el valor del
+    impuesto de la patente
+    """
     id = models.AutoField(primary_key=True)
     numero = models.IntegerField('Numero', blank=True, null=True)
     fraccion_basica = models.IntegerField('Fraccion basica', blank=True, null=True)
