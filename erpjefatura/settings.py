@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.contribuyente',
     'apps.direccion',
-    'apps.establecimiento'
+    'apps.establecimiento',
     'apps.impuesto',
 ]
 
