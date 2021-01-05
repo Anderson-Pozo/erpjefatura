@@ -1,12 +1,13 @@
 from django.db import models
 
+
 # Create your models here.
 class Parroquia(models.Model):
     """
     Clase Parroquia  que almacena el nombre de la parroquia
     """
     id = models.AutoField(primary_key=True)
-    nombre = models.CharField('Nombre de la parroquia', blank=True, null=True)
+    nombre = models.CharField('Nombre de la parroquia', max_length=20, blank=True, null=True)
 
 
 class Barrio(models.Model):
@@ -15,8 +16,8 @@ class Barrio(models.Model):
     tabla de parroquia
     """
     id = models.AutoField(primary_key=True)
-    nombre = models.CharField('Nombre del barrio', blank=True, null=True)
-    zona = models.CharField('Zona', blank=True, null=True)
+    nombre = models.CharField('Nombre del barrio', max_length=25, blank=True, null=True)
+    zona = models.CharField('Zona', max_length=6, blank=True, null=True)
     parroquia = models.ForeignKey(Parroquia, on_delete=models.CASCADE)
 
 
@@ -26,7 +27,7 @@ class Direccion(models.Model):
     tabla de Barrio
     """
     id = models.AutoField(primary_key=True)
-    calle_principal = models.CharField('Calle Principal', blank=True, null=True)
-    calle_secundaria = models.CharField('Calle Secundaria', blank=True, null=True)
+    calle_principal = models.CharField('Calle Principal', max_length=35, blank=True, null=True)
+    calle_secundaria = models.CharField('Calle Secundaria', max_length=35, blank=True, null=True)
     barrio = models.ForeignKey(Barrio, on_delete=models.CASCADE)
 

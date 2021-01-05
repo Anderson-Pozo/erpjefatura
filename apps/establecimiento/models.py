@@ -10,7 +10,7 @@ class TipoActividad(models.Model):
     el negocio
     """
     id = models.AutoField(primary_key=True)
-    nombre = models.CharField('Tipo de actividad comercial', blank=True, null=True)
+    nombre = models.CharField('Tipo de actividad comercial', max_length=25, blank=True, null=True)
 
 
 class Establecimiento(models.Model):
