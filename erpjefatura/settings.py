@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'apps.direccion',
     'apps.establecimiento',
     'apps.impuesto',
+    'apps.alcabala',
+    'apps.patente',
+    'apps.plusvalia',
+    'apps.predio',
 ]
 
 MIDDLEWARE = [

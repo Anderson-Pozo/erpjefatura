@@ -1,4 +1,5 @@
 from django.db import models
+from apps.predio.models import Predio
 
 # Create your models here.
 class Comprador(models.Model):
@@ -11,6 +12,7 @@ class Comprador(models.Model):
     apellidos = models.CharField('Apellidos', max_length=50, blank=True, null=True)
     casado = models.BooleanField('Casado', default=False, blank=True, null=True)
 
+
 class Vendedor(models.Model):
     """
     Clase Vendedor permite guardar la información de numero de cédula, nombres, apellidos, casado del vendedor
@@ -20,6 +22,7 @@ class Vendedor(models.Model):
     nombres = models.CharField('Nombres', max_length=50, blank=True, null=True)
     apellidos = models.CharField('Apellidos', max_length=50, blank=True, null=True)
     casado = models.BooleanField('Casado', default=False, blank=True, null=True)
+
 
 class Alcabala(models.Model):
     """
@@ -39,3 +42,4 @@ class Alcabala(models.Model):
     agua_potable = models.FloatField('Agua potable', blank=True, null=True)
     comprador = models.ForeignKey(Comprador, on_delete=models.CASCADE)
     vendedor = models.ForeignKey(Vendedor, on_delete=models.CASCADE)
+    predio = models.ForeignKey(Predio, on_delete=models.CASCADE)
