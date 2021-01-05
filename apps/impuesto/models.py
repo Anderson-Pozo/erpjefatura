@@ -1,3 +1,5 @@
+from _ast import mod
+
 from django.db import models
 
 
@@ -25,3 +27,13 @@ class Impuesto(models.Model):
     fraccion_excedente = models.IntegerField('Fraccion excedente', blank=True, null=True)
     impuesto_fraccion_basica = models.IntegerField('Impuesto fraccion basica', blank=True, null=True)
     porcentaje_fraccion_excedente = models.FloatField('Porcentaje fraccion excedente', blank=True, null=True)
+
+
+class Multa(models.Model):
+    """
+    Modelo Multa que contiene los porcentajes de mmulta de mora por cada mes del año
+    """
+    id = models.AutoField(primary_key=True)
+    anio = models.CharField('Año', max_length=4, blank=True, null=True)
+    mes = models.CharField('Mes', max_length=15, blank=True, null=True)
+    porcentaje = models.FloatField('Porcentaje multa', blank=True, null=True)
