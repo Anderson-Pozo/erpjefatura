@@ -16,6 +16,9 @@ class Comprador(models.Model):
     class Meta:
         db_table = "comprador"
 
+    def __str__(self):
+        return self.nombres + ' ' + self.apellidos
+
 
 class Vendedor(models.Model):
     """
@@ -29,6 +32,9 @@ class Vendedor(models.Model):
 
     class Meta:
         db_table = "vendedor"
+
+    def __str__(self):
+        return self.nombres + ' ' + self.apellidos
 
 
 class Alcabala(models.Model):
