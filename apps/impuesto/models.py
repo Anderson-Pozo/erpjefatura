@@ -14,6 +14,9 @@ class Vencimiento(models.Model):
     no_obligado = models.DateField('No obligado', blank=True, null=True)
     obligado = models.DateField('Obligado', blank=True, null=True)
 
+    class Meta:
+        db_table = "vencimiento"
+
 
 class Impuesto(models.Model):
     """
@@ -28,6 +31,9 @@ class Impuesto(models.Model):
     impuesto_fraccion_basica = models.IntegerField('Impuesto fraccion basica', blank=True, null=True)
     porcentaje_fraccion_excedente = models.FloatField('Porcentaje fraccion excedente', blank=True, null=True)
 
+    class Meta:
+        db_table = "impuesto"
+
 
 class Multa(models.Model):
     """
@@ -37,3 +43,6 @@ class Multa(models.Model):
     anio = models.CharField('Año', max_length=4, blank=True, null=True)
     mes = models.CharField('Mes', max_length=15, blank=True, null=True)
     porcentaje = models.FloatField('Porcentaje multa', blank=True, null=True)
+
+    class Meta:
+        db_table = "multa"

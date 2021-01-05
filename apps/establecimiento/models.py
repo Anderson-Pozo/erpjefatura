@@ -12,6 +12,9 @@ class TipoActividad(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField('Tipo de actividad comercial', max_length=25, blank=True, null=True)
 
+    class Meta:
+        db_table = "tipo_actividad"
+
 
 class Establecimiento(models.Model):
     """
@@ -25,3 +28,6 @@ class Establecimiento(models.Model):
     total_patrimonio = models.FloatField('Total de patrimonio', blank=True, null=True)
     tipo_actividad = models.ForeignKey(TipoActividad, on_delete=models.CASCADE)
     direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = "establecimiento"

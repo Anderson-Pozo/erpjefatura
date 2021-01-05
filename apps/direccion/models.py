@@ -9,6 +9,9 @@ class Parroquia(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField('Nombre de la parroquia', max_length=20, blank=True, null=True)
 
+    class Meta:
+        db_table = "parroquia"
+
 
 class Barrio(models.Model):
     """
@@ -19,6 +22,9 @@ class Barrio(models.Model):
     nombre = models.CharField('Nombre del barrio', max_length=25, blank=True, null=True)
     zona = models.CharField('Zona', max_length=6, blank=True, null=True)
     parroquia = models.ForeignKey(Parroquia, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = "barrio"
 
 
 class Direccion(models.Model):
@@ -31,3 +37,5 @@ class Direccion(models.Model):
     calle_secundaria = models.CharField('Calle Secundaria', max_length=35, blank=True, null=True)
     barrio = models.ForeignKey(Barrio, on_delete=models.CASCADE)
 
+    class Meta:
+        db_table = "direccion"

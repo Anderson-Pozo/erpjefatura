@@ -11,6 +11,9 @@ class TipoContribuyente(models.Model):
     nombre = models.CharField('Tipo de contribuyente ', max_length=20, blank=True, null=True)
     obligado_contabilidad = models.BooleanField('Obligado a llevar contabilidad ', default=False, blank=True, null=True)
 
+    class Meta:
+        db_table = "tipo_contribuyente"
+
 
 class Contribuyente(models.Model):
     """
@@ -28,3 +31,5 @@ class Contribuyente(models.Model):
     tlf_convencional = models.CharField('Telefono convencional', max_length=10, blank=True, null=True)
     tipocontribuyente = models.ForeignKey(TipoContribuyente, on_delete=models.CASCADE)
 
+    class Meta:
+        db_table = "contribuyente"

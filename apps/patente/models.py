@@ -16,6 +16,9 @@ class Patente(models.Model):
     contribuyente = models.ForeignKey(Contribuyente, on_delete=models.CASCADE)
     establecimiento = models.ForeignKey(Establecimiento, on_delete=models.CASCADE)
 
+    class Meta:
+        db_table = "patente"
+
 
 class DetallePatente(models.Model):
     """
@@ -30,3 +33,6 @@ class DetallePatente(models.Model):
     multa = models.FloatField('Multa', blank=True, null=True)
     servicios_administrativos = models.FloatField('Servicios administrativos', blank=True, null=True)
     patente = models.ForeignKey(Patente, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = "detalle_patente"

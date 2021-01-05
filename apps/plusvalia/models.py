@@ -1,6 +1,7 @@
 from django.db import models
 from apps.alcabala.models import Alcabala
 
+
 # Create your models here.
 class Plusvalia(models.Model):
     """
@@ -24,3 +25,6 @@ class Plusvalia(models.Model):
     rebaja_desvalorizacion = models.FloatField('Rebaja por desvalorización', blank=True, null=True)
     utilidad_imponible = models.FloatField('Utilidad imponible', blank=True, null=True)
     alcabala = models.ForeignKey(Alcabala, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = "plusvalia"

@@ -14,3 +14,6 @@ class Predio(models.Model):
     area_terreno = models.FloatField('Área del terreno', blank=True, null=True)
     zona = models.CharField('Zona urbana o rural', max_length=20, blank=True, null=True)
     direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = "predio"
