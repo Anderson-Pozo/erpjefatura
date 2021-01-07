@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'apps.patente',
     'apps.plusvalia',
     'apps.predio',
+    'apps.administrador',
+    'apps.usuario'
 ]
 
 MIDDLEWARE = [
