@@ -6,7 +6,10 @@
 {% endblock %}
 
 {% block bodypage %}
-        <body class="bg-primary" style="background-image: url( {% static 'assets/img/illustrations/fondo_sesion.jpeg' %} ); background-size: cover;">
+        <body class="bg-primary"
+              style="background-image: url( {% static 'assets/img/illustrations/fondo_sesion.jpeg' %} );
+                      background-size: cover;
+                      background-repeat: no-repeat">
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
@@ -22,13 +25,13 @@
                                             {% csrf_token %}
                                             <!-- Cuadro de texto para el ingreso de la credencial del número de cédula-->
                                             <div class="form-group">
-{#                                                <label class="small mb-1" for="numeroCedula">Número de cédula </label>#}
+                                                <label class="small mb-1" for="numeroCedula">Número de cédula </label>
 {#                                                <input class="form-control" id="numeroCedulaCedula" type="text" placeholder="Ingrese el número de cédula" maxlength="10" pattern="[0-9]+" required/>#}
                                                 {{ form.username }}
                                             </div>
                                             <!-- Cuadro de texto para el ingreso de la credencial de contraseña-->
                                             <div class="form-group">
-{#                                                <label class="small mb-1" for="password">Contraseña</label>#}
+                                                <label class="small mb-1" for="password">Contraseña</label>
 {#                                                <input class="form-control" id="password" type="password" placeholder="Ingrese su contraseña" required/>#}
                                                 {{ form.password }}
                                             </div>
@@ -41,8 +44,8 @@
                                             </div>
                                             <!-- link para recuperar contraseña y boton de incio de sesion-->
                                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <a class="small" href="auth-password-basic.html">Recuperar contraseña</a>
-                                                <button  class="btn btn-primary" type="submit">Inciar sesion</button>
+                                                <a class="small" href="{% url 'recover_password' %}">Recuperar contraseña</a>
+                                                <button  class="btn btn-primary" type="submit">Iniciar sesion</button>
                                             </div>
                                         </form>
                                     </div>

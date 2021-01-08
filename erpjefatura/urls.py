@@ -19,12 +19,13 @@ from django.conf import settings
 
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from apps.usuario.views import Login
+from apps.usuario.views import Login, RecoveryPassword
 from apps.administrador.views import Index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', Login.as_view(), name='login'),
+    path('recover_password/', RecoveryPassword.as_view(), name='recover_password'),
     path('', Index.as_view(), name='index'),
 ]
 

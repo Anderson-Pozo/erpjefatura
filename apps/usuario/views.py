@@ -3,7 +3,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponseRedirect
-from django.views.generic import FormView
+from django.views.generic import FormView, TemplateView
 from django.contrib.auth import login, logout
 from .forms import LoginForm
 
@@ -25,3 +25,7 @@ class Login(FormView):
     def form_valid(self, form):
         login(self.request, form.get_user())
         return super(Login, self).form_valid(form)
+
+
+class RecoveryPassword(TemplateView):
+    template_name = 'usuario/recovery_password.html'
