@@ -36,7 +36,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['email']
 
     class Meta:
-        permissions = []
+        db_table = "usuario"
 
     def __str__(self):
         return f'{self.first_name}, {self.last_name}'
