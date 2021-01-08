@@ -18,13 +18,15 @@ from django.urls import path, include
 from django.conf import settings
 
 from django.conf.urls.static import static
+from django.contrib.auth.decorators import login_required
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from apps.usuario.views import Login, RecoveryPassword
+from apps.usuario.views import Login, logout_user, RecoveryPassword
 from apps.administrador.views import Index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', Login.as_view(), name='login'),
+    path('accounts/login/', Login.as_view(), name='login'),
+    path('logout/', login_required(logout_user), name='logout'),
     path('recover_password/', RecoveryPassword.as_view(), name='recover_password'),
     path('', Index.as_view(), name='index'),
 ]

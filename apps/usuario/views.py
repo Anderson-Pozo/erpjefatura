@@ -23,8 +23,17 @@ class Login(FormView):
             return super(Login, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
+        # remember_me = form.cleaned_data['remember_me']
+        # if not remember_me:
+        #     self.request.session.set_expiry(0)
+        #     self.request.session.modified = True
         login(self.request, form.get_user())
         return super(Login, self).form_valid(form)
+
+
+def logout_user(request):
+    logout(request)
+    return HttpResponseRedirect('/accounts/login/')
 
 
 class RecoveryPassword(TemplateView):

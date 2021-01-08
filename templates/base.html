@@ -33,38 +33,6 @@
             <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 mr-lg-2" id="sidebarToggle"><i data-feather="menu"></i></button>
             <!-- Navbar Items-->
             <ul class="navbar-nav align-items-center ml-auto">
-                <!-- Documentation Dropdown-->
-                <li class="nav-item dropdown no-caret d-none d-sm-block mr-3">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div class="font-weight-500">Documentation</div>
-                        <i class="fas fa-chevron-right dropdown-arrow"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right py-0 mr-sm-n15 mr-lg-0 o-hidden animated--fade-in-up" aria-labelledby="navbarDropdownDocs">
-                        <a class="dropdown-item py-3" href="https://docs.startbootstrap.com/sb-admin-pro" target="_blank">
-                            <div class="icon-stack bg-primary-soft text-primary mr-4"><i data-feather="book"></i></div>
-                            <div>
-                                <div class="small text-gray-500">Documentation</div>
-                                Usage instructions and reference
-                            </div>
-                        </a>
-                        <div class="dropdown-divider m-0"></div>
-                        <a class="dropdown-item py-3" href="https://docs.startbootstrap.com/sb-admin-pro/components" target="_blank">
-                            <div class="icon-stack bg-primary-soft text-primary mr-4"><i data-feather="code"></i></div>
-                            <div>
-                                <div class="small text-gray-500">Components</div>
-                                Code snippets and reference
-                            </div>
-                        </a>
-                        <div class="dropdown-divider m-0"></div>
-                        <a class="dropdown-item py-3" href="https://docs.startbootstrap.com/sb-admin-pro/changelog" target="_blank">
-                            <div class="icon-stack bg-primary-soft text-primary mr-4"><i data-feather="file-text"></i></div>
-                            <div>
-                                <div class="small text-gray-500">Changelog</div>
-                                Updates and changes
-                            </div>
-                        </a>
-                    </div>
-                </li>
                 <!-- Navbar Search Dropdown-->
                 <!-- * * Note: * * Visible only below the md breakpoint-->
                 <li class="nav-item dropdown no-caret mr-3 d-md-none">
@@ -141,7 +109,7 @@
                             <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
                             Cuenta
                         </a>
-                        <a class="dropdown-item" href="#!">
+                        <a class="dropdown-item" href="{% url 'logout' %}">
                             <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
                             Cerrar sesión
                         </a>
@@ -296,8 +264,8 @@
                     <!-- Sidenav Footer-->
                     <div class="sidenav-footer">
                         <div class="sidenav-footer-content">
-                            <div class="sidenav-footer-subtitle">Logged in as:</div>
-                            <div class="sidenav-footer-title">Valerie Luna</div>
+                            <div class="sidenav-footer-subtitle">Inicio sesión como:</div>
+                            <div class="sidenav-footer-title">{{ user.first_name }}</div>
                         </div>
                     </div>
                 </nav>

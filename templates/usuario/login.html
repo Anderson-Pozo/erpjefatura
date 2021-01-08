@@ -18,28 +18,37 @@
                             <div class="col-lg-5">
                                 <!-- Formulario basico de login-->
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header justify-content-center"> <h1><b>Iniciar  sesion</b></h1> </div>
+                                    <div class="card-header justify-content-center"> <h1><b>Iniciar  sesión</b></h1> </div>
                                     <div class="card-body">
                                         <!-- Login form-->
                                         <form method="post">
                                             {% csrf_token %}
+                                            <div class="form-group">
+                                            {% if form.non_field_errors %}
+                                                <ul class='alert alert-danger'>
+                                                    {% for error in form.non_field_errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                            </div>
                                             <!-- Cuadro de texto para el ingreso de la credencial del número de cédula-->
                                             <div class="form-group">
+                                                {{ form.username.errors }}
                                                 <label class="small mb-1" for="numeroCedula">Número de cédula </label>
-{#                                                <input class="form-control" id="numeroCedulaCedula" type="text" placeholder="Ingrese el número de cédula" maxlength="10" pattern="[0-9]+" required/>#}
                                                 {{ form.username }}
                                             </div>
                                             <!-- Cuadro de texto para el ingreso de la credencial de contraseña-->
                                             <div class="form-group">
+                                                {{ form.password.errors }}
                                                 <label class="small mb-1" for="password">Contraseña</label>
-{#                                                <input class="form-control" id="password" type="password" placeholder="Ingrese su contraseña" required/>#}
                                                 {{ form.password }}
                                             </div>
                                             <!-- Casilla para guardar la contraseña-->
                                             <div class="form-group">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" id="recordarPassword" type="checkbox" />
-                                                    <label class="custom-control-label" for="recordarPassword">Guardar contraseña</label>
+                                                    {{ form.remember_me }}
+                                                    <label class="custom-control-label" for="id_remember_me">Guardar contraseña</label>
                                                 </div>
                                             </div>
                                             <!-- link para recuperar contraseña y boton de incio de sesion-->
