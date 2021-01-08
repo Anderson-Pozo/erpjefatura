@@ -25,7 +25,7 @@ from apps.administrador.views import Index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', Login.as_view(), name='login'),
-    path('', Index.as_view(), name='index')
+    path('', Index.as_view(), name='index'),
 ]
 
 # URL Apps
