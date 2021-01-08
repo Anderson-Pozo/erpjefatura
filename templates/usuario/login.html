@@ -22,13 +22,15 @@
                                             {% csrf_token %}
                                             <!-- Cuadro de texto para el ingreso de la credencial del número de cédula-->
                                             <div class="form-group">
-                                                <label class="small mb-1" for="numeroCedula">Número de cédula </label>
-                                                <input class="form-control" id="numeroCedulaCedula" type="text" placeholder="Ingrese el número de cédula" maxlength="10" pattern="[0-9]+" required/>
+{#                                                <label class="small mb-1" for="numeroCedula">Número de cédula </label>#}
+{#                                                <input class="form-control" id="numeroCedulaCedula" type="text" placeholder="Ingrese el número de cédula" maxlength="10" pattern="[0-9]+" required/>#}
+                                                {{ form.username }}
                                             </div>
                                             <!-- Cuadro de texto para el ingreso de la credencial de contraseña-->
                                             <div class="form-group">
-                                                <label class="small mb-1" for="password">Contraseña</label>
-                                                <input class="form-control" id="password" type="password" placeholder="Ingrese su contraseña" required/>
+{#                                                <label class="small mb-1" for="password">Contraseña</label>#}
+{#                                                <input class="form-control" id="password" type="password" placeholder="Ingrese su contraseña" required/>#}
+                                                {{ form.password }}
                                             </div>
                                             <!-- Casilla para guardar la contraseña-->
                                             <div class="form-group">
