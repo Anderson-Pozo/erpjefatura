@@ -17,7 +17,7 @@ class LoginForm(AuthenticationForm):
         help_text='Ingrese su número de cédula de 10 dígitos',
         error_messages={
             'required': 'Número de cédula es requerido',
-            'max_length': 'El número de cédual debe tener 10 dígitos'
+            'maxlength': 'El número de cédula debe tener 10 dígitos'
         },
         widget=forms.TextInput(
             attrs={
@@ -44,7 +44,7 @@ class LoginForm(AuthenticationForm):
     )
 
     remember_me = forms.BooleanField(
-        # required=False,
+        required=False,
         label='Guardar contraseña',
         widget=forms.CheckboxInput(
             attrs={

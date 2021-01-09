@@ -1,1 +1,23 @@
 {% extends 'base.html' %}
+
+{% block navlinkinicio %}
+    <a class="nav-link active" href="{% url 'index' %}">
+        Inicio
+    </a>
+{% endblock %}
+
+{% block iconheader %}
+    <div class="page-header-icon"><i data-feather="home"></i></div>
+{% endblock %}
+
+{% block titleheader %}
+    Inicio
+{% endblock %}
+
+{% block subtitleheader %}
+    Sitio de administración de la Jefatura de Rentas
+{% endblock %}
+
+{% block titleheadercard %}
+    Bienvenido {{ user.first_name }}
+{% endblock %}

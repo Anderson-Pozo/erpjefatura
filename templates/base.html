@@ -105,7 +105,7 @@
                             </div>
                         </h6>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#!">
+                        <a class="dropdown-item" href="{% url 'usuario:account' %}">
                             <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
                             Cuenta
                         </a>
@@ -139,22 +139,27 @@
                                 Messages
                                 <span class="badge badge-success-soft text-success ml-auto">2 New!</span>
                             </a>
-                            <!-- Sidenav Menu Heading (Core)-->
-                            <div class="sidenav-menu-heading">Core</div>
-                            <!-- Sidenav Accordion (Dashboard)-->
+                            <!-- Sidenav Menu Heading-->
+                            <div class="sidenav-menu-heading">ADMINISTRACIÓN</div>
+                            <!-- Sidenav Accordion -->
                             <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">
                                 <div class="nav-link-icon"><i data-feather="activity"></i></div>
-                                Dashboards
+                                Administración
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseDashboards" data-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                    <a class="nav-link" href="index.html">
-                                        Default
-                                        <span class="badge badge-primary-soft text-primary ml-auto">Updated</span>
+                                    {% block navlinkinicio %}
+                                    <a class="nav-link" href="{% url 'index' %}">
+                                        Inicio
                                     </a>
-                                    <a class="nav-link" href="dashboard-2.html">Multipurpose</a>
-                                    <a class="nav-link" href="dashboard-3.html">Affiliate</a>
+                                    {% endblock %}
+                                    <a class="nav-link" href="dashboard-2.html">
+                                        Multipurpose
+                                    </a>
+                                    <a class="nav-link" href="dashboard-3.html">
+                                        Affiliate
+                                    </a>
                                 </nav>
                             </div>
                             <!-- Sidenav Heading (App Views)-->
@@ -281,11 +286,15 @@
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-auto mt-4">
                                         <h1 class="page-header-title">
-                                            <div class="page-header-icon"><i data-feather="activity"></i></div>
+                                            {% block iconheader %}
+                                                <div class="page-header-icon"><i data-feather="activity"></i></div>
+                                            {% endblock %}
                                             {% block titleheader %}Vencimiento{% endblock %}
                                         </h1>
                                         <div class="page-header-subtitle">
+                                            {% block subtitleheader %}
                                             Example dashboard overview and content summary
+                                            {% endblock %}
                                         </div>
                                     </div>
                                     <div class="col-12 col-xl-auto mt-4">
@@ -308,7 +317,9 @@
                                         <div class="row align-items-center">
                                             <div class="col-xl-8 col-xxl-12">
                                                 <div class="text-center text-xl-left text-xxl-center px-4 mb-4 mb-xl-0 mb-xxl-4">
-                                                    <h1 class="text-primary">Welcome to SB Admin Pro!</h1>
+                                                    <h1 class="text-primary">
+                                                        {% block titleheadercard %}Welcome to SB Admin Pro!{% endblock %}
+                                                    </h1>
                                                     <p class="text-gray-700 mb-0">Browse our fully designed UI toolkit! Browse our prebuilt app pages, components, and utilites, and be sure to look at our full documentation!</p>
                                                 </div>
                                             </div>

@@ -25,22 +25,30 @@
                                             {% csrf_token %}
                                             <div class="form-group">
                                             {% if form.non_field_errors %}
-                                                <ul class='alert alert-danger'>
+                                                <ul class='alert alert-danger' role="alert">
                                                     {% for error in form.non_field_errors %}
-                                                        <li>{{ error }}</li>
+                                                        {{ error }}
                                                     {% endfor %}
                                                 </ul>
                                             {% endif %}
                                             </div>
                                             <!-- Cuadro de texto para el ingreso de la credencial del número de cédula-->
                                             <div class="form-group">
-                                                {{ form.username.errors }}
+                                                {% if form.username.errors %}
+                                                    <div class="text-danger text-xs">
+                                                        {{ form.username.errors }}
+                                                    </div>
+                                                {% endif %}
                                                 <label class="small mb-1" for="numeroCedula">Número de cédula </label>
                                                 {{ form.username }}
                                             </div>
                                             <!-- Cuadro de texto para el ingreso de la credencial de contraseña-->
                                             <div class="form-group">
-                                                {{ form.password.errors }}
+                                                {% if form.username.errors %}
+                                                    <div class="text-danger text-xs">
+                                                        {{ form.password.errors }}
+                                                    </div>
+                                                {% endif %}
                                                 <label class="small mb-1" for="password">Contraseña</label>
                                                 {{ form.password }}
                                             </div>

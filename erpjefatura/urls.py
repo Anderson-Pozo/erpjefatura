@@ -33,7 +33,8 @@ urlpatterns = [
 
 # URL Apps
 urlpatterns += [
-    path('impuesto/', include(('apps.impuesto.urls', 'impuesto')))
+    path('impuesto/', include(('apps.impuesto.urls', 'impuesto'))),
+    path('usuario/', include(('apps.usuario.urls', 'usuario')))
 ]
 
 urlpatterns += staticfiles_urlpatterns()
