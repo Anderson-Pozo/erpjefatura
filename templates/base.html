@@ -154,17 +154,33 @@
                                         Inicio
                                     </a>
                                     {% endblock %}
-                                    <a class="nav-link" href="dashboard-2.html">
-                                        Multipurpose
+{#                                    <a class="nav-link" href="dashboard-2.html">#}
+{#                                        Multipurpose#}
+{#                                    </a>#}
+{#                                    <a class="nav-link" href="dashboard-3.html">#}
+{#                                        Affiliate#}
+{#                                    </a>#}
+                                </nav>
+                            </div>
+                            <!-- Sidenav Heading (Patente)-->
+                            <div class="sidenav-menu-heading">Patente</div>
+                            <!-- Sidenav Accordion (Patente)-->
+                            <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapsePatente" aria-expanded="false" aria-controls="collapsePatente">
+                                <div class="nav-link-icon"><i data-feather="repeat"></i></div>
+                                Patente
+                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapsePatente" data-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
+                                    <a class="nav-link" href="#">
+                                        Apertura de patente
                                     </a>
-                                    <a class="nav-link" href="dashboard-3.html">
-                                        Affiliate
+                                    <a class="nav-link" href="#">
+                                        Catastro
                                     </a>
                                 </nav>
                             </div>
-                            <!-- Sidenav Heading (App Views)-->
-                            <div class="sidenav-menu-heading">Patente</div>
-                            <!-- Sidenav Accordion (Pages)-->
+                            <!-- Sidenav Accordion (Impuesto)-->
                             <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseMulta" aria-expanded="false" aria-controls="collapseMulta">
                                 <div class="nav-link-icon"><i class="fas fa-dollar-sign"></i></div>
                                 Impuesto
@@ -183,18 +199,28 @@
                                     </a>
                                 </nav>
                             </div>
-                            <!-- Sidenav Accordion (Flows)-->
-                            <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseFlows" aria-expanded="false" aria-controls="collapseFlows">
-                                <div class="nav-link-icon"><i data-feather="repeat"></i></div>
-                                Flows
-                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            <!-- Sidenav Link (Contribuyentes)-->
+                            <a class="nav-link" href="#">
+                                <div class="nav-link-icon"><i class="fas fa-street-view"></i></div>
+                                Contribuyentes
                             </a>
-                            <div class="collapse" id="collapseFlows" data-parent="#accordionSidenav">
-                                <nav class="sidenav-menu-nested nav">
-                                    <a class="nav-link" href="multi-tenant-select.html">Multi-Tenant Registration</a>
-                                    <a class="nav-link" href="wizard.html">Wizard</a>
-                                </nav>
-                            </div>
+                            <!-- Sidenav Link (Establecimientos)-->
+                            <a class="nav-link" href="#">
+                                <div class="nav-link-icon"><i class="fas fa-store"></i></div>
+                                Establecimientos
+                            </a>
+                            <!-- Sidenav Heading (Patente)-->
+                            <div class="sidenav-menu-heading">Plusvalía y alcabalas</div>
+                            <!-- Sidenav Link (Establecimientos)-->
+                            <a class="nav-link" href="#">
+                                <div class="nav-link-icon"><i class="fas fa-people-arrows"></i></div>
+                                Aviso de alcabalas
+                            </a>
+                            <!-- Sidenav Link (Establecimientos)-->
+                            <a class="nav-link" href="#">
+                                <div class="nav-link-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                                Plusvalía
+                            </a>
                         </div>
                     </div>
                     <!-- Sidenav Footer-->
