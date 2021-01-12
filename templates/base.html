@@ -200,12 +200,12 @@
                                 </nav>
                             </div>
                             <!-- Sidenav Link (Contribuyentes)-->
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{% url 'contribuyente:lista_contribuyentes' %}">
                                 <div class="nav-link-icon"><i class="fas fa-street-view"></i></div>
                                 Contribuyentes
                             </a>
                             <!-- Sidenav Link (Establecimientos)-->
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{% url 'establecimiento:lista_establecimientos' %}">
                                 <div class="nav-link-icon"><i class="fas fa-store"></i></div>
                                 Establecimientos
                             </a>
@@ -235,8 +235,9 @@
             {# Central body #}
 
             <div id="layoutSidenav_content">
-                {% block centralbody %}
+                {% block mainbody %}
                 <main>
+                    {% block header %}
                     <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
                         <div class="container">
                             <div class="page-header-content pt-4">
@@ -255,18 +256,23 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-xl-auto mt-4">
+                                        {% block buttondate %}
                                         <button class="btn btn-white p-3" id="reportrange">
                                             <i class="mr-2 text-primary" data-feather="calendar"></i>
                                             <span></span>
                                             <i class="ml-1" data-feather="chevron-down"></i>
                                         </button>
+                                        {% endblock %}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </header>
+                    {% endblock %}
                     <!-- Main page content-->
+                    {% block centralbody %}
                     <div class="container mt-n10">
+                        {% block welcomecard %}
                         <div class="row">
                             <div class="col-xxl-4 col-xl-12 mb-4">
                                 <div class="card h-100">
@@ -277,15 +283,21 @@
                                                     <h1 class="text-primary">
                                                         {% block titleheadercard %}Welcome to SB Admin Pro!{% endblock %}
                                                     </h1>
-                                                    <p class="text-gray-700 mb-0">Browse our fully designed UI toolkit! Browse our prebuilt app pages, components, and utilites, and be sure to look at our full documentation!</p>
+                                                    <p class="text-gray-700 mb-0">
+                                                        Browse our fully designed UI toolkit!
+                                                        Browse our prebuilt app pages, components, and utilites, and be
+                                                        sure to look at our full documentation!
+                                                    </p>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-4 col-xxl-12 text-center"><img class="img-fluid" src="assets/img/illustrations/at-work.svg" style="max-width: 26rem" /></div>
+{#                                            <div class="col-xl-4 col-xxl-12 text-center"><img class="img-fluid" src="assets/img/illustrations/at-work.svg" style="max-width: 26rem" /></div>#}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        {% endblock %}
+
                         <!-- Example Colored Cards for Dashboard Demo-->
                         <div class="row">
                             <div class="col-xxl-3 col-lg-6">
@@ -402,17 +414,10 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Example DataTable for Dashboard Demo-->
-                        <div class="card mb-4">
-                            <div class="card-header">Personnel Management</div>
-                            <div class="card-body">
-                                <h1>Hola desde body</h1>
-                            </div>
-                        </div>
                     </div>
+                    {% endblock %}
                 </main>
                 {% endblock %}
-
                 {% block footer %}
                 <footer class="footer mt-auto footer-light">
                     <div class="container-fluid">
@@ -439,6 +444,9 @@
         <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js" crossorigin="anonymous"></script>
         <script src="{% static 'assets/demo/date-range-picker-demo.js' %}"></script>
+        <script src="{% static 'assets/demo/datatable-language.js' %}"></script>
+        {% endblock %}
+        {% block extrajs %}
         {% endblock %}
     </body>
     {% endblock %}

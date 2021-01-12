@@ -34,7 +34,9 @@ urlpatterns = [
 # URL Apps
 urlpatterns += [
     path('impuesto/', include(('apps.impuesto.urls', 'impuesto'))),
-    path('usuario/', include(('apps.usuario.urls', 'usuario')))
+    path('usuario/', include(('apps.usuario.urls', 'usuario'))),
+    path('contribuyente/', include(('apps.contribuyente.urls', 'contribuyente'))),
+    path('establecimiento/', include(('apps.establecimiento.urls', 'establecimiento')))
 ]
 
 urlpatterns += staticfiles_urlpatterns()
