@@ -28,7 +28,7 @@
     <body class="nav-fixed">
         <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
             <!-- Navbar Brand-->
-            <a class="navbar-brand" href="index.html">Jefatura de Rentas</a>
+            <a class="navbar-brand" href="{% url 'index' %}">Jefatura de Rentas</a>
             <!-- Sidenav Toggle Button-->
             <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 mr-lg-2" id="sidebarToggle"><i data-feather="menu"></i></button>
             <!-- Navbar Items-->
@@ -122,22 +122,10 @@
                 <nav class="sidenav shadow-right sidenav-light">
                     <div class="sidenav-menu">
                         <div class="nav accordion" id="accordionSidenav">
-                            <!-- Sidenav Menu Heading (Account)-->
-                            <!-- * * Note: * * Visible only on and above the sm breakpoint-->
-                            <div class="sidenav-menu-heading d-sm-none">Account</div>
-                            <!-- Sidenav Link (Alerts)-->
-                            <!-- * * Note: * * Visible only on and above the sm breakpoint-->
-                            <a class="nav-link d-sm-none" href="#!">
-                                <div class="nav-link-icon"><i data-feather="bell"></i></div>
-                                Alerts
-                                <span class="badge badge-warning-soft text-warning ml-auto">4 New!</span>
-                            </a>
-                            <!-- Sidenav Link (Messages)-->
-                            <!-- * * Note: * * Visible only on and above the sm breakpoint-->
-                            <a class="nav-link d-sm-none" href="#!">
-                                <div class="nav-link-icon"><i data-feather="mail"></i></div>
-                                Messages
-                                <span class="badge badge-success-soft text-success ml-auto">2 New!</span>
+                            <div class="sidenav-menu-heading"></div>
+                            <a class="nav-link" href="{% url 'index' %}">
+                                <div class="nav-link-icon"><i class="fas fa-home"></i></div>
+                                Inicio
                             </a>
                             <!-- Sidenav Menu Heading-->
                             <div class="sidenav-menu-heading">ADMINISTRACIÓN</div>
@@ -166,7 +154,7 @@
                             <div class="sidenav-menu-heading">Patente</div>
                             <!-- Sidenav Accordion (Patente)-->
                             <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapsePatente" aria-expanded="false" aria-controls="collapsePatente">
-                                <div class="nav-link-icon"><i data-feather="repeat"></i></div>
+                                <div class="nav-link-icon"><i class="fas fa-file-signature"></i></div>
                                 Patente
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
