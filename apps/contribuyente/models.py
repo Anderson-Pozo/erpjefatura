@@ -43,5 +43,8 @@ class Contribuyente(models.Model):
         item['tipocontribuyente'] = self.tipocontribuyente.nombre
         return item
 
+    def __str__(self):
+        return self.nombres
+
     class Meta:
         db_table = "contribuyente"
