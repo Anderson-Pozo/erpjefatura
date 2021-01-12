@@ -36,10 +36,10 @@ Listado de contribuyentes de la Jefatura de Rentas
                             <th>Apellidos</th>
                             <th>Nº Cédula</th>
                             <th>RUC</th>
-                            <th>Tipo Contribuyente</th>
+{#                            <th>Tipo Contribuyente</th>#}
                             <th>Correo</th>
                             <th>Teléfono</th>
-                            <th>Acciones</th>
+{#                            <th>Acciones</th>#}
                         </tr>
                     </thead>
                     <tfoot>
@@ -48,47 +48,14 @@ Listado de contribuyentes de la Jefatura de Rentas
                             <th>Apellidos</th>
                             <th>Nº Cédula</th>
                             <th>RUC</th>
-                            <th>Tipo Contribuyente</th>
+{#                            <th>Tipo Contribuyente</th>#}
                             <th>Correo</th>
                             <th>Teléfono</th>
-                            <th>Acciones</th>
+{#                            <th>Acciones</th>#}
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                            <td>
-                                <div class="badge badge-primary badge-pill">Full-time</div>
-                            </td>
-                            <td>
-                                <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i
-                                        data-feather="more-vertical"></i></button>
-                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i
-                                        data-feather="trash-2"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Huakansd askndk</td>
-                            <td>jlksdj guwbqn</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                            <td>
-                                <div class="badge badge-primary badge-pill">Full-time</div>
-                            </td>
-                            <td>
-                                <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i
-                                        data-feather="more-vertical"></i></button>
-                                <button class="btn btn-datatable btn-icon btn-transparent-dark"><i
-                                        data-feather="trash-2"></i></button>
-                            </td>
-                        </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -98,4 +65,5 @@ Listado de contribuyentes de la Jefatura de Rentas
 {% endblock %}
 
 {% block extrajs %}
+    <script src="{% static 'static/jefatura/contribuyente.js' %}"></script>
 {% endblock %}
