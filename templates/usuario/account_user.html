@@ -39,10 +39,10 @@
                             <!-- Profile picture image-->
                             <img class="img-account-profile rounded-circle mb-2"
                                 src="{% static 'assets/img/illustrations/profiles/profile-1.png' %}" alt="" />
-                            <!-- Profile picture help block-->
-                            <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+{#                            <!-- Profile picture help block-->#}
+{#                            <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>#}
                             <!-- Profile picture upload button-->
-                            <button class="btn btn-primary" type="button">Subir nueva imagen</button>
+                            <button class="btn btn-primary" type="file">Subir nueva imagen</button>
                         </div>
                     </div>
                 </div>
@@ -54,64 +54,53 @@
                             <form>
                                 <!-- Form Group (username)-->
                                 <div class="form-group">
-                                    <label class="small mb-1" for="inputUsername">Username (how your name will appear to
-                                        other users on the site)</label>
-                                    <input class="form-control" id="inputUsername" type="text"
-                                        placeholder="Enter your username" value="username" />
+                                    <label class="small mb-1" for="numeroCedula">Número de cédula</label>
+                                    <input class="form-control" id="numeroCedula" type="text" maxlength="10"
+                                           minlength="10"
+                                        placeholder="Ingrese su número de cédula" value="" required/>
                                 </div>
                                 <!-- Form Row-->
                                 <div class="form-row">
                                     <!-- Form Group (first name)-->
                                     <div class="form-group col-md-6">
-                                        <label class="small mb-1" for="inputFirstName">First name</label>
-                                        <input class="form-control" id="inputFirstName" type="text"
-                                            placeholder="Enter your first name" value="Valerie" />
+                                        <label class="small mb-1" for="ingreseNombres">Nombres</label>
+                                        <input class="form-control" id="ingreseNombres" type="text" maxlength="60"
+                                            placeholder="Ingrese sus nombres completos" value="" required />
                                     </div>
                                     <!-- Form Group (last name)-->
                                     <div class="form-group col-md-6">
-                                        <label class="small mb-1" for="inputLastName">Last name</label>
-                                        <input class="form-control" id="inputLastName" type="text"
-                                            placeholder="Enter your last name" value="Luna" />
-                                    </div>
-                                </div>
-                                <!-- Form Row        -->
-                                <div class="form-row">
-                                    <!-- Form Group (organization name)-->
-                                    <div class="form-group col-md-6">
-                                        <label class="small mb-1" for="inputOrgName">Organization name</label>
-                                        <input class="form-control" id="inputOrgName" type="text"
-                                            placeholder="Enter your organization name" value="Start Bootstrap" />
-                                    </div>
-                                    <!-- Form Group (location)-->
-                                    <div class="form-group col-md-6">
-                                        <label class="small mb-1" for="inputLocation">Location</label>
-                                        <input class="form-control" id="inputLocation" type="text"
-                                            placeholder="Enter your location" value="San Francisco, CA" />
+                                        <label class="small mb-1" for="ingreseApellidos">Apellidos</label>
+                                        <input class="form-control" id="ingreseApellidos" type="text" maxlength="60"
+                                            placeholder="Digite sus apellidos" value="" required />
                                     </div>
                                 </div>
                                 <!-- Form Group (email address)-->
                                 <div class="form-group">
-                                    <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                                    <label class="small mb-1"
+                                           for="inputEmailAddress">Dirección de correo electrónico</label>
                                     <input class="form-control" id="inputEmailAddress" type="email"
-                                        placeholder="Enter your email address" value="name@example.com" />
+                                        placeholder="Ingrese su correo electrónico"
+                                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{​​​​2,15}​​​​$"
+                                           value="" required/>
                                 </div>
                                 <!-- Form Row-->
                                 <div class="form-row">
                                     <!-- Form Group (phone number)-->
                                     <div class="form-group col-md-6">
-                                        <label class="small mb-1" for="inputPhone">Phone number</label>
-                                        <input class="form-control" id="inputPhone" type="tel"
-                                            placeholder="Enter your phone number" value="555-123-4567" />
+                                        <label class="small mb-1" for="inputPhone">Teléfono celular</label>
+                                        <input class="form-control" id="inputPhone" type="tel" maxlength="10"
+                                               minlength="10"
+                                            placeholder="Ingrese sus número de teléfono celular"  required />
                                     </div>
                                     <!-- Form Group (birthday)-->
                                     <div class="form-group col-md-6">
-                                        <label class="small mb-1" for="inputBirthday">Birthday</label>
-                                        <input class="form-control" id="inputBirthday" type="text" name="birthday"
-                                            placeholder="Enter your birthday" value="06/10/1988" />
+                                        <label class="small mb-1" for="inputDateBorn">Fecha de nacimiento</label>
+                                        <input class="form-control" id="inputDateBorn" type="date"
+                                            placeholder="Ingrese su fecha de nacimiento" value="dd/mm/aaaa" required />
                                     </div>
                                 </div>
                                 <!-- Save changes button-->
-                                <button class="btn btn-primary" type="button">Save changes</button>
+                                <button class="btn btn-primary" type="submit">Guardar</button>
                             </form>
                         </div>
                     </div>
