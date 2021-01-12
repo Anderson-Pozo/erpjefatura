@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import model_to_dict
 
 
 # Create your models here.
@@ -10,6 +11,12 @@ class TipoContribuyente(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField('Tipo de contribuyente ', max_length=20, blank=True, null=True)
     obligado_contabilidad = models.BooleanField('Obligado a llevar contabilidad ', default=False, blank=True, null=True)
+
+    def natural_key(self):
+        return self.nombre
+
+    def __str__(self):
+        return self.nombre
 
     class Meta:
         db_table = "tipo_contribuyente"
@@ -30,6 +37,11 @@ class Contribuyente(models.Model):
     tlf_celular = models.CharField('Celular', max_length=10, blank=True, null=True)
     tlf_convencional = models.CharField('Telefono convencional', max_length=10, blank=True, null=True)
     tipocontribuyente = models.ForeignKey(TipoContribuyente, on_delete=models.CASCADE)
+
+    def to_json(self):
+        item = model_to_dict(self)
+        item['tipocontribuyente'] = self.tipocontribuyente.nombre
+        return item
 
     class Meta:
         db_table = "contribuyente"
