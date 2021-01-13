@@ -75,3 +75,20 @@ initComplete: function(settings, json) {
     // alert('Datos cargados');
 }
 });
+
+
+function register_user() {
+    $.ajax({
+        data: $('#form_creation').serialize(),
+        url: $('#form_creation').attr('action'),
+        type: $('#form_creation').attr('method'),
+        success: function (response) {
+            // show_notification_success(response.message);
+            // close_modal_creation();
+        },
+        error: function (error) {
+            // show_notification_error(error.responseJSON.message);
+            // show_errors_modal(error);
+        }
+    })
+}

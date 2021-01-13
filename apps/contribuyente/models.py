@@ -12,8 +12,8 @@ class TipoContribuyente(models.Model):
     nombre = models.CharField('Tipo de contribuyente ', max_length=20, blank=True, null=True)
     obligado_contabilidad = models.BooleanField('Obligado a llevar contabilidad ', default=False, blank=True, null=True)
 
-    def natural_key(self):
-        return self.nombre
+    # def natural_key(self):
+    #     return self.nombre
 
     def __str__(self):
         return self.nombre
