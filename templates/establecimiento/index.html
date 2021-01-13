@@ -25,7 +25,11 @@ Listado de establecimientos
 <div class="container mt-n10">
     <div class="card mb-4">
         <div class="card-header">
-            Crear registro
+            <button onclick="open_modal_creacion('{% url 'establecimiento:crear_establecimiento' %}')"
+                    class="btn btn-primary" type="button" data-toggle="modal"
+                    data-target="#modalEstablecimiento">
+                    Crear registro
+            </button>
         </div>
         <div class="card-body">
             <div class="datatable">
@@ -58,8 +62,12 @@ Listado de establecimientos
         </div>
     </div>
 </div>
+<div class="modal" id="modalEstablecimiento" tabindex="-1" role="dialog"
+    aria-labelledby="modalEstablecimientoTitle" aria-hidden="true">
+</div>
 {% endblock %}
 
 {% block extrajs %}
     <script src="{% static 'static/jefatura/establecimiento/datatable.js' %}"></script>
+    <script src="{% static 'static/jefatura/establecimiento/modals.js' %}"></script>
 {% endblock %}
