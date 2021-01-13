@@ -1,0 +1,90 @@
+ <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalContribuyenteTitle">Contribuyente</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="card mb-4">
+                    <div class="card-header">Datos del Contribuyente</div>
+                    <div class="card-body">
+                        <form>
+                            <!-- Form Group (username)-->
+                            <div class="form-group">
+                                <label class="small mb-1" for="ingreseCedula">Número de cédula</label>
+                                <input class="form-control" id="ingreseCedula" type="text"
+                                    placeholder="Ingrese el número de cédula" maxlength="10" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="small mb-1" for="ingreseRuc">RUC</label>
+                                <input class="form-control" id="ingreseRuc" type="text" placeholder="Ingrese el RUC"
+                                    maxlength="13" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="small mb-1" for="tipoPersona">Tipo de persona</label>
+                                <div class="custom-control custom-radio">
+                                    <input class="custom-control-input" id="personaNatural" type="radio"
+                                        name="personaNatural">
+                                    <label class="custom-control-label" for="personaNatural">Natural</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input class="custom-control-input" id="personaJuridica" type="radio"
+                                        name="personaJuridica">
+                                    <label class="custom-control-label" for="personaJuridica">Juridica</label>
+                                </div>
+                            </div>
+                            <!-- Form Row-->
+                            <div class="form-row">
+                                <!-- Form Group (first name)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="ingreseNombres">Nombres</label>
+                                    <input class="form-control" id="inputFirstName" type="text"
+                                        placeholder="Ingrese sus Nombres" maxlength="60" required />
+                                </div>
+                                <!-- Form Group (last name)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="ingreseApellidos">Apellidos</label>
+                                    <input class="form-control" id="inputLastName" type="text"
+                                        placeholder="Ingrese sus Apellidos" maxlength="60" required />
+                                </div>
+                            </div>
+                            <!-- Form Row        -->
+                            <div class="form-row">
+                                <!-- Form Group (organization name)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="ingreseNacionalidad">Nacionalidad</label>
+                                    <input class="form-control" id="ingreseNacionalidad" type="text"
+                                        placeholder="Ingrese su Nacionalidad" required />
+                                </div>
+                            </div>
+                            <!-- Form Group (email address)-->
+                            <div class="form-group">
+                                <label class="small mb-1" for="ingreseEmail">Correo Electronico</label>
+                                <input class="form-control" id="ingreseEmail" type="email"
+                                    placeholder="Digite su correo Electronico"
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{​​​​2,15}​​​​$" />
+                            </div>
+                            <!-- Form Row-->
+                            <div class="form-row">
+                                <!-- Form Group (phone number)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="ingreseTelefono">Teléfono Celular</label>
+                                    <input class="form-control" id="inputPhone" type="tel"
+                                        placeholder="Ingrese su número célular" maxlength="10" required />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="ingreseTelefonoConv">Teléfono Convencional</label>
+                                    <input class="form-control" id="ingreseTelefonoConv" type="tel"
+                                        placeholder="Ingrese el teléfono Convencional" maxlength="10" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary" type="button"
+                    data-dismiss="modal">Cerrar</button><button class="btn btn-primary" type="submit">Guardar</button>
+            </div>
+        </div>
+    </div>

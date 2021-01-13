@@ -25,7 +25,11 @@ Listado de contribuyentes de la Jefatura de Rentas
 <div class="container mt-n10">
     <div class="card mb-4">
         <div class="card-header">
-            Crear registro
+            <button onclick="open_modal_creacion('{% url 'contribuyente:crear_contribuyente' %}')"
+                    class="btn btn-primary" type="button" data-toggle="modal"
+                    data-target="#modalContribuyente">
+                    Crear registro
+            </button>
         </div>
         <div class="card-body">
             <div class="datatable">
@@ -60,6 +64,9 @@ Listado de contribuyentes de la Jefatura de Rentas
             </div>
         </div>
     </div>
+</div>
+<div class="modal" id="modalContribuyente" tabindex="-1" role="dialog"
+    aria-labelledby="modalContribuyenteTitle" aria-hidden="true">
 </div>
 {% endblock %}
 

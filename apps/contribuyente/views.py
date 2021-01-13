@@ -37,3 +37,9 @@ class ListaContribuyente(ListView):
     #         return HttpResponse(serialize('json', self.get_queryset()), 'application/json')
     #     else:
     #         return redirect('contribuyente:home')
+
+
+class CrearContribuyente(TemplateView):
+    model = Contribuyente
+    template_name = 'contribuyente/crear_contribuyente.html'
+
