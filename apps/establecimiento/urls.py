@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import IndexEstablecimiento
+from .views import ListaEstablecimiento
 
 urlpatterns = [
-    path('', IndexEstablecimiento.as_view(), name='lista_establecimientos'),
+    path('', ListaEstablecimiento.as_view(), name='lista_establecimientos'),
 ]
 
 # URL Implicit views

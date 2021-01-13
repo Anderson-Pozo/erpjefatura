@@ -19,44 +19,42 @@ language: {
         "previous": "Anterior",
     },
 },
-// responsive: true,
-// autoWidth: false,
-// destroy: true,
-// deferRender: true,
-// ajax: {
-//     url: window.location.pathname,
-//     type: 'POST',
-//     data: {
-//         'action': 'searchdata'
-//     }, // parametros
-//     dataSrc: ""
-// },
-// columns: [
-//     // { "data": "nombres"},
-//     // { "data": "apellidos"},
-//     // { "data": "numero_cedula"},
-//     // { "data": "ruc"},
-//     // { "data": "tlf_celular"},
-//     // { "data": "tipocontribuyente"},
-//     // { "data": "tipocontribuyente"},
-// ],
-// columnDefs: [
-//     {
-//         targets: [-2],
-//         class: 'text-center',
-//         orderable: true,
-//         render: function (data, type, row) {
-//             if (row.tipocontribuyente == 'Natural'){
-//                 return '<div class="badge badge-success badge-pill">' + row.tipocontribuyente + '</div></td>';
-//                 // return 'Natural'
-//             }
-//             if (row.tipocontribuyente == 'Juridica') {
-//                 return '<div class="badge badge-indigo badge-pill">' + row.tipocontribuyente +'</div></td>';
-//                 // return 'Jurídico'
-//             }
-//         }
-//     },
-// ],
+responsive: true,
+autoWidth: false,
+destroy: true,
+deferRender: true,
+ajax: {
+    url: window.location.pathname,
+    type: 'POST',
+    data: {
+        'action': 'searchdata'
+    }, // parametros
+    dataSrc: ""
+},
+columns: [
+    { "data": "nombre"},
+    { "data": "fecha_inicio_actividad"},
+    { "data": "total_patrimonio"},
+    { "data": "tipo_actividad"},
+    { "data": "direccion"},
+    { "data": "direccion"},
+],
+columnDefs: [
+    {
+        targets: [-1],
+        class: 'text-center',
+        orderable: false,
+        render: function (data, type, row) {
+            let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2">' +
+                            '<i class="fas fa-edit"></i>' +
+                            '</button>';
+            buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange">' +
+                        '<i class="fas fa-trash"></i>' +
+                        '</button>';
+            return buttons;
+        }
+    },
+],
 initComplete: function(settings, json) {
     // alert('Datos cargados');
 }
