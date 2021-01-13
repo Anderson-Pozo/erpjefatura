@@ -3,7 +3,7 @@ from django.core.serializers import serialize
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from django.http import HttpResponse, JsonResponse
 from .models import Establecimiento
 
@@ -30,3 +30,8 @@ class ListaEstablecimiento(ListView):
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
+
+
+class CrearEstablecimiento(TemplateView):
+    model = Establecimiento
+    template_name = 'establecimiento/crear_establecimiento.html'

@@ -78,10 +78,12 @@ initComplete: function(settings, json) {
 
 
 function register_user() {
+    var data = new FormData($('#form_creacion').get(0));
     $.ajax({
-        data: $('#form_creation').serialize(),
+        // data: $('#form_creation').serialize(),
         url: $('#form_creation').attr('action'),
         type: $('#form_creation').attr('method'),
+        data: data,
         success: function (response) {
             // show_notification_success(response.message);
             // close_modal_creation();

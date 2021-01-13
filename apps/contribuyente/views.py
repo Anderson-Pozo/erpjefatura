@@ -3,8 +3,12 @@ from django.core.serializers import serialize
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+<<<<<<< HEAD
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
+=======
+from django.views.generic import ListView,TemplateView
+>>>>>>> 5f5c13ddcd5a79a2e68b93f03a037a07a6cf1d43
 from django.http import HttpResponse, JsonResponse
 from .models import Contribuyente
 from  .forms import ContribuyenteForm
