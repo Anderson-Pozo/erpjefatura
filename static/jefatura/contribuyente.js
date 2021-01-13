@@ -76,7 +76,6 @@ initComplete: function(settings, json) {
 }
 });
 
-let $ = jQuery.noConflict();
 
 function open_modal_creacion(url) {
     $('#modalContribuyente').load(url, function () {
