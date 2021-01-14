@@ -84,7 +84,7 @@ class ContribuyenteForm(forms.ModelForm):
                     'placeholder': 'Ingrese el teléfono convencional',
                 }
             ),
-            'tipocontribuyente': forms.SelectMultiple(
+            'tipocontribuyente': forms.Select(
                 attrs={
                     'class': 'form-control',
                 }

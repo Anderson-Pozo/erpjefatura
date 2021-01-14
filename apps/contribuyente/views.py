@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
 from django.http import HttpResponse, JsonResponse
 from .models import Contribuyente
-from  .forms import ContribuyenteForm
+from .forms import ContribuyenteForm
 
 
 # Create your views here.
