@@ -9,6 +9,7 @@
                 <div class="card mb-4">
                     <div class="card-header">Datos del Contribuyente</div>
                     <div class="card-body">
+                        <div id="errors"></div>
                         <form id="form_creation" action="{% url 'contribuyente:crear_contribuyente' %}" method="POST">
                             {% csrf_token %}
                             {% if form.errors %}
@@ -77,7 +78,7 @@
                                 <button onclick="close_modal_creacion()"
                                         class="btn btn-secondary" type="button"
                                     >Cerrar</button>
-                                <button onclick="register_user()"
+                                <button onclick="crear_contribuyente()"
                                     class="btn btn-primary" type="submit">Guardar</button>
                             </div>
                         </form>

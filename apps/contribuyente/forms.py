@@ -9,17 +9,22 @@ class ContribuyenteForm(forms.ModelForm):
 
     class Meta:
         model = Contribuyente
-        fields = (
-            'ruc',
-            'numero_cedula',
-            'nombres',
-            'apellidos',
-            'nacionalidad',
-            'email',
-            'tlf_celular',
-            'tlf_convencional',
-            'tipocontribuyente'
-        )
+        fields = '__all__'
+        error_messages = {
+            'numero_cedula': {
+                'max_length': 'El número de cédula solo debe tener 10 dígitos',
+                'required': 'El número de cédula es obligatorio'
+            },
+            'ruc': {
+                'max_length': 'El ruc solo debe tener 13 dígitos'
+            },
+            'nombres': {
+                'required': 'Los nombres son obligatorios'
+            },
+            'tipocontribuyente': {
+                'required': 'El tipo de persona no puede estar vacío'
+            }
+        }
         labels = {
             'ruc': 'RUC',
             'numero_cedula': 'Número de cédula',

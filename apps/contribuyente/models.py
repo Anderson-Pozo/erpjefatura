@@ -36,7 +36,7 @@ class Contribuyente(models.Model):
     """
     id = models.AutoField(primary_key=True)
     ruc = models.CharField('Ruc ', max_length=13, blank=True, null=True)
-    numero_cedula = models.CharField('Número de cédula', max_length=10, blank=True, null=True, unique=True)
+    numero_cedula = models.CharField('Número de cédula', max_length=10, blank=False, null=True, unique=True)
     nacionalidad = models.CharField('Nacionalidad', max_length=20, blank=True, null=True)
     nombres = models.CharField('Nombres', max_length=50, blank=True, null=True)
     apellidos = models.CharField('Apellidos', max_length=50, blank=True, null=True)

@@ -59,6 +59,7 @@ class CrearContribuyente(CreateView):
                 return response
             else:
                 mensaje = f'{self.model.__name__} no se ha podido registrar!'
+                # print(form.errors)
                 error = form.errors
                 response = JsonResponse({'mensaje': mensaje, 'error': error})
                 response.status_code = 400

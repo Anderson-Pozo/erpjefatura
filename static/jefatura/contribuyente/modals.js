@@ -23,3 +23,14 @@ function show_notification_error(message) {
         icon: 'error'
     })
 }
+
+function show_errors_modal(errors) {
+    $('#errors').html("");
+    let error = '';
+    for(let item in errors.responseJSON.error){
+        error += '<div class="alert alert-danger">' +
+                    '<strong>' + errors.responseJSON.error[item] + '</strong>' +
+                  '</div>';
+    }
+    $('#errors').append(error);
+}
