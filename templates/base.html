@@ -188,10 +188,29 @@
                                 </nav>
                             </div>
                             <!-- Sidenav Link (Contribuyentes)-->
-                            <a class="nav-link" href="{% url 'contribuyente:lista_contribuyentes' %}">
+{#                            <a class="nav-link" href="{% url 'contribuyente:lista_contribuyentes' %}">#}
+{#                                <div class="nav-link-icon"><i class="fas fa-street-view"></i></div>#}
+{#                                Contribuyentes#}
+{#                            </a>#}
+
+                            <div class="sidenav-menu-heading">Contribuyentes</div>
+                            <!-- Sidenav Accordion (Contribuyentes)-->
+                            <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseContribuyentes" aria-expanded="false" aria-controls="collapseContribuyentes">
                                 <div class="nav-link-icon"><i class="fas fa-street-view"></i></div>
                                 Contribuyentes
+                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
+                            <div class="collapse" id="collapseContribuyentes" data-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
+                                    <a class="nav-link" href="{% url 'contribuyente:lista_contribuyentes' %}">
+                                        Personas Naturales
+                                    </a>
+                                    <a class="nav-link" href="#">
+                                        Personas Juridicas
+                                    </a>
+                                </nav>
+                            </div>
+
                             <!-- Sidenav Link (Establecimientos)-->
                             <a class="nav-link" href="{% url 'establecimiento:lista_establecimientos' %}">
                                 <div class="nav-link-icon"><i class="fas fa-store"></i></div>
