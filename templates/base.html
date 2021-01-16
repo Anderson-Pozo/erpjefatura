@@ -176,13 +176,13 @@
                             </a>
                             <div class="collapse" id="collapseMulta" data-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                    <a class="nav-link" href="{% url 'index' %}">
+                                    <a class="nav-link" href="{% url 'impuesto:lista_vencimiento' %}">
                                         Vencimiento
                                     </a>
-                                    <a class="nav-link" href="dashboard-2.html">
+                                    <a class="nav-link" href="{% url 'impuesto:lista_multa' %}">
                                         Mora y multa
                                     </a>
-                                    <a class="nav-link" href="dashboard-3.html">
+                                    <a class="nav-link" href="{% url 'impuesto:lista_impuesto' %}">
                                         Impuesto patente
                                     </a>
                                 </nav>

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Impuesto Patente</title>
+{% endblock %}
+
+{#{% block centralbody %}#}
+{#    <h1>Vencimiento</h1>#}
+{#{% endblock %}#}
+
+{% block iconheader %}
+    <div class="page-header-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+{% endblock %}
+
+{% block titleheader %}
+    Impuesto Patente
+{% endblock %}
+
+{% block subtitleheader %}
+Impuesto sobre las patentes
+{% endblock %}
+
+{% block buttondate %}
+{% endblock %}
+
+{% block centralbody %}
+<div class="container mt-n10">
+    <div class="card mb-4">
+
+        <div class="card-body">
+            <div class="datatable">
+                <table class="table table-bordered table-hover" id="tableImpuesto" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Fracción Basica </th>
+                            <th>Francción Excedente</th>
+                            <th>Impuesto de la fraccón basica</th>
+                            <th>Porcentaje de la fracción excedente</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>N°</th>
+                            <th>Fracción Basica </th>
+                            <th>Francción Excedente</th>
+                            <th>Impuesto de la fraccón basica</th>
+                            <th>Porcentaje de la fracción excedente</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{#<div class="modal" id="modalEstablecimiento" tabindex="-1" role="dialog"#}
+{#    aria-labelledby="modalEstablecimientoTitle" aria-hidden="true">#}
+{#</div>#}
+{% endblock %}
+
+{% block extrajs %}
+    <script src="{% static 'static/jefatura/impuesto/impuesto/datatable.js' %}"></script>
+{% endblock %}

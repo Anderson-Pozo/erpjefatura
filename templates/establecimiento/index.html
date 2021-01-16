@@ -13,7 +13,13 @@
 {% block titleheader %}
 Establecimientos
 {% endblock %}
-
+        <div class="card-header">
+            <button onclick="open_modal_creacion('{% url 'establecimiento:crear_establecimiento' %}')"
+                    class="btn btn-primary" type="button" data-toggle="modal"
+                    data-target="#modalEstablecimiento">
+                    Crear registro
+            </button>
+        </div>
 {% block subtitleheader %}
 Listado de establecimientos
 {% endblock %}
