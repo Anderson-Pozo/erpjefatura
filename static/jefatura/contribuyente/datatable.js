@@ -44,6 +44,13 @@ function lista_contribuyentes(){
         { "data": "tipocontribuyente"},
     ],
     columnDefs: [
+        // {
+        //     targets: [0],
+        //     orderable: true,
+        //     render: function (data, type, row) {
+        //         return '<p>' + row.nombres + '</p>';
+        //     }
+        // },
         {
             targets: [-2],
             class: 'text-center',

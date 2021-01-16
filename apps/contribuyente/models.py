@@ -35,11 +35,11 @@ class Contribuyente(models.Model):
     TipoContribuyente
     """
     id = models.AutoField(primary_key=True)
-    ruc = models.CharField('Ruc ', max_length=13, blank=True, null=True)
+    ruc = models.CharField('Ruc ', max_length=13, blank=False, null=True, unique=True)
     numero_cedula = models.CharField('Número de cédula', max_length=10, blank=False, null=True, unique=True)
     nacionalidad = models.CharField('Nacionalidad', max_length=20, blank=True, null=True)
-    nombres = models.CharField('Nombres', max_length=50, blank=True, null=True)
-    apellidos = models.CharField('Apellidos', max_length=50, blank=True, null=True)
+    nombres = models.CharField('Nombres', max_length=50, blank=False, null=True)
+    apellidos = models.CharField('Apellidos', max_length=50, blank=False, null=True)
     email = models.CharField('Email', max_length=50, blank=True, null=True)
     tlf_celular = models.CharField('Celular', max_length=10, blank=True, null=True)
     tlf_convencional = models.CharField('Telefono convencional', max_length=10, blank=True, null=True)
@@ -55,3 +55,10 @@ class Contribuyente(models.Model):
 
     class Meta:
         db_table = "contribuyente"
+
+
+class Sociedad(Contribuyente):
+    razon_social = models.CharField('Razon social', max_length=10, blank=False, null=True)
+
+    # class Meta:
+    #     db_table = 'sociedad'

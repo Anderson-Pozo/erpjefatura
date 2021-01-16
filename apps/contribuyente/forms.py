@@ -16,10 +16,14 @@ class ContribuyenteForm(forms.ModelForm):
                 'required': 'El número de cédula es obligatorio'
             },
             'ruc': {
-                'max_length': 'El ruc solo debe tener 13 dígitos'
+                'max_length': 'El ruc solo debe tener 13 dígitos',
+                'required': 'El ruc es obligatorio'
             },
             'nombres': {
                 'required': 'Los nombres son obligatorios'
+            },
+            'apellidos': {
+                'required': 'Los apellidos son obligatorios'
             },
             'tipocontribuyente': {
                 'required': 'El tipo de persona no puede estar vacío'

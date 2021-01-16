@@ -1,87 +1,188 @@
  <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalContribuyenteTitle">Contribuyente</h5>
+                <h5 class="modal-title" id="modalContribuyenteTitle">Crear registro</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body">
                 <div class="card mb-4">
-                    <div class="card-header">Datos del Contribuyente</div>
+                <div class="card-header border-bottom">
+                    <ul class="nav nav-tabs card-header-tabs" id="dashboardNav" role="tablist">
+                        <li class="nav-item mr-1">
+                            <a class="nav-link active"
+                               id="normal-pill"
+                               href="#normal" data-toggle="tab"
+                               role="tab" aria-controls="normal" aria-selected="true">
+                                Contribuyente
+                            </a></li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               id="sociedad-pill"
+                               href="#sociedad" data-toggle="tab" role="tab"
+                               aria-controls="sociedad" aria-selected="false">
+                                Sociedad
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+{#                    <div class="card-header">Datos del Contribuyente</div>#}
                     <div class="card-body">
-                        <div id="errors"></div>
-                        <form id="form_creation" action="{% url 'contribuyente:crear_contribuyente' %}" method="POST">
-                            {% csrf_token %}
-                            {% if form.errors %}
-                                <div class="alert alert-danger">
-                                    {{ form.errors }}
-                                </div>
-                            {% endif %}
-                            <!-- Form Group (username)-->
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                <label class="small mb-1" for="ingreseCedula">Número de cédula</label>
-                                    {{ form.numero_cedula }}
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="ingreseRuc">RUC</label>
-                                    {{ form.ruc }}
-                                </div>
-                            </div>
+                        <div class="tab-content" id="dashboardNavContent">
+                            <div class="tab-pane fade show active" id="normal" role="tabpanel" aria-labelledby="normal-pill">
+                                <div id="errors"></div>
+                                <br>
+                                <form id="form_creation" action="{% url 'contribuyente:crear_contribuyente' %}" method="POST">
+                                    {% csrf_token %}
+                                    {% if form.errors %}
+                                        <div class="alert alert-danger">
+                                            {{ form.errors }}
+                                        </div>
+                                    {% endif %}
+                                    <!-- Form Group (username)-->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                        <label class="small mb-1" for="ingreseCedula">Número de cédula</label>
+                                            {{ form.numero_cedula }}
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="ingreseRuc">RUC</label>
+                                            {{ form.ruc }}
+                                        </div>
+                                    </div>
 
-                            <div class="form-group">
-                                <label class="small mb-1" for="tipoPersona">Tipo de persona</label>
-                                {{ form.tipocontribuyente }}
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="tipoPersona">Tipo de persona</label>
+                                        {{ form.tipocontribuyente }}
+                                    </div>
+                                    <!-- Form Row-->
+                                    <div class="form-row">
+                                        <!-- Form Group (first name)-->
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="ingreseNombres">Nombres</label>
+                                            {{ form.nombres }}
+                                        </div>
+                                        <!-- Form Group (last name)-->
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="ingreseApellidos">Apellidos</label>
+                                            {{ form.apellidos }}
+                                        </div>
+                                    </div>
+                                    <!-- Form Row        -->
+                                    <div class="form-row">
+                                        <!-- Form Group (organization name)-->
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="ingreseNacionalidad">Nacionalidad</label>
+                                            {{ form.nacionalidad }}
+                                        </div>
+                                    </div>
+                                    <!-- Form Row-->
+                                    <div class="form-row">
+                                        <!-- Form Group correo-->
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="ingreseEmail">Correo Electronico</label>
+                                            {{ form.email }}
+                                        </div>
+                                        <!-- Form Group (phone number)-->
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="ingreseTelefono">Teléfono Celular</label>
+                                            {{ form.tlf_celular }}
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="ingreseTelefonoConv">Teléfono Convencional</label>
+                                            {{ form.tlf_convencional }}
+                                        </div>
+                                    </div>
+        {#                            {{ form.as_p }}#}
+                                    <div class="modal-footer">
+                                        <button onclick="close_modal_creacion()"
+                                                class="btn btn-red" type="button"
+                                            >Cerrar</button>
+                                        <button onclick="crear_contribuyente()"
+                                            class="btn btn-green" type="button">Guardar</button>
+                                    </div>
+                                </form>
                             </div>
-                            <!-- Form Row-->
-                            <div class="form-row">
-                                <!-- Form Group (first name)-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="ingreseNombres">Nombres</label>
-                                    {{ form.nombres }}
-                                </div>
-                                <!-- Form Group (last name)-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="ingreseApellidos">Apellidos</label>
-                                    {{ form.apellidos }}
-                                </div>
+                            <div class="tab-pane fade" id="sociedad" role="tabpanel" aria-labelledby="sociedad-pill">
+                                <div id="errors"></div>
+                                <br>
+                                <form id="form_creation" action="{% url 'contribuyente:crear_contribuyente' %}" method="POST">
+                                    {% csrf_token %}
+                                    {% if form.errors %}
+                                        <div class="alert alert-danger">
+                                            {{ form.errors }}
+                                        </div>
+                                    {% endif %}
+                                    <!-- Form Group (username)-->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                        <label class="small mb-1" for="ingreseCedula">Número de cédula</label>
+                                            {{ form.numero_cedula }}
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="ingreseRuc">RUC</label>
+                                            {{ form.ruc }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="tipoPersona">Tipo de persona</label>
+                                        {{ form.tipocontribuyente }}
+                                    </div>
+                                    <!-- Form Row-->
+                                    <div class="form-row">
+                                        <!-- Form Group (first name)-->
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="ingreseNombres">Nombres</label>
+                                            {{ form.nombres }}
+                                        </div>
+                                        <!-- Form Group (last name)-->
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="ingreseApellidos">Apellidos</label>
+                                            {{ form.apellidos }}
+                                        </div>
+                                    </div>
+                                    <!-- Form Row        -->
+                                    <div class="form-row">
+                                        <!-- Form Group (organization name)-->
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="ingreseNacionalidad">Nacionalidad</label>
+                                            {{ form.nacionalidad }}
+                                        </div>
+                                    </div>
+                                    <!-- Form Row-->
+                                    <div class="form-row">
+                                        <!-- Form Group correo-->
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="ingreseEmail">Correo Electronico</label>
+                                            {{ form.email }}
+                                        </div>
+                                        <!-- Form Group (phone number)-->
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="ingreseTelefono">Teléfono Celular</label>
+                                            {{ form.tlf_celular }}
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="ingreseTelefonoConv">Teléfono Convencional</label>
+                                            {{ form.tlf_convencional }}
+                                        </div>
+                                    </div>
+        {#                            {{ form.as_p }}#}
+                                    <div class="modal-footer">
+                                        <button onclick="close_modal_creacion()"
+                                                class="btn btn-red" type="button"
+                                            >Cerrar</button>
+                                        <button onclick="crear_contribuyente()"
+                                            class="btn btn-green" type="button">Guardar</button>
+                                    </div>
+                                </form>
                             </div>
-                            <!-- Form Row        -->
-                            <div class="form-row">
-                                <!-- Form Group (organization name)-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="ingreseNacionalidad">Nacionalidad</label>
-                                    {{ form.nacionalidad }}
-                                </div>
-                            </div>
-                            <!-- Form Row-->
-                            <div class="form-row">
-                                <!-- Form Group correo-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="ingreseEmail">Correo Electronico</label>
-                                    {{ form.email }}
-                                </div>
-                                <!-- Form Group (phone number)-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="ingreseTelefono">Teléfono Celular</label>
-                                    {{ form.tlf_celular }}
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="ingreseTelefonoConv">Teléfono Convencional</label>
-                                    {{ form.tlf_convencional }}
-                                </div>
-                            </div>
-{#                            {{ form.as_p }}#}
-                            <div class="modal-footer">
-                                <button onclick="close_modal_creacion()"
-                                        class="btn btn-secondary" type="button"
-                                    >Cerrar</button>
-                                <button onclick="crear_contribuyente()"
-                                    class="btn btn-primary" type="submit">Guardar</button>
-                            </div>
-                        </form>
+                        </div>
+
                     </div>
                 </div>
             </div>

@@ -28,8 +28,8 @@ function show_errors_modal(errors) {
     $('#errors').html("");
     let error = '';
     for(let item in errors.responseJSON.error){
-        error += '<div class="alert alert-danger">' +
-                    '<strong>' + errors.responseJSON.error[item] + '</strong>' +
+        error += '<div class="text-danger text-xs">' +
+                    '<li><strong>' + errors.responseJSON.error[item] + '</strong></li>' +
                   '</div>';
     }
     $('#errors').append(error);
