@@ -28,10 +28,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False)),
                 ('ruc', models.CharField(blank=True, max_length=13, null=True, verbose_name='Ruc ')),
-                ('numero_cedula', models.CharField(blank=True, max_length=10, null=True, verbose_name='Número de cédula')),
-                ('nacionalidad', models.CharField(blank=True, max_length=20, null=True, verbose_name='Nacionalidad')),
-                ('nombres', models.CharField(blank=True, max_length=50, null=True, verbose_name='Nombres')),
-                ('apellidos', models.CharField(blank=True, max_length=50, null=True, verbose_name='Apellidos')),
                 ('email', models.CharField(blank=True, max_length=50, null=True, verbose_name='Email')),
                 ('tlf_celular', models.CharField(blank=True, max_length=10, null=True, verbose_name='Celular')),
                 ('tlf_convencional', models.CharField(blank=True, max_length=10, null=True, verbose_name='Telefono convencional')),

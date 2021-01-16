@@ -25,7 +25,7 @@ class ListaContribuyente(ListView):
             action = request.POST['action']
             if action == 'searchdata':
                 data = []
-                for i in Contribuyente.objects.all():
+                for i in Contribuyente.objects.filter(estado=True):
                     # data['tipocontribuyente'] = i.tipocontribuyente.nombre
                     data.append(i.to_json())
             else:

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Contribuyente, TipoContribuyente
+from .models import Natural, TipoContribuyente
 
 
 class ContribuyenteForm(forms.ModelForm):
@@ -8,8 +8,9 @@ class ContribuyenteForm(forms.ModelForm):
         self.fields['tipocontribuyente'].queryset = TipoContribuyente.objects.all()
 
     class Meta:
-        model = Contribuyente
+        model = Natural
         fields = '__all__'
+        # exclude = ''
         error_messages = {
             'numero_cedula': {
                 'max_length': 'El número de cédula solo debe tener 10 dígitos',
