@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Mora y Multa</title>
+{% endblock %}
+
+{#{% block centralbody %}#}
+{#    <h1>Vencimiento</h1>#}
+{#{% endblock %}#}
+
+{% block iconheader %}
+    <div class="page-header-icon"><i class="fas fa-business-time"></i></div>
+{% endblock %}
+
+{% block titleheader %}
+    Mora y Multa
+{% endblock %}
+
+{% block subtitleheader %}
+Listado de fechas y porcetajes de Mora y Multa
+{% endblock %}
+
+{% block buttondate %}
+{% endblock %}
+
+{% block centralbody %}
+<div class="container mt-n10">
+    <div class="card mb-4">
+        <div class="card-header">
+            <button onclick="open_modal_creacion('{% url 'contribuyente:crear_contribuyente' %}')"
+                    class="btn btn-primary" type="button" data-toggle="modal"
+                    data-target="#modalContribuyente">
+{#                    <i class="fab fa-facebook-f"></i>#}
+                    Crear registro
+            </button>
+        </div>
+        <div class="card-body">
+            <div class="datatable">
+                <table class="table table-bordered table-hover" id="tableMulta" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Año</th>
+                            <th>Mes</th>
+                            <th>Porcentaje</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Año</th>
+                            <th>Mes</th>
+                            <th>Porcentaje</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{#<div class="modal" id="modalEstablecimiento" tabindex="-1" role="dialog"#}
+{#    aria-labelledby="modalEstablecimientoTitle" aria-hidden="true">#}
+{#</div>#}
+{% endblock %}
+
+{% block extrajs %}
+    <script src="{% static 'static/jefatura/impuesto/multa/datatable.js' %}"></script>
+{% endblock %}

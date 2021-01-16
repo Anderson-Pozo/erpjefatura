@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Vencimiento</title>
+{% endblock %}
+
+{#{% block centralbody %}#}
+{#    <h1>Vencimiento</h1>#}
+{#{% endblock %}#}
+
+{% block iconheader %}
+    <div class="page-header-icon"><i class="fas fa-calendar-day"></i></div>
+{% endblock %}
+
+{% block titleheader %}
+    Vencimiento
+{% endblock %}
+
+{% block subtitleheader %}
+Fechas de vencimiento
+{% endblock %}
+
+{% block buttondate %}
+{% endblock %}
+
+{% block centralbody %}
+<div class="container mt-n10">
+    <div class="card mb-4">
+
+        <div class="card-body">
+            <div class="datatable">
+                <table class="table table-bordered table-hover" id="tableVencimiento" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>9no digito de la cédula</th>
+                            <th>NO obligados</th>
+                            <th>Obligados</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>9no digito de la cédula</th>
+                            <th>NO obligados</th>
+                            <th>Obligados</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{#<div class="modal" id="modalEstablecimiento" tabindex="-1" role="dialog"#}
+{#    aria-labelledby="modalEstablecimientoTitle" aria-hidden="true">#}
+{#</div>#}
+{% endblock %}
+
+{% block extrajs %}
+    <script src="{% static 'static/jefatura/impuesto/vencimiento/datatable.js' %}"></script>
+{% endblock %}

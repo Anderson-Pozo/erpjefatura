@@ -1,5 +1,5 @@
 from _ast import mod
-
+from django.forms import model_to_dict
 from django.db import models
 
 
@@ -13,6 +13,10 @@ class Vencimiento(models.Model):
     digito = models.IntegerField('Noveno dígito de cédula', blank=True, null=True)
     no_obligado = models.DateField('No obligado', blank=True, null=True)
     obligado = models.DateField('Obligado', blank=True, null=True)
+
+    def to_json(self):
+        item = model_to_dict(self)
+        return item
 
     class Meta:
         db_table = "vencimiento"
