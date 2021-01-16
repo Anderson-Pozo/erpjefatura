@@ -39,7 +39,7 @@ class Contribuyente(models.Model):
     email = models.CharField('Email', max_length=50, blank=True, null=True)
     tlf_celular = models.CharField('Celular', max_length=10, blank=True, null=True)
     tlf_convencional = models.CharField('Telefono convencional', max_length=10, blank=True, null=True)
-    estado = models.BooleanField('Activo/Inactivo', blank=True, null=True, default=False)
+    estado = models.BooleanField('Activo/Inactivo', blank=True, null=True, default=True)
     tipocontribuyente = models.ForeignKey(TipoContribuyente, on_delete=models.CASCADE)
 
     def to_json(self):
