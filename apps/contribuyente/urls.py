@@ -1,12 +1,23 @@
 from django.urls import path
-from .views import ListaContribuyente, CrearContribuyente
+from .views import ListaContribuyenteNatural, \
+    CrearContribuyenteNatural, \
+    ListaContribuyenteJuridico
 
 urlpatterns = [
-    path('', ListaContribuyente.as_view(), name='lista_contribuyentes'),
-    path('crear_contribuyente/', CrearContribuyente.as_view(), name='crear_contribuyente')
+    path('natural/',
+         ListaContribuyenteNatural.as_view(),
+         name='lista_contribuyente_natural'
+         ),
+    path('crear_contribuyente_natural/',
+         CrearContribuyenteNatural.as_view(),
+         name='crear_contribuyente_natural'
+         )
 ]
 
 # URL Implicit views
 urlpatterns += [
-
+    path('juridico/',
+         ListaContribuyenteJuridico.as_view(),
+         name='lista_contribuyente_juridico'
+         )
 ]

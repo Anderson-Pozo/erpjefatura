@@ -6,14 +6,14 @@ from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
 from django.http import HttpResponse, JsonResponse
-from .models import Contribuyente
-from .forms import ContribuyenteForm
+from .models import Natural, Juridico
+from .forms import ContribuyenteNaturalForm
 
 
 # Create your views here.
-class ListaContribuyente(ListView):
-    model = Contribuyente
-    template_name = 'contribuyente/index.html'
+class ListaContribuyenteNatural(ListView):
+    model = Natural
+    template_name = 'contribuyente/natural/index.html'
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -25,8 +25,7 @@ class ListaContribuyente(ListView):
             action = request.POST['action']
             if action == 'searchdata':
                 data = []
-                for i in Contribuyente.objects.filter(estado=True):
-                    # data['tipocontribuyente'] = i.tipocontribuyente.nombre
+                for i in Natural.objects.filter(estado=True):
                     data.append(i.to_json())
             else:
                 data['error'] = 'Ha ocurrido un error'
@@ -34,17 +33,11 @@ class ListaContribuyente(ListView):
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
 
-    # def get(self, request, *args, **kwargs):
-    #     if request.is_ajax():
-    #         return HttpResponse(serialize('json', self.get_queryset()), 'application/json')
-    #     else:
-    #         return redirect('contribuyente:home')
 
-
-class CrearContribuyente(CreateView):
-    model = Contribuyente
-    form_class = ContribuyenteForm
-    template_name = 'contribuyente/crear_contribuyente.html'
+class CrearContribuyenteNatural(CreateView):
+    model = Natural
+    form_class = ContribuyenteNaturalForm
+    template_name = 'contribuyente/natural/crear_contribuyente.html'
     # success_url = reverse_lazy('contribuyente:lista_contribuyentes')
 
     def post(self, request, *args, **kwargs):
@@ -64,4 +57,27 @@ class CrearContribuyente(CreateView):
                 response = JsonResponse({'mensaje': mensaje, 'error': error})
                 response.status_code = 400
                 return response
-        return redirect('contribuyente:lista_contribuyentes')
+        return redirect('contribuyente:lista_contribuyente_natural')
+
+
+class ListaContribuyenteJuridico(ListView):
+    model = Juridico
+    template_name = 'contribuyente/juridico/index.html'
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, *kwargs)
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+        try:
+            action = request.POST['action']
+            if action == 'searchdata':
+                data = []
+                for i in Juridico.objects.filter(estado=True):
+                    data.append(i.to_json())
+            else:
+                data['error'] = 'Ha ocurrido un error'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)

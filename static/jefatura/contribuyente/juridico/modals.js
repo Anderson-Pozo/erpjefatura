@@ -1,4 +1,4 @@
-function open_modal_creacion(url) {
+function open_modal_creacion_contribuyente(url) {
     $('#modalContribuyente').load(url, function () {
         $(this).modal('show');
     });

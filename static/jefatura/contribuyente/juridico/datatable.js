@@ -1,5 +1,5 @@
 function lista_contribuyentes(){
-    $('#tableContribuyente').DataTable({
+    $('#tableContribuyenteJuridico').DataTable({
     language: {
         "decimal": "",
         "emptyTable": "No hay información",
@@ -35,37 +35,15 @@ function lista_contribuyentes(){
         dataSrc: ""
     },
     columns: [
-        { "data": "nombres"},
-        { "data": "apellidos"},
-        { "data": "numero_cedula"},
         { "data": "ruc"},
+        { "data": "razon_social"},
         { "data": "tlf_celular"},
-        { "data": "tipocontribuyente"},
+        { "data": "email"},
+        { "data": "nombres_representante"},
+        { "data": "telefono_representante"},
         { "data": "acciones"},
     ],
     columnDefs: [
-        // {
-        //     targets: [0],
-        //     orderable: true,
-        //     render: function (data, type, row) {
-        //         return '<p>' + row.nombres + '</p>';
-        //     }
-        // },
-        {
-            targets: [-2],
-            class: 'text-center',
-            orderable: true,
-            render: function (data, type, row) {
-                if (row.tipocontribuyente == 'Natural'){
-                    return '<div class="badge badge-success badge-pill">' + row.tipocontribuyente + '</div></td>';
-                    // return 'Natural'
-                }
-                if (row.tipocontribuyente == 'Jurídica') {
-                    return '<div class="badge badge-indigo badge-pill">' + row.tipocontribuyente +'</div></td>';
-                    // return 'Jurídico'
-                }
-            }
-        },
         {
             targets: [-1],
             class: 'text-center',
@@ -82,7 +60,7 @@ function lista_contribuyentes(){
         }
     ],
     initComplete: function(settings, json) {
-        // alert('Datos cargados');
+        alert('Datos cargados');
     }
     });
 }

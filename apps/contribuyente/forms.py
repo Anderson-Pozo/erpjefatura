@@ -2,7 +2,7 @@ from django import forms
 from .models import Natural, TipoContribuyente
 
 
-class ContribuyenteForm(forms.ModelForm):
+class ContribuyenteNaturalForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['tipocontribuyente'].queryset = TipoContribuyente.objects.all()

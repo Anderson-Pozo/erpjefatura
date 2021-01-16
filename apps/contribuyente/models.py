@@ -48,7 +48,7 @@ class Contribuyente(models.Model):
         return item
 
     # def __str__(self):
-    #     return self.nombres
+    #     return self.ruc
 
     class Meta:
         db_table = "contribuyente"
