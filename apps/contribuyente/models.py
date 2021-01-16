@@ -36,13 +36,10 @@ class Contribuyente(models.Model):
     """
     id = models.AutoField(primary_key=True)
     ruc = models.CharField('Ruc ', max_length=13, blank=False, null=True, unique=True)
-    numero_cedula = models.CharField('Número de cédula', max_length=10, blank=False, null=True, unique=True)
-    nacionalidad = models.CharField('Nacionalidad', max_length=20, blank=True, null=True)
-    nombres = models.CharField('Nombres', max_length=50, blank=False, null=True)
-    apellidos = models.CharField('Apellidos', max_length=50, blank=False, null=True)
     email = models.CharField('Email', max_length=50, blank=True, null=True)
     tlf_celular = models.CharField('Celular', max_length=10, blank=True, null=True)
     tlf_convencional = models.CharField('Telefono convencional', max_length=10, blank=True, null=True)
+    estado = models.BooleanField('Activo/Inactivo', blank=True, null=True, default=False)
     tipocontribuyente = models.ForeignKey(TipoContribuyente, on_delete=models.CASCADE)
 
     def to_json(self):
@@ -50,15 +47,27 @@ class Contribuyente(models.Model):
         item['tipocontribuyente'] = self.tipocontribuyente.nombre
         return item
 
-    def __str__(self):
-        return self.nombres
+    # def __str__(self):
+    #     return self.nombres
 
     class Meta:
         db_table = "contribuyente"
 
 
-class Sociedad(Contribuyente):
-    razon_social = models.CharField('Razon social', max_length=10, blank=False, null=True)
+class Natural(Contribuyente):
+    numero_cedula = models.CharField('Número de cédula', max_length=10, blank=False, null=True, unique=True)
+    nacionalidad = models.CharField('Nacionalidad', max_length=20, blank=True, null=True)
+    nombres = models.CharField('Nombres', max_length=50, blank=False, null=True)
+    apellidos = models.CharField('Apellidos', max_length=50, blank=False, null=True)
+
+
+class Juridico(Contribuyente):
+    razon_social = models.CharField('Razon social', max_length=50, blank=False, null=True)
+    cedula_representante = models.CharField('Cédula del representante', max_length=10, blank=False, null=True)
+    nombres_representante = models.CharField('Nombres del representante', max_length=50, blank=False, null=True)
+    apellidos_representante = models.CharField('Apellidos del representante', max_length=50, blank=False, null=True)
+    telefono_representante = models.CharField('Teléfono del representante', max_length=10, blank=False, null=True)
+    correo_representante = models.EmailField('Correo del representante', max_length=50, blank=False, null=True)
 
     # class Meta:
     #     db_table = 'sociedad'

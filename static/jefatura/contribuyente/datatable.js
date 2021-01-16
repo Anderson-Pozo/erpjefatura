@@ -41,7 +41,7 @@ function lista_contribuyentes(){
         { "data": "ruc"},
         { "data": "tlf_celular"},
         { "data": "tipocontribuyente"},
-        { "data": "tipocontribuyente"},
+        { "data": "acciones"},
     ],
     columnDefs: [
         // {
@@ -60,7 +60,7 @@ function lista_contribuyentes(){
                     return '<div class="badge badge-success badge-pill">' + row.tipocontribuyente + '</div></td>';
                     // return 'Natural'
                 }
-                if (row.tipocontribuyente == 'Juridica') {
+                if (row.tipocontribuyente == 'Jurídica') {
                     return '<div class="badge badge-indigo badge-pill">' + row.tipocontribuyente +'</div></td>';
                     // return 'Jurídico'
                 }
