@@ -35,6 +35,10 @@ class Impuesto(models.Model):
     impuesto_fraccion_basica = models.IntegerField('Impuesto fraccion basica', blank=True, null=True)
     porcentaje_fraccion_excedente = models.FloatField('Porcentaje fraccion excedente', blank=True, null=True)
 
+    def to_json(self):
+        item = model_to_dict(self)
+        return item
+
     class Meta:
         db_table = "impuesto"
 
@@ -47,6 +51,10 @@ class Multa(models.Model):
     anio = models.CharField('Año', max_length=4, blank=True, null=True)
     mes = models.CharField('Mes', max_length=15, blank=True, null=True)
     porcentaje = models.FloatField('Porcentaje multa', blank=True, null=True)
+
+    def to_json(self):
+        item = model_to_dict(self)
+        return item
 
     class Meta:
         db_table = "multa"
