@@ -25,9 +25,9 @@ Listado de contribuyentes jurídicos de la Jefatura de Rentas
 <div class="container mt-n10">
     <div class="card mb-4">
         <div class="card-header">
-            <button onclick="open_modal_creacion_contribuyente('{% url 'contribuyente:crear_contribuyente_natural' %}')"
+            <button onclick="open_modal_contribuyente_juridico('{% url 'contribuyente:crear_contribuyente_juridico' %}')"
                     class="btn btn-primary" type="button" data-toggle="modal"
-                    data-target="#modalContribuyente">
+                    data-target="#modalContribuyenteJuridico">
 {#                    <i class="fab fa-facebook-f"></i>#}
                     Crear registro
             </button>
@@ -65,8 +65,8 @@ Listado de contribuyentes jurídicos de la Jefatura de Rentas
         </div>
     </div>
 </div>
-<div class="modal" id="modalContribuyente" tabindex="-1" role="dialog"
-    aria-labelledby="modalContribuyenteTitle" aria-hidden="true">
+<div class="modal" id="modalContribuyenteJuridico" tabindex="-1" role="dialog"
+    aria-labelledby="modalContribuyenteJuridicoTitle" aria-hidden="true">
 </div>
 {% endblock %}
 

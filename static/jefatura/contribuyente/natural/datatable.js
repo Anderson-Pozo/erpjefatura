@@ -1,4 +1,4 @@
-function lista_contribuyentes(){
+function lista_contribuyentes_naturales(){
     $('#tableContribuyente').DataTable({
     language: {
         "decimal": "",
@@ -88,7 +88,6 @@ function lista_contribuyentes(){
 }
 
 
-
 function crear_contribuyente() {
     var data = new FormData($('#form_creation').get(0));
     $.ajax({
@@ -101,7 +100,7 @@ function crear_contribuyente() {
         success: function (response) {
             $('#modalContribuyente').modal('hide');
             show_notification_success(response.mensaje);
-            lista_contribuyentes();
+            lista_contribuyentes_naturales();
             // console.log(response);
         },
         error: function (error) {
@@ -112,6 +111,43 @@ function crear_contribuyente() {
     })
 }
 
+function delete_user(pk) {
+    // console.log($("[name='csrfmiddlewaretoken']").val())
+    $.ajax({
+        data: {
+            csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
+        },
+        url: '/user/delete_user/'+pk+'/',
+        type: 'post',
+        success: function (response) {
+            show_notification_success(response.message);
+            close_modal_elimination();
+            list_users();
+        },
+        error: function (error) {
+            show_notification_error(error.responseJSON.message);
+        }
+    });
+}
+
+function edit_user() {
+    $.ajax({
+        data: $('#form_edition').serialize(),
+        url: $('#form_edition').attr('action'),
+        type: $('#form_edition').attr('method'),
+        success: function (response) {
+            show_notification_success(response.message);
+            close_modal_edition();
+            list_users();
+        },
+        error: function (error) {
+            show_notification_error(error.responseJSON.message);
+            show_errors_modal_edition(error);
+        }
+    })
+}
+
 $(document).ready(function () {
-    lista_contribuyentes();
+    // let nameTable = '#tableContribuyente'
+    lista_contribuyentes_naturales();
 })
