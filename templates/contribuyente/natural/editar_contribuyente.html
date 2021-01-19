@@ -1,0 +1,93 @@
+<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalContribuyenteTitle">Contribuyente</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="card mb-4">
+                    <div class="card-header">Datos del Contribuyente</div>
+                    <div class="card-body">
+                        <div id="errors"></div>
+                        <br>
+                        <form id="form_creation" action="{% url 'contribuyente:editar_contribuyente_natural' object.pk %}" method="POST">
+                            {% csrf_token %}
+                            {% if form.errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.errors }}
+                                </div>
+                            {% endif %}
+                            <!-- Form Group (username)-->
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                <!-- Form Group (numero de cedula)-->
+                                <label class="small mb-1" for="numerocedula">Número de cédula</label>
+                                    {{ form.numero_cedula }}
+                                </div>
+                                <!-- Form Group (ruc)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="ruc">RUC</label>
+                                    {{ form.ruc }}
+                                </div>
+                            </div>
+                            <!-- Form Row-->
+                            <div class="form-row">
+                                <!-- Form Group (nombres)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="nombres">Nombres</label>
+                                    {{ form.nombres }}
+                                </div>
+                                <!-- Form Group (apellidos)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="apellidos">Apellidos</label>
+                                    {{ form.apellidos }}
+                                </div>
+                            </div>
+                            <!-- Form Row        -->
+                            <div class="form-row">
+                                <!-- Form Group (tipo de persona)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="tipoPersona">Tipo de persona</label>
+                                    {{ form.tipocontribuyente }}
+                                </div>
+                                <!-- Form Group (nacionalidad)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="ingreseNacionalidad">Nacionalidad</label>
+                                    {{ form.nacionalidad }}
+                                </div>
+                            </div>
+                            <!-- Form Row-->
+                            <div class="form-row">
+                                <!-- Form Group correo-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="email">Correo electrónico</label>
+                                    {{ form.email }}
+                                </div>
+                                <!-- Form Group (telefono celular)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="telefonocelular">Teléfono celular</label>
+                                    {{ form.tlf_celular }}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <!-- Form Group (telefono convencional)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="telefonoconvencional">Teléfono convencional</label>
+                                    {{ form.tlf_convencional }}
+                                </div>
+                            </div>
+{#                            {{ form.as_p }}#}
+                            <div class="modal-footer">
+                                <button onclick="close_modal_creacion()"
+                                        class="btn btn-red" type="button"
+                                    >Cerrar</button>
+                                <button
+                                    class="btn btn-primary" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

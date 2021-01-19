@@ -21,3 +21,24 @@ class AjaxCreate:
                 response.status_code = 400
                 return response
         return self.success_url
+
+
+class AjaxUpdate:
+    def post(self, request, *args, **kwargs):
+        if request.is_ajax():
+            form = self.form_class(request.POST, instance=self.get_object())
+            if form.is_valid():
+                form.save()
+                message = f'{self.model.__name__} actualizado correctamente'
+                error = 'There`s no error'
+                response = JsonResponse({'message': message, 'error': error})
+                response.status_code = 201
+                return response
+            else:
+                message = f'{self.model.__name__} no se pudo actualizar'
+                error = form.errors
+                response = JsonResponse({'message': message, 'error': error})
+                response.status_code = 400
+                return response
+        else:
+            return self.success_url
