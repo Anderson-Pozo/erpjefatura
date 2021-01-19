@@ -1,5 +1,5 @@
-function lista_contribuyentes(nameTable){
-    $(nameTable).DataTable({
+function lista_contribuyentes_naturales(){
+    $('#tableContribuyente').DataTable({
     language: {
         "decimal": "",
         "emptyTable": "No hay información",
@@ -100,7 +100,7 @@ function crear_contribuyente() {
         success: function (response) {
             $('#modalContribuyente').modal('hide');
             show_notification_success(response.mensaje);
-            lista_contribuyentes();
+            lista_contribuyentes_naturales();
             // console.log(response);
         },
         error: function (error) {
@@ -148,6 +148,6 @@ function edit_user() {
 }
 
 $(document).ready(function () {
-    let nameTable = '#tableContribuyente'
-    lista_contribuyentes(nameTable);
+    // let nameTable = '#tableContribuyente'
+    lista_contribuyentes_naturales();
 })
