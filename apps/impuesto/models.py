@@ -10,9 +10,9 @@ class Vencimiento(models.Model):
     dependiendo del noveno digito de cédula
     """
     id = models.AutoField(primary_key=True)
-    digito = models.IntegerField('Noveno dígito de cédula', blank=True, null=True)
-    no_obligado = models.DateField('No obligado', blank=True, null=True)
-    obligado = models.DateField('Obligado', blank=True, null=True)
+    digito = models.IntegerField('Noveno dígito de cédula', blank=False, null=True)
+    no_obligado = models.DateField('No obligado', blank=False, null=True)
+    obligado = models.DateField('Obligado', blank=False, null=True)
 
     def to_json(self):
         item = model_to_dict(self)
@@ -29,11 +29,11 @@ class Impuesto(models.Model):
     impuesto de la patente
     """
     id = models.AutoField(primary_key=True)
-    numero = models.IntegerField('Numero', blank=True, null=True)
-    fraccion_basica = models.IntegerField('Fraccion basica', blank=True, null=True)
-    fraccion_excedente = models.IntegerField('Fraccion excedente', blank=True, null=True)
-    impuesto_fraccion_basica = models.IntegerField('Impuesto fraccion basica', blank=True, null=True)
-    porcentaje_fraccion_excedente = models.FloatField('Porcentaje fraccion excedente', blank=True, null=True)
+    numero = models.IntegerField('Numero', blank=False, null=True)
+    fraccion_basica = models.IntegerField('Fraccion basica', blank=False, null=True)
+    fraccion_excedente = models.IntegerField('Fraccion excedente', blank=False, null=True)
+    impuesto_fraccion_basica = models.IntegerField('Impuesto fraccion basica', blank=False, null=True)
+    porcentaje_fraccion_excedente = models.FloatField('Porcentaje fraccion excedente', blank=False, null=True)
 
     def to_json(self):
         item = model_to_dict(self)
@@ -48,9 +48,9 @@ class Multa(models.Model):
     Modelo Multa que contiene los porcentajes de mmulta de mora por cada mes del año
     """
     id = models.AutoField(primary_key=True)
-    anio = models.CharField('Año', max_length=4, blank=True, null=True)
-    mes = models.CharField('Mes', max_length=15, blank=True, null=True)
-    porcentaje = models.FloatField('Porcentaje multa', blank=True, null=True)
+    anio = models.CharField('Año', max_length=4, blank=False, null=True)
+    mes = models.CharField('Mes', max_length=15, blank=False, null=True)
+    porcentaje = models.FloatField('Porcentaje multa', blank=False, null=True)
 
     def to_json(self):
         item = model_to_dict(self)

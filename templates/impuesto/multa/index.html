@@ -28,9 +28,9 @@ Listado de fechas y porcetajes de Mora y Multa
 <div class="container mt-n10">
     <div class="card mb-4">
         <div class="card-header">
-            <button onclick=""
+            <button onclick="open_modal_creacion_multa('{% url 'impuesto:crear_multa' %}')"
                     class="btn btn-primary" type="button" data-toggle="modal"
-                    data-target="#modalContribuyente">
+                    data-target="#modalMulta">
 {#                    <i class="fab fa-facebook-f"></i>#}
                     Crear registro
             </button>
@@ -62,11 +62,12 @@ Listado de fechas y porcetajes de Mora y Multa
         </div>
     </div>
 </div>
-{#<div class="modal" id="modalEstablecimiento" tabindex="-1" role="dialog"#}
-{#    aria-labelledby="modalEstablecimientoTitle" aria-hidden="true">#}
-{#</div>#}
+<div class="modal" id="modalMulta" tabindex="-1" role="dialog"
+    aria-labelledby="modalMultaTitle" aria-hidden="true">
+</div>
 {% endblock %}
 
 {% block extrajs %}
     <script src="{% static 'static/jefatura/impuesto/multa/datatable.js' %}"></script>
+    <script src="{% static 'static/jefatura/impuesto/multa/modals.js' %}"></script>
 {% endblock %}

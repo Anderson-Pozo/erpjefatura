@@ -86,28 +86,28 @@ function lista_multa(){
 
 
 
-// function crear_contribuyente() {
-//     var data = new FormData($('#form_creation').get(0));
-//     $.ajax({
-//         // data: $('#form_creation').serialize(),
-//         url: $('#form_creation').attr('action'),
-//         type: $('#form_creation').attr('method'),
-//         data: data,
-//         processData: false,
-//         contentType: false,
-//         success: function (response) {
-//             $('#modalContribuyente').modal('hide');
-//             show_notification_success(response.mensaje);
-//             lista_contribuyentes();
-//             // console.log(response);
-//         },
-//         error: function (error) {
-//             show_notification_error(error.responseJSON.mensaje);
-//             show_errors_modal(error);
-//             console.log(error);
-//         }
-//     })
-// }
+function crear_multa() {
+    var data = new FormData($('#form_creation').get(0));
+    $.ajax({
+        // data: $('#form_creation').serialize(),
+        url: $('#form_creation').attr('action'),
+        type: $('#form_creation').attr('method'),
+        data: data,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            $('#modalMulta').modal('hide');
+            show_notification_success(response.mensaje);
+            lista_multa();
+            // console.log(response);
+        },
+        error: function (error) {
+            show_notification_error(error.responseJSON.mensaje);
+            show_errors_modal(error);
+            console.log(error);
+        }
+    })
+}
 
 $(document).ready(function () {
     lista_multa();
