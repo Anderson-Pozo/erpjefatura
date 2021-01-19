@@ -1,11 +1,11 @@
-function open_modal_creacion_contribuyente(url) {
-    $('#modalContribuyente').load(url, function () {
+function open_modal_contribuyente_juridico(url) {
+    $('#modalContribuyenteJuridico').load(url, function () {
         $(this).modal('show');
     });
 }
 
-function close_modal_creacion() {
-    $('#modalContribuyente').modal('hide');
+function close_modal_contribuyente_juridico() {
+    $('#modalContribuyenteJuridico').modal('hide');
 }
 
 function show_notification_success(message) {

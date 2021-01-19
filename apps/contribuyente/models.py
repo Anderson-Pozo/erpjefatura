@@ -5,8 +5,8 @@ from django.forms import model_to_dict
 # Create your models here.
 
 OPCIONES_TIPO = (
-    ('NATURAL', 'Natural'),
-    ('JURIDICA', 'Jurídica'),
+    ('Natural', 'Natural'),
+    ('Jurídica', 'Jurídica'),
 )
 
 
@@ -36,7 +36,7 @@ class Contribuyente(models.Model):
     """
     id = models.AutoField(primary_key=True)
     ruc = models.CharField('Ruc ', max_length=13, blank=False, null=True, unique=True)
-    email = models.CharField('Email', max_length=50, blank=True, null=True)
+    email = models.EmailField('Email', max_length=50, blank=True, null=True)
     tlf_celular = models.CharField('Celular', max_length=10, blank=True, null=True)
     tlf_convencional = models.CharField('Telefono convencional', max_length=10, blank=True, null=True)
     estado = models.BooleanField('Activo/Inactivo', blank=True, null=True, default=True)
@@ -54,9 +54,16 @@ class Contribuyente(models.Model):
         db_table = "contribuyente"
 
 
+NACIONALIDADES = (
+    ('Ecuatoriana', 'Ecuatoriana'),
+    ('Colombiana', 'Colombiana'),
+    ('Venezonalana', 'Venezonalana'),
+)
+
+
 class Natural(Contribuyente):
     numero_cedula = models.CharField('Número de cédula', max_length=10, blank=False, null=True, unique=True)
-    nacionalidad = models.CharField('Nacionalidad', max_length=20, blank=True, null=True)
+    nacionalidad = models.CharField('Nacionalidad', max_length=20, blank=True, null=True, choices=NACIONALIDADES)
     nombres = models.CharField('Nombres', max_length=50, blank=False, null=True)
     apellidos = models.CharField('Apellidos', max_length=50, blank=False, null=True)
 
@@ -66,8 +73,8 @@ class Juridico(Contribuyente):
     cedula_representante = models.CharField('Cédula del representante', max_length=10, blank=False, null=True)
     nombres_representante = models.CharField('Nombres del representante', max_length=50, blank=False, null=True)
     apellidos_representante = models.CharField('Apellidos del representante', max_length=50, blank=False, null=True)
-    telefono_representante = models.CharField('Teléfono del representante', max_length=10, blank=False, null=True)
-    correo_representante = models.EmailField('Correo del representante', max_length=50, blank=False, null=True)
+    telefono_representante = models.CharField('Teléfono del representante', max_length=10, blank=True, null=True)
+    correo_representante = models.EmailField('Correo del representante', max_length=50, blank=True, null=True)
 
     # class Meta:
     #     db_table = 'sociedad'

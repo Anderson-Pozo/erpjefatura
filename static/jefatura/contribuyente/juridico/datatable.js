@@ -66,8 +66,7 @@ function lista_contribuyentes(){
 }
 
 
-
-function crear_contribuyente() {
+function crear_contribuyente_juridico() {
     var data = new FormData($('#form_creation').get(0));
     $.ajax({
         // data: $('#form_creation').serialize(),
@@ -77,7 +76,7 @@ function crear_contribuyente() {
         processData: false,
         contentType: false,
         success: function (response) {
-            $('#modalContribuyente').modal('hide');
+            $('#modalContribuyenteJuridico').modal('hide');
             show_notification_success(response.mensaje);
             lista_contribuyentes();
             // console.log(response);
@@ -85,7 +84,7 @@ function crear_contribuyente() {
         error: function (error) {
             show_notification_error(error.responseJSON.mensaje);
             show_errors_modal(error);
-            console.log(error);
+            // console.log(error);
         }
     })
 }
