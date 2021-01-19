@@ -2,11 +2,11 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 from django.http import JsonResponse
 from .models import Natural, Juridico
 from .forms import ContribuyenteNaturalForm, ContribuyenteJuridicoForm
-from apps.utils.ajax import AjaxCreate
+from apps.utils.ajax import AjaxCreate, AjaxUpdate
 
 
 # Create your views here.
@@ -37,6 +37,13 @@ class CrearContribuyenteNatural(AjaxCreate, CreateView):
     model = Natural
     form_class = ContribuyenteNaturalForm
     template_name = 'contribuyente/natural/crear_contribuyente.html'
+    success_url = reverse_lazy('contribuyente:lista_contribuyente_natural')
+
+
+class EditarContribuyenteNatural(UpdateView):
+    model = Natural
+    form_class = ContribuyenteNaturalForm
+    template_name = 'contribuyente/natural/editar_contribuyente.html'
     success_url = reverse_lazy('contribuyente:lista_contribuyente_natural')
 
 
