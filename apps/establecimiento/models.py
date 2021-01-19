@@ -4,7 +4,7 @@ from apps.direccion.models import Direccion
 
 
 # Create your models here.
-ACTIVIDAD= (
+ACTIVIDAD = (
     ('Comercial', 'Comercial'),
     ('Industrial', 'Industrial'),
     ('Inmobiliaria', 'Inmobiliaria'),
@@ -22,7 +22,7 @@ class TipoActividad(models.Model):
     el negocio
     """
     id = models.AutoField(primary_key=True)
-    tipo_actividad= models.CharField('Tipo de actividad comercial', max_length=25, blank=False, null=True, choices=ACTIVIDAD)
+    tipo_actividad = models.CharField('Tipo de actividad comercial', max_length=25, blank=False, null=True, choices=ACTIVIDAD)
 
     def __str__(self):
         return self.tipo_actividad
@@ -30,11 +30,13 @@ class TipoActividad(models.Model):
     class Meta:
         db_table = "tipo_actividad"
 
-TIPO_VENTA=(
+
+TIPO_VENTA = (
     ('Venta al por mayor', 'Venta al por mayor '),
     ('Venta al por menor', 'Venta al por menor '),
     ('Venta al por mayor y menor', 'Venta al por mayor y menor'),
 )
+
 
 class Establecimiento(models.Model):
     """
