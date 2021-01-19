@@ -37,7 +37,7 @@ columns: [
     { "data": "total_patrimonio"},
     { "data": "tipo_actividad"},
     { "data": "direccion"},
-    { "data": "direccion"},
+    { "data": "acciones"},
 ],
 columnDefs: [
     {

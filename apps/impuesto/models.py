@@ -42,6 +42,22 @@ class Impuesto(models.Model):
     class Meta:
         db_table = "impuesto"
 
+MESES = (
+    ('Enero', 'Enero'),
+    ('Febrero', 'Febrero'),
+    ('Marzo', 'Marzo'),
+    ('Abril', 'Abril'),
+    ('Mayo', 'Mayo'),
+    ('Junio', 'Junio'),
+    ('Julio', 'Julio'),
+    ('Agosto', 'Agosto'),
+    ('Septiembre', 'Septiembre'),
+    ('Octubre', 'Octubre'),
+    ('Noviembre', 'Noviembre'),
+    ('Diciembre', 'Diciembre'),
+)
+
+
 
 class Multa(models.Model):
     """
@@ -49,7 +65,7 @@ class Multa(models.Model):
     """
     id = models.AutoField(primary_key=True)
     anio = models.CharField('Año', max_length=4, blank=False, null=True)
-    mes = models.CharField('Mes', max_length=15, blank=False, null=True)
+    mes = models.CharField('Mes', max_length=15, blank=False, null=True, choices=MESES)
     porcentaje = models.FloatField('Porcentaje multa', blank=False, null=True)
 
     def to_json(self):

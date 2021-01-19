@@ -87,11 +87,11 @@ function lista_multa(){
 
 
 function crear_multa() {
-    var data = new FormData($('#form_creation').get(0));
+    var data = new FormData($('#form_multa').get(0));
     $.ajax({
         // data: $('#form_creation').serialize(),
-        url: $('#form_creation').attr('action'),
-        type: $('#form_creation').attr('method'),
+        url: $('#form_multa').attr('action'),
+        type: $('#form_multa').attr('method'),
         data: data,
         processData: false,
         contentType: false,

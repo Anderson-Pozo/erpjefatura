@@ -9,76 +9,63 @@
                 <div class="card mb-4">
                     <div class="card-header">Datos del Establecimiento</div>
                     <div class="card-body">
-                        <form>
-                            <!-- Form Group (username)-->
-                            <div class="form-group">
-                                <label class="small mb-1" for="ingreseNombre">Nombre</label>
-                                <input class="form-control" id="ingreseNombre" type="text"
-                                    placeholder="Ingrese el nombre del establecimiento" maxlength="60" required />
-                            </div>
-                            <div class="form-group">
-                                <label class="small mb-1" for="ingreseDescripcion">Descripción</label>
-                                <label for="Textareadescripcion"></label><textarea
-                                    class="form-control form-control-solid" id="Textareadescripcion" rows="3"
-                                    maxlength="300" required></textarea>
-                            </div>
-                            <!-- Form Row-->
-                            <div class="form-row">
-                                <!-- Form Group (first name)-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="ingreseActividad">Inicio de actividad</label>
-                                    <input class="form-control" id="ingreseActividad" type="date" required />
-                                </div>
-                                <!-- Form Group (last name)-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="ingresePatrimonio">Total del patrimonio</label>
-                                    <input class="form-control" id="ingresePatrimonio" type="text"
-                                        placeholder="Ingrese el patrimonio" maxlength="15" required />
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                    <!-- Form Group (organization name)-->
-                                    <div class="form-group col-md-6">
-                                        <label class="small mb-1" for="ingreseCallePrincipal">Calle Principal</label>
-                                        <input class="form-control" id="ingreseCallePrincipal" type="text"
-                                            placeholder="Ingrese la calle Principal" required />
+                        <form id="form_multa" action="{% url 'establecimiento:crear_establecimiento' %}" method="POST">
+                                    {% csrf_token %}
+                                    {% if form.errors %}
+                                        <div class="alert alert-danger">
+                                            {{ form.errors }}
+                                        </div>
+                                    {% endif %}
+                                    <!-- Form Group (username)-->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                        <label class="small mb-1" for="ingreseNombre">Nombre</label>
+                                            {{ form.nombre }}
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1"
+                                                   for="fechaInicioActividad">Fecha de inicio de la actividad</label>
+                                             {{ form.fecha_inicio_actividad }}
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="small mb-1" for="ingreseCalleSecundaria">Calle Secundaria</label>
-                                        <input class="form-control" id="ingreseCalleSecundaria" type="text"
-                                            placeholder="Ingrese la calle Secundaria" required />
-                                    </div>
-                            </div>
 
-                            <!-- Form Group (email address)-->
-                            <div class="form-group" re>
-                                <label class="small mb-1" for="tipoActividad">Tipo de actividad </label>
-                                <select class="form-control" id="tipoActividad" required>
-                                    <option>Comercial</option>
-                                    <option>Industrial</option>
-                                    <option>Inmobiliaria</option>
-                                    <option>Financiera</option>
-                                    <option>Artesanal</option>
-                                    <option>Profesional</option>
-                                    <option>Alcoholes</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="small mb-1" for="tipoVenta">Tipo de venta</label>
-                                <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" id="ventaMenor" type="checkbox">
-                                    <label class="custom-control-label" for="ventaMenor">Ventas al por menor</label>
-                                </div>
-                                <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" id="ventaMayor" type="checkbox">
-                                    <label class="custom-control-label" for="ventaMayor">Ventas al por mayor</label>
-                                </div>
-                            </div>
-                            <div class="modal-footer"><button class="btn btn-secondary" type="button"
-                                data-dismiss="modal">Cerrar</button><button class="btn btn-primary" type="submit">
-                                Guardar</button>
-                            </div>
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="descripcionActividad">Descripción</label>
+                                            {{ form.descripcion_actividad }}
+                                    </div>
+                                     <div class="form-group">
+                                        <label class="small mb-1" for="callePrincipal">Dirección</label>
+                                            {{ form.direccion }}
+                                    </div>
+
+                                    <!-- Form Row-->
+                                    <div class="form-row">
+                                        <!-- Form Group (first name)-->
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="patrimonio">Total Patrimonio</label>
+                                            {{ form.total_patrimonio }}
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="tipoActividad">Tipo de actividad</label>
+                                            {{ form.tipo_actividad }}
+                                        </div>
+                                    </div>
+                                    <!-- Form Row        -->
+                                    <div class="form-row">
+                                        <!-- Form Group (organization name)-->
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="tipoVenta">Tipo de venta</label>
+                                            {{ form.tipo_venta }}
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button onclick="close_modal_creacion()"
+                                                class="btn btn-red" type="button"
+                                            >Cerrar</button>
+                                        <button onclick="crear_multa()"
+                                            class="btn btn-green" type="button">Guardar</button>
+                                    </div>
                         </form>
                     </div>
                 </div>

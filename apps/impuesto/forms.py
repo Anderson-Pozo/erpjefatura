@@ -37,10 +37,9 @@ class MultaForm(forms.ModelForm):
                     'required': True,
                 }
             ),
-            'mes': forms.TextInput(
+            'mes': forms.Select(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Ingrese el mes',
                     'required': True,
                 }
             ),
