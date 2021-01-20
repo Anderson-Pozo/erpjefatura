@@ -57,7 +57,7 @@ class Establecimiento(models.Model):
 
     def to_json(self):
         item = model_to_dict(self)
-        item['tipo_actividad'] = self.tipo_actividad.nombre
+        item['tipo_actividad'] = self.tipo_actividad.tipo_actividad
         item['direccion'] = self.direccion.get_all_direccion()
         return item
 
