@@ -50,10 +50,11 @@ function lista_contribuyentes(){
             orderable: false,
             render: function (data, type, row) {
                 let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2"' +
-                                ' onclick="open_modal_edition(\'/contribuyente/natural/editar/' + row.id +'/\')">' +
+                                ' onclick="open_modal_edition(\'/contribuyente/juridico/editar/' + row.id +'/\')">' +
                                 '<i class="fas fa-edit"></i>' +
                                 '</button>';
-                buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange" onclick="alert("Hola")">' +
+                buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange" ' +
+                            ' onclick="open_modal_elimination(\'/contribuyente/juridico/eliminar/' + row.id +'/\')">' +
                             '<i class="fas fa-trash"></i>' +
                             '</button>';
                 return buttons;
@@ -87,6 +88,48 @@ function crear_contribuyente_juridico() {
             // console.log(error);
         }
     })
+}
+
+
+function editar_contribuyente_juridico() {
+    let data = new FormData($('#form_edition_juridico').get(0));
+    $.ajax({
+        url: $('#form_edition_juridico').attr('action'),
+        type: $('#form_edition_juridico').attr('method'),
+        data: data,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            show_notification_success(response.message);
+            close_modal_edition();
+            lista_contribuyentes();
+        },
+        error: function (error) {
+            show_notification_error(error.responseJSON.message);
+            show_errors_edition(error);
+            // show_errors_modal_edition(error);
+            // console.log(error.responseJSON.message);
+        }
+    })
+}
+
+function eliminar_contribuyente(pk) {
+    $.ajax({
+        data: {
+            csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
+        },
+        url: '/contribuyente/juridico/eliminar/'+ pk +'/',
+        type: 'post',
+        success: function (response) {
+            show_notification_success(response.message);
+            close_modal_elimination();
+            lista_contribuyentes();
+        },
+        error: function (error) {
+            show_notification_error(error.responseJSON.message);
+        }
+    });
 }
 
 $(document).ready(function () {

@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block collapse_contribuyente %}collapse show{% endblock %}
+
 {% block title %}
 <title>Contribuyentes naturales</title>
 {% endblock %}
@@ -70,6 +72,9 @@ Listado de contribuyentes naturales de la Jefatura de Rentas
 </div>
 <div class="modal" id="edicion" tabindex="-1" role="dialog"
     aria-labelledby="edicion" aria-hidden="true">
+</div>
+<div class="modal" id="eliminacion" tabindex="-1" role="dialog"
+    aria-labelledby="eliminacionTitle" aria-hidden="true">
 </div>
 {% endblock %}
 

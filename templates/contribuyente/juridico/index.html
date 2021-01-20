@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block collapse_contribuyente %}collapse show{% endblock %}
+
 {% block title %}
 <title>Contribuyentes jurídicos</title>
 {% endblock %}
@@ -28,7 +30,6 @@ Listado de contribuyentes jurídicos de la Jefatura de Rentas
             <button onclick="open_modal_creation('{% url 'contribuyente:crear_contribuyente_juridico' %}')"
                     class="btn btn-primary" type="button" data-toggle="modal"
                     data-target="#creacion">
-{#                    <i class="fab fa-facebook-f"></i>#}
                     Crear registro
             </button>
         </div>
@@ -67,6 +68,12 @@ Listado de contribuyentes jurídicos de la Jefatura de Rentas
 </div>
 <div class="modal" id="creacion" tabindex="-1" role="dialog"
     aria-labelledby="creacionTitle" aria-hidden="true">
+</div>
+<div class="modal" id="edicion" tabindex="-1" role="dialog"
+    aria-labelledby="edicionTitle" aria-hidden="true">
+</div>
+<div class="modal" id="eliminacion" tabindex="-1" role="dialog"
+    aria-labelledby="eliminacionTitle" aria-hidden="true">
 </div>
 {% endblock %}
 

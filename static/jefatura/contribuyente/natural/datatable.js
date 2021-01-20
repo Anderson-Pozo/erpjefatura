@@ -75,7 +75,8 @@ function lista_contribuyentes_naturales(){
                                 ' onclick="open_modal_edition(\'/contribuyente/natural/editar/' + row.id +'/\')">' +
                                 '<i class="fas fa-edit"></i>' +
                                 '</button>';
-                buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange">' +
+                buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange" ' +
+                            ' onclick="open_modal_elimination(\'/contribuyente/natural/eliminar/' + row.id +'/\')">' +
                             '<i class="fas fa-trash"></i>' +
                             '</button>';
                 return buttons;
@@ -135,18 +136,17 @@ function editar_contribuyente_natural() {
     })
 }
 
-function delete_user(pk) {
-    // console.log($("[name='csrfmiddlewaretoken']").val())
+function eliminar_contribuyente_natural(pk) {
     $.ajax({
         data: {
             csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
         },
-        url: '/user/delete_user/'+pk+'/',
+        url: '/contribuyente/natural/eliminar/'+ pk +'/',
         type: 'post',
         success: function (response) {
             show_notification_success(response.message);
             close_modal_elimination();
-            list_users();
+            lista_contribuyentes_naturales();
         },
         error: function (error) {
             show_notification_error(error.responseJSON.message);

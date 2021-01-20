@@ -42,3 +42,18 @@ class AjaxUpdate:
                 return response
         else:
             return self.success_url
+
+
+class AjaxDelete:
+    def delete(self, request, *args, **kwargs):
+        if request.is_ajax():
+            modelo = self.get_object()
+            modelo.estado = False
+            modelo.save()
+            message = f'{self.model.__name__} fue eliminado'
+            error = 'No hay error'
+            response = JsonResponse({'message': message, 'error': error})
+            response.status_code = 201
+            return response
+        else:
+            return self.success_url

@@ -142,12 +142,6 @@
                                         Inicio
                                     </a>
                                     {% endblock %}
-{#                                    <a class="nav-link" href="dashboard-2.html">#}
-{#                                        Multipurpose#}
-{#                                    </a>#}
-{#                                    <a class="nav-link" href="dashboard-3.html">#}
-{#                                        Affiliate#}
-{#                                    </a>#}
                                 </nav>
                             </div>
                             <!-- Sidenav Heading (Patente)-->
@@ -158,7 +152,7 @@
                                 Patente
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapsePatente" data-parent="#accordionSidenav">
+                            <div class="{% block collapse_patente %}collapse{% endblock %}" id="collapsePatente" data-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
                                     <a class="nav-link" href="#">
                                         Apertura de patente
@@ -168,13 +162,29 @@
                                     </a>
                                 </nav>
                             </div>
+
+                            <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseContribuyentes" aria-expanded="false" aria-controls="collapseContribuyentes">
+                                <div class="nav-link-icon"><i class="fas fa-street-view"></i></div>
+                                Contribuyentes
+                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="{% block collapse_contribuyente %}collapse{% endblock %}" id="collapseContribuyentes" data-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
+                                    <a class="nav-link" href="{% url 'contribuyente:lista_contribuyente_natural' %}">
+                                        Naturales
+                                    </a>
+                                    <a class="nav-link" href="{% url 'contribuyente:lista_contribuyente_juridico' %}">
+                                        Jurídicos
+                                    </a>
+                                </nav>
+                            </div>
                             <!-- Sidenav Accordion (Impuesto)-->
                             <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseMulta" aria-expanded="false" aria-controls="collapseMulta">
                                 <div class="nav-link-icon"><i class="fas fa-dollar-sign"></i></div>
-                                Impuesto
+                                    Impuesto
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapseMulta" data-parent="#accordionSidenav">
+                            <div class="{% block collapse_impuesto %}collapse{% endblock %}" id="collapseMulta" data-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
                                     <a class="nav-link" href="{% url 'impuesto:lista_vencimiento' %}">
                                         Vencimiento
@@ -187,30 +197,6 @@
                                     </a>
                                 </nav>
                             </div>
-                            <!-- Sidenav Link (Contribuyentes)-->
-{#                            <a class="nav-link" href="{% url 'contribuyente:lista_contribuyentes' %}">#}
-{#                                <div class="nav-link-icon"><i class="fas fa-street-view"></i></div>#}
-{#                                Contribuyentes#}
-{#                            </a>#}
-
-                            <div class="sidenav-menu-heading">Contribuyentes</div>
-                            <!-- Sidenav Accordion (Contribuyentes)-->
-                            <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseContribuyentes" aria-expanded="false" aria-controls="collapseContribuyentes">
-                                <div class="nav-link-icon"><i class="fas fa-street-view"></i></div>
-                                Contribuyentes
-                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseContribuyentes" data-parent="#accordionSidenav">
-                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                    <a class="nav-link" href="{% url 'contribuyente:lista_contribuyente_natural' %}">
-                                        Naturales
-                                    </a>
-                                    <a class="nav-link" href="{% url 'contribuyente:lista_contribuyente_juridico' %}">
-                                        Jurídicos
-                                    </a>
-                                </nav>
-                            </div>
-
                             <!-- Sidenav Link (Establecimientos)-->
                             <a class="nav-link" href="{% url 'establecimiento:lista_establecimientos' %}">
                                 <div class="nav-link-icon"><i class="fas fa-store"></i></div>
