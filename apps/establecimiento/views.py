@@ -37,4 +37,4 @@ class CrearEstablecimiento(AjaxCreate, CreateView):
     model = Establecimiento
     template_name = 'establecimiento/crear_establecimiento.html'
     form_class = EstablecimientoForm
-    success_url = reverse_lazy('establecimeinto:lista_establecimiento')
+    success_url = reverse_lazy('establecimiento:lista_establecimiento')

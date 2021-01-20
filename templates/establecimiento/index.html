@@ -9,17 +9,10 @@
 <div class="page-header-icon"><i class="fas fa-store"></i></div>
 {% endblock %}
 
-
 {% block titleheader %}
 Establecimientos
 {% endblock %}
-        <div class="card-header">
-            <button onclick="open_modal_creacion('{% url 'establecimiento:crear_establecimiento' %}')"
-                    class="btn btn-primary" type="button" data-toggle="modal"
-                    data-target="#modalEstablecimiento">
-                    Crear registro
-            </button>
-        </div>
+
 {% block subtitleheader %}
 Listado de establecimientos
 {% endblock %}
@@ -31,7 +24,7 @@ Listado de establecimientos
 <div class="container mt-n10">
     <div class="card mb-4">
         <div class="card-header">
-            <button onclick="open_modal_creacion('{% url 'establecimiento:crear_establecimiento' %}')"
+            <button onclick="open_modal_creacion('{% url 'establecimiento:crear_establecimientos' %}')"
                     class="btn btn-primary" type="button" data-toggle="modal"
                     data-target="#modalEstablecimiento">
                     Crear registro
