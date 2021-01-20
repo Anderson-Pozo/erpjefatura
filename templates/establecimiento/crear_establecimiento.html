@@ -9,7 +9,9 @@
                 <div class="card mb-4">
                     <div class="card-header">Datos del Establecimiento</div>
                     <div class="card-body">
-                        <form id="form_multa" action="{% url 'establecimiento:crear_establecimiento' %}" method="POST">
+                        <div id="errors"></div>
+                        <br>
+                        <form id="form_establecimientos" action="{% url 'establecimiento:crear_establecimiento' %}" method="POST">
                                     {% csrf_token %}
                                     {% if form.errors %}
                                         <div class="alert alert-danger">
@@ -60,10 +62,10 @@
                                     </div>
 
                                     <div class="modal-footer">
-                                        <button onclick="close_modal_creacion()"
+                                        <button onclick="close_modal_creation();"
                                                 class="btn btn-red" type="button"
                                             >Cerrar</button>
-                                        <button onclick="crear_multa()"
+                                        <button onclick="crear_establecimientos();"
                                             class="btn btn-green" type="button">Guardar</button>
                                     </div>
                         </form>

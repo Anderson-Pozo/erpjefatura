@@ -57,10 +57,34 @@ function lista_establecimientos() {
             },
         ],
         initComplete: function (settings, json) {
-            alert('Datos cargados');
+            // alert('Datos cargados');
         }
     });
 }
+
+
+function crear_establecimientos() {
+    var data = new FormData($('#form_establecimientos').get(0));
+    $.ajax({
+        url: $('#form_establecimientos').attr('action'),
+        type: $('#form_establecimientos').attr('method'),
+        data: data,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            $('#modalEstablecimiento').modal('hide');
+            show_notification_success(response.mensaje);
+            lista_establecimientos();
+            // console.log(response);
+        },
+        error: function (error) {
+            show_notification_error(error.responseJSON.mensaje);
+            show_errors_creation(error);
+            // console.log(error);
+        }
+    })
+}
+
 
 $(document).ready(function () {
     lista_establecimientos();

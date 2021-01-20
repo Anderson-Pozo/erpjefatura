@@ -25,9 +25,9 @@ Listado de contribuyentes jurídicos de la Jefatura de Rentas
 <div class="container mt-n10">
     <div class="card mb-4">
         <div class="card-header">
-            <button onclick="open_modal_contribuyente_juridico('{% url 'contribuyente:crear_contribuyente_juridico' %}')"
+            <button onclick="open_modal_creation('{% url 'contribuyente:crear_contribuyente_juridico' %}')"
                     class="btn btn-primary" type="button" data-toggle="modal"
-                    data-target="#modalContribuyenteJuridico">
+                    data-target="#creacion">
 {#                    <i class="fab fa-facebook-f"></i>#}
                     Crear registro
             </button>
@@ -65,12 +65,13 @@ Listado de contribuyentes jurídicos de la Jefatura de Rentas
         </div>
     </div>
 </div>
-<div class="modal" id="modalContribuyenteJuridico" tabindex="-1" role="dialog"
-    aria-labelledby="modalContribuyenteJuridicoTitle" aria-hidden="true">
+<div class="modal" id="creacion" tabindex="-1" role="dialog"
+    aria-labelledby="creacionTitle" aria-hidden="true">
 </div>
 {% endblock %}
 
 {% block extrajs %}
     <script src="{% static 'static/jefatura/contribuyente/juridico/datatable.js' %}"></script>
-    <script src="{% static 'static/jefatura/contribuyente/juridico/modals.js' %}"></script>
+    <script src="{% static 'static/jefatura/modals.js' %}"></script>
+    <script src="{% static 'static/jefatura/messages.js' %}"></script>
 {% endblock %}

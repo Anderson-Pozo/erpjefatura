@@ -65,9 +65,8 @@ function lista_multa(){
 
 
 function crear_multa() {
-    var data = new FormData($('#form_multa').get(0));
+    let data = new FormData($('#form_multa').get(0));
     $.ajax({
-        // data: $('#form_creation').serialize(),
         url: $('#form_multa').attr('action'),
         type: $('#form_multa').attr('method'),
         data: data,
@@ -81,8 +80,8 @@ function crear_multa() {
         },
         error: function (error) {
             show_notification_error(error.responseJSON.mensaje);
-            show_errors_modal(error);
-            console.log(error);
+            show_errors_creation(error);
+            // console.log(error);
         }
     })
 }

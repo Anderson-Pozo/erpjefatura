@@ -61,30 +61,29 @@ function lista_contribuyentes(){
         }
     ],
     initComplete: function(settings, json) {
-        alert('Datos cargados');
+        // alert('Datos cargados');
     }
     });
 }
 
 
 function crear_contribuyente_juridico() {
-    var data = new FormData($('#form_creation').get(0));
+    let data = new FormData($('#form_creation').get(0));
     $.ajax({
-        // data: $('#form_creation').serialize(),
         url: $('#form_creation').attr('action'),
         type: $('#form_creation').attr('method'),
         data: data,
         processData: false,
         contentType: false,
         success: function (response) {
-            $('#modalContribuyenteJuridico').modal('hide');
+            close_modal_creation();
             show_notification_success(response.mensaje);
             lista_contribuyentes();
             // console.log(response);
         },
         error: function (error) {
             show_notification_error(error.responseJSON.mensaje);
-            show_errors_modal(error);
+            show_errors_creation(error);
             // console.log(error);
         }
     })

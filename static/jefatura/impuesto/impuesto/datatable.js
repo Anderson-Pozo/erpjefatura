@@ -43,28 +43,6 @@ function lista_impuesto(){
         { "data": "acciones"},
     ],
     columnDefs: [
-        // {
-        //     targets: [0],
-        //     orderable: true,
-        //     render: function (data, type, row) {
-        //         return '<p>' + row.nombres + '</p>';
-        //     }
-        // },
-        // {
-        //     targets: [-2],
-        //     class: 'text-center',
-        //     orderable: true,
-        //     render: function (data, type, row) {
-        //         if (row.tipocontribuyente == 'Natural'){
-        //             return '<div class="badge badge-success badge-pill">' + row.tipocontribuyente + '</div></td>';
-        //             // return 'Natural'
-        //         }
-        //         if (row.tipocontribuyente == 'Jurídica') {
-        //             return '<div class="badge badge-indigo badge-pill">' + row.tipocontribuyente +'</div></td>';
-        //             // return 'Jurídico'
-        //         }
-        //     }
-        // },
         {
             targets: [-1],
             class: 'text-center',
@@ -85,31 +63,6 @@ function lista_impuesto(){
     }
     });
 }
-
-
-
-// function crear_contribuyente() {
-//     var data = new FormData($('#form_creation').get(0));
-//     $.ajax({
-//         // data: $('#form_creation').serialize(),
-//         url: $('#form_creation').attr('action'),
-//         type: $('#form_creation').attr('method'),
-//         data: data,
-//         processData: false,
-//         contentType: false,
-//         success: function (response) {
-//             $('#modalContribuyente').modal('hide');
-//             show_notification_success(response.mensaje);
-//             lista_contribuyentes();
-//             // console.log(response);
-//         },
-//         error: function (error) {
-//             show_notification_error(error.responseJSON.mensaje);
-//             show_errors_modal(error);
-//             console.log(error);
-//         }
-//     })
-// }
 
 $(document).ready(function () {
     lista_impuesto();
