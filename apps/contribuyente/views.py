@@ -40,7 +40,7 @@ class CrearContribuyenteNatural(AjaxCreate, CreateView):
     success_url = reverse_lazy('contribuyente:lista_contribuyente_natural')
 
 
-class EditarContribuyenteNatural(UpdateView):
+class EditarContribuyenteNatural(AjaxUpdate, UpdateView):
     model = Natural
     form_class = ContribuyenteNaturalForm
     template_name = 'contribuyente/natural/editar_contribuyente.html'

@@ -71,7 +71,8 @@ function lista_contribuyentes_naturales(){
             class: 'text-center',
             orderable: false,
             render: function (data, type, row) {
-                let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2">' +
+                let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2"' +
+                                ' onclick="open_modal_edition(\'/contribuyente/natural/editar/' + row.id +'/\')">' +
                                 '<i class="fas fa-edit"></i>' +
                                 '</button>';
                 buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange">' +
@@ -98,15 +99,38 @@ function crear_contribuyente() {
         processData: false,
         contentType: false,
         success: function (response) {
-            $('#modalContribuyente').modal('hide');
+            close_modal_creation();
             show_notification_success(response.mensaje);
             lista_contribuyentes_naturales();
             // console.log(response);
         },
         error: function (error) {
             show_notification_error(error.responseJSON.mensaje);
-            show_errors_modal(error);
-            console.log(error);
+            show_errors_creation(error);
+            // console.log(error);
+        }
+    })
+}
+
+function editar_contribuyente_natural() {
+    let data = new FormData($('#form_edition').get(0));
+    $.ajax({
+        url: $('#form_edition').attr('action'),
+        type: $('#form_edition').attr('method'),
+        data: data,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            show_notification_success(response.message);
+            close_modal_edition();
+            lista_contribuyentes_naturales();
+        },
+        error: function (error) {
+            show_notification_error(error.responseJSON.message);
+            show_errors_edition(error);
+            // show_errors_modal_edition(error);
+            // console.log(error.responseJSON.message);
         }
     })
 }
@@ -130,24 +154,6 @@ function delete_user(pk) {
     });
 }
 
-function edit_user() {
-    $.ajax({
-        data: $('#form_edition').serialize(),
-        url: $('#form_edition').attr('action'),
-        type: $('#form_edition').attr('method'),
-        success: function (response) {
-            show_notification_success(response.message);
-            close_modal_edition();
-            list_users();
-        },
-        error: function (error) {
-            show_notification_error(error.responseJSON.message);
-            show_errors_modal_edition(error);
-        }
-    })
-}
-
 $(document).ready(function () {
-    // let nameTable = '#tableContribuyente'
     lista_contribuyentes_naturales();
 })

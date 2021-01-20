@@ -10,7 +10,7 @@ urlpatterns = [
          ListaContribuyenteNatural.as_view(),
          name='lista_contribuyente_natural'
          ),
-    path('crear_contribuyente_natural/',
+    path('natural/crear/',
          CrearContribuyenteNatural.as_view(),
          name='crear_contribuyente_natural'
          ),
@@ -26,7 +26,7 @@ urlpatterns += [
          ListaContribuyenteJuridico.as_view(),
          name='lista_contribuyente_juridico'
          ),
-    path('crear_contribuyente_juridico/',
+    path('juridico/crear/',
          CrearContribuyenteJuridico.as_view(),
          name='crear_contribuyente_juridico'
          )

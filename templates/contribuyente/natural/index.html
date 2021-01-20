@@ -25,10 +25,9 @@ Listado de contribuyentes naturales de la Jefatura de Rentas
 <div class="container mt-n10">
     <div class="card mb-4">
         <div class="card-header">
-            <button onclick="open_modal_creacion_contribuyente('{% url 'contribuyente:crear_contribuyente_natural' %}')"
+            <button onclick="open_modal_creation('{% url 'contribuyente:crear_contribuyente_natural' %}')"
                     class="btn btn-primary" type="button" data-toggle="modal"
-                    data-target="#modalContribuyente">
-{#                    <i class="fab fa-facebook-f"></i>#}
+                    data-target="#creacion">
                     Crear registro
             </button>
         </div>
@@ -66,12 +65,16 @@ Listado de contribuyentes naturales de la Jefatura de Rentas
         </div>
     </div>
 </div>
-<div class="modal" id="modalContribuyente" tabindex="-1" role="dialog"
-    aria-labelledby="modalContribuyenteTitle" aria-hidden="true">
+<div class="modal" id="creacion" tabindex="-1" role="dialog"
+    aria-labelledby="creacionTitle" aria-hidden="true">
+</div>
+<div class="modal" id="edicion" tabindex="-1" role="dialog"
+    aria-labelledby="edicion" aria-hidden="true">
 </div>
 {% endblock %}
 
 {% block extrajs %}
     <script src="{% static 'static/jefatura/contribuyente/natural/datatable.js' %}"></script>
-    <script src="{% static 'static/jefatura/contribuyente/natural/modals.js' %}"></script>
+    <script src="{% static 'static/jefatura/modals.js' %}"></script>
+    <script src="{% static 'static/jefatura/messages.js' %}"></script>
 {% endblock %}

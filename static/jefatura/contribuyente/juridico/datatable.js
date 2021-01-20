@@ -49,10 +49,11 @@ function lista_contribuyentes(){
             class: 'text-center',
             orderable: false,
             render: function (data, type, row) {
-                let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2">' +
+                let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2"' +
+                                ' onclick="open_modal_edition(\'/contribuyente/natural/editar/' + row.id +'/\')">' +
                                 '<i class="fas fa-edit"></i>' +
                                 '</button>';
-                buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange">' +
+                buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange" onclick="alert("Hola")">' +
                             '<i class="fas fa-trash"></i>' +
                             '</button>';
                 return buttons;
