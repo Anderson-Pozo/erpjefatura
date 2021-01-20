@@ -4,11 +4,11 @@ from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 from django.http import HttpResponse, JsonResponse
 from .models import Impuesto, Vencimiento, Multa
 from .forms import MultaForm
-from apps.utils.ajax import AjaxCreate
+from apps.utils.ajax import AjaxCreate, AjaxUpdate
 
 
 # Create your views here.
@@ -82,6 +82,13 @@ class CrearMulta(AjaxCreate, CreateView):
     #             response.status_code = 400
     #             return response
     #     return redirect('impuesto:lista_multa')
+
+
+class EditarMulta(AjaxUpdate, UpdateView):
+    model = Multa
+    form_class = MultaForm
+    template_name = 'impuesto/multa/editar_multa.html'
+    success_url = reverse_lazy('impuesto:lista_multa')
 
 
 class ListaImpuesto(ListView):

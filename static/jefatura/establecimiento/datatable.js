@@ -41,24 +41,40 @@ function lista_establecimientos() {
             {"data": "acciones"},
         ],
         columnDefs: [
-            {
-                targets: [-1],
-                class: 'text-center',
-                orderable: false,
-                render: function (data, type, row) {
-                    let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2">' +
-                        '<i class="fas fa-edit"></i>' +
-                        '</button>';
-                    buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange">' +
-                        '<i class="fas fa-trash"></i>' +
-                        '</button>';
-                    return buttons;
-                }
-            },
-        ],
-        initComplete: function (settings, json) {
-            // alert('Datos cargados');
+        //     {
+        //         targets: [-1],
+        //         class: 'text-center',
+        //         orderable: false,
+        //         render: function (data, type, row) {
+        //             let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2">' +
+        //                 '<i class="fas fa-edit"></i>' +
+        //                 '</button>';
+        //             buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange">' +
+        //                 '<i class="fas fa-trash"></i>' +
+        //                 '</button>';
+        //             return buttons;
+        //         }
+        //     },
+        // ],
+        {
+            targets: [-1],
+            class: 'text-center',
+            orderable: false,
+            render: function (data, type, row) {
+                let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2"' +
+                                ' onclick="open_modal_edition(\'editar/' + row.id +'/\')">' +
+                                '<i class="fas fa-edit"></i>' +
+                                '</button>';
+                buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange">' +
+                            '<i class="fas fa-trash"></i>' +
+                            '</button>';
+                return buttons;
+            }
         }
+    ],
+    initComplete: function(settings, json) {
+        // alert('Datos cargados');
+    }
     });
 }
 
@@ -81,6 +97,30 @@ function crear_establecimientos() {
             show_notification_error(error.responseJSON.mensaje);
             show_errors_creation(error);
             // console.log(error);
+        }
+    })
+}
+
+
+function editar_establecimientos() {
+    let data = new FormData($('#form_edition').get(0));
+    $.ajax({
+        url: $('#form_edition').attr('action'),
+        type: $('#form_edition').attr('method'),
+        data: data,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            show_notification_success(response.message);
+            close_modal_edition();
+            lista_establecimientos();
+        },
+        error: function (error) {
+            show_notification_error(error.responseJSON.message);
+            show_errors_edition(error);
+            // show_errors_modal_edition(error);
+            // console.log(error.responseJSON.message);
         }
     })
 }

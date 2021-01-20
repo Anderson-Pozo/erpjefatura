@@ -49,6 +49,7 @@ class Establecimiento(models.Model):
     fecha_inicio_actividad = models.DateField('Fecha de inicio de actividad comercial', blank=False, null=True)
     total_patrimonio = models.FloatField('Total de patrimonio', blank=False, null=True)
     tipo_venta = models.CharField('Tipo de venta', max_length=35 ,blank=False, null=True, choices=TIPO_VENTA)
+    estado = models.BooleanField('Activo/Inactivo', blank=True, null=True, default=True)
     tipo_actividad = models.ForeignKey(TipoActividad, on_delete=models.CASCADE)
     direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
 

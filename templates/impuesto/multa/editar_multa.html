@@ -1,0 +1,63 @@
+ <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalMultaTitle">Crear registro</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="card mb-4">
+                <div class="card-header border-bottom">
+                    <ul class="nav nav-tabs card-header-tabs" id="dashboardNav" role="tablist">
+                        <li class="nav-item mr-1">
+                            <a class="nav-link active"
+                               id="multa-pill"
+                               href="#multa" data-toggle="tab"
+                               role="tab" aria-controls="multa" aria-selected="true">
+                                Crear Mora y Multa
+                            </a></li>
+                    </ul>
+                </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="dashboardNavContent">
+                            <div class="tab-pane fade show active" id="multa" role="tabpanel" aria-labelledby="multa-pill">
+                                <div id="errors_edition"></div>
+                                <br>
+                                <form id="form_edition" action="{% url 'impuesto:editar_multa' object.pk %}" method="POST">
+                                    {% csrf_token %}
+                                    {% if form.errors %}
+                                        <div class="alert alert-danger">
+                                            {{ form.errors }}
+                                        </div>
+                                    {% endif %}
+                                    <!-- Form Group (username)-->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                        <label class="small mb-1" for="ingreseAnio">Año</label>
+                                            {{ form.anio }}
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="ingreseMes">Mes</label>
+                                            {{ form.mes }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="ingresePorcentaje">Porcentaje</label>
+                                        {{ form.porcentaje }}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button onclick="close_modal_edition();"
+                                                class="btn btn-red" type="button"
+                                            >Cerrar</button>
+                                        <button onclick="editar_multa();"
+                                            class="btn btn-green" type="button">Guardar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

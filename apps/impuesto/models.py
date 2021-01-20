@@ -67,6 +67,7 @@ class Multa(models.Model):
     anio = models.CharField('Año', max_length=4, blank=False, null=True)
     mes = models.CharField('Mes', max_length=15, blank=False, null=True, choices=MESES)
     porcentaje = models.FloatField('Porcentaje multa', blank=False, null=True)
+    estado = models.BooleanField('Activo/Inactivo', blank=True, null=True, default=True)
 
     def to_json(self):
         item = model_to_dict(self)
