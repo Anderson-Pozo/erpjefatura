@@ -53,6 +53,7 @@ class EstablecimientoForm(forms.ModelForm):
                 }
             ),
             'fecha_inicio_actividad': forms.DateInput(
+                format='%Y-%m-%d',
                 attrs={
                     'class': 'form-control',
                     'required': True,

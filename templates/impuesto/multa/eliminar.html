@@ -1,0 +1,25 @@
+<div class="modal-dialog modal-sm modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalMultaTitle">Eliminar Multa</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+            </div>
+            {% csrf_token %}
+            <div class="modal-body">
+                <div class="text-black-75">
+                    ¿Está seguro de eliminar la multa con mes {{ object.mes }} ?
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="close_modal_elimination();"
+                        class="btn btn-light" type="button">
+                    Cerrar
+                </button>
+                <button onclick="eliminar_multa({{ object.pk }})"
+                        class="btn btn-red" type="button">
+                    Eliminar
+                </button>
+            </div>
+        </div>
+    </div>

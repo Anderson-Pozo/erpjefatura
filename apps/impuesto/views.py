@@ -4,11 +4,11 @@ from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.http import HttpResponse, JsonResponse
 from .models import Impuesto, Vencimiento, Multa
 from .forms import MultaForm
-from apps.utils.ajax import AjaxCreate, AjaxUpdate
+from apps.utils.ajax import AjaxCreate, AjaxUpdate, AjaxDelete
 
 
 # Create your views here.
@@ -49,7 +49,7 @@ class ListaMulta(ListView):
             action = request.POST['action']
             if action == 'searchdata':
                 data = []
-                for i in Multa.objects.all():
+                for i in Multa.objects.filter(estado=True):
                     data.append(i.to_json())
             else:
                 data['error'] = 'Ha ocurrido un error'
@@ -88,6 +88,12 @@ class EditarMulta(AjaxUpdate, UpdateView):
     model = Multa
     form_class = MultaForm
     template_name = 'impuesto/multa/editar_multa.html'
+    success_url = reverse_lazy('impuesto:lista_multa')
+
+
+class EliminarMulta(AjaxDelete, DeleteView):
+    model = Multa
+    template_name = 'impuesto/multa/eliminar.html'
     success_url = reverse_lazy('impuesto:lista_multa')
 
 

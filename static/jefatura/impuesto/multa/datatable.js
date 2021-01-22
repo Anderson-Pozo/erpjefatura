@@ -66,7 +66,8 @@ function lista_multa(){
                                 ' onclick="open_modal_edition(\'/impuesto/multa/editar/' + row.id +'/\')">' +
                                 '<i class="fas fa-edit"></i>' +
                                 '</button>';
-                buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange">' +
+                buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange" ' +
+                            ' onclick="open_modal_elimination(\'/impuesto/multa/eliminar/' + row.id +'/\')">' +
                             '<i class="fas fa-trash"></i>' +
                             '</button>';
                 return buttons;
@@ -81,15 +82,15 @@ function lista_multa(){
 
 
 function crear_multa() {
-    let data = new FormData($('#form_multa').get(0));
+    var data = new FormData($('#form_creation').get(0));
     $.ajax({
-        url: $('#form_multa').attr('action'),
-        type: $('#form_multa').attr('method'),
+        url: $('#form_creation').attr('action'),
+        type: $('#form_creation').attr('method'),
         data: data,
         processData: false,
         contentType: false,
         success: function (response) {
-            $('#modalMulta').modal('hide');
+            close_modal_edition();
             show_notification_success(response.mensaje);
             lista_multa();
             // console.log(response);
@@ -124,6 +125,25 @@ function editar_multa() {
             // console.log(error.responseJSON.message);
         }
     })
+}
+
+
+function eliminar_multa(pk) {
+    $.ajax({
+        data: {
+            csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
+        },
+        url: '/impuesto/multa/eliminar/'+ pk +'/',
+        type: 'post',
+        success: function (response) {
+            show_notification_success(response.message);
+            close_modal_elimination();
+            lista_multa();
+        },
+        error: function (error) {
+            show_notification_error(error.responseJSON.message);
+        }
+    });
 }
 
 

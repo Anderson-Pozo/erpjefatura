@@ -65,7 +65,8 @@ function lista_establecimientos() {
                                 ' onclick="open_modal_edition(\'editar/' + row.id +'/\')">' +
                                 '<i class="fas fa-edit"></i>' +
                                 '</button>';
-                buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange">' +
+                buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange" ' +
+                            ' onclick="open_modal_elimination(\'eliminar/' + row.id +'/\')">' +
                             '<i class="fas fa-trash"></i>' +
                             '</button>';
                 return buttons;
@@ -123,6 +124,25 @@ function editar_establecimientos() {
             // console.log(error.responseJSON.message);
         }
     })
+}
+
+
+function eliminar_establecimientos(pk) {
+    $.ajax({
+        data: {
+            csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
+        },
+        url: 'eliminar/'+ pk +'/',
+        type: 'post',
+        success: function (response) {
+            show_notification_success(response.message);
+            close_modal_elimination();
+            lista_establecimientos();
+        },
+        error: function (error) {
+            show_notification_error(error.responseJSON.message);
+        }
+    });
 }
 
 
