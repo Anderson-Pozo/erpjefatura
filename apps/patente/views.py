@@ -1,7 +1,7 @@
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DeleteView, TemplateView
 from django.http import HttpResponse, JsonResponse
 from .models import Patente, DetallePatente
 from .forms import PatenteForm
@@ -29,3 +29,7 @@ class ListaCatastro(ListView):
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
+
+
+class CrearContribuyente(TemplateView):
+    template_name = 'patente/apertura/paso1.html'
