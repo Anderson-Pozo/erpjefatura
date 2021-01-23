@@ -1,0 +1,291 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block collapse_patente %}collapse show{% endblock %}
+
+{% block title %}
+<title>Catastro</title>
+{% endblock %}
+
+{% block iconheader %}
+<div class="page-header-icon"><i class="fas fa-file-signature"></i></div>
+{% endblock %}
+
+{% block titleheader %}
+Apertura de patente
+{% endblock %}
+
+{% block subtitleheader %}
+En esta seccion se realizara el ingreso de los datos del contribuyente y establecimiento
+{% endblock %}
+
+{% block buttondate %}
+{% endblock %}
+
+{% block centralbody %}
+<div class="container mt-n10">
+    <!-- Wizard card example with navigation-->
+    <div class="card">
+        <div class="card-header border-bottom">
+            <!-- Wizard navigation-->
+            <div class="nav nav-pills nav-justified flex-column flex-xl-row nav-wizard" id="cardTab" role="tablist">
+                <!-- Wizard navigation item 1-->
+                <a class="nav-item nav-link active" id="wizard1-tab" href="#wizard1" data-toggle="tab" role="tab"
+                    aria-controls="wizard1" aria-selected="true">
+                    <div class="wizard-step-icon">1</div>
+                    <div class="wizard-step-text">
+                        <div class="wizard-step-text-name">Contribuyente</div>
+                        <div class="wizard-step-text-details">Datos del contribuyente</div>
+                    </div>
+                </a>
+                <!-- Wizard navigation item 2-->
+                <a class="nav-item nav-link" id="wizard2-tab" href="#wizard2" data-toggle="tab" role="tab"
+                    aria-controls="wizard2" aria-selected="true">
+                    <div class="wizard-step-icon">2</div>
+                    <div class="wizard-step-text">
+                        <div class="wizard-step-text-name">Establecimiento</div>
+                        <div class="wizard-step-text-details">Datos del establecimiento</div>
+                    </div>
+                </a>
+                <!-- Wizard navigation item 3-->
+                <a class="nav-item nav-link" id="wizard3-tab" href="#wizard3" data-toggle="tab" role="tab"
+                    aria-controls="wizard3" aria-selected="true">
+                    <div class="wizard-step-icon">3</div>
+                    <div class="wizard-step-text">
+                        <div class="wizard-step-text-name">Datos de patente</div>
+                        <div class="wizard-step-text-details">Seleccion de datos del contribuyente y establecimiento</div>
+                    </div>
+                </a>
+                <!-- Wizard navigation item 4-->
+                <a class="nav-item nav-link" id="wizard4-tab" href="#wizard4" data-toggle="tab" role="tab"
+                    aria-controls="wizard4" aria-selected="true">
+                    <div class="wizard-step-icon">4</div>
+                    <div class="wizard-step-text">
+                        <div class="wizard-step-text-name">Revisar e imprimir</div>
+                        <div class="wizard-step-text-details">Imprimir datos de la apertura de la patente</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="tab-content" id="cardTabContent">
+                <!-- Wizard tab pane item 1-->
+                <div class="card-header border-bottom">
+                    <ul class="nav nav-tabs card-header-tabs" id="dashboardNav" role="tablist">
+                        <li class="nav-item mr-1">
+                            <a class="nav-link active"
+                               id="form_creation"
+                               href="#form_creation" data-toggle="tab"
+                               role="tab" aria-controls="form_creation" aria-selected="true">
+                                Contribuyente Natural
+                            </a>
+                        </li>
+                        <li class="nav-item mr-1">
+                            <a class="nav-link"
+                               id="contribuyente2"
+                               href="#contribuyente2" data-toggle="tab"
+                               role="tab" aria-controls="contribuyente2" aria-selected="true">
+                                Contribuyente Juridico
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="col-xxl-6 col-xl-8">
+                            <h3 class="text-primary">Contribuyente</h3>
+                            <h5 class="card-title">Ingrese los datos del contribuyente</h5>
+                            <div id="errors"></div>
+                            <br>
+                            <form id="form_creation" action="{% url 'contribuyente:crear_contribuyente_natural' %}" method="POST">
+                            {% csrf_token %}
+                            {% if form.errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.errors }}
+                                </div>
+                            {% endif %}
+                            <!-- Form Group (username)-->
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                <!-- Form Group (numero de cedula)-->
+                                <label class="small mb-1" for="numerocedula">Número de cédula</label>
+                                    {{ form.numero_cedula }}
+                                </div>
+                                <!-- Form Group (ruc)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="ruc">RUC</label>
+                                    {{ form.ruc }}
+                                </div>
+                            </div>
+                            <!-- Form Row-->
+                            <div class="form-row">
+                                <!-- Form Group (nombres)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="nombres">Nombres</label>
+                                    {{ form.nombres }}
+                                </div>
+                                <!-- Form Group (apellidos)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="apellidos">Apellidos</label>
+                                    {{ form.apellidos }}
+                                </div>
+                            </div>
+                            <!-- Form Row        -->
+                            <div class="form-row">
+                                <!-- Form Group (tipo de persona)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="tipoPersona">Tipo de persona</label>
+                                    {{ form.tipocontribuyente }}
+                                </div>
+                                <!-- Form Group (nacionalidad)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="ingreseNacionalidad">Nacionalidad</label>
+                                    {{ form.nacionalidad }}
+                                </div>
+                            </div>
+                            <!-- Form Row-->
+                            <div class="form-row">
+                                <!-- Form Group correo-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="email">Correo electrónico</label>
+                                    {{ form.email }}
+                                </div>
+                                <!-- Form Group (telefono celular)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="telefonocelular">Teléfono celular</label>
+                                    {{ form.tlf_celular }}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <!-- Form Group (telefono convencional)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="telefonoconvencional">Teléfono convencional</label>
+                                    {{ form.tlf_convencional }}
+                                </div>
+                            </div>
+{#                            {{ form.as_p }}#}
+                            <div class="modal-footer">
+                                <button onclick="close_modal_creation();"
+                                        class="btn btn-red" type="button"
+                                    >Cerrar</button>
+                                <button onclick="crear_contribuyente()"
+                                    class="btn btn-primary" type="button">Guardar</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="col-xxl-6 col-xl-8">
+                            <h3 class="text-primary">Contribuyente</h3>
+                            <h5 class="card-title">Ingrese los datos del contribuyente</h5>
+                            <div id="errors"></div>
+                            <br>
+                            <form id="contribuyente2" action="{% url 'contribuyente:crear_contribuyente_juridico' %}" method="POST">
+                            {% csrf_token %}
+                            {% if form.errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.errors }}
+                                </div>
+                            {% endif %}
+                            <!-- Form Group (username)-->
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                <label class="small mb-1" for="razon_social">Razón social</label>
+                                    {{ form.razon_social }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="ruc">RUC</label>
+                                    {{ form.ruc }}
+                                </div>
+                            </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="tipo_persona">Tipo de persona</label>
+                                {{ form.tipocontribuyente }}
+                            </div>
+                        </div>
+                            <!-- Form Row-->
+                            <div class="form-row">
+                                <!-- Form Group correo-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="email">Correo Electrónico</label>
+                                    {{ form.email }}
+                                </div>
+                                <!-- Form Group (phone number)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="telefono_celular">Teléfono Celular</label>
+                                    {{ form.tlf_celular }}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="telefono_convencional">Teléfono Convencional</label>
+                                    {{ form.tlf_convencional }}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="text-primary">
+                                Datos del representante legal
+                            </div>
+                            <hr>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="cedula_representante">Número de cédula</label>
+                                    {{ form.cedula_representante }}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <!-- Form Group (nombres)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="nombres_representante">Nombres</label>
+                                    {{ form.nombres_representante }}
+                                </div>
+                                <!-- Form Group (apellidos)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="apellidos_representante">Apellidos</label>
+                                    {{ form.apellidos_representante }}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <!-- Form Group (telefono representante)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="nombres_representante">Teléfono</label>
+                                    {{ form.telefono_representante }}
+                                </div>
+                                <!-- Form Group (email representante)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="email_representante">Correo electrónico</label>
+                                    {{ form.correo_representante }}
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button onclick="close_modal_creation();"
+                                        class="btn btn-red" type="button"
+                                    >Cerrar</button>
+                                <button onclick="crear_contribuyente_juridico()"
+                                    class="btn btn-primary" type="button">Guardar</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{#<div class="modal" id="creacion" tabindex="-1" role="dialog" aria-labelledby="creacionTitle" aria-hidden="true">#}
+{#</div>#}
+{#<div class="modal" id="edicion" tabindex="-1" role="dialog" aria-labelledby="edicion" aria-hidden="true">#}
+{#</div>#}
+{#<div class="modal" id="eliminacion" tabindex="-1" role="dialog" aria-labelledby="eliminacionTitle" aria-hidden="true">#}
+{#</div>#}
+{% endblock %}
+
+{% block extrajs %}
+{#<script src="{% static 'static/jefatura/patente/catastro/datatable.js' %}"></script>#}
+{#<script src="{% static 'static/jefatura/modals.js' %}"></script>#}
+{#<script src="{% static 'static/jefatura/messages.js' %}"></script>#}
+{% endblock %}
