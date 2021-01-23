@@ -1,11 +1,14 @@
+from django.http import JsonResponse
 from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
-from django.views.decorators.csrf import csrf_protect
-from django.http import HttpResponseRedirect
-from django.views.generic import FormView, TemplateView
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.views.generic import FormView, TemplateView, ListView
 from django.contrib.auth import login, logout
 from .forms import LoginForm
+from .models import User
+from apps.utils.ajax import AjaxCreate
 
 
 # Create your views here.
@@ -29,6 +32,29 @@ class Login(FormView):
             self.request.session.modified = True
         login(self.request, form.get_user())
         return super(Login, self).form_valid(form)
+
+
+class ListaUsuarios(ListView):
+    model = User
+    template_name = 'usuario/admin/lista_usuarios.html'
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, *kwargs)
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+        try:
+            action = request.POST['action']
+            if action == 'searchdata':
+                data = []
+                for i in self.model.objects.all():
+                    data.append(i.to_json())
+            else:
+                data['error'] = 'Ha ocurrido un error'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
 
 
 def logout_user(request):

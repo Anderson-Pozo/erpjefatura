@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.contrib.auth.models import AbstractUser, BaseUserManager, Group
+from django.forms import model_to_dict
 
 
 class UserManager(BaseUserManager):
@@ -34,6 +35,10 @@ class User(AbstractUser):
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
+
+    def to_json(self):
+        item = model_to_dict(self)
+        return item
 
     class Meta:
         db_table = "usuario"

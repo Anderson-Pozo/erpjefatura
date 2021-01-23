@@ -127,23 +127,6 @@
                                 <div class="nav-link-icon"><i class="fas fa-home"></i></div>
                                 Inicio
                             </a>
-                            <!-- Sidenav Menu Heading-->
-                            <div class="sidenav-menu-heading">ADMINISTRACIÓN</div>
-                            <!-- Sidenav Accordion -->
-                            <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseDashboards" aria-expanded="true" aria-controls="collapseDashboards">
-                                <div class="nav-link-icon"><i data-feather="activity"></i></div>
-                                Administración
-                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseDashboards" data-parent="#accordionSidenav">
-                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                    {% block navlinkinicio %}
-                                    <a class="nav-link" href="{% url 'index' %}">
-                                        Inicio
-                                    </a>
-                                    {% endblock %}
-                                </nav>
-                            </div>
                             <!-- Sidenav Heading (Patente)-->
                             <div class="sidenav-menu-heading">Patente</div>
                             <!-- Sidenav Accordion (Patente)-->
@@ -214,7 +197,30 @@
                                 <div class="nav-link-icon"><i class="fas fa-hand-holding-usd"></i></div>
                                 Plusvalía
                             </a>
+                            <!-- Sidenav Menu Heading-->
+                            <div class="sidenav-menu-heading">USUARIOS</div>
+                            <!-- Sidenav Accordion -->
+                            <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseDashboards" aria-expanded="true" aria-controls="collapseDashboards">
+                                <div class="nav-link-icon"><i class="fas fa-lock"></i></div>
+                                Seguridad
+                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="{% block collapse_usuarios %}collapse{% endblock %}" id="collapseDashboards" data-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
+                                    <a class="nav-link" href="{% url 'usuario:lista_usuarios' %}">
+                                        Usuarios
+                                    </a>
+                                    <a class="nav-link">
+                                    Grupos
+                                    </a>
+                                    <a class="nav-link">
+                                    Permisos
+                                    </a>
+
+                                </nav>
+                            </div>
                         </div>
+
                     </div>
                     <!-- Sidenav Footer-->
                     <div class="sidenav-footer">
