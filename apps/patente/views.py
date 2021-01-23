@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.http import HttpResponse, JsonResponse
 from .models import Patente, DetallePatente
-# from .forms import MultaForm
+from .forms import PatenteForm
 from apps.utils.ajax import AjaxCreate, AjaxUpdate, AjaxDelete
 
 
