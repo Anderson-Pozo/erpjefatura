@@ -65,18 +65,18 @@ function lista_usuarios() {
 }
 
 
-function crear_establecimientos() {
-    var data = new FormData($('#form_establecimientos').get(0));
+function crear_usuario() {
+    var data = new FormData($('#form_usuario').get(0));
     $.ajax({
-        url: $('#form_establecimientos').attr('action'),
-        type: $('#form_establecimientos').attr('method'),
+        url: $('#form_usuario').attr('action'),
+        type: $('#form_usuario').attr('method'),
         data: data,
         processData: false,
         contentType: false,
         success: function (response) {
-            $('#modalEstablecimiento').modal('hide');
+            close_modal_creation();
             show_notification_success(response.mensaje);
-            lista_establecimientos();
+            lista_usuarios();
             // console.log(response);
         },
         error: function (error) {

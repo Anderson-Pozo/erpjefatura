@@ -26,7 +26,8 @@ class UserManager(BaseUserManager):
 
 # Create your models here.
 class User(AbstractUser):
-    username = models.CharField('Nombre usuario', max_length=10, unique=True)
+    username = models.CharField('Nombre usuario', max_length=10, unique=True,
+                                help_text='Es recomendable colocar el número de cédula')
     email = models.EmailField('Correo electrónico', max_length=60, unique=True)
     first_name = models.CharField('Nombres', max_length=100, blank=True, null=True)
     last_name = models.CharField('Apellidos', max_length=100, blank=True, null=True)
@@ -45,5 +46,3 @@ class User(AbstractUser):
 
     def __str__(self):
         return f'{self.first_name}, {self.last_name}'
-
-

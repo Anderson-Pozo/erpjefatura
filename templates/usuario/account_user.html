@@ -25,7 +25,7 @@
         <div class="container mt-4">
             <!-- Account page navigation-->
             <nav class="nav nav-borders">
-                <a class="nav-link active ml-0" href="{% url 'usuario:account' %}">Perfil</a>
+                <a class="nav-link active ml-0" href="{% url 'usuario:account' object.pk %}">Perfil</a>
                 <a class="nav-link" href="{% url 'usuario:change_password' %}">Cambiar contraseña</a>
                 <a class="nav-link" href="#">Notificaciones</a>
             </nav>
@@ -51,54 +51,58 @@
                     <div class="card mb-4">
                         <div class="card-header">Detalles de la cuenta</div>
                         <div class="card-body">
-                            <form>
+                            {% if form.errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.errors }}
+                                </div>
+                            {% endif %}
+                            <form action="{% url 'usuario:account' object.pk %}" method="POST">
+                                {% csrf_token %}
                                 <!-- Form Group (username)-->
                                 <div class="form-group">
+{#                                    <div class="form-group col-md-6">#}
+{#                                        #}
+{#                                    </div>#}
                                     <label class="small mb-1" for="numeroCedula">Número de cédula</label>
-                                    <input class="form-control" id="numeroCedula" type="text" maxlength="10"
-                                           minlength="10"
-                                        placeholder="Ingrese su número de cédula" value="" required/>
+                                    {{ form.username }}
                                 </div>
                                 <!-- Form Row-->
                                 <div class="form-row">
                                     <!-- Form Group (first name)-->
                                     <div class="form-group col-md-6">
                                         <label class="small mb-1" for="ingreseNombres">Nombres</label>
-                                        <input class="form-control" id="ingreseNombres" type="text" maxlength="60"
-                                            placeholder="Ingrese sus nombres completos" value="" required />
+                                        {{ form.first_name }}
                                     </div>
                                     <!-- Form Group (last name)-->
                                     <div class="form-group col-md-6">
                                         <label class="small mb-1" for="ingreseApellidos">Apellidos</label>
-                                        <input class="form-control" id="ingreseApellidos" type="text" maxlength="60"
-                                            placeholder="Digite sus apellidos" value="" required />
+                                        {{ form.last_name }}
                                     </div>
                                 </div>
                                 <!-- Form Group (email address)-->
-                                <div class="form-group">
-                                    <label class="small mb-1"
-                                           for="inputEmailAddress">Dirección de correo electrónico</label>
-                                    <input class="form-control" id="inputEmailAddress" type="email"
-                                        placeholder="Ingrese su correo electrónico"
-                                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{​​​​2,15}​​​​$"
-                                           value="" required/>
-                                </div>
-                                <!-- Form Row-->
                                 <div class="form-row">
-                                    <!-- Form Group (phone number)-->
                                     <div class="form-group col-md-6">
-                                        <label class="small mb-1" for="inputPhone">Teléfono celular</label>
-                                        <input class="form-control" id="inputPhone" type="tel" maxlength="10"
-                                               minlength="10"
-                                            placeholder="Ingrese sus número de teléfono celular"  required />
-                                    </div>
-                                    <!-- Form Group (birthday)-->
-                                    <div class="form-group col-md-6">
-                                        <label class="small mb-1" for="inputDateBorn">Fecha de nacimiento</label>
-                                        <input class="form-control" id="inputDateBorn" type="date"
-                                            placeholder="Ingrese su fecha de nacimiento" value="dd/mm/aaaa" required />
+                                        <label class="small mb-1"
+                                           for="inputEmailAddress">Dirección de correo electrónico</label>
+                                    {{ form.email }}
                                     </div>
                                 </div>
+{#                                <!-- Form Row-->#}
+{#                                <div class="form-row">#}
+{#                                    <!-- Form Group (phone number)-->#}
+{#                                    <div class="form-group col-md-6">#}
+{#                                        <label class="small mb-1" for="inputPhone">Teléfono celular</label>#}
+{#                                        <input class="form-control" id="inputPhone" type="tel" maxlength="10"#}
+{#                                               minlength="10"#}
+{#                                            placeholder="Ingrese sus número de teléfono celular"  required />#}
+{#                                    </div>#}
+{#                                    <!-- Form Group (birthday)-->#}
+{#                                    <div class="form-group col-md-6">#}
+{#                                        <label class="small mb-1" for="inputDateBorn">Fecha de nacimiento</label>#}
+{#                                        <input class="form-control" id="inputDateBorn" type="date"#}
+{#                                            placeholder="Ingrese su fecha de nacimiento" value="dd/mm/aaaa" required />#}
+{#                                    </div>#}
+{#                                </div>#}
                                 <!-- Save changes button-->
                                 <button class="btn btn-primary" type="submit">Guardar</button>
                             </form>
