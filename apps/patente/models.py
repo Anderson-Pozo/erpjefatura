@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import model_to_dict
 from apps.contribuyente.models import Contribuyente
 from apps.establecimiento.models import Establecimiento
 
@@ -15,6 +16,15 @@ class Patente(models.Model):
     suspendida = models.BooleanField('Patente suspendida', blank=True, null=True, default=False)
     contribuyente = models.ForeignKey(Contribuyente, on_delete=models.CASCADE)
     establecimiento = models.ForeignKey(Establecimiento, on_delete=models.CASCADE)
+
+    def to_json(self):
+        item = model_to_dict(self)
+        item['ruc'] = self.contribuyente.ruc
+        item['tipocontribuyente'] = self.contribuyente.tipocontribuyente.nombre
+        item['nombre_establecimiento'] = self.establecimiento.nombre
+        item['total_patrimonio'] = self.establecimiento.total_patrimonio
+        item['direccion'] = self.establecimiento.direccion.get_all_direccion()
+        return item
 
     class Meta:
         db_table = "patente"
@@ -33,6 +43,10 @@ class DetallePatente(models.Model):
     multa = models.FloatField('Multa', blank=True, null=True)
     servicios_administrativos = models.FloatField('Servicios administrativos', blank=True, null=True)
     patente = models.ForeignKey(Patente, on_delete=models.CASCADE)
+
+    def to_json(self):
+        item = model_to_dict(self)
+        return item
 
     class Meta:
         db_table = "detalle_patente"
