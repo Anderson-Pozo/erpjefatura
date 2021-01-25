@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse_lazy
@@ -7,8 +9,7 @@ from .models import Patente, DetallePatente
 from apps.contribuyente.models import Natural, Juridico, Contribuyente
 from apps.establecimiento.models import Establecimiento
 from .forms import PatenteForm
-from apps.utils.ajax import AjaxCreate, AjaxUpdate, AjaxDelete
-from apps.contribuyente.forms import ContribuyenteNaturalForm, ContribuyenteJuridicoForm
+from apps.contribuyente.forms import ContribuyenteNaturalForm as NaturalForm, ContribuyenteJuridicoForm as JuridicoForm
 from apps.establecimiento.forms import EstablecimientoForm
 
 
@@ -39,32 +40,51 @@ class ListaCatastro(ListView):
 #     template_name = 'patente/apertura/paso1_contribuyente.html'
 
 
-class CrearContribuyente(AjaxCreate, CreateView):
-    # model = Contribuyente
-    model = Natural
-    # model = Juridico
-    form_class = ContribuyenteNaturalForm
-    # form_class = ContribuyenteJuridicoForm
+class CrearContribuyente(TemplateView):
     template_name = 'patente/apertura/paso1_contribuyente.html'
-    # success_url = reverse_lazy('patente:crear_contribuyente_natural')
 
-class CrearContribuyenteJuridico(AjaxCreate, CreateView):
-    model = Contribuyente
-    model = Natural
-    model = Juridico
-    form_class = ContribuyenteNaturalForm
-    form_class = ContribuyenteJuridicoForm
-    template_name = 'patente/apertura/paso1_contribuyente.html'
-    # success_url = reverse_lazy('patente:crear_contribuyente_natural')
+    def get(self, request, *args, **kwargs):
+        form_natural = NaturalForm(self.request.GET or None, prefix="natural")
+        form_juridico = JuridicoForm(self.request.GET or None, prefix="juridico")
+        context = super(CrearContribuyente, self).get_context_data(**kwargs)
+        context['form_natural'] = form_natural
+        context['form_juridico'] = form_juridico
+        return self.render_to_response(context)
 
-class CrearEstablecimiento(AjaxCreate, CreateView):
+    # def post(self, request, *args, **kwargs):
+    #
+    #     form_natural = NaturalForm(request.POST, prefix="form_natural")
+    #     if form_natural.is_valid():
+    #         print(form_natural)
+    #         form_natural.save()
+    #         messages.success(request, 'Registro creado')
+    #         return redirect('patente:crear_contribuyente')
+    #     else:
+    #         return None
+
+        # context = self.get_context_data(**kwargs)
+        #
+        # if context['form_natural'].is_valid():
+        #     instance = NaturalForm.save(request.POST)
+        #     messages.success(request, 'Your offer bid #{0} has been submitted.'.format(instance.pk))
+        # elif context['form_juridico'].is_valid():
+        #     instance = context['form_juridico'].save()
+        #     messages.success(request, 'Your offer attachment #{0} has been submitted.'.format(instance.pk))
+        #     # advise of any errors
+        # else:
+        #     messages.error('Error(s) encountered during form processing, please review below and re-submit')
+        # return self.render_to_response(context)
+    # success_url = reverse_lazy('patente:crear_establecimiento')
+
+
+class CrearEstablecimiento(CreateView):
     model = Establecimiento
     form_class = EstablecimientoForm
     template_name = 'patente/apertura/paso2_establecimiento.html'
     # success_url = reverse_lazy('patente:crear_contribuyente_natural')
 
 
-class CrearPatente(AjaxCreate, CreateView):
+class CrearPatente(CreateView):
     model = Patente
     form_class = PatenteForm
     template_name = 'patente/apertura/paso3_detalle.html'

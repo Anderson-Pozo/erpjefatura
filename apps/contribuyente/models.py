@@ -48,7 +48,12 @@ class Contribuyente(models.Model):
         return item
 
     # def __str__(self):
-    #     return self.ruc
+    #     contribuyente = self.objects.get(self.id)
+    #     if self.tipocontribuyente.id == 1:
+    #         return contribuyente.natural.numero_cedula
+    #     else:
+    #         # return object.juridico.razon_social
+    #         return contribuyente.juridico.razon_social
 
     class Meta:
         db_table = "contribuyente"
