@@ -1,77 +1,76 @@
- <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalEstablecimientoTitle">Establecimiento</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">×</span></button>
-            </div>
-            <div class="modal-body">
-                <div class="card mb-4">
-                    <div class="card-header">Datos del Establecimiento</div>
-                    <div class="card-body">
-                        <div id="errors"></div>
-                        <br>
-                        <form id="form_establecimientos" action="{% url 'establecimiento:crear_establecimiento' %}" method="POST">
-                                    {% csrf_token %}
-                                    {% if form.errors %}
-                                        <div class="alert alert-danger">
-                                            {{ form.errors }}
-                                        </div>
-                                    {% endif %}
-                                    <!-- Form Group (username)-->
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                        <label class="small mb-1" for="ingreseNombre">Nombre</label>
-                                            {{ form.nombre }}
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label class="small mb-1"
-                                                   for="fechaInicioActividad">Fecha de inicio de la actividad</label>
-                                             {{ form.fecha_inicio_actividad }}
-                                        </div>
-                                    </div>
+<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalEstablecimientoTitle">Establecimiento</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+            <div class="card mb-4">
+                <div class="card-header">Datos del Establecimiento</div>
+                <div class="card-body">
+                    <div id="errors"></div>
+                    <br>
+                    <form id="form_establecimientos" action="{% url 'establecimiento:crear_establecimiento' %}"
+                        method="POST">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.errors }}
+                        </div>
+                        {% endif %}
+                        <!-- Form Group (username)-->
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="ingreseNombre">Nombre</label>
+                                {{ form.nombre }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="fechaInicioActividad">Fecha de inicio de la
+                                    actividad</label>
+                                {{ form.fecha_inicio_actividad }}
+                            </div>
+                        </div>
 
-                                    <div class="form-group">
-                                        <label class="small mb-1" for="descripcionActividad">Descripción</label>
-                                            {{ form.descripcion_actividad }}
-                                    </div>
-                                     <div class="form-group">
-                                        <label class="small mb-1" for="callePrincipal">Dirección</label>
-                                            {{ form.direccion }}
-                                    </div>
+                        <div class="form-group">
+                            <label class="small mb-1" for="descripcionActividad">Descripción</label>
+                            {{ form.descripcion_actividad }}
+                        </div>
+                        <div class="form-group">
+                            <label class="small mb-1" for="callePrincipal">Dirección</label>
+                            {{ form.direccion }}
+                        </div>
 
-                                    <!-- Form Row-->
-                                    <div class="form-row">
-                                        <!-- Form Group (first name)-->
-                                        <div class="form-group col-md-6">
-                                            <label class="small mb-1" for="patrimonio">Total Patrimonio</label>
-                                            {{ form.total_patrimonio }}
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label class="small mb-1" for="tipoActividad">Tipo de actividad</label>
-                                            {{ form.tipo_actividad }}
-                                        </div>
-                                    </div>
-                                    <!-- Form Row        -->
-                                    <div class="form-row">
-                                        <!-- Form Group (organization name)-->
-                                        <div class="form-group col-md-6">
-                                            <label class="small mb-1" for="tipoVenta">Tipo de venta</label>
-                                            {{ form.tipo_venta }}
-                                        </div>
-                                    </div>
+                        <!-- Form Row-->
+                        <div class="form-row">
+                            <!-- Form Group (first name)-->
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="patrimonio">Total Patrimonio</label>
+                                {{ form.total_patrimonio }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="tipoActividad">Tipo de actividad</label>
+                                {{ form.tipo_actividad }}
+                            </div>
+                        </div>
+                        <!-- Form Row        -->
+                        <div class="form-row">
+                            <!-- Form Group (organization name)-->
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="tipoVenta">Tipo de venta</label>
+                                {{ form.tipo_venta }}
+                            </div>
+                        </div>
 
-                                    <div class="modal-footer">
-                                        <button onclick="close_modal_creation();"
-                                                class="btn btn-red" type="button"
-                                            >Cerrar</button>
-                                        <button onclick="crear_establecimientos();"
-                                            class="btn btn-green" type="button">Guardar</button>
-                                    </div>
-                        </form>
-                    </div>
+                        <div class="modal-footer">
+                            <button onclick="close_modal_creation();" class="btn btn-red" type="button">Cerrar</button>
+                            <button onclick="crear_establecimientos();" class="btn btn-green"
+                                type="button">Guardar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-
         </div>
+
     </div>
+</div>

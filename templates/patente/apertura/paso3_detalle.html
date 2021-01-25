@@ -4,7 +4,7 @@
 {% block collapse_patente %}collapse show{% endblock %}
 
 {% block title %}
-<title>Catastro</title>
+<title>Crear contribuyente</title>
 {% endblock %}
 
 {% block iconheader %}
@@ -25,7 +25,7 @@ En esta seccion se realizara el ingreso de los datos del contribuyente y estable
 {% block centralbody %}
 <div class="container mt-n10">
     <!-- Wizard card example with navigation-->
-    <div class="card">
+    <div class="card card-progress">
         <div class="card-header border-bottom">
             <!-- Wizard navigation-->
             <div class="nav nav-pills nav-justified flex-column flex-xl-row nav-wizard" id="cardTab" role="tablist">
@@ -53,7 +53,8 @@ En esta seccion se realizara el ingreso de los datos del contribuyente y estable
                     <div class="wizard-step-icon">3</div>
                     <div class="wizard-step-text">
                         <div class="wizard-step-text-name">Datos de patente</div>
-                        <div class="wizard-step-text-details">Seleccion de datos del contribuyente y establecimiento</div>
+                        <div class="wizard-step-text-details">Seleccion de datos del contribuyente y establecimiento
+                        </div>
                     </div>
                 </a>
                 <!-- Wizard navigation item 4-->
@@ -69,63 +70,52 @@ En esta seccion se realizara el ingreso de los datos del contribuyente y estable
         </div>
         <div class="card-body">
             <div class="tab-content" id="cardTabContent">
-                <!-- Wizard tab pane item 3-->
-                <div class="tab-pane py-5 py-xl-10 fade" id="wizard3" role="tabpanel" aria-labelledby="wizard3-tab">
-                    <div class="row justify-content-center">
-                        <div class="col-xxl-6 col-xl-8">
-                            <h3 class="text-primary">Datos de patente</h3>
-                            <h5 class="card-title">Ingrese los detalles de la patente</h5>
-                            <form id="form_establecimientos" action="{% url 'patente:crear_patente' %}" method="POST">
-                                    {% csrf_token %}
-                                    {% if form.errors %}
-                                        <div class="alert alert-danger">
-                                            {{ form.errors }}
-                                        </div>
-                                    {% endif %}
-                                    <!-- Form Group (username)-->
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                        <label class="small mb-1" for="ingreseNombre">Tipo de patente</label>
-                                            {{ form.tipo_patente }}
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label class="small mb-1"
-                                                   for="fecha">Fecha de la patente</label>
-                                             {{ form.fecha }}
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="small mb-1" for="descripcionActividad">Contribuyente</label>
-                                            {{ form.contribuyente }}
-                                    </div>
-                                     <div class="form-group">
-                                        <label class="small mb-1" for="callePrincipal">Establecimiento</label>
-                                            {{ form.establecimiento }}
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button onclick="close_modal_creation();"
-                                                class="btn btn-red" type="button"
-                                            >Cerrar</button>
-                                        <button onclick="crear_establecimientos();"
-                                            class="btn btn-green" type="button">Guardar</button>
-                                    </div>
-                        </form>
+                <div class="tab-pane py-2 py-xl-3 fade show active" id="wizard3" role="tabpanel"
+                    aria-labelledby="wizard3-tab">
+                    <h3 class="text-primary">Establecimiento</h3>
+                    <h5 class="card-title">Digite los detalles del establecimiento</h5>
+                    <div id="errors"></div>
+                    <br>
+                    <form id="form_patente" action="{% url 'patente:crear_patente' %}"
+                        method="POST">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.errors }}
                         </div>
-                    </div>
+                        {% endif %}
+                        <!-- Form Group (username)-->
+                         <div class="form-group">
+                            <label class="small mb-1" for="fecha">Fecha</label>
+                            {{ form.fecha }}
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="contribuyente">Escoja el contribuyente</label>
+                                {{ form.contribuyente }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="establecimiento">Escoja el establecimiento</label>
+                                {{ form.establecimiento }}
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button onclick="close_modal_creation();" class="btn btn-red" type="button">Cerrar</button>
+                            <button onclick="crear_patente();" class="btn btn-green"
+                                type="button">Guardar</button>
+                        </div>
+                    </form>
                 </div>
+
             </div>
+        </div>
+        <div class="progress rounded-0">
+            <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="25"
+                aria-valuemin="0" aria-valuemax="100"></div>
         </div>
     </div>
 </div>
-
-{#<div class="modal" id="creacion" tabindex="-1" role="dialog" aria-labelledby="creacionTitle" aria-hidden="true">#}
-{#</div>#}
-{#<div class="modal" id="edicion" tabindex="-1" role="dialog" aria-labelledby="edicion" aria-hidden="true">#}
-{#</div>#}
-{#<div class="modal" id="eliminacion" tabindex="-1" role="dialog" aria-labelledby="eliminacionTitle" aria-hidden="true">#}
-{#</div>#}
 {% endblock %}
 
 {% block extrajs %}

@@ -12,9 +12,6 @@ class PatenteForm(forms.ModelForm):
         fields = '__all__'
         # exclude = ''
         error_messages = {
-            'numero_patente': {
-                'required': 'La fecha es obligatoria'
-            },
             'fecha': {
                 'required': 'La fecha es obligatoria'
             },
