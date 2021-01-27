@@ -1,0 +1,110 @@
+{% extends 'patente/layout/wizard_step.html' %}
+
+{% block title %}<title>Crear contribuyente</title>{% endblock %}
+
+
+{% block link_paso1 %}nav-item nav-link active{% endblock %}
+
+{% block body_wizard %}
+<div class="card">
+  <div class="card-header border-bottom">
+    <!-- Dashboard card navigation-->
+    <ul class="nav nav-tabs card-header-tabs" id="dashboardNav" role="tablist">
+      <li class="nav-item mr-1">
+        <a class="{% block tab_natural %}nav-link active{% endblock %}"
+           id="natural-pill" href="{% url 'patente:crear_natural' %}"
+          aria-controls="natural" aria-selected="true">Natural</a>
+      </li>
+      <li class="nav-item">
+        <a class="{% block tab_juridico %}nav-link{% endblock %}"
+           id="juridico-pill" href="{% url 'patente:crear_juridico' %}"
+           aria-controls="juridico"  aria-selected="false">Jurídico</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="tab-content" id="dashboardNavContent">
+      <!-- Dashboard Tab Pane 1-->
+      <div class="tab-pane fade show active" id="natural">
+        {% block tabpane %}
+        <form id="form_creation" action="{% url 'patente:crear_natural' %}" method="POST">
+          {% csrf_token %}
+            {% if form.errors %}
+                <div class="alert alert-danger">{{ form.errors }}</div>
+            {% endif %}
+          <!-- Form Group (username)-->
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <!-- Form Group (numero de cedula)-->
+              <label class="small mb-1" for="numerocedula">Número de cédula</label>
+              {{ form.numero_cedula }}
+            </div>
+            <!-- Form Group (ruc)-->
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="ruc">RUC</label>
+              {{ form.ruc }}
+            </div>
+          </div>
+          <!-- Form Row-->
+          <div class="form-row">
+            <!-- Form Group (nombres)-->
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="nombres">Nombres</label>
+              {{ form.nombres }}
+            </div>
+            <!-- Form Group (apellidos)-->
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="apellidos">Apellidos</label>
+              {{ form.apellidos }}
+            </div>
+          </div>
+          <!-- Form Row        -->
+          <div class="form-row">
+            <!-- Form Group (tipo de persona)-->
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="tipoPersona">Tipo de persona</label>
+              {{ form.tipocontribuyente }}
+            </div>
+            <!-- Form Group (nacionalidad)-->
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="ingreseNacionalidad">Nacionalidad</label>
+              {{ form.nacionalidad }}
+            </div>
+          </div>
+          <!-- Form Row-->
+          <div class="form-row">
+            <!-- Form Group correo-->
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="email">Correo electrónico</label>
+              {{ form.email }}
+            </div>
+            <!-- Form Group (telefono celular)-->
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="telefonocelular">Teléfono celular</label>
+              {{ form.tlf_celular }}
+            </div>
+          </div>
+          <div class="form-row">
+            <!-- Form Group (telefono convencional)-->
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="telefonoconvencional">Teléfono convencional</label>
+              {{ form.tlf_convencional }}
+            </div>
+          </div>
+          <div class="modal-footer">
+{#            <button onclick="close_modal_creation();" class="btn btn-red" type="button">#}
+{#              Cerrar#}
+{#            </button>#}
+            <button class="btn btn-primary" type="submit">
+              Guardar y continuar
+            </button>
+          </div>
+        </form>
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block progress %} width: 25% {% endblock %}

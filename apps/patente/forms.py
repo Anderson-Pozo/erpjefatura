@@ -1,5 +1,7 @@
 from django import forms
-from .models import Patente,DetallePatente
+from .models import Patente, DetallePatente
+from apps.contribuyente.models import Contribuyente
+from apps.establecimiento.models import Establecimiento
 
 
 class PatenteForm(forms.ModelForm):
@@ -33,16 +35,20 @@ class PatenteForm(forms.ModelForm):
                     'type': 'date',
                 }
             ),
-            'contribuyente': forms.Select(
+            'contribuyente': forms.TextInput(
                 attrs={
                     'class': 'form-control',
                     'required': True,
+                    'value': Contribuyente.objects.last().ruc,
+                    'readonly': True
                 }
             ),
-            'establecimiento': forms.Select(
+            'establecimiento': forms.TextInput(
                 attrs={
                     'class': 'form-control',
                     'required': True,
+                    'value': Establecimiento.objects.last().nombre,
+                    'readonly': True
                 }
             ),
 
