@@ -11,14 +11,12 @@
     <!-- Dashboard card navigation-->
     <ul class="nav nav-tabs card-header-tabs" id="dashboardNav" role="tablist">
       <li class="nav-item mr-1">
-        <a class="{% block tab_natural %}nav-link active{% endblock %}"
-           id="natural-pill" href="{% url 'patente:crear_natural' %}"
-          aria-controls="natural" aria-selected="true">Natural</a>
+        <a class="{% block tab_natural %}nav-link active{% endblock %}" id="natural-pill"
+          href="{% url 'patente:crear_natural' %}" aria-controls="natural" aria-selected="true">Natural</a>
       </li>
       <li class="nav-item">
-        <a class="{% block tab_juridico %}nav-link{% endblock %}"
-           id="juridico-pill" href="{% url 'patente:crear_juridico' %}"
-           aria-controls="juridico"  aria-selected="false">Jurídico</a>
+        <a class="{% block tab_juridico %}nav-link{% endblock %}" id="juridico-pill"
+          href="{% url 'patente:crear_juridico' %}" aria-controls="juridico" aria-selected="false">Jurídico</a>
       </li>
     </ul>
   </div>
@@ -29,9 +27,20 @@
         {% block tabpane %}
         <form id="form_creation" action="{% url 'patente:crear_natural' %}" method="POST">
           {% csrf_token %}
-            {% if form.errors %}
-                <div class="alert alert-danger">{{ form.errors }}</div>
-            {% endif %}
+          {% if form.errors %}
+          {% for field in form %}
+          {% for error in field.errors %}
+          <div class="text-danger text-xs">
+            <li><strong>{{ error|escape }}</strong></li>
+          </div>
+          {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+          <div class="text-danger text-xs">
+            <li><strong>{{ error|escape }}</strong></li>
+          </div>
+          {% endfor %}
+          {% endif %}
           <!-- Form Group (username)-->
           <div class="form-row">
             <div class="form-group col-md-6">

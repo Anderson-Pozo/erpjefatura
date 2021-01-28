@@ -91,7 +91,7 @@ class CrearEstablecimiento(CreateView):
     model = Establecimiento
     form_class = EstablecimientoForm
     template_name = 'patente/apertura/paso2_establecimiento.html'
-    # success_url = reverse_lazy('patente:crear_contribuyente_natural')
+    success_url = reverse_lazy('patente:crear_patente')
 
 
 class CrearPatente(CreateView):

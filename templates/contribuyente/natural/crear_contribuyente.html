@@ -13,11 +13,6 @@
                         <br>
                         <form id="form_creation" action="{% url 'contribuyente:crear_contribuyente_natural' %}" method="POST">
                             {% csrf_token %}
-                            {% if form.errors %}
-                                <div class="alert alert-danger">
-                                    {{ form.errors }}
-                                </div>
-                            {% endif %}
                             <!-- Form Group (username)-->
                             <div class="form-row">
                                 <div class="form-group col-md-6">
