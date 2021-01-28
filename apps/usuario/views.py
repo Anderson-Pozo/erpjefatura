@@ -5,9 +5,10 @@ from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
-from django.views.generic import FormView, TemplateView, ListView, CreateView, UpdateView
+from django.views.generic import FormView, TemplateView, ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth import login, logout
 from .forms import LoginForm, UserForm, AccountForm
+from apps.utils.ajax import AjaxCreate,AjaxUpdate, AjaxDelete
 from .models import User
 from apps.utils.ajax import AjaxCreate
 
@@ -110,3 +111,15 @@ class CrearUsuario(CreateView):
                 return response
         else:
             return redirect('usuario:lista_usuarios')
+
+class EditarUsuario(AjaxUpdate, UpdateView):
+    model = User
+    form_class = UserForm
+    template_name = 'usuario/admin/editar_usuario.html'
+    success_url = reverse_lazy('usuario:lista_usuarios')
+
+
+class EliminarUsuario(AjaxDelete, DeleteView):
+    model = User
+    template_name = 'usuario/admin/eliminar.html'
+    success_url = reverse_lazy('usuario:lista_usuarios')

@@ -47,11 +47,11 @@ function lista_usuarios() {
             orderable: false,
             render: function (data, type, row) {
                 let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2"' +
-                                ' onclick="open_modal_edition(\'editar/' + row.id +'/\')">' +
+                                ' onclick="open_modal_edition(\'/usuario/editar/' + row.id +'/\')">' +
                                 '<i class="fas fa-edit"></i>' +
                                 '</button>';
                 buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange" ' +
-                            ' onclick="open_modal_elimination(\'eliminar/' + row.id +'/\')">' +
+                            ' onclick="open_modal_elimination(\'/usuario/eliminar/' + row.id +'/\')">' +
                             '<i class="fas fa-trash"></i>' +
                             '</button>';
                 return buttons;
@@ -88,7 +88,7 @@ function crear_usuario() {
 }
 
 
-function editar_establecimientos() {
+function editar_usuario() {
     let data = new FormData($('#form_edition').get(0));
     $.ajax({
         url: $('#form_edition').attr('action'),
@@ -100,7 +100,7 @@ function editar_establecimientos() {
         success: function (response) {
             show_notification_success(response.message);
             close_modal_edition();
-            lista_establecimientos();
+            lista_usuarios();
         },
         error: function (error) {
             show_notification_error(error.responseJSON.message);
@@ -112,17 +112,17 @@ function editar_establecimientos() {
 }
 
 
-function eliminar_establecimientos(pk) {
+function eliminar_usuario(pk) {
     $.ajax({
         data: {
             csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
         },
-        url: 'eliminar/'+ pk +'/',
+        url: '/usuario/eliminar/'+ pk +'/',
         type: 'post',
         success: function (response) {
             show_notification_success(response.message);
             close_modal_elimination();
-            lista_establecimientos();
+            lista_usuarios();
         },
         error: function (error) {
             show_notification_error(error.responseJSON.message);

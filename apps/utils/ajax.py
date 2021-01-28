@@ -48,7 +48,10 @@ class AjaxDelete:
     def delete(self, request, *args, **kwargs):
         if request.is_ajax():
             modelo = self.get_object()
-            modelo.estado = False
+            if modelo.estado:
+                modelo.estado = False
+            elif modelo.is_active:
+                modelo.is_active = False
             modelo.save()
             message = f'{self.model.__name__} fue eliminado'
             error = 'No hay error'

@@ -62,11 +62,11 @@ function lista_establecimientos() {
             orderable: false,
             render: function (data, type, row) {
                 let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2"' +
-                                ' onclick="open_modal_edition(\'editar/' + row.id +'/\')">' +
+                                ' onclick="open_modal_edition(\'/establecimiento/editar/' + row.id +'/\')">' +
                                 '<i class="fas fa-edit"></i>' +
                                 '</button>';
                 buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange" ' +
-                            ' onclick="open_modal_elimination(\'eliminar/' + row.id +'/\')">' +
+                            ' onclick="open_modal_elimination(\'/establecimiento/eliminar/' + row.id +'/\')">' +
                             '<i class="fas fa-trash"></i>' +
                             '</button>';
                 return buttons;

@@ -9,9 +9,9 @@
                 <div class="card mb-4">
                     <div class="card-header">Datos de usuario</div>
                     <div class="card-body">
-                        <div id="errors"></div>
+                        <div id="errors_edition"></div>
                         <br>
-                        <form id="form_usuario" action="{% url 'usuario:crear_usuario' %}" method="POST">
+                        <form id="form_edition" action="{% url 'usuario:editar_usuario' object.pk %}" method="POST">
                             {% csrf_token %}
                             <!-- Form Row-->
                             <div class="form-row">
@@ -59,10 +59,10 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button onclick="close_modal_creation();"
+                                <button onclick="close_modal_edition();"
                                         class="btn btn-red" type="button"
                                     >Cerrar</button>
-                                <button onclick="crear_usuario();"
+                                <button onclick="editar_usuario();"
                                     class="btn btn-primary" type="button">Guardar</button>
                             </div>
                         </form>
