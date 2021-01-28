@@ -6,7 +6,6 @@
 
 {% block body_wizard %}
 <form id="form_patente" action="{% url 'patente:crear_patente' %}" method="POST">
-    {% csrf_token %}
     {% if form.errors %}
         {% for field in form %}
             {% for error in field.errors %}
@@ -22,14 +21,16 @@
         {% endfor %}
     {% endif %}
     <br>
-    <div class="form-group">
-        <label class="small mb-1" for="fecha">Fecha</label>
-        {{ form.fecha }}
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label class="small mb-1" for="fecha">Número de patente</label>
+            {{ form.numero_patente }}
+        </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label class="small mb-1" for="contribuyente">Escoja el contribuyente</label>
-{#            <input type="text" id="contribuyente" value="{{ form.contribuyente.ruc }}">#}
+            {# <input type="text" id="contribuyente" value="{{ form.contribuyente.ruc }}">#}
             {{ form.contribuyente }}
         </div>
         <div class="form-group col-md-6">
@@ -39,9 +40,9 @@
     </div>
 
     <div class="modal-footer">
-      <button class="btn btn-primary" type="submit">
-          Guardar y continuar
-      </button>
+        <button class="btn btn-primary" type="submit">
+            Guardar y continuar
+        </button>
     </div>
 </form>
 {% endblock %}

@@ -28,12 +28,12 @@ class PatenteForm(forms.ModelForm):
         }
 
         widgets = {
-            'fecha': forms.DateInput(
-                format='%Y-%m-%d',
+            'numero_patente': forms.NumberInput(
+                # format='%Y-%m-%d',
                 attrs={
                     'class': 'form-control',
                     'required': True,
-                    'type': 'date',
+                    'type': 'number',
                 }
             ),
             'contribuyente': forms.Select(

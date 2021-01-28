@@ -18,7 +18,7 @@ class EstablecimientoForm(forms.ModelForm):
                 'required': 'El nombre es obligatorio'
             },
             'descripcion_actividad': {
-                'required': 'La actividad es obligatoria'
+                'required': 'La descripción es obligatoria'
             },
             'fecha_inicio_actividad': {
                 'required': 'La fecha de inicio es obligatoria'
