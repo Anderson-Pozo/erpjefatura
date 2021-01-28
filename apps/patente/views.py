@@ -36,10 +36,6 @@ class ListaCatastro(ListView):
         return JsonResponse(data, safe=False)
 
 
-# class CrearContribuyenteNatural(TemplateView):
-#     template_name = 'patente/apertura/paso1_contribuyente.html'
-
-
 class CrearContribuyente(TemplateView):
     template_name = 'patente/apertura/paso1_contribuyente.html'
 
@@ -75,6 +71,20 @@ class CrearContribuyente(TemplateView):
         #     messages.error('Error(s) encountered during form processing, please review below and re-submit')
         # return self.render_to_response(context)
     # success_url = reverse_lazy('patente:crear_establecimiento')
+
+
+class CrearNatural(CreateView):
+    model = Natural
+    form_class = NaturalForm
+    template_name = 'patente/apertura/paso1_contribuyente_natural.html'
+    success_url = reverse_lazy('patente:crear_establecimiento')
+
+
+class CrearJuridico(CreateView):
+    model = Juridico
+    form_class = JuridicoForm
+    template_name = 'patente/apertura/paso1_contribuyente_juridico.html'
+    success_url = reverse_lazy('patente:crear_establecimiento')
 
 
 class CrearEstablecimiento(CreateView):

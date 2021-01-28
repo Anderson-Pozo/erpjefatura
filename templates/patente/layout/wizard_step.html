@@ -33,7 +33,7 @@
         <a
           class="{% block link_paso1 %}nav-item nav-link{% endblock %}"
           id="wizard1-tab"
-          href="{% url 'patente:crear_contribuyente' %}"
+          href="{% url 'patente:crear_natural' %}"
           aria-controls="wizard1"
           aria-selected="true"
         >
@@ -103,11 +103,15 @@
           role="tabpanel"
           aria-labelledby="wizard1-tab"
         >
-          {% block body_wizard %}
-          <div class="text-black">
-            <h1>Text here</h1>
-          </div>
-          {% endblock %}
+        <div class="row justify-content-center">
+            <div class="col-xxl-6 col-xl-10">
+              {% block body_wizard %}
+              <div class="text-black">
+                <h1>Text here</h1>
+              </div>
+              {% endblock %}
+            </div>
+        </div>
         </div>
       </div>
     </div>
