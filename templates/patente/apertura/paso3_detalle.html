@@ -6,11 +6,19 @@
 
 {% block body_wizard %}
 <form id="form_patente" action="{% url 'patente:crear_patente' %}" method="POST">
-    {% csrf_token %}
     {% if form.errors %}
-    <div class="alert alert-danger">
-        {{ form.errors }}
+    {% for field in form %}
+    {% for error in field.errors %}
+    <div class="text-danger text-xs">
+        <li><strong>{{ error|escape }}</strong></li>
     </div>
+    {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+    <div class="text-danger text-xs">
+        <li><strong>{{ error|escape }}</strong></li>
+    </div>
+    {% endfor %}
     {% endif %}
     <!-- Form Group (username)-->
     <div class="form-group">
@@ -20,7 +28,7 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label class="small mb-1" for="contribuyente">Escoja el contribuyente</label>
-{#            <input type="text" id="contribuyente" value="{{ form.contribuyente.ruc }}">#}
+            {# <input type="text" id="contribuyente" value="{{ form.contribuyente.ruc }}">#}
             {{ form.contribuyente }}
         </div>
         <div class="form-group col-md-6">
@@ -30,9 +38,9 @@
     </div>
 
     <div class="modal-footer">
-      <button class="btn btn-primary" type="submit">
-          Guardar y continuar
-      </button>
+        <button class="btn btn-primary" type="submit">
+            Guardar y continuar
+        </button>
     </div>
 </form>
 {% endblock %}
