@@ -8,11 +8,20 @@
 <form id="form_patente" action="{% url 'patente:crear_patente' %}" method="POST">
     {% csrf_token %}
     {% if form.errors %}
-    <div class="alert alert-danger">
-        {{ form.errors }}
-    </div>
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div class="text-danger text-xs">
+                    <li><strong>{{ error|escape }}</strong></li>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <div class="text-danger text-xs">
+                <li><strong>{{ error|escape }}</strong></li>
+            </div>
+        {% endfor %}
     {% endif %}
-    <!-- Form Group (username)-->
+    <br>
     <div class="form-group">
         <label class="small mb-1" for="fecha">Fecha</label>
         {{ form.fecha }}

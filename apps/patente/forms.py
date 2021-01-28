@@ -7,7 +7,8 @@ from apps.establecimiento.models import Establecimiento
 class PatenteForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # self.fields['multa'].queryset = Multa.objects.all()
+        self.fields['contribuyente'].initial = Contribuyente.objects.last()
+        self.fields['establecimiento'].initial = Establecimiento.objects.last()
 
     class Meta:
         model = Patente
@@ -35,20 +36,19 @@ class PatenteForm(forms.ModelForm):
                     'type': 'date',
                 }
             ),
-            'contribuyente': forms.TextInput(
+            'contribuyente': forms.Select(
                 attrs={
                     'class': 'form-control',
                     'required': True,
-                    'value': Contribuyente.objects.last().ruc,
-                    'readonly': True
+                    'disabled': True
                 }
             ),
-            'establecimiento': forms.TextInput(
+            'establecimiento': forms.Select(
                 attrs={
                     'class': 'form-control',
                     'required': True,
-                    'value': Establecimiento.objects.last().nombre,
-                    'readonly': True
+                    'disabled': True
+                    # 'value': Establecimiento.objects.last().id,
                 }
             ),
 

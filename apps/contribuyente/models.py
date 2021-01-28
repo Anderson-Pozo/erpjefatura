@@ -47,7 +47,8 @@ class Contribuyente(models.Model):
         item['tipocontribuyente'] = self.tipocontribuyente.nombre
         return item
 
-    # def __str__(self):
+    def __str__(self):
+        return self.ruc
     #     contribuyente = self.objects.get(self.id)
     #     if self.tipocontribuyente.id == 1:
     #         return contribuyente.natural.numero_cedula
