@@ -62,7 +62,7 @@ class Contribuyente(models.Model):
 NACIONALIDADES = (
     ('Ecuatoriana', 'Ecuatoriana'),
     ('Colombiana', 'Colombiana'),
-    ('Venezonalana', 'Venezonalana'),
+    ('Venezonalana', 'Venezolana'),
 )
 
 

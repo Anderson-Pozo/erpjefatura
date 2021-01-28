@@ -94,9 +94,11 @@ class ContribuyenteNaturalForm(forms.ModelForm):
                     'placeholder': 'Ingrese el teléfono convencional',
                 }
             ),
-            'tipocontribuyente': forms.Select(
+            'tipocontribuyente': forms.TextInput(
                 attrs={
                     'class': 'form-control',
+                    'value': TipoContribuyente.objects.first(),
+                    'readonly': True
                 }
             )
         }

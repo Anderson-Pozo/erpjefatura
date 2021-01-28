@@ -49,13 +49,17 @@ function lista_catastro(){
             class: 'text-center',
             orderable: false,
             render: function (data, type, row) {
-                let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2">' +
-                                '<i class="fas fa-edit"></i>' +
-                                '</button>';
-                buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange">' +
-                            '<i class="fas fa-trash"></i>' +
-                            '</button>';
-                return buttons;
+                return '<div class="dropdown no-caret">\n' +
+                    ' <button class="btn btn-transparent-dark btn-datatable dropdown-toggle" ' +
+                    'id="dropdownPeople1" type="button" data-toggle="dropdown" aria-haspopup="true" ' +
+                    'aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>\n' +
+                    '    <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownPeople1">\n' +
+                    '        <button class="dropdown-item btn-light" href="#">Suspensión</button>\n' +
+                    '        <button class="dropdown-item btn-light" href="#">Exoneración</button>\n' +
+                    '        <button class="dropdown-item btn-light" href="#">Renovación</button>\n' +
+                    '        <button class="dropdown-item btn-light" href="#">Historial</button>\n' +
+                    '    </div>\n' +
+                    '</div>';
             }
         }
     ],
