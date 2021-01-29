@@ -23,7 +23,6 @@ class Patente(models.Model):
         item['tipocontribuyente'] = self.contribuyente.tipocontribuyente.nombre
         item['nombre_establecimiento'] = self.establecimiento.nombre
         item['total_patrimonio'] = self.establecimiento.total_patrimonio
-        item['direccion'] = self.establecimiento.direccion.get_all_direccion()
         return item
 
     class Meta:
