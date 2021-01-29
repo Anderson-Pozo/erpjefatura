@@ -40,7 +40,7 @@ function lista_catastro(){
         { "data": "tipocontribuyente"},
         { "data": "nombre_establecimiento"},
         { "data": "total_patrimonio"},
-        { "data": "direccion"},
+        { "data": "exonerada"},
         { "data": "acciones"},
     ],
     columnDefs: [
@@ -60,6 +60,23 @@ function lista_catastro(){
                     '        <button class="dropdown-item btn-light" href="#">Historial</button>\n' +
                     '    </div>\n' +
                     '</div>';
+            }
+        },
+        {
+            targets: [-2],
+            class: 'text-center',
+            orderable: false,
+            render: function (data, type, row) {
+                if (!row.suspendida && !row.exonerada){
+                    return '<span class="badge badge-light">Normal</span>';
+                }
+                if (row.exonerada){
+                    return '<span class="badge badge-success">Exonerada</span>';
+                }
+                if (row.suspendida){
+                    return '<span class="badge badge-danger">Suspendida</span>';
+                }
+
             }
         }
     ],
