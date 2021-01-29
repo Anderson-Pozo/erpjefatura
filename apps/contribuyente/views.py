@@ -24,7 +24,7 @@ class ListaContribuyenteNatural(ListView):
             action = request.POST['action']
             if action == 'searchdata':
                 data = []
-                for i in self.model.objects.filter(estado=True):
+                for i in self.model.objects.all():
                     data.append(i.to_json())
             else:
                 data['error'] = 'Ha ocurrido un error'
@@ -68,7 +68,7 @@ class ListaContribuyenteJuridico(ListView):
             action = request.POST['action']
             if action == 'searchdata':
                 data = []
-                for i in Juridico.objects.filter(estado=True):
+                for i in Juridico.objects.all():
                     data.append(i.to_json())
             else:
                 data['error'] = 'Ha ocurrido un error'

@@ -38,6 +38,7 @@ function lista_usuarios() {
             {"data": "email"},
             {"data": "first_name"},
             {"data": "last_name"},
+            {"data": "is_active"},
             {"data": "acciones"},
         ],
         columnDefs: [
@@ -55,6 +56,18 @@ function lista_usuarios() {
                             '<i class="fas fa-trash"></i>' +
                             '</button>';
                 return buttons;
+            }
+        },
+        {
+            targets: [-2],
+            class: 'text-center',
+            orderable: false,
+            render: function (data, type, row) {
+                if (row.is_active){
+                    return '<span class="badge badge-success">Activo</span>';
+                }else {
+                    return '<span class="badge badge-danger">Desactivo</span>';
+                }
             }
         }
     ],

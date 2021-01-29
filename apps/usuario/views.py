@@ -112,6 +112,7 @@ class CrearUsuario(CreateView):
         else:
             return redirect('usuario:lista_usuarios')
 
+
 class EditarUsuario(AjaxUpdate, UpdateView):
     model = User
     form_class = UserForm

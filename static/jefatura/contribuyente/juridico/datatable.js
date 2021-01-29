@@ -40,7 +40,8 @@ function lista_contribuyentes(){
         { "data": "tlf_celular"},
         { "data": "email"},
         { "data": "nombres_representante"},
-        { "data": "telefono_representante"},
+        // { "data": "telefono_representante"},
+        { "data": "estado"},
         { "data": "acciones"},
     ],
     columnDefs: [
@@ -58,6 +59,18 @@ function lista_contribuyentes(){
                             '<i class="fas fa-trash"></i>' +
                             '</button>';
                 return buttons;
+            }
+        },
+        {
+            targets: [-2],
+            class: 'text-center',
+            orderable: false,
+            render: function (data, type, row) {
+                if (row.estado){
+                    return '<span class="badge badge-danger">Suspendido</span>';
+                }else {
+                    return '<span class="badge badge-success">Activo</span>';
+                }
             }
         }
     ],
