@@ -61,12 +61,12 @@ function lista_usuarios() {
         {
             targets: [-2],
             class: 'text-center',
-            orderable: false,
+            orderable: true,
             render: function (data, type, row) {
                 if (row.is_active){
                     return '<span class="badge badge-success">Activo</span>';
                 }else {
-                    return '<span class="badge badge-danger">Desactivo</span>';
+                    return '<span class="badge badge-danger">Inactivo</span>';
                 }
             }
         }
