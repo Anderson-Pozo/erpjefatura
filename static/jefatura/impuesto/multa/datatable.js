@@ -35,8 +35,7 @@ function lista_multa(){
         dataSrc: ""
     },
     columns: [
-        { "data": "anio"},
-        { "data": "mes"},
+        { "data": "fecha"},
         { "data": "porcentaje"},
         { "data": "acciones"},
     ],
@@ -90,7 +89,7 @@ function crear_multa() {
         processData: false,
         contentType: false,
         success: function (response) {
-            close_modal_edition();
+            close_modal_creation();
             show_notification_success(response.mensaje);
             lista_multa();
             // console.log(response);

@@ -61,11 +61,19 @@ Impuesto sobre las patentes
         </div>
     </div>
 </div>
+<div class="modal" id="edicion" tabindex="-1" role="dialog"
+    aria-labelledby="edicion" aria-hidden="true">
+</div>
+<div class="modal" id="eliminacion" tabindex="-1" role="dialog"
+    aria-labelledby="eliminacionTitle" aria-hidden="true">
+</div>
 {#<div class="modal" id="modalEstablecimiento" tabindex="-1" role="dialog"#}
 {#    aria-labelledby="modalEstablecimientoTitle" aria-hidden="true">#}
 {#</div>#}
 {% endblock %}
 
 {% block extrajs %}
+    <script src="{% static 'static/jefatura/modals.js' %}"></script>
+    <script src="{% static 'static/jefatura/messages.js' %}"></script>
     <script src="{% static 'static/jefatura/impuesto/impuesto/datatable.js' %}"></script>
 {% endblock %}

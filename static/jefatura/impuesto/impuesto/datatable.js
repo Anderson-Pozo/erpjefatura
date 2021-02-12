@@ -48,10 +48,12 @@ function lista_impuesto(){
             class: 'text-center',
             orderable: false,
             render: function (data, type, row) {
-                let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2">' +
+                let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2"' +
+                                ' onclick="open_modal_edition(\'/impuesto/impuesto/editar/' + row.id +'/\')">' +
                                 '<i class="fas fa-edit"></i>' +
                                 '</button>';
-                buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange">' +
+                buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange" ' +
+                            ' onclick="open_modal_elimination(\'/impuesto/impuesto/eliminar/' + row.id +'/\')">' +
                             '<i class="fas fa-trash"></i>' +
                             '</button>';
                 return buttons;
@@ -63,6 +65,50 @@ function lista_impuesto(){
     }
     });
 }
+
+
+function editar_impuesto() {
+    let data = new FormData($('#form_edition').get(0));
+    $.ajax({
+        url: $('#form_edition').attr('action'),
+        type: $('#form_edition').attr('method'),
+        data: data,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            show_notification_success(response.message);
+            close_modal_edition();
+            lista_impuesto();
+        },
+        error: function (error) {
+            show_notification_error(error.responseJSON.message);
+            show_errors_edition(error);
+            // show_errors_modal_edition(error);
+            // console.log(error.responseJSON.message);
+        }
+    })
+}
+
+
+function eliminar_impuesto(pk) {
+    $.ajax({
+        data: {
+            csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
+        },
+        url: '/impuesto/impuesto/eliminar/'+ pk +'/',
+        type: 'post',
+        success: function (response) {
+            show_notification_success(response.message);
+            close_modal_elimination();
+            lista_impuesto();
+        },
+        error: function (error) {
+            show_notification_error(error.responseJSON.message);
+        }
+    });
+}
+
 
 $(document).ready(function () {
     lista_impuesto();

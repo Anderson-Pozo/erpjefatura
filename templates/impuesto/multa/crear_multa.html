@@ -23,23 +23,19 @@
                                     <!-- Form Group (username)-->
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                        <label class="small mb-1" for="ingreseAnio">Año</label>
-                                            {{ form.anio }}
+                                        <label class="small mb-1" for="ingreseFecha">Fecha</label>
+                                            {{ form.fecha }}
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label class="small mb-1" for="ingreseMes">Mes</label>
-                                            {{ form.mes }}
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
                                         <label class="small mb-1" for="ingresePorcentaje">Porcentaje</label>
                                         {{ form.porcentaje }}
                                     </div>
+                                    </div>
+
+
                                     <div class="modal-footer">
                                         <button onclick="close_modal_creation();"
-                                                class="btn btn-red" type="button"
-                                            >Cerrar</button>
+                                                class="btn btn-red" type="button">Cerrar</button>
                                         <button onclick="crear_multa();"
                                             class="btn btn-green" type="button">Guardar</button>
                                     </div>

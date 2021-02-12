@@ -1,5 +1,6 @@
 from django import forms
-from .models import Multa
+from .models import Multa, Impuesto, Vencimiento
+
 
 
 class MultaForm(forms.ModelForm):
@@ -12,11 +13,8 @@ class MultaForm(forms.ModelForm):
         fields = '__all__'
         # exclude = ''
         error_messages = {
-            'anio': {
-                'required': 'El año es obligatorio'
-            },
-            'mes': {
-                'required': 'El mes es obligatorio'
+            'fecha': {
+                'required': 'La fecha es obligatoria'
             },
             'porcentaje': {
                 'required': 'El porcentaje es obligatorio'
@@ -24,23 +22,17 @@ class MultaForm(forms.ModelForm):
 
         }
         labels = {
-            'anio': 'Año',
-            'mes': 'Mes',
+            'fecha': 'fecha',
             'porcentaje': 'Porcentaje'
 
         }
         widgets = {
-            'anio': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Ingrese el año',
-                    'required': True,
-                }
-            ),
-            'mes': forms.Select(
+            'fecha': forms.DateInput(
+                format='%Y-%m-%d',
                 attrs={
                     'class': 'form-control',
                     'required': True,
+                    'type': 'date',
                 }
             ),
             'porcentaje': forms.NumberInput(
@@ -48,6 +40,132 @@ class MultaForm(forms.ModelForm):
                     'class': 'form-control',
                     'placeholder': 'Ingrese el porcentaje',
                     'required': True,
+                }
+            ),
+
+        }
+
+
+class ImpuestoForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # self.fields['multa'].queryset = Multa.objects.all()
+
+    class Meta:
+        model = Impuesto
+        fields = '__all__'
+        # exclude = ''
+        error_messages = {
+            'numero': {
+                'required': 'El id es obligatorio'
+            },
+            'fraccion_basica': {
+                'required': 'La fracción basica es obligatoria'
+            },
+            'fraccion_excedente': {
+                'required': 'La fracción excedente es obligatoria'
+            },
+            'impuesto_fraccion_basica': {
+                'required': 'El impuesto basico es obligatorio'
+            },
+            'porcentaje_fraccion_excedente': {
+                'required': 'El porcentaje excedente es obligatorio'
+            },
+
+        }
+        # labels = {
+        #     'fecha': 'fecha',
+        #     'porcentaje': 'Porcentaje'
+        #
+        # }
+        widgets = {
+            'numero': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Ingrese el id',
+                    'required': True,
+                }
+            ),
+            'fraccion_basica': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Ingrese la fracción basica',
+                    'required': True,
+                }
+            ),
+            'fraccion_excedente': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Ingrese la fraccion excedente',
+                    'required': True,
+                }
+            ),
+            'impuesto_fraccion_basica': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Ingrese el impuesto basico',
+                    'required': True,
+                }
+            ),
+            'porcentaje_fraccion_excedente': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Ingrese el porcentaje excednete',
+                    'required': True,
+                }
+            ),
+
+        }
+
+
+class VencimientoForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # self.fields['multa'].queryset = Multa.objects.all()
+
+    class Meta:
+        model = Vencimiento
+        fields = '__all__'
+        # exclude = ''
+        error_messages = {
+            'digito': {
+                'required': 'el digito es obligatorio'
+            },
+            'no_obligado': {
+                'required': 'La fecha es obligatoria'
+            },
+            'obligado': {
+                'required': 'La fecha es obligatoria'
+            },
+
+        }
+        # labels = {
+        #     'fecha': 'fecha',
+        #     'porcentaje': 'Porcentaje'
+        #
+        # }
+        widgets = {
+            'digito': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Ingrese el digito',
+                    'required': True,
+                }
+            ),
+            'no_obligado': forms.DateInput(
+                format='%Y-%m-%d',
+                attrs={
+                    'class': 'form-control',
+                    'required': True,
+                    'type': 'date',
+                }
+            ),
+            'obligado': forms.DateInput(
+                format='%Y-%m-%d',
+                attrs={
+                    'class': 'form-control',
+                    'required': True,
+                    'type': 'date',
                 }
             ),
 
