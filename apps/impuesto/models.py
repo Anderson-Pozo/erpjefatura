@@ -13,6 +13,7 @@ class Vencimiento(models.Model):
     digito = models.IntegerField('Noveno dígito de cédula', blank=False, null=True)
     no_obligado = models.DateField('No obligado', blank=False, null=True)
     obligado = models.DateField('Obligado', blank=False, null=True)
+    estado = models.BooleanField('Activo/Inactivo', blank=True, null=True, default=True)
 
     def to_json(self):
         item = model_to_dict(self)
@@ -34,6 +35,7 @@ class Impuesto(models.Model):
     fraccion_excedente = models.IntegerField('Fraccion excedente', blank=False, null=True)
     impuesto_fraccion_basica = models.IntegerField('Impuesto fraccion basica', blank=False, null=True)
     porcentaje_fraccion_excedente = models.FloatField('Porcentaje fraccion excedente', blank=False, null=True)
+    estado = models.BooleanField('Activo/Inactivo', blank=True, null=True, default=True)
 
     def to_json(self):
         item = model_to_dict(self)
@@ -64,8 +66,9 @@ class Multa(models.Model):
     Modelo Multa que contiene los porcentajes de mmulta de mora por cada mes del año
     """
     id = models.AutoField(primary_key=True)
-    anio = models.CharField('Año', max_length=4, blank=False, null=True)
-    mes = models.CharField('Mes', max_length=15, blank=False, null=True, choices=MESES)
+    fecha = models.DateField('Fecha', blank=False, null=True)
+    # anio = models.CharField('Año', max_length=4, blank=False, null=True)
+    # mes = models.CharField('Mes', max_length=15, blank=False, null=True, choices=MESES)
     porcentaje = models.FloatField('Porcentaje multa', blank=False, null=True)
     estado = models.BooleanField('Activo/Inactivo', blank=True, null=True, default=True)
 

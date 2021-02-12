@@ -46,10 +46,12 @@ function lista_vencimiento(){
             class: 'text-center',
             orderable: false,
             render: function (data, type, row) {
-                let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2">' +
+                let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2"' +
+                                ' onclick="open_modal_edition(\'/impuesto/vencimiento/editar/' + row.id +'/\')">' +
                                 '<i class="fas fa-edit"></i>' +
                                 '</button>';
-                buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange">' +
+                buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange" ' +
+                            ' onclick="open_modal_elimination(\'/impuesto/vencimiento/eliminar/' + row.id +'/\')">' +
                             '<i class="fas fa-trash"></i>' +
                             '</button>';
                 return buttons;
@@ -86,6 +88,50 @@ function lista_vencimiento(){
 //         }
 //     })
 // }
+
+
+function editar_vencimiento() {
+    let data = new FormData($('#form_edition').get(0));
+    $.ajax({
+        url: $('#form_edition').attr('action'),
+        type: $('#form_edition').attr('method'),
+        data: data,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            show_notification_success(response.message);
+            close_modal_edition();
+            lista_vencimiento();
+        },
+        error: function (error) {
+            show_notification_error(error.responseJSON.message);
+            show_errors_edition(error);
+            // show_errors_modal_edition(error);
+            // console.log(error.responseJSON.message);
+        }
+    })
+}
+
+
+function eliminar_vencimiento(pk) {
+    $.ajax({
+        data: {
+            csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
+        },
+        url: '/impuesto/vencimiento/eliminar/'+ pk +'/',
+        type: 'post',
+        success: function (response) {
+            show_notification_success(response.message);
+            close_modal_elimination();
+            lista_vencimiento();
+        },
+        error: function (error) {
+            show_notification_error(error.responseJSON.message);
+        }
+    });
+}
+
 
 $(document).ready(function () {
     lista_vencimiento();

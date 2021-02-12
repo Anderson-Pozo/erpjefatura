@@ -1,7 +1,7 @@
  <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalMultaTitle">Editar registro</h5>
+                <h5 class="modal-title" id="modalVencimientoTitle">Editar registro</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">×</span></button>
             </div>
@@ -11,19 +11,21 @@
                     <ul class="nav nav-tabs card-header-tabs" id="dashboardNav" role="tablist">
                         <li class="nav-item mr-1">
                             <a class="nav-link active"
-                               id="multa-pill"
-                               href="#multa" data-toggle="tab"
-                               role="tab" aria-controls="multa" aria-selected="true">
-                                Editar Mora y Multa
+                               id="vencimiento-pill"
+                               href="#vencimiento" data-toggle="tab"
+                               role="tab" aria-controls="vencimiento" aria-selected="true">
+                                Editar Impuesto
                             </a></li>
                     </ul>
                 </div>
                     <div class="card-body">
                         <div class="tab-content" id="dashboardNavContent">
-                            <div class="tab-pane fade show active" id="multa" role="tabpanel" aria-labelledby="multa-pill">
+                            <div class="tab-pane fade show active" id="impuesto" role="tabpanel"
+                                 aria-labelledby="vencimiento-pill">
                                 <div id="errors_edition"></div>
                                 <br>
-                                <form id="form_edition" action="{% url 'impuesto:editar_multa' object.pk %}" method="POST">
+                                <form id="form_edition" action="{% url 'impuesto:editar_vencimiento' object.pk %}"
+                                      method="POST">
                                     {% csrf_token %}
                                     {% if form.errors %}
                                         <div class="alert alert-danger">
@@ -33,19 +35,25 @@
                                     <!-- Form Group (username)-->
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                        <label class="small mb-1" for="ingreseFecha">Fecha</label>
-                                            {{ form.fecha }}
+                                        <label class="small mb-1" for="ingreseDigito">Ingrese un digito</label>
+                                            {{ form.digito }}
                                         </div>
                                         <div class="form-group col-md-6">
-                                        <label class="small mb-1" for="ingresePorcentaje">Porcentaje</label>
-                                        {{ form.porcentaje }}
+                                        <label class="small mb-1" for="ingreseNoObligado">Ingrese una fecha</label>
+                                        {{ form.no_obligado }}
+                                        </div>
                                     </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                        <label class="small mb-1" for="ingreseObligado">Ingrese una fecha</label>
+                                            {{ form.obligado}}
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button onclick="close_modal_edition();"
                                                 class="btn btn-red" type="button"
                                             >Cerrar</button>
-                                        <button onclick="editar_multa();"
+                                        <button onclick="editar_vencimiento();"
                                             class="btn btn-green" type="button">Guardar</button>
                                     </div>
                                 </form>

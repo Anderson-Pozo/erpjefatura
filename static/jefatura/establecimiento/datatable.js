@@ -90,6 +90,7 @@ function crear_establecimientos() {
         contentType: false,
         success: function (response) {
             $('#modalEstablecimiento').modal('hide');
+            close_modal_creation();
             show_notification_success(response.mensaje);
             lista_establecimientos();
             // console.log(response);

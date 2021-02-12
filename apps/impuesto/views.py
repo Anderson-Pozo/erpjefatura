@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.http import HttpResponse, JsonResponse
 from .models import Impuesto, Vencimiento, Multa
-from .forms import MultaForm
+from .forms import MultaForm, ImpuestoForm, VencimientoForm
 from apps.utils.ajax import AjaxCreate, AjaxUpdate, AjaxDelete
 
 
@@ -26,13 +26,26 @@ class ListaVencimiento(ListView):
             action = request.POST['action']
             if action == 'searchdata':
                 data = []
-                for i in Vencimiento.objects.all():
+                for i in Vencimiento.objects.filter(estado=True):
                     data.append(i.to_json())
             else:
                 data['error'] = 'Ha ocurrido un error'
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
+
+
+class EditarVencimiento(AjaxUpdate, UpdateView):
+    model = Vencimiento
+    form_class = VencimientoForm
+    template_name = 'impuesto/vencimiento/editar_vencimiento.html'
+    success_url = reverse_lazy('impuesto:lista_vencimiento')
+
+
+class EliminarVencimiento(AjaxDelete, DeleteView):
+    model = Vencimiento
+    template_name = 'impuesto/vencimiento/eliminar.html'
+    success_url = reverse_lazy('impuesto:lista_vencimiento')
 
 
 class ListaMulta(ListView):
@@ -111,10 +124,23 @@ class ListaImpuesto(ListView):
             action = request.POST['action']
             if action == 'searchdata':
                 data = []
-                for i in Impuesto.objects.all():
+                for i in Impuesto.objects.filter(estado=True):
                     data.append(i.to_json())
             else:
                 data['error'] = 'Ha ocurrido un error'
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
+
+
+class EditarImpuesto(AjaxUpdate, UpdateView):
+    model = Impuesto
+    form_class = ImpuestoForm
+    template_name = 'impuesto/impuesto/editar_impuesto.html'
+    success_url = reverse_lazy('impuesto:lista_impuesto')
+
+
+class EliminarImpuesto(AjaxDelete, DeleteView):
+    model = Impuesto
+    template_name = 'impuesto/impuesto/eliminar.html'
+    success_url = reverse_lazy('impuesto:lista_impuesto')
