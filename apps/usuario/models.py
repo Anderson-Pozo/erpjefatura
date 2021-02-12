@@ -1,9 +1,9 @@
-import locale
 from django.db import models
-from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.forms import model_to_dict
-from apps.auditoria.mixins import AuditMixin
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.contrib.admin.models import LogEntry
+from apps.auditoria.mixins import AuditMixin
+from apps.utils.format_date import current_date_format
 
 
 class UserManager(BaseUserManager):
@@ -64,9 +64,7 @@ class Logs(LogEntry):
         proxy = True
 
     def to_json(self):
-        # locale.setlocale(locale.LC_ALL, 'es-ES')
-
         item = model_to_dict(self)
         item['user'] = self.user.__str__()
-        item['date'] = self.action_time.strftime('%d %B, %Y %H:%M:%S')
+        item['date'] = current_date_format(self.action_time)
         return item
