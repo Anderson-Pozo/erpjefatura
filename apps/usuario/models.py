@@ -64,7 +64,7 @@ class Logs(LogEntry):
         proxy = True
 
     def to_json(self):
-        locale.setlocale(locale.LC_ALL, 'es-ES')
+        # locale.setlocale(locale.LC_ALL, 'es-ES')
 
         item = model_to_dict(self)
         item['user'] = self.user.__str__()
