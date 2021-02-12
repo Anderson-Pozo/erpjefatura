@@ -1,8 +1,9 @@
 from django.db import models
+from apps.auditoria.mixins import AuditMixin
 
 
 # Create your models here.
-class Parroquia(models.Model):
+class Parroquia(AuditMixin, models.Model):
     """
     Clase Parroquia  que almacena el nombre de la parroquia
     """
@@ -16,7 +17,7 @@ class Parroquia(models.Model):
         db_table = "parroquia"
 
 
-class Barrio(models.Model):
+class Barrio(AuditMixin, models.Model):
     """
     Clase Barrio almacena el nombre, la zona (Rural, Urbana), y su relacion con la
     tabla de parroquia
@@ -33,7 +34,7 @@ class Barrio(models.Model):
         db_table = "barrio"
 
 
-class Direccion(models.Model):
+class Direccion(AuditMixin, models.Model):
     """
     Clase Direccion almacena la calle principal y secundaria, y su relacion con la
     tabla de Barrio

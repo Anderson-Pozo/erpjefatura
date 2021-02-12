@@ -1,6 +1,7 @@
 from django.db import models
 from django.forms import model_to_dict
 from apps.direccion.models import Direccion
+from apps.auditoria.mixins import AuditMixin
 
 
 # Create your models here.
@@ -15,7 +16,7 @@ ACTIVIDAD = (
 )
 
 
-class TipoActividad(models.Model):
+class TipoActividad(AuditMixin, models.Model):
     """
     Clase que representa la entidad Tipo Actividad que contiene
     la información del tipo de actividad comercial que realiza
@@ -38,7 +39,7 @@ TIPO_VENTA = (
 )
 
 
-class Establecimiento(models.Model):
+class Establecimiento(AuditMixin, models.Model):
     """
     Clase Establecimiento que almacena la información de los negocios que poseen
     una patente municipal

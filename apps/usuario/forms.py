@@ -68,7 +68,7 @@ class UserForm(forms.ModelForm):
         widget=forms.PasswordInput(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'Input your password',
+                'placeholder': 'Ingrese la constraseña',
                 'id': 'password1',
                 'required': 'required'
             }
@@ -79,7 +79,7 @@ class UserForm(forms.ModelForm):
         widget=forms.PasswordInput(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'Input your password again',
+                'placeholder': 'Confirme la contraseña',
                 'id': 'password2',
                 'required': 'required'
             }

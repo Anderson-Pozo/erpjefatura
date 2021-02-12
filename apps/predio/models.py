@@ -1,9 +1,10 @@
 from django.db import models
 from apps.direccion.models import Direccion
+from apps.auditoria.mixins import AuditMixin
 
 
 # Create your models here.
-class Predio(models.Model):
+class Predio(AuditMixin, models.Model):
     """
     Clase Predio que contiene los campos de la entidad
     Predio y su relación con dirección

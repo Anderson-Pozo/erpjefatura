@@ -1,9 +1,10 @@
 from django.db import models
 from apps.alcabala.models import Alcabala
+from apps.auditoria.mixins import AuditMixin
 
 
 # Create your models here.
-class Plusvalia(models.Model):
+class Plusvalia(AuditMixin, models.Model):
     """
     Clase Plusvalia que contiene los campos de la entidad
     plusvalia y su relacion con la entidad Alcabala

@@ -8,9 +8,8 @@ from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.generic import FormView, TemplateView, ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth import login, logout
 from .forms import LoginForm, UserForm, AccountForm
-from apps.utils.ajax import AjaxCreate,AjaxUpdate, AjaxDelete
-from .models import User
-from apps.utils.ajax import AjaxCreate
+from apps.utils.ajax import AjaxCreate, AjaxUpdate, AjaxDelete
+from .models import User, Logs
 
 
 # General views
@@ -124,3 +123,27 @@ class EliminarUsuario(AjaxDelete, DeleteView):
     model = User
     template_name = 'usuario/admin/eliminar.html'
     success_url = reverse_lazy('usuario:lista_usuarios')
+
+
+# Logs Module
+class ListaLogs(ListView):
+    model = Logs
+    template_name = 'usuario/admin/lista_logs.html'
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, *kwargs)
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+        try:
+            action = request.POST['action']
+            if action == 'searchdata':
+                data = []
+                for i in self.model.objects.all():
+                    data.append(i.to_json())
+            else:
+                data['error'] = 'Ha ocurrido un error'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)

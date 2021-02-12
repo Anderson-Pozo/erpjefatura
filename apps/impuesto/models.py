@@ -1,10 +1,11 @@
 from _ast import mod
 from django.forms import model_to_dict
 from django.db import models
+from apps.auditoria.mixins import AuditMixin
 
 
 # Create your models here.
-class Vencimiento(models.Model):
+class Vencimiento(AuditMixin, models.Model):
     """"
     Clase vencimiento que almacena las fechas de vencimiento de la multa
     dependiendo del noveno digito de cédula
@@ -22,7 +23,7 @@ class Vencimiento(models.Model):
         db_table = "vencimiento"
 
 
-class Impuesto(models.Model):
+class Impuesto(AuditMixin, models.Model):
     """
     Clase impuesto que almacena valores correspondientes a las
     fracciones basicas y excedentes para calcular el valor del
@@ -42,6 +43,7 @@ class Impuesto(models.Model):
     class Meta:
         db_table = "impuesto"
 
+
 MESES = (
     ('Enero', 'Enero'),
     ('Febrero', 'Febrero'),
@@ -58,8 +60,7 @@ MESES = (
 )
 
 
-
-class Multa(models.Model):
+class Multa(AuditMixin, models.Model):
     """
     Modelo Multa que contiene los porcentajes de mmulta de mora por cada mes del año
     """

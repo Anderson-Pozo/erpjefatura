@@ -1,9 +1,10 @@
 from django.db import models
 from apps.predio.models import Predio
+from apps.auditoria.mixins import AuditMixin
 
 
 # Create your models here.
-class Comprador(models.Model):
+class Comprador(AuditMixin, models.Model):
     """
     Clase Comprador permite guardar la información de numero de cédula, nombres, apellidos, casado del comprador
     """
@@ -20,7 +21,7 @@ class Comprador(models.Model):
         return self.nombres + ' ' + self.apellidos
 
 
-class Vendedor(models.Model):
+class Vendedor(AuditMixin, models.Model):
     """
     Clase Vendedor permite guardar la información de numero de cédula, nombres, apellidos, casado del vendedor
     """
@@ -37,7 +38,7 @@ class Vendedor(models.Model):
         return self.nombres + ' ' + self.apellidos
 
 
-class Alcabala(models.Model):
+class Alcabala(AuditMixin, models.Model):
     """
     Clase Alcabala permite almacenar la información de la patente como la fecha, numero y tramite, ademas de los
     impuestos y valores que se calcularan para generar la alcabala, y su relacion con las tablas de comprador y

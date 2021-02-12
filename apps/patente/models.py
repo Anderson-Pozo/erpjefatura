@@ -2,10 +2,11 @@ from django.db import models
 from django.forms import model_to_dict
 from apps.contribuyente.models import Contribuyente
 from apps.establecimiento.models import Establecimiento
+from apps.auditoria.mixins import AuditMixin
 
 
 # Create your models here.
-class Patente(models.Model):
+class Patente(AuditMixin, models.Model):
     """
     Modelo de Pantente que contiene los datos de la patente
     municipal y su relación con el establecimiento
@@ -29,7 +30,7 @@ class Patente(models.Model):
         db_table = "patente"
 
 
-class DetallePatente(models.Model):
+class DetallePatente(AuditMixin, models.Model):
     """
     El modelo DetallePatente almacena un historico de los
     movimientos de patente, ya se apertura o renovación

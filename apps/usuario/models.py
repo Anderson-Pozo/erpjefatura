@@ -1,6 +1,9 @@
+import locale
 from django.db import models
-from django.contrib.auth.models import AbstractUser, BaseUserManager, Group
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.forms import model_to_dict
+from apps.auditoria.mixins import AuditMixin
+from django.contrib.admin.models import LogEntry
 
 
 class UserManager(BaseUserManager):
@@ -25,7 +28,7 @@ class UserManager(BaseUserManager):
 
 
 # Create your models here.
-class User(AbstractUser):
+class User(AuditMixin, AbstractUser):
     username = models.CharField('Nombre usuario', max_length=10, unique=True,
                                 help_text='Es recomendable colocar el número de cédula')
     email = models.EmailField('Correo electrónico', max_length=60, unique=True)
@@ -46,3 +49,24 @@ class User(AbstractUser):
 
     def __str__(self):
         return f'{self.first_name}, {self.last_name}'
+
+
+# class Grupo(Group):
+#     class Meta:
+#         proxy = True
+#
+#     def say_hello(self):
+#         return "Hello, my name is {}".format(self.name)
+
+
+class Logs(LogEntry):
+    class Meta:
+        proxy = True
+
+    def to_json(self):
+        locale.setlocale(locale.LC_ALL, 'es-ES')
+
+        item = model_to_dict(self)
+        item['user'] = self.user.__str__()
+        item['date'] = self.action_time.strftime('%d %B, %Y %H:%M:%S')
+        return item
