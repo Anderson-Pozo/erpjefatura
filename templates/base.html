@@ -17,6 +17,9 @@
         <link href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" rel="stylesheet" crossorigin="anonymous" />
         <link rel="shortcut icon" href="{% static 'assets/img/favicon.png' %}">
         {% endblock %}
+        {% block extracss %}
+        <link href="{% static 'css/icons-datatable.css' %}" rel="stylesheet">
+        {% endblock %}
 
         {% block javascripthead %}
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>

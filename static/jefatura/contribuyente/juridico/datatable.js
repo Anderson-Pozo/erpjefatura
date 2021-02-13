@@ -1,5 +1,22 @@
+function format ( d ) {
+    return '<table cellpadding="5" cellspacing="0" style="padding-left:50px; border: hidden">'+
+        '<tr>'+
+            '<td>Nombres representante:</td>'+
+            '<td>'+d.nombres_representante+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Apellidos representante:</td>'+
+            '<td>'+d.apellidos_representante+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Email representante:</td>'+
+            '<td>'+ d.correo_representante +'</td>'+
+        '</tr>'+
+    '</table>';
+}
+
 function lista_contribuyentes(){
-    $('#tableContribuyenteJuridico').DataTable({
+    let table = $('#tableContribuyenteJuridico').DataTable({
     language: {
         "decimal": "",
         "emptyTable": "No hay información",
@@ -22,7 +39,6 @@ function lista_contribuyentes(){
     },
     responsive: true,
     autoWidth: true,
-    // scrollX: true,
     destroy: true,
     deferRender: true,
     ordering: true,
@@ -35,12 +51,17 @@ function lista_contribuyentes(){
         dataSrc: ""
     },
     columns: [
+        {
+            "className":      'details-control',
+            "orderable":      false,
+            "data":           null,
+            "defaultContent": ''
+        },
         { "data": "ruc"},
         { "data": "razon_social"},
         { "data": "tlf_celular"},
         { "data": "email"},
         { "data": "nombres_representante"},
-        // { "data": "telefono_representante"},
         { "data": "estado"},
         { "data": "acciones"},
     ],
@@ -78,8 +99,23 @@ function lista_contribuyentes(){
         // alert('Datos cargados');
     }
     });
-}
 
+    $('#tableContribuyenteJuridico tbody').on('click', 'td.details-control', function () {
+        let tr = $(this).closest('tr');
+        let row = table.row( tr );
+
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+    } );
+}
 
 function crear_contribuyente_juridico() {
     let data = new FormData($('#form_creation').get(0));
