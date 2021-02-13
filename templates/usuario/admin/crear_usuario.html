@@ -11,6 +11,11 @@
                     <div class="card-body">
                         <div id="errors"></div>
                         <br>
+{#                        <form method="post" action="{% url 'usuario:crear_usuario' %}">#}
+{#                            {% csrf_token %}#}
+{#                            {{ form.as_p }}#}
+{#                            <button type="submit">Crera</button>#}
+{#                        </form>#}
                         <form id="form_usuario" action="{% url 'usuario:crear_usuario' %}" method="POST">
                             {% csrf_token %}
                             <!-- Form Row-->
@@ -45,14 +50,30 @@
                                         <label class="custom-control-label" for="id_is_superuser">Es superusuario</label>
                                     </div>
                                 </div>
+                                <div class="form-group col-md-6">
+                                    <div class="custom-control custom-checkbox">
+                                        {{ form.is_active }}
+                                        <label class="custom-control-label" for="id_is_active">Es activo</label>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-row">
-                                <!-- Form Group (nombres)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="groups">Grupo</label>
+                                    {{ form.groups }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="permisos">Permisos de usuario</label>
+                                    {{ form.user_permissions }}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <!-- Form Group (contraseña)-->
                                 <div class="form-group col-md-6">
                                     <label class="small mb-1" for="password1">Contraseña</label>
                                     {{ form.password1 }}
                                 </div>
-                                <!-- Form Group (apellidos)-->
+                                <!-- Form Group (confirmar contraseña)-->
                                 <div class="form-group col-md-6">
                                     <label class="small mb-1" for="password2">Confirme la contraseña</label>
                                     {{ form.password2 }}

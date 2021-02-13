@@ -3,17 +3,18 @@ from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DeleteView, TemplateView, CreateView
+from django.views.generic import ListView, TemplateView, CreateView
 from django.http import HttpResponse, JsonResponse
-from .models import Patente, DetallePatente
 from apps.contribuyente.models import Natural, Juridico, Contribuyente
 from apps.establecimiento.models import Establecimiento
-from .forms import PatenteForm
 from apps.contribuyente.forms import ContribuyenteNaturalForm as NaturalForm, ContribuyenteJuridicoForm as JuridicoForm
 from apps.establecimiento.forms import EstablecimientoForm
+from apps.utils.ajax import AjaxList
+from .models import Patente, DetallePatente
+from .forms import PatenteForm
 
 
-class ListaCatastro(ListView):
+class ListaCatastro(AjaxList, ListView):
     model = Patente
     template_name = 'patente/catastro/index.html'
 
@@ -21,19 +22,19 @@ class ListaCatastro(ListView):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, *kwargs)
 
-    def post(self, request, *args, **kwargs):
-        data = {}
-        try:
-            action = request.POST['action']
-            if action == 'searchdata':
-                data = []
-                for i in Patente.objects.all():
-                    data.append(i.to_json())
-            else:
-                data['error'] = 'Ha ocurrido un error'
-        except Exception as e:
-            data['error'] = str(e)
-        return JsonResponse(data, safe=False)
+    # def post(self, request, *args, **kwargs):
+    #     data = {}
+    #     try:
+    #         action = request.POST['action']
+    #         if action == 'searchdata':
+    #             data = []
+    #             for i in Patente.objects.all():
+    #                 data.append(i.to_json())
+    #         else:
+    #             data['error'] = 'Ha ocurrido un error'
+    #     except Exception as e:
+    #         data['error'] = str(e)
+    #     return JsonResponse(data, safe=False)
 
 
 class CrearContribuyente(TemplateView):

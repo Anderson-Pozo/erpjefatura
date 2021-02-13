@@ -4,33 +4,19 @@ from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from apps.utils.ajax import AjaxCreate, AjaxUpdate, AjaxDelete
+from apps.utils.ajax import AjaxList, AjaxCreate, AjaxUpdate, AjaxDelete
 from .forms import ContribuyenteNaturalForm, ContribuyenteJuridicoForm
 from .models import Natural, Juridico, Contribuyente
 
 
 # Create your views here.
-class ListaContribuyenteNatural(ListView):
+class ListaContribuyenteNatural(AjaxList, ListView):
     model = Natural
     template_name = 'contribuyente/natural/index.html'
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, *kwargs)
-
-    def post(self, request, *args, **kwargs):
-        data = {}
-        try:
-            action = request.POST['action']
-            if action == 'searchdata':
-                data = []
-                for i in self.model.objects.all():
-                    data.append(i.to_json())
-            else:
-                data['error'] = 'Ha ocurrido un error'
-        except Exception as e:
-            data['error'] = str(e)
-        return JsonResponse(data, safe=False)
 
 
 class CrearContribuyenteNatural(AjaxCreate, CreateView):
@@ -54,27 +40,13 @@ class EliminarContribuyenteNatural(AjaxDelete, DeleteView):
 
 
 # Clases del contribuyente juridico
-class ListaContribuyenteJuridico(ListView):
+class ListaContribuyenteJuridico(AjaxList, ListView):
     model = Juridico
     template_name = 'contribuyente/juridico/index.html'
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, *kwargs)
-
-    def post(self, request, *args, **kwargs):
-        data = {}
-        try:
-            action = request.POST['action']
-            if action == 'searchdata':
-                data = []
-                for i in Juridico.objects.all():
-                    data.append(i.to_json())
-            else:
-                data['error'] = 'Ha ocurrido un error'
-        except Exception as e:
-            data['error'] = str(e)
-        return JsonResponse(data, safe=False)
 
 
 class CrearContribuyenteJuridico(AjaxCreate, CreateView):

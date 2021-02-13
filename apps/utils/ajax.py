@@ -2,6 +2,22 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 
 
+class AjaxList:
+    def post(self, request, *args, **kwargs):
+        data = {}
+        try:
+            action = request.POST['action']
+            if action == 'searchdata':
+                data = []
+                for i in self.model.objects.all():
+                    data.append(i.to_json())
+            else:
+                data['error'] = 'Ha ocurrido un error'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
+
+
 class AjaxCreate:
     def post(self, request, *args, **kwargs):
         if request.is_ajax():

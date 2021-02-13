@@ -1,9 +1,9 @@
 from django.db import models
 from django.forms import model_to_dict
-from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.contrib.auth.models import AbstractUser, BaseUserManager, Group, Permission
 from django.contrib.admin.models import LogEntry
-from apps.auditoria.mixins import AuditMixin
 from apps.utils.format_date import current_date_format
+from apps.auditoria.mixins import AuditMixin
 
 
 class UserManager(BaseUserManager):
@@ -27,7 +27,6 @@ class UserManager(BaseUserManager):
         return self._create_user(email, username, first_name, last_name, password, True, True)
 
 
-# Create your models here.
 class User(AuditMixin, AbstractUser):
     username = models.CharField('Nombre usuario', max_length=10, unique=True,
                                 help_text='Es recomendable colocar el número de cédula')
@@ -41,7 +40,7 @@ class User(AuditMixin, AbstractUser):
     REQUIRED_FIELDS = ['email']
 
     def to_json(self):
-        item = model_to_dict(self)
+        item = model_to_dict(self, exclude=['user_permissions', ])
         return item
 
     class Meta:
@@ -51,12 +50,24 @@ class User(AuditMixin, AbstractUser):
         return f'{self.first_name}, {self.last_name}'
 
 
-# class Grupo(Group):
-#     class Meta:
-#         proxy = True
-#
-#     def say_hello(self):
-#         return "Hello, my name is {}".format(self.name)
+class Grupo(Group):
+    class Meta:
+        proxy = True
+
+    def to_json(self):
+        item = model_to_dict(self, exclude=['permissions', ])
+        # item['permissions'] = {x: x for x in self.permissions.name}
+        return item
+
+
+class Permisos(Permission):
+    class Meta:
+        proxy = True
+
+    def to_json(self):
+        item = model_to_dict(self)
+        item['content_type'] = self.content_type.name
+        return item
 
 
 class Logs(LogEntry):

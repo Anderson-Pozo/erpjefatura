@@ -1,22 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block collapse_patente %}collapse show{% endblock %}
+{% block collapse_usuarios %}collapse show{% endblock %}
 
 {% block title %}
-    <title>Catastro</title>
+<title>Grupos</title>
 {% endblock %}
 
 {% block iconheader %}
-    <div class="page-header-icon"><i class="fas fa-file-signature"></i></div>
+<div class="page-header-icon"><i class="fas fa-users-cog"></i></div>
 {% endblock %}
 
 {% block titleheader %}
-    Catastro
+Grupos
 {% endblock %}
 
 {% block subtitleheader %}
-Listado del catastro de patentes
+Lista de grupos de permisos
 {% endblock %}
 
 {% block buttondate %}
@@ -26,37 +26,30 @@ Listado del catastro de patentes
 <div class="container mt-n10">
     <div class="card mb-4">
         <div class="card-header">
-            <a class="btn btn-primary" href="{% url 'patente:crear_natural' %}">
-                Abrir patente
-            </a>
+            <button onclick="open_modal_creation('{% url 'usuario:crear_usuario' %}')"
+                    class="btn btn-primary" type="button" data-toggle="modal"
+                    data-target="#creacion">
+                    Crear registro
+            </button>
         </div>
         <div class="card-body">
             <div class="datatable">
-                <table class="table table-bordered table-hover" id="tableCatastro" width="100%" cellspacing="0">
+                <table class="table table-bordered table-hover" id="tableGrupos" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Ruc</th>
-{#                            <th>Razón Social</th>#}
-                            <th>Tipo contribuyente</th>
-                            <th>Nombre Comercial</th>
-                            <th>Capital</th>
-                            <th>Estado</th>
+                            <th>Nº</th>
+                            <th>Nombre del grupo</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>Ruc</th>
-{#                            <th>Razón Social</th>#}
-                            <th>Tipo contribuyente</th>
-                            <th>Nombre Comercial</th>
-                            <th>Capital</th>
-                            <th>Estado</th>
+                            <th>Nº</th>
+                            <th>Nombre del grupo</th>
                             <th>Acciones</th>
                         </tr>
                     </tfoot>
                     <tbody>
-
                     </tbody>
                 </table>
             </div>
@@ -75,7 +68,7 @@ Listado del catastro de patentes
 {% endblock %}
 
 {% block extrajs %}
-    <script src="{% static 'static/jefatura/patente/catastro/datatable.js' %}"></script>
+    <script src="{% static 'static/jefatura/usuario/grupos/datatable.js' %}"></script>
     <script src="{% static 'static/jefatura/modals.js' %}"></script>
     <script src="{% static 'static/jefatura/messages.js' %}"></script>
 {% endblock %}

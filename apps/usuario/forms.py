@@ -93,7 +93,10 @@ class UserForm(forms.ModelForm):
             'username',
             'first_name',
             'last_name',
-            'is_superuser'
+            'is_superuser',
+            'is_active',
+            'groups',
+            'user_permissions'
         }
         widgets = {
             'email': forms.EmailInput(
@@ -124,10 +127,24 @@ class UserForm(forms.ModelForm):
                 attrs={
                     'class': 'custom-control-input',
                     'type': 'checkbox',
-                    # 'id': 'is_superuser'
+                }
+            ),
+            'is_active': forms.CheckboxInput(
+                attrs={
+                    'class': 'custom-control-input',
+                    'type': 'checkbox',
+                }
+            ),
+            'groups': forms.SelectMultiple(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+            'user_permissions': forms.SelectMultiple(
+                attrs={
+                    'class': 'form-control'
                 }
             )
-
         }
 
     def clean_password2(self):

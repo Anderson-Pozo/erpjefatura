@@ -67,9 +67,9 @@ function lista_contribuyentes(){
             orderable: false,
             render: function (data, type, row) {
                 if (row.estado){
-                    return '<span class="badge badge-danger">Suspendido</span>';
-                }else {
                     return '<span class="badge badge-success">Activo</span>';
+                }else {
+                    return '<span class="badge badge-danger">Suspendido</span>';
                 }
             }
         }

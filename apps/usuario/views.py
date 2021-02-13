@@ -1,15 +1,14 @@
-from django.http import JsonResponse
-from django.shortcuts import redirect
+from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.generic import FormView, TemplateView, ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth import login, logout
 from .forms import LoginForm, UserForm, AccountForm
-from apps.utils.ajax import AjaxCreate, AjaxUpdate, AjaxDelete
-from .models import User, Logs
+from apps.utils.ajax import AjaxList, AjaxCreate, AjaxUpdate, AjaxDelete
+from .models import User, Logs, Grupo, Permisos
 
 
 # General views
@@ -56,7 +55,7 @@ class ChangePassword(TemplateView):
 
 
 # Admin views
-class ListaUsuarios(ListView):
+class ListaUsuarios(AjaxList, ListView):
     model = User
     template_name = 'usuario/admin/lista_usuarios.html'
 
@@ -64,36 +63,27 @@ class ListaUsuarios(ListView):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, *kwargs)
 
-    def post(self, request, *args, **kwargs):
-        data = {}
-        try:
-            action = request.POST['action']
-            if action == 'searchdata':
-                data = []
-                for i in self.model.objects.all():
-                    data.append(i.to_json())
-            else:
-                data['error'] = 'Ha ocurrido un error'
-        except Exception as e:
-            data['error'] = str(e)
-        return JsonResponse(data, safe=False)
-
 
 class CrearUsuario(CreateView):
     model = User
     form_class = UserForm
     template_name = 'usuario/admin/crear_usuario.html'
+    # success_url = reverse_lazy('usuario:lista_usuarios')
 
     def post(self, request, *args, **kwargs):
         if request.is_ajax():
             form = self.form_class(request.POST)
             if form.is_valid():
+                # print(form.cleaned_data.get('email'))
+                # print(form.cleaned_data.get('username'))
+                # print(form.cleaned_data.get('user_permissions'))
                 new_user = User(
                     email=form.cleaned_data.get('email'),
                     username=form.cleaned_data.get('username'),
                     first_name=form.cleaned_data.get('first_name'),
                     last_name=form.cleaned_data.get('last_name'),
                     is_superuser=form.cleaned_data.get('is_superuser'),
+                    is_active=form.cleaned_data.get('is_active'),
                 )
                 new_user.set_password(form.cleaned_data.get('password1'))
                 new_user.save()
@@ -126,7 +116,7 @@ class EliminarUsuario(AjaxDelete, DeleteView):
 
 
 # Logs Module
-class ListaLogs(ListView):
+class ListaLogs(AjaxList, ListView):
     model = Logs
     template_name = 'usuario/admin/lista_logs.html'
 
@@ -134,16 +124,20 @@ class ListaLogs(ListView):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, *kwargs)
 
-    def post(self, request, *args, **kwargs):
-        data = {}
-        try:
-            action = request.POST['action']
-            if action == 'searchdata':
-                data = []
-                for i in self.model.objects.all():
-                    data.append(i.to_json())
-            else:
-                data['error'] = 'Ha ocurrido un error'
-        except Exception as e:
-            data['error'] = str(e)
-        return JsonResponse(data, safe=False)
+
+class ListaGrupo(AjaxList, ListView):
+    model = Grupo
+    template_name = 'usuario/grupos/lista_grupo.html'
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, *kwargs)
+
+
+class ListaPermisos(AjaxList, ListView):
+    model = Permisos
+    template_name = 'usuario/permisos/lista_permisos.html'
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, *kwargs)

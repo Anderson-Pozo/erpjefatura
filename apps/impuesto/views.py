@@ -8,31 +8,17 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.http import HttpResponse, JsonResponse
 from .models import Impuesto, Vencimiento, Multa
 from .forms import MultaForm, ImpuestoForm, VencimientoForm
-from apps.utils.ajax import AjaxCreate, AjaxUpdate, AjaxDelete
+from apps.utils.ajax import AjaxList, AjaxCreate, AjaxUpdate, AjaxDelete
 
 
 # Create your views here.
-class ListaVencimiento(ListView):
+class ListaVencimiento(AjaxList, ListView):
     model = Vencimiento
     template_name = 'impuesto/vencimiento/index.html'
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, *kwargs)
-
-    def post(self, request, *args, **kwargs):
-        data = {}
-        try:
-            action = request.POST['action']
-            if action == 'searchdata':
-                data = []
-                for i in Vencimiento.objects.filter(estado=True):
-                    data.append(i.to_json())
-            else:
-                data['error'] = 'Ha ocurrido un error'
-        except Exception as e:
-            data['error'] = str(e)
-        return JsonResponse(data, safe=False)
 
 
 class EditarVencimiento(AjaxUpdate, UpdateView):
@@ -48,7 +34,8 @@ class EliminarVencimiento(AjaxDelete, DeleteView):
     success_url = reverse_lazy('impuesto:lista_vencimiento')
 
 
-class ListaMulta(ListView):
+# Clases MuLta
+class ListaMulta(AjaxList, ListView):
     model = Multa
     template_name = 'impuesto/multa/index.html'
 
@@ -56,45 +43,12 @@ class ListaMulta(ListView):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, *kwargs)
 
-    def post(self, request, *args, **kwargs):
-        data = {}
-        try:
-            action = request.POST['action']
-            if action == 'searchdata':
-                data = []
-                for i in Multa.objects.filter(estado=True):
-                    data.append(i.to_json())
-            else:
-                data['error'] = 'Ha ocurrido un error'
-        except Exception as e:
-            data['error'] = str(e)
-        return JsonResponse(data, safe=False)
-
 
 class CrearMulta(AjaxCreate, CreateView):
     model = Multa
     form_class = MultaForm
     template_name = 'impuesto/multa/crear_multa.html'
     success_url = reverse_lazy('impuesto:lista_multa')
-
-    # def post(self, request, *args, **kwargs):
-    #     if request.is_ajax():
-    #         form = self.form_class(data=request.POST, files=request.FILES)
-    #         if form.is_valid():
-    #             form.save()
-    #             mensaje = f'{self.model.__name__} registrado correctamente!'
-    #             error = 'No hay error!'
-    #             response = JsonResponse({'mensaje': mensaje, 'error': error})
-    #             response.status_code = 201
-    #             return response
-    #         else:
-    #             mensaje = f'{self.model.__name__} no se ha podido registrar!'
-    #             # print(form.errors)
-    #             error = form.errors
-    #             response = JsonResponse({'mensaje': mensaje, 'error': error})
-    #             response.status_code = 400
-    #             return response
-    #     return redirect('impuesto:lista_multa')
 
 
 class EditarMulta(AjaxUpdate, UpdateView):
@@ -110,27 +64,14 @@ class EliminarMulta(AjaxDelete, DeleteView):
     success_url = reverse_lazy('impuesto:lista_multa')
 
 
-class ListaImpuesto(ListView):
+# Clases impuesto
+class ListaImpuesto(AjaxList, ListView):
     model = Impuesto
     template_name = 'impuesto/impuesto/index.html'
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, *kwargs)
-
-    def post(self, request, *args, **kwargs):
-        data = {}
-        try:
-            action = request.POST['action']
-            if action == 'searchdata':
-                data = []
-                for i in Impuesto.objects.filter(estado=True):
-                    data.append(i.to_json())
-            else:
-                data['error'] = 'Ha ocurrido un error'
-        except Exception as e:
-            data['error'] = str(e)
-        return JsonResponse(data, safe=False)
 
 
 class EditarImpuesto(AjaxUpdate, UpdateView):
