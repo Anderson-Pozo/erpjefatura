@@ -42,6 +42,7 @@ function lista_contribuyentes(){
     destroy: true,
     deferRender: true,
     ordering: true,
+    buttons: [ 'copy', 'csv', 'excel' ],
     ajax: {
         url: window.location.pathname,
         type: 'POST',
@@ -55,7 +56,13 @@ function lista_contribuyentes(){
             "className":      'details-control',
             "orderable":      false,
             "data":           null,
-            "defaultContent": ''
+            "defaultContent": '',
+            // render: (data, type, row) =>{
+            //     let datos = new Object(data);
+            //     // console.log(datos);
+            //     // return `<button onclick="show_childs( ${datos})"></buttonon>`;
+            //     // return '<button onclick="show_childs(\'' + datos +'\')">aC</button>';
+            // }
         },
         { "data": "ruc"},
         { "data": "razon_social"},
@@ -97,24 +104,46 @@ function lista_contribuyentes(){
     ],
     initComplete: function(settings, json) {
         // alert('Datos cargados');
-    }
+    },
     });
+    $('#tableContribuyenteJuridico tbody').
+        on('click', 'td.details-control',
+        function () {
+            let tr = $(this).closest('tr');
+            let row = table.row( tr );
 
-    $('#tableContribuyenteJuridico tbody').on('click', 'td.details-control', function () {
-        let tr = $(this).closest('tr');
-        let row = table.row( tr );
-
-        if ( row.child.isShown() ) {
-            // This row is already open - close it
-            row.child.hide();
-            tr.removeClass('shown');
-        }
-        else {
-            // Open this row
-            row.child( format(row.data()) ).show();
-            tr.addClass('shown');
-        }
+            if ( row.child.isShown() ) {
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                row.child( format(row.data()) ).show();
+                // console.log(row.data());
+                tr.addClass('shown');
+            }
     } );
+}
+
+function show_childs(variable) {
+    console.log(JSON.parse(variable));
+
+    // let table = $('#tableContribuyenteJuridico').DataTable();
+    // $('#tableContribuyenteJuridico tbody').
+    //     on('click', 'td.details-control',
+    //     function () {
+    //         let tr = $(this).closest('tr');
+    //         let row = table.row( tr );
+    //
+    //         if ( row.child.isShown() ) {
+    //             row.child.hide();
+    //             tr.removeClass('shown');
+    //         }
+    //         else {
+    //             row.child( format(row.data()) ).show();
+    //             console.log(row.data());
+    //             tr.addClass('shown');
+    //         }
+    // } );
 }
 
 function crear_contribuyente_juridico() {
@@ -139,7 +168,6 @@ function crear_contribuyente_juridico() {
     })
 }
 
-
 function editar_contribuyente_juridico() {
     let data = new FormData($('#form_edition_juridico').get(0));
     $.ajax({
@@ -149,16 +177,17 @@ function editar_contribuyente_juridico() {
         cache: false,
         processData: false,
         contentType: false,
-        success: function (response) {
+        success: (response) => {
             show_notification_success(response.message);
             close_modal_edition();
-            lista_contribuyentes();
+            // lista_contribuyentes();
+            $(document).ready( () => lista_contribuyentes());
+            // setTimeout(window.location.reload(),1000);
+            // window.location.reload();
         },
-        error: function (error) {
+        error: (error) => {
             show_notification_error(error.responseJSON.message);
             show_errors_edition(error);
-            // show_errors_modal_edition(error);
-            // console.log(error.responseJSON.message);
         }
     })
 }
@@ -181,6 +210,4 @@ function eliminar_contribuyente(pk) {
     });
 }
 
-$(document).ready(function () {
-    lista_contribuyentes();
-})
+$(document).ready(() => lista_contribuyentes());
