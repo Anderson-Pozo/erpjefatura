@@ -59,7 +59,7 @@ function lista_vencimiento(){
         }
     ],
     initComplete: function(settings, json) {
-         alert('Datos cargados');
+         // alert('Datos cargados');
     }
     });
 }
