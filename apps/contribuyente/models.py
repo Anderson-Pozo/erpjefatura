@@ -57,6 +57,12 @@ class Contribuyente(models.Model):
     #         # return object.juridico.razon_social
     #         return contribuyente.juridico.razon_social
 
+    def get_nombre(self, ruc):
+        if self.tipocontribuyente.id == 1:
+            return Natural.objects.get(ruc=ruc).get_nombre()
+        else:
+            return Juridico.objects.get(ruc=ruc).get_nombre()
+
     class Meta:
         db_table = "contribuyente"
 
@@ -74,6 +80,9 @@ class Natural(AuditMixin, Contribuyente):
     nombres = models.CharField('Nombres', max_length=50, blank=False, null=True)
     apellidos = models.CharField('Apellidos', max_length=50, blank=False, null=True)
 
+    def get_nombre(self):
+        return '{} {}'.format(self.nombres, self.apellidos)
+
 
 class Juridico(AuditMixin, Contribuyente):
     razon_social = models.CharField('Razon social', max_length=50, blank=False, null=True)
@@ -83,5 +92,5 @@ class Juridico(AuditMixin, Contribuyente):
     telefono_representante = models.CharField('Teléfono del representante', max_length=10, blank=True, null=True)
     correo_representante = models.EmailField('Correo del representante', max_length=50, blank=True, null=True)
 
-    # class Meta:
-    #     db_table = 'sociedad'
+    def get_nombre(self):
+        return '{}'.format(self.razon_social)

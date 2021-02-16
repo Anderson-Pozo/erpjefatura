@@ -24,6 +24,11 @@ class Patente(AuditMixin, models.Model):
         item['tipocontribuyente'] = self.contribuyente.tipocontribuyente.nombre
         item['nombre_establecimiento'] = self.establecimiento.nombre
         item['total_patrimonio'] = self.establecimiento.total_patrimonio
+        item['contr'] = self.contribuyente.get_nombre(self.contribuyente.ruc)
+        # if self.contribuyente.tipocontribuyente == 1:
+        #     item['nombre_contr'] = self.contribuyente.natural.get_nombre()
+        # else:
+        #     item['nombre_contr'] = self.contribuyente.juridico.get_nombre()
         return item
 
     class Meta:

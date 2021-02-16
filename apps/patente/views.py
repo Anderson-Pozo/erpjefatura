@@ -3,8 +3,8 @@ from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse_lazy
-from django.views.generic import ListView, TemplateView, CreateView
-from django.http import HttpResponse, JsonResponse
+from django.views.generic import ListView, TemplateView, CreateView, View
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from apps.contribuyente.models import Natural, Juridico, Contribuyente
 from apps.establecimiento.models import Establecimiento
 from apps.contribuyente.forms import ContribuyenteNaturalForm as NaturalForm, ContribuyenteJuridicoForm as JuridicoForm
@@ -12,6 +12,12 @@ from apps.establecimiento.forms import EstablecimientoForm
 from apps.utils.ajax import AjaxList
 from .models import Patente, DetallePatente
 from .forms import PatenteForm
+
+import os
+from django.conf import settings
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.contrib.staticfiles import finders
 
 
 class ListaCatastro(AjaxList, ListView):
@@ -100,3 +106,22 @@ class CrearPatente(CreateView):
     form_class = PatenteForm
     template_name = 'patente/apertura/paso3_detalle.html'
     success_url = reverse_lazy('patente:crear_natural')
+
+
+class ReportDeclaracion(View):
+    def get(self, request, *args, **kwargs):
+        try:
+            template = get_template('patente/reportes/declaracion_report.html')
+            context = {
+                'patente': Patente.objects.get(pk=self.kwargs['pk'])
+            }
+            html = template.render(context)
+            response = HttpResponse(content_type='application/pdf')
+            # response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+            pisa_status = pisa.CreatePDF(
+                html, dest=response)
+            return response
+        except:
+            pass
+        return HttpResponseRedirect(reverse_lazy('patente:lista_catastro'))
+

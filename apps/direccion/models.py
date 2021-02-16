@@ -48,7 +48,7 @@ class Direccion(AuditMixin, models.Model):
         return self.calle_principal + ' y ' + self.calle_secundaria
 
     def get_all_direccion(self):
-        return self.barrio.nombre + ' , ' + self.calle_principal + ' y ' + self.calle_secundaria
+        return 'Barrio ' + self.barrio.nombre + ', calle ' + self.calle_principal + ' y ' + self.calle_secundaria
 
     class Meta:
         db_table = "direccion"

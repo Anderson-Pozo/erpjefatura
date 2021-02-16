@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Nombres o razón social: {{ patente.contribuyente.juridico.razon_social }}</h2>
+<h2>Número de patente: {{ patente.numero_patente }}</h2>
+<h2>RUC Contribuyente: {{ patente.contribuyente.ruc }}</h2>
+<h2>Establecimiento: {{ patente.establecimiento.nombre }}</h2>
+<h2>Dirección: {{ patente.establecimiento.direccion.get_all_direccion }}</h2>
+<h2>Tipo de actividad: {{ patente.establecimiento.tipo_actividad }}</h2>
+<h2>Monto de capital: {{ patente.establecimiento.total_patrimonio }}</h2>
+<h2>Fecha de inicio actividad: {{ patente.establecimiento.fecha_inicio_actividad }}</h2>
+<h2>Obligado a llevar contabilidad: {{ patente.contribuyente.tipocontribuyente.obligado_contabilidad }}</h2>
+</body>
+</html>
