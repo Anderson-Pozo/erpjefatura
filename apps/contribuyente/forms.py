@@ -5,7 +5,8 @@ from .models import Natural, Juridico, TipoContribuyente
 class ContribuyenteNaturalForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['tipocontribuyente'].queryset = TipoContribuyente.objects.all()
+        self.fields['tipocontribuyente'].initial = TipoContribuyente.objects.get(id=1)
+        # self.fields['contribuyente'].initial = Contribuyente.objects.last()
 
     class Meta:
         model = Natural
@@ -94,11 +95,11 @@ class ContribuyenteNaturalForm(forms.ModelForm):
                     'placeholder': 'Ingrese el teléfono convencional',
                 }
             ),
-            'tipocontribuyente': forms.TextInput(
+            'tipocontribuyente': forms.Select(
                 attrs={
                     'class': 'form-control',
-                    'value': TipoContribuyente.objects.first(),
-                    'readonly': True
+                    'required': True,
+                    'disabled': True
                 }
             )
         }
@@ -107,7 +108,7 @@ class ContribuyenteNaturalForm(forms.ModelForm):
 class ContribuyenteJuridicoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['tipocontribuyente'].queryset = TipoContribuyente.objects.all()
+        self.fields['tipocontribuyente'].initial = TipoContribuyente.objects.get(id=2)
 
     class Meta:
         model = Juridico
@@ -170,6 +171,8 @@ class ContribuyenteJuridicoForm(forms.ModelForm):
             'tipocontribuyente': forms.Select(
                 attrs={
                     'class': 'form-control',
+                    'required': True,
+                    'disabled': True
                 }
             ),
             'cedula_representante': forms.TextInput(

@@ -39,15 +39,15 @@ class PatenteForm(forms.ModelForm):
             'contribuyente': forms.Select(
                 attrs={
                     'class': 'form-control',
-                    'required': True,
-                    'disabled': True
+                    # 'required': True,
+                    'readonly': True
                 }
             ),
             'establecimiento': forms.Select(
                 attrs={
                     'class': 'form-control',
-                    'required': True,
-                    'disabled': True
+                    # 'required': True,
+                    'readonly': True
                     # 'value': Establecimiento.objects.last().id,
                 }
             ),

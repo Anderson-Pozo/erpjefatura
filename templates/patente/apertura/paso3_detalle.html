@@ -6,6 +6,7 @@
 
 {% block body_wizard %}
 <form id="form_patente" action="{% url 'patente:crear_patente' %}" method="POST">
+    {% csrf_token %}
     {% if form.errors %}
         {% for field in form %}
             {% for error in field.errors %}
