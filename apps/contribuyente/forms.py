@@ -99,7 +99,7 @@ class ContribuyenteNaturalForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control',
                     'required': True,
-                    'disabled': True
+                    'readonly': True
                 }
             )
         }
@@ -172,7 +172,7 @@ class ContribuyenteJuridicoForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control',
                     'required': True,
-                    'disabled': True
+                    'readonly': True
                 }
             ),
             'cedula_representante': forms.TextInput(
