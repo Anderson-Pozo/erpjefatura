@@ -13,6 +13,7 @@ class Patente(AuditMixin, models.Model):
     """
     id = models.AutoField(primary_key=True)
     numero_patente = models.IntegerField('Número de patente', blank=True, null=True)
+    fecha = models.DateField('Fecha', blank=True, null=True)
     exonerada = models.BooleanField('Patente exonerada', blank=True, null=True, default=False)
     suspendida = models.BooleanField('Patente suspendida', blank=True, null=True, default=False)
     contribuyente = models.ForeignKey(Contribuyente, on_delete=models.CASCADE)

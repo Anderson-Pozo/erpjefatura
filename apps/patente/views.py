@@ -104,8 +104,12 @@ class CrearEstablecimiento(CreateView):
 class CrearPatente(CreateView):
     model = Patente
     form_class = PatenteForm
-    template_name = 'patente/apertura/paso3_detalle.html'
+    template_name = 'patente/apertura/paso3_patente.html'
     success_url = reverse_lazy('patente:crear_natural')
+
+
+class RevisionDeclaracion(View):
+    pass
 
 
 class ReportDeclaracion(View):

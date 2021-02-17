@@ -5,8 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-<h2>Nombres o razón social: {{ patente.contribuyente.juridico.razon_social }}</h2>
-<h2>Número de patente: {{ patente.numero_patente }}</h2>
+{#<h1>Noooo {{ patente.contribuyente.tipocontribuyente.id }}</h1>#}
+{% if patente.contribuyente.tipocontribuyente.id == 1 %}
+    <h1>Nombres o razón social: {{ patente.contribuyente.natural.nombres }}</h1>
+{% else %}
+    <h1>Nombres o razón social: {{ patente.contribuyente.juridico.razon_social }}</h1>
+{% endif %}
+<h1>Número de patente: {{ patente.numero_patente }}</h1>
 <h2>RUC Contribuyente: {{ patente.contribuyente.ruc }}</h2>
 <h2>Establecimiento: {{ patente.establecimiento.nombre }}</h2>
 <h2>Dirección: {{ patente.establecimiento.direccion.get_all_direccion }}</h2>
