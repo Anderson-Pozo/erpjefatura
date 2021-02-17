@@ -37,6 +37,11 @@ TIPO_VENTA = (
     ('Venta al por menor', 'Venta al por menor '),
     ('Venta al por mayor y menor', 'Venta al por mayor y menor'),
 )
+SITUACION_LEGAL = (
+    ('Propio', 'Propio'),
+    ('Arrendado', 'Arrendado'),
+    ('Anticresis', 'Anticresis'),
+)
 
 
 class Establecimiento(AuditMixin, models.Model):
@@ -51,6 +56,7 @@ class Establecimiento(AuditMixin, models.Model):
     total_patrimonio = models.FloatField('Total de patrimonio', blank=False, null=True)
     tipo_venta = models.CharField('Tipo de venta', max_length=35, blank=False, null=True, choices=TIPO_VENTA)
     estado = models.BooleanField('Activo/Inactivo', blank=True, null=True, default=True)
+    situacion_legal = models.CharField('Situación legal', max_length=15, blank=True, null=True, choices=SITUACION_LEGAL)
     tipo_actividad = models.ForeignKey(TipoActividad, on_delete=models.CASCADE)
     direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
 

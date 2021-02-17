@@ -1,0 +1,91 @@
+{% extends 'patente/layout/wizard_step.html' %}
+
+{% block title %}<title>Formulario declaración</title>{% endblock %}
+
+{% block link_paso4 %}nav-item nav-link active{% endblock %}
+
+{% block body_wizard %}
+    <div class="row justify-content-center">
+        <div class="col-xl-8">
+            <h3 class="text-primary">Formulario de declaración de patente</h3>
+            <h5 class="card-title">Revise la información de la patente</h5>
+
+            <div class="row small text-muted">
+                <div class="col-sm-6 text-truncate">
+                    <em>Número de patente: {{ patente.numero_patente }}</em>
+                </div>
+                <div class="col-sm-6 text-truncate">
+                    <em>Fecha: {{ patente.fecha }}</em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row small text-muted">
+                <div class="col-sm-6 text-truncate">
+                    <em>RUC contribuyente: {{ patente.contribuyente.ruc }}</em>
+                </div>
+            </div>
+            <div class="row small text-muted">
+                {% if patente.contribuyente.tipocontribuyente.id == 1 %}
+                    <div class="col-sm-12 text-truncate">
+                        <em>Nombres o razón social: {{ patente.contribuyente.natural.nombres }}</em>
+                    </div>
+                {% else %}
+                    <div class="col-sm-12 text-truncate">
+                        <em>Nombres o razón social: {{ patente.contribuyente.juridico.razon_social }}</em>
+                    </div>
+                {% endif %}
+            </div>
+            <hr class="my-4"/>
+            <div class="row small text-muted">
+                <div class="col-sm-12 text-truncate">
+                    <em>Establecimiento: {{ patente.establecimiento.nombre }}</em>
+                </div>
+            </div>
+            <div class="row small text-muted">
+                <div class="col-sm-12 text-truncate">
+                    <em>Dirección: {{ patente.establecimiento.direccion.get_all_direccion }}</em>
+                </div>
+            </div>
+            <div class="row small text-muted">
+                <div class="col-sm-6 text-truncate">
+                    <em>Tipo actividad: {{ patente.establecimiento.tipo_actividad }}</em>
+                </div>
+                <div class="col-sm-6 text-truncate">
+                    <em>Capital: {{ patente.establecimiento.total_patrimonio }} $</em>
+                </div>
+            </div>
+            <div class="row small text-muted">
+                <div class="col-sm-12 text-truncate">
+                    <em>Fecha inicio actividad: {{ patente.establecimiento.fecha_inicio_actividad }}</em>
+                </div>
+            </div>
+            <div class="row small text-muted">
+                <div class="col-sm-12 text-truncate">
+                    <em>Situación legal: {{ patente.establecimiento.situacion_legal }}</em>
+                </div>
+            </div>
+            <div class="row small text-muted">
+                {% if  patente.contribuyente.tipocontribuyente.obligado_contabilidad %}
+                    <div class="col-sm-12 text-truncate">
+                        <em>Obligado llevar contabilidad: SI</em>
+                    </div>
+                {% else %}
+                    <div class="col-sm-12 text-truncate">
+                        <em>Obligado llevar contabilidad: NO</em>
+                    </div>
+                {% endif %}
+            </div>
+            <hr class="my-4"/>
+            <div class="d-flex justify-content-between">
+                <a class="btn btn-primary-soft btn-flat"
+                    target="_blank"
+                    href="{% url 'patente:report_declaracion' patente.id %}">
+                    <i class="fas fa-print"></i> Imprimir formulario
+                </a>
+                <button class="btn btn-primary" type="button">Submit</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block progress %} width: 100% {% endblock %}

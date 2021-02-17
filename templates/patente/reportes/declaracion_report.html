@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Imprimir formulario</title>
 </head>
 <body>
-{#<h1>Noooo {{ patente.contribuyente.tipocontribuyente.id }}</h1>#}
+<h1>Fecha: {{ patente.fecha }}</h1>
 {% if patente.contribuyente.tipocontribuyente.id == 1 %}
     <h1>Nombres o razón social: {{ patente.contribuyente.natural.nombres }}</h1>
 {% else %}
@@ -17,6 +17,7 @@
 <h2>Dirección: {{ patente.establecimiento.direccion.get_all_direccion }}</h2>
 <h2>Tipo de actividad: {{ patente.establecimiento.tipo_actividad }}</h2>
 <h2>Monto de capital: {{ patente.establecimiento.total_patrimonio }}</h2>
+<h2>Situación legal: {{ patente.establecimiento.situacion_legal }}</h2>
 <h2>Fecha de inicio actividad: {{ patente.establecimiento.fecha_inicio_actividad }}</h2>
 <h2>Obligado a llevar contabilidad: {{ patente.contribuyente.tipocontribuyente.obligado_contabilidad }}</h2>
 </body>

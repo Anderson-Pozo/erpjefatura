@@ -105,11 +105,32 @@ class CrearPatente(CreateView):
     model = Patente
     form_class = PatenteForm
     template_name = 'patente/apertura/paso3_patente.html'
-    success_url = reverse_lazy('patente:crear_natural')
+    success_url = reverse_lazy('patente:revision_declaracion')
 
 
-class RevisionDeclaracion(View):
-    pass
+# class RevisionDeclaracion(View):
+#     def get(self, request, *args, **kwargs):
+#         try:
+#             template = get_template('patente/apertura/paso4_revision.html')
+#             context = {
+#                 'patente': Patente.objects.last()
+#             }
+#             html = template.render(context)
+#             response = HttpResponse(html)
+#             return response
+#         except:
+#             pass
+#         return HttpResponseRedirect(reverse_lazy('patente:lista_catastro'))
+
+
+class RevisionDeclaracion(TemplateView):
+
+    template_name = "patente/apertura/paso4_revision.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['patente'] = Patente.objects.last()
+        return context
 
 
 class ReportDeclaracion(View):

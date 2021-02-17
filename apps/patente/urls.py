@@ -1,7 +1,7 @@
 from django.urls import path, re_path
 from .views import ListaCatastro, CrearContribuyente, \
     CrearNatural, CrearJuridico, CrearEstablecimiento, CrearPatente, \
-    ReportDeclaracion
+    ReportDeclaracion, RevisionDeclaracion
 
 urlpatterns = [
     path('lista_catastro/', ListaCatastro.as_view(), name='lista_catastro'),
@@ -9,5 +9,6 @@ urlpatterns = [
     path('crear_contribuyente/juridico/', CrearJuridico.as_view(), name='crear_juridico'),
     path('crear_establecimiento/', CrearEstablecimiento.as_view(), name='crear_establecimiento'),
     path('crear_patente/', CrearPatente.as_view(), name='crear_patente'),
+    path('revision_declaracion/', RevisionDeclaracion.as_view(), name='revision_declaracion'),
     path('report_declaracion/<int:pk>/', ReportDeclaracion.as_view(), name='report_declaracion')
 ]
