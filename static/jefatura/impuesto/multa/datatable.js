@@ -1,81 +1,88 @@
-function lista_multa(){
+function lista_multa() {
     $('#tableMulta').DataTable({
-    language: {
-        "decimal": "",
-        "emptyTable": "No hay información",
-        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-        "infoPostFix": "",
-        "thousands": ",",
-        "lengthMenu": "Mostrar _MENU_ entradas",
-        "loadingRecords": "Cargando...",
-        "processing": "Procesando...",
-        "search": "Buscar:",
-        "zeroRecords": "Sin resultados encontrados",
-        "paginate": {
-            "first": "Primero",
-            "last": "Último",
-            "next": "Siguiente",
-            "previous": "Anterior",
+        language: {
+            'url': 'https://raw.githubusercontent.com/Jhon-Paillacho/ERP-estaticos/main/language.json'
         },
-    },
-    responsive: true,
-    autoWidth: true,
-    // scrollX: true,
-    destroy: true,
-    deferRender: true,
-    ordering: true,
-    ajax: {
-        url: window.location.pathname,
-        type: 'POST',
-        data: {
-            'action': 'searchdata'
-        }, // parametros
-        dataSrc: ""
-    },
-    columns: [
-        { "data": "fecha"},
-        { "data": "porcentaje"},
-        { "data": "acciones"},
-    ],
+        dom: "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-12 col-md-5'li><'col-sm-12 col-md-7'p>>",
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                text: 'Exportar Excel <i class="fas fa-file-excel"></i>',
+                titleAttr: 'Excel',
+                className: 'btn btn-green btn-flat btn-xs'
+            },
+            {
+                extend: 'pdfHtml5',
+                text: 'Exportar PDF <i class="fas fa-file-pdf"></i>',
+                titleAttr: 'PDF',
+                className: 'btn btn-red btn-flat btn-xs'
+            },
+            {
+                extend: 'print',
+                text: 'Imprimir <i class="fas fa-print"></i>',
+                titleAttr: 'Imprimir',
+                className: 'btn btn-teal btn-flat btn-xs'
+            },
+            // 'excel', 'pdf', 'print'
+        ],
+        responsive: true,
+        autoWidth: true,
+        // scrollX: true,
+        destroy: true,
+        deferRender: true,
+        ordering: true,
+        ajax: {
+            url: window.location.pathname,
+            type: 'POST',
+            data: {
+                'action': 'searchdata'
+            }, // parametros
+            dataSrc: ""
+        },
+        columns: [
+            {"data": "fecha"},
+            {"data": "porcentaje"},
+            {"data": "acciones"},
+        ],
 
         columnDefs: [
-        //     {
-        //         targets: [-1],
-        //         class: 'text-center',
-        //         orderable: false,
-        //         render: function (data, type, row) {
-        //             let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2">' +
-        //                 '<i class="fas fa-edit"></i>' +
-        //                 '</button>';
-        //             buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange">' +
-        //                 '<i class="fas fa-trash"></i>' +
-        //                 '</button>';
-        //             return buttons;
-        //         }
-        //     },
-        // ],
-        {
-            targets: [-1],
-            class: 'text-center',
-            orderable: false,
-            render: function (data, type, row) {
-                let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2"' +
-                                ' onclick="open_modal_edition(\'/impuesto/multa/editar/' + row.id +'/\')">' +
-                                '<i class="fas fa-edit"></i>' +
-                                '</button>';
-                buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange" ' +
-                            ' onclick="open_modal_elimination(\'/impuesto/multa/eliminar/' + row.id +'/\')">' +
-                            '<i class="fas fa-trash"></i>' +
-                            '</button>';
-                return buttons;
+            //     {
+            //         targets: [-1],
+            //         class: 'text-center',
+            //         orderable: false,
+            //         render: function (data, type, row) {
+            //             let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2">' +
+            //                 '<i class="fas fa-edit"></i>' +
+            //                 '</button>';
+            //             buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange">' +
+            //                 '<i class="fas fa-trash"></i>' +
+            //                 '</button>';
+            //             return buttons;
+            //         }
+            //     },
+            // ],
+            {
+                targets: [-1],
+                class: 'text-center',
+                orderable: false,
+                render: function (data, type, row) {
+                    let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2"' +
+                        ' onclick="open_modal_edition(\'/impuesto/multa/editar/' + row.id + '/\')">' +
+                        '<i class="fas fa-edit"></i>' +
+                        '</button>';
+                    buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange" ' +
+                        ' onclick="open_modal_elimination(\'/impuesto/multa/eliminar/' + row.id + '/\')">' +
+                        '<i class="fas fa-trash"></i>' +
+                        '</button>';
+                    return buttons;
+                }
             }
+        ],
+        initComplete: function (settings, json) {
+            // alert('Datos cargados');
         }
-    ],
-    initComplete: function(settings, json) {
-        // alert('Datos cargados');
-    }
     });
 }
 
@@ -132,7 +139,7 @@ function eliminar_multa(pk) {
         data: {
             csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
         },
-        url: '/impuesto/multa/eliminar/'+ pk +'/',
+        url: '/impuesto/multa/eliminar/' + pk + '/',
         type: 'post',
         success: function (response) {
             show_notification_success(response.message);
