@@ -43,7 +43,7 @@ function lista_catastro() {
         },
         columns: [
             {"data": "ruc"},
-            // { "data": "razon_social"},
+            { "data": "nombre_contribuyente"},
             {"data": "tipocontribuyente"},
             {"data": "nombre_establecimiento"},
             {"data": "total_patrimonio"},
