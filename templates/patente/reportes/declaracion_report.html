@@ -2,22 +2,149 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Imprimir formulario</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin-top: 5.5cm;
+            margin-left: 2cm;
+            margin-right: 2cm;
+        }
+
+        .fecha {
+            text-align: left;
+            margin-left: 1.5cm;
+            text-transform: uppercase;
+        }
+
+        .ruc {
+            margin-left: 7.5cm;
+            padding-top: 2px;
+        }
+
+        .direccion {
+            margin-left: 4.5cm;
+        }
+
+        .row-actividad {
+            margin-left: 5cm;
+        }
+
+        .row-capital {
+            margin-left: 8cm;
+        }
+
+        .row-situacion {
+            margin-left: 7cm;
+        }
+
+        .row-fecha {
+            margin-left: 9cm;
+        }
+
+        .row-contabilidad {
+            margin-left: 8cm;
+        }
+
+        .activos {
+            margin-left: 5cm;
+        }
+
+        p {
+            font-size: 15px;
+        }
+    </style>
 </head>
 <body>
-{#<h1>Noooo {{ patente.contribuyente.tipocontribuyente.id }}</h1>#}
-{% if patente.contribuyente.tipocontribuyente.id == 1 %}
-    <h1>Nombres o razón social: {{ patente.contribuyente.natural.nombres }}</h1>
-{% else %}
-    <h1>Nombres o razón social: {{ patente.contribuyente.juridico.razon_social }}</h1>
-{% endif %}
-<h1>Número de patente: {{ patente.numero_patente }}</h1>
-<h2>RUC Contribuyente: {{ patente.contribuyente.ruc }}</h2>
-<h2>Establecimiento: {{ patente.establecimiento.nombre }}</h2>
-<h2>Dirección: {{ patente.establecimiento.direccion.get_all_direccion }}</h2>
-<h2>Tipo de actividad: {{ patente.establecimiento.tipo_actividad }}</h2>
-<h2>Monto de capital: {{ patente.establecimiento.total_patrimonio }}</h2>
-<h2>Fecha de inicio actividad: {{ patente.establecimiento.fecha_inicio_actividad }}</h2>
-<h2>Obligado a llevar contabilidad: {{ patente.contribuyente.tipocontribuyente.obligado_contabilidad }}</h2>
+<div class="fecha">
+    <p>Fecha: {{ patente.fecha }}</p>
+    {% if patente.contribuyente.tipocontribuyente.id == 1 %}
+        <p>Nombres o razón social: {{ patente.contribuyente.natural.nombres }}</p>
+    {% else %}
+        <p>Nombres o razón social: {{ patente.contribuyente.juridico.razon_social }}</p>
+    {% endif %}
+</div>
+<br>
+<div class="ruc">
+    <p>Nº cédula: {{ patente.contribuyente.ruc }}</p>
+    <p>RUC Contribuyente: {{ patente.contribuyente.ruc }}</p>
+    <p>Nacionalidad: Ecuatoriana</p>
+</div>
+
+<div class="direccion">
+    <p>Dirección: {{ patente.establecimiento.direccion.get_all_direccion }}</p>
+    <p style="padding-top: 20px">
+        Establecimiento: {{ patente.establecimiento.nombre }}
+    </p>
+</div>
+
+{#<p>Número de patente: {{ patente.numero_patente }}</p>#}
+<div class="row-actividad">
+    <p>
+        {{ patente.establecimiento.tipo_actividad }}
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp
+        2020
+    </p>
+</div>
+
+<div class="row-capital">
+    <p style="padding-top: 15px">
+        {{ patente.establecimiento.total_patrimonio }}
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        10250.25
+    </p>
+</div>
+
+<div class="row-situacion">
+    {% if patente.establecimiento.situacion_legal == 'Propio' %}
+        <p style="padding-top: 10px">
+            X
+        </p>
+    {% elif patente.establecimiento.situacion_legal == 'Arrendado' %}
+        <p style="padding-top: 10px">
+            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+            &nbsp;
+            X
+        </p>
+    {% else %}
+        <p style="padding-top: 10px">
+            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+            X
+        </p>
+    {% endif %}
+</div>
+
+<div class="row-fecha">
+    <p>Primera vez</p>
+    <p>{{ patente.establecimiento.fecha_inicio_actividad }}</p>
+</div>
+
+<div class="row-contabilidad">
+    {% if patente.contribuyente.tipocontribuyente.obligado_contabilidad %}
+        <p style="padding-top: 15px">
+            X
+        </p>
+    {% else %}
+        <p style="padding-top: 15px">
+            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+            X
+        </p>
+    {% endif %}
+</div>
+
+<div class="activos">
+    <p>1250 $</p>
+</div>
 </body>
 </html>

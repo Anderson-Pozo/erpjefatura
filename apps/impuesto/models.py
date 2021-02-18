@@ -35,7 +35,14 @@ class Impuesto(AuditMixin, models.Model):
     fraccion_basica = models.IntegerField('Fraccion basica', blank=False, null=True)
     fraccion_excedente = models.IntegerField('Fraccion excedente', blank=False, null=True)
     impuesto_fraccion_basica = models.IntegerField('Impuesto fraccion basica', blank=False, null=True)
-    porcentaje_fraccion_excedente = models.FloatField('Porcentaje fraccion excedente', blank=False, null=True)
+    porcentaje_fraccion_excedente = models.DecimalField(
+        'Porcentaje fraccion excedente',
+        decimal_places=3,
+        default=0.000,
+        max_digits=9,
+        blank=False,
+        null=True
+    )
     estado = models.BooleanField('Activo/Inactivo', blank=True, null=True, default=True)
 
     def to_json(self):
@@ -68,9 +75,14 @@ class Multa(AuditMixin, models.Model):
     """
     id = models.AutoField(primary_key=True)
     fecha = models.DateField('Fecha', blank=False, null=True)
-    # anio = models.CharField('Año', max_length=4, blank=False, null=True)
-    # mes = models.CharField('Mes', max_length=15, blank=False, null=True, choices=MESES)
-    porcentaje = models.FloatField('Porcentaje multa', blank=False, null=True)
+    porcentaje = models.DecimalField(
+        'Porcentaje multa',
+        decimal_places=5,
+        default=0.00000,
+        max_digits=9,
+        blank=False,
+        null=True
+    )
     estado = models.BooleanField('Activo/Inactivo', blank=True, null=True, default=True)
 
     def to_json(self):

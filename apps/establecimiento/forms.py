@@ -35,6 +35,9 @@ class EstablecimientoForm(forms.ModelForm):
             'tipo_venta': {
                 'required': 'El tipo de venta es obligatorio'
             },
+            'situacion_legal': {
+                'required': 'La situación legal es obligatoria'
+            },
         }
 
         widgets = {
@@ -81,6 +84,12 @@ class EstablecimientoForm(forms.ModelForm):
                 }
             ),
             'tipo_venta': forms.Select(
+                attrs={
+                    'class': 'form-control',
+                    'required': True,
+                }
+            ),
+            'situacion_legal': forms.Select(
                 attrs={
                     'class': 'form-control',
                     'required': True,
