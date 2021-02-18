@@ -40,10 +40,38 @@ class DetallePatente(AuditMixin, models.Model):
     id = models.AutoField(primary_key=True)
     zona = models.CharField('Zona urbana o rural', max_length=10, blank=True, null=True)
     fecha = models.DateField('Fecha de tramite', blank=True, null=True)
-    impuesto = models.FloatField('Impuesto', blank=True, null=True)
-    interes = models.FloatField('Interes', blank=True, null=True)
-    multa = models.FloatField('Multa', blank=True, null=True)
-    servicios_administrativos = models.FloatField('Servicios administrativos', blank=True, null=True)
+    impuesto = models.DecimalField(
+        'Impuesto',
+        decimal_places=2,
+        default=0.00,
+        max_digits=9,
+        blank=True,
+        null=True
+    )
+    interes = models.DecimalField(
+        'Interes',
+        decimal_places=2,
+        default=0.00,
+        max_digits=9,
+        blank=True,
+        null=True
+    )
+    multa = models.DecimalField(
+        'Multa',
+        decimal_places=2,
+        default=0.00,
+        max_digits=9,
+        blank=True,
+        null=True
+    )
+    servicios_administrativos = models.DecimalField(
+        'Servicios administrativos',
+        decimal_places=2,
+        default=0.00,
+        max_digits=9,
+        blank=True,
+        null=True
+    )
     patente = models.ForeignKey(Patente, on_delete=models.CASCADE)
 
     def to_json(self):
