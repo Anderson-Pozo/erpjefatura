@@ -20,7 +20,7 @@ class Plusvalia(AuditMixin, models.Model):
     precio_adquisicion = models.FloatField('Precio de adquisición', blank=True, null=True)
     diferencia_bruta = models.FloatField('Diferencia bruta', blank=True, null=True)
     rebaja_mejoras = models.FloatField('Rebaja por mejoras', blank=True, null=True)
-    diferenicia_neta = models.FloatField('Diferencia neta', blank=True, null=True)
+    diferencia_neta = models.FloatField('Diferencia neta', blank=True, null=True)
     tenencia = models.FloatField('Tenencia', blank=True, null=True)
     base_rebajar_moneda = models.FloatField('Base para rebajar moneda', blank=True, null=True)
     rebaja_desvalorizacion = models.FloatField('Rebaja por desvalorización', blank=True, null=True)
