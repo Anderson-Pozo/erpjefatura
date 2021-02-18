@@ -12,7 +12,7 @@ class CrearAlcabala(CreateView):
     model = Alcabala
     form_class =  AlcabalaForm
     template_name = 'alcabala/crear_alcabala.html'
-    success_url = reverse_lazy('establecimiento:lista_establecimiento')
+    success_url = reverse_lazy('establecimiento:lista_establecimientos')
 
     # @method_decorator(csrf_exempt)
     # def dispatch(self, request, *args, **kwargs):

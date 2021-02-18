@@ -46,17 +46,36 @@ class AlcabalaForm(forms.ModelForm):
         }
 
         widgets = {
+            'fecha': forms.DateInput(
+                format='%Y-%m-%d',
+                attrs={
+                    'class': 'form-control',
+                    'required': True,
+                    'type': 'date',
+                }
+            ),
+            'numero': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Ingrese el número',
+                    'required': True,
+                }
+            ),
             'vendedor': forms.Select(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Ingrese el vendedor',
                     'required': True,
                 }
             ),
             'comprador': forms.Select(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Ingrese el comprador',
+                    'required': True,
+                }
+            ),
+            'predio': forms.Select(
+                attrs={
+                    'class': 'form-control',
                     'required': True,
                 }
             ),
@@ -109,5 +128,6 @@ class AlcabalaForm(forms.ModelForm):
                     'required': True,
                 }
             ),
+
 
         }

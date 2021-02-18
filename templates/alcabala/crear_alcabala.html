@@ -46,6 +46,18 @@
                             <div class="form-row">
                                 <!-- Form Group (first name)-->
                                 <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="inputFirstName">Fecha</label>
+                                    {{ form.fecha }}
+                                </div>
+                                <!-- Form Group (last name)-->
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1" for="inputLastName">Número</label>
+                                    {{ form.numero }}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <!-- Form Group (first name)-->
+                                <div class="form-group col-md-6">
                                     <label class="small mb-1" for="inputFirstName">Propietario</label>
                                     {{ form.vendedor }}
                                 </div>
@@ -54,6 +66,10 @@
                                     <label class="small mb-1" for="inputLastName">Comprador</label>
                                     {{ form.comprador }}
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="small mb-1" for="callePrincipal">Clave catastral</label>
+                                {{ form.predio }}
                             </div>
                             <!-- Form Row        -->
                             <div class="form-group">
