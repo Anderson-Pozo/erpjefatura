@@ -49,6 +49,24 @@ class Impuesto(AuditMixin, models.Model):
         item = model_to_dict(self)
         return item
 
+    def calcular_impuesto(self, capital):
+        if 0 <= capital <= 600:
+            return 0
+        if 600 <= capital <= 800:
+            return 600
+        if 800 <= capital <= 1000:
+            return 800
+        if 1000 <= capital <= 1200:
+            return 1000
+        if 1200 <= capital <= 1500:
+            return 1200
+        if 1500 <= capital <= 3000:
+            return 1500
+        if capital > self.fraccion_basica:
+            return 'Es mayor'
+        else:
+            return 'Es menor'
+
     class Meta:
         db_table = "impuesto"
 

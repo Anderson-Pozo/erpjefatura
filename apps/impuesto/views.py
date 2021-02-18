@@ -85,3 +85,10 @@ class EliminarImpuesto(AjaxDelete, DeleteView):
     model = Impuesto
     template_name = 'impuesto/impuesto/eliminar.html'
     success_url = reverse_lazy('impuesto:lista_impuesto')
+
+
+# class test(ListView):
+#     model = Impuesto
+
+    # def get(self, request, *args, **kwargs):
+        # Impuesto.objects.get(fraccion_basica)
