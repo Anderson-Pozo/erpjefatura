@@ -47,13 +47,55 @@ class Alcabala(AuditMixin, models.Model):
     id = models.AutoField(primary_key=True)
     fecha = models.DateField('Fecha', blank=True, null=True)
     numero = models.IntegerField('Numero', blank=True, null=True)
-    descripcion_tramite = models.TextField('Descripcion del tramite',max_length=300 , blank=True, null=True)
-    valor_compra_venta = models.FloatField('Valor de la compra-venta', blank=True, null=True)
-    impuesto_alcabalas = models.FloatField('Impuesto de alacabalas', blank=True, null=True)
-    alcabalas_provinciales = models.FloatField('Alcabalas provinciales', blank=True, null=True)
-    fondos_escolares = models.FloatField('Fondos escolares', blank=True, null=True)
-    fondos_prevencion_riesgos = models.FloatField('Fondos de prevencion de riesgos', blank=True, null=True)
-    agua_potable = models.FloatField('Agua potable', blank=True, null=True)
+    descripcion_tramite = models.TextField('Descripcion del tramite', max_length=300, blank=True, null=True)
+    valor_compra_venta = models.DecimalField(
+        'Valor de la compra-venta',
+        decimal_places=2,
+        default=0.00,
+        max_digits=9,
+        blank=False,
+        null=True
+    )
+    impuesto_alcabalas = models.DecimalField(
+        'Impuesto de alacabalas',
+        decimal_places=2,
+        default=0.00,
+        max_digits=9,
+        blank=False,
+        null=True
+    )
+    alcabalas_provinciales = models.DecimalField(
+        'Alcabalas provinciales',
+        decimal_places=2,
+        default=0.00,
+        max_digits=9,
+        blank=False,
+        null=True
+    )
+    fondos_escolares = models.DecimalField(
+        'Fondos escolares',
+        decimal_places=2,
+        default=0.00,
+        max_digits=9,
+        blank=False,
+        null=True
+    )
+    fondos_prevencion_riesgos = models.DecimalField(
+        'Fondos de prevencion de riesgos',
+        decimal_places=2,
+        default=0.00,
+        max_digits=9,
+        blank=False,
+        null=True
+    )
+    agua_potable = models.DecimalField(
+        'Agua potable',
+        decimal_places=2,
+        default=0.00,
+        max_digits=9,
+        blank=False,
+        null=True
+    )
     comprador = models.ForeignKey(Comprador, on_delete=models.CASCADE)
     vendedor = models.ForeignKey(Vendedor, on_delete=models.CASCADE)
     predio = models.ForeignKey(Predio, on_delete=models.CASCADE)
