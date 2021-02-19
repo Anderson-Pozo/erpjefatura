@@ -2,6 +2,7 @@ from django.db import models
 from django.forms import model_to_dict
 from apps.contribuyente.models import Contribuyente
 from apps.establecimiento.models import Establecimiento
+from apps.impuesto.models import Impuesto
 from apps.auditoria.mixins import AuditMixin
 
 
@@ -77,6 +78,10 @@ class DetallePatente(AuditMixin, models.Model):
     def to_json(self):
         item = model_to_dict(self)
         return item
+
+    def calcular_impuesto(self):
+        for i in Impuesto.objects.all():
+            print(i)
 
     class Meta:
         db_table = "detalle_patente"

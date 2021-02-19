@@ -150,3 +150,6 @@ class ReportDeclaracion(View):
             pass
         return HttpResponseRedirect(reverse_lazy('patente:lista_catastro'))
 
+
+class Test(View):
+    d = DetallePatente.objects.get(patente__id=5)

@@ -67,6 +67,11 @@ class Impuesto(AuditMixin, models.Model):
         else:
             return 'Es menor'
 
+    def total_impuesto(self, capital):
+        diferencia = capital - self.fraccion_basica
+        suma = self.impuesto_fraccion_basica + (diferencia * self.porcentaje_fraccion_excedente)
+        return format(suma, '.2f')
+
     class Meta:
         db_table = "impuesto"
 
