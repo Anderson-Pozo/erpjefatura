@@ -1,8 +1,8 @@
 {% extends 'patente/layout/wizard_step.html' %}
 
-{% block title %}<title>Formulario declaración</title>{% endblock %}
+{% block title %}<title>Revisión formulario declaración</title>{% endblock %}
 
-{% block link_paso4 %}nav-item nav-link active{% endblock %}
+{% block link_paso3 %}nav-item nav-link active{% endblock %}
 
 {% block body_wizard %}
     <div class="row justify-content-center">
@@ -82,7 +82,7 @@
                     href="{% url 'patente:report_declaracion' patente.id %}">
                     <i class="fas fa-print"></i> Imprimir formulario
                 </a>
-                <button class="btn btn-primary" type="button">Submit</button>
+                <button class="btn btn-primary" type="button">Continuar</button>
             </div>
         </div>
     </div>

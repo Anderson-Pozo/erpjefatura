@@ -23,7 +23,13 @@ class TipoActividad(AuditMixin, models.Model):
     el negocio
     """
     id = models.AutoField(primary_key=True)
-    tipo_actividad = models.CharField('Tipo de actividad comercial', max_length=25, blank=False, null=True, choices=ACTIVIDAD)
+    tipo_actividad = models.CharField(
+        'Tipo de actividad comercial',
+        max_length=25,
+        blank=False,
+        null=True,
+        choices=ACTIVIDAD
+    )
 
     def __str__(self):
         return self.tipo_actividad
@@ -53,7 +59,14 @@ class Establecimiento(AuditMixin, models.Model):
     nombre = models.CharField('Nombre del establecimiento', max_length=50, blank=False, null=True)
     descripcion_actividad = models.TextField('Descripcion actividad comercial', max_length=300, blank=False, null=True)
     fecha_inicio_actividad = models.DateField('Fecha de inicio de actividad comercial', blank=False, null=True)
-    total_patrimonio = models.FloatField('Total de patrimonio', blank=False, null=True)
+    total_patrimonio = models.DecimalField(
+        'Total de patrimonio',
+        decimal_places=2,
+        default=0.00,
+        max_digits=10,
+        blank=False,
+        null=True
+    )
     tipo_venta = models.CharField('Tipo de venta', max_length=35, blank=False, null=True, choices=TIPO_VENTA)
     estado = models.BooleanField('Activo/Inactivo', blank=True, null=True, default=True)
     situacion_legal = models.CharField('Situación legal', max_length=15, blank=True, null=True, choices=SITUACION_LEGAL)

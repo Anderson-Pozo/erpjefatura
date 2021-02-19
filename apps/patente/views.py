@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse_lazy
@@ -11,7 +11,7 @@ from apps.contribuyente.forms import ContribuyenteNaturalForm as NaturalForm, Co
 from apps.establecimiento.forms import EstablecimientoForm
 from apps.utils.ajax import AjaxList
 from .models import Patente, DetallePatente
-from .forms import PatenteForm
+from .forms import PatenteForm, DetalleForm
 
 import os
 from django.conf import settings
@@ -124,8 +124,7 @@ class CrearPatente(CreateView):
 
 
 class RevisionDeclaracion(TemplateView):
-
-    template_name = "patente/apertura/paso4_revision.html"
+    template_name = "patente/apertura/paso3_revision_declaracion.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -151,5 +150,18 @@ class ReportDeclaracion(View):
         return HttpResponseRedirect(reverse_lazy('patente:lista_catastro'))
 
 
-# class Test(View):
-#     d = DetallePatente.objects.get(patente__id=5)
+class EspeciePatente(CreateView):
+    template_name = 'patente/especie/especie.html'
+    form_class = DetalleForm
+    success_url = reverse_lazy('patente:crear_patente')
+
+    def get_context_data(self, **kwargs):
+        context = {
+            'patente': Patente.objects.get(pk=self.kwargs['pk']),
+            'form': self.form_class,
+        }
+        return context
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.get_context_data())
+
