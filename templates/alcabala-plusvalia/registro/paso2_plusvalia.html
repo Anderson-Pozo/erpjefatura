@@ -1,0 +1,208 @@
+{% extends 'alcabala-plusvalia/layout/wizard_step.html' %}
+
+{% block title %}<title>Crear Plusvalia</title>{% endblock %}
+
+{% block link_paso2 %}nav-item nav-link active{% endblock %}
+
+{% block body_wizard %}
+    <br>
+    <form id="form_creation" action="{% url 'plusvalia:crear_plusvalia' %}"
+          method="POST">
+        {% csrf_token %}
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                {{ form.errors }}
+            </div>
+        {% endif %}
+        <!-- Form Row-->
+    <div class="form-row">
+            <!-- Form Group (first name)-->
+            <div class="form-group col-md-4">
+                <label class="small mb-1" for="inputFirstName">Número</label>
+                {{ form.numero }}
+            </div>
+        </div>
+        <div class="form-row">
+            <!-- Form Group (first name)-->
+            <div class="form-group col-md-6">
+                <label class="small mb-1" for="inputFirstName">Vendedor</label>
+                <input class="form-control" id="inputVendedor" type="text"
+                       placeholder="Ingresa el nombre del vendedor"/>
+            </div>
+            <!-- Form Group (last name)-->
+            <div class="form-group col-md-6">
+                <label class="small mb-1" for="inputLastName">Comprador</label>
+                <input class="form-control" id="inputComprador" type="text"
+                       placeholder="Ingresa el nombre del Comprador"/>
+            </div>
+        </div>
+        <div class="form-row">
+            <!-- Form Group (first name)-->
+            <div class="form-group col-md-6">
+                <label class="small mb-1" for="inputFirstName">Fecha</label>
+                {{ form.fecha_escritura }}
+            </div>
+            <!-- Form Group (last name)-->
+            <div class="form-group col-md-6">
+                <label class="small mb-1" for="inputLastName">Fecha</label>
+                {{ form.fecha_tramite }}
+            </div>
+        </div>
+        <div class="form-row">
+            <!-- Form Group (first name)-->
+            <div class="form-group col-md-6">
+                <label class="small mb-1" for="inputFirstName">valor</label>
+                {{ form.valor_escritura }}
+            </div>
+            <!-- Form Group (last name)-->
+            <div class="form-group col-md-6">
+                <label class="small mb-1" for="inputLastName">valor</label>
+                {{ form.valor_notaria }}
+            </div>
+        </div>
+        <div class="card-body p-4 p-md-5">
+            <!-- Invoice table-->
+            <div class="table-responsive">
+                <table class="table table-borderless mb-0">
+                    <thead class="border-bottom">
+                    <tr class="small text-uppercase text-muted">
+                        <th scope="col">Impuestos</th>
+                        <th class="text-right" colspan="4" scope="col">Montos</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Invoice item 1-->
+                    <tr class="border-bottom">
+                        <td>
+                            <div class="font-weight-bold">Precio de venta</div>
+                            <div class="small text-muted d-none d-md-block">
+                            </div>
+                        </td>
+                        <td class="text-right font-weight-bold" colspan="4">
+                            {{ form.precio_venta }}
+                        </td>
+                    </tr>
+                    <!-- Invoice item 2-->
+                    <tr class="border-bottom">
+                        <td>
+                            <div class="font-weight-bold">Precio de adquisicion</div>
+                            <div class="small text-muted d-none d-md-block">
+                            </div>
+                        </td>
+
+                        <td class="text-right font-weight-bold" colspan="4">
+                            {{ form.precio_adquisicion }}
+                        </td>
+                    </tr>
+                    <!-- Invoice item 3-->
+                    <tr class="border-bottom">
+                        <td>
+                            <div class="font-weight-bold">Diferencia Bruta</div>
+                            <div class="small text-muted d-none d-md-block">
+                            </div>
+                        </td>
+                        <td class="text-right font-weight-bold" colspan="4">
+                            {{ form.diferencia_bruta }}
+                        </td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td>
+                            <div class="font-weight-bold">Mejoras</div>
+                            <div class="small text-muted d-none d-md-block">
+                            </div>
+                        </td>
+                        <td class="text-right font-weight-bold" colspan="4">
+                            {{ form.rebaja_mejoras }}
+                        </td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td>
+                            <div class="font-weight-bold">Diferencia Neta</div>
+                            <div class="small text-muted d-none d-md-block">
+                            </div>
+                        </td>
+                        <td class="text-right font-weight-bold" colspan="4">
+                            {{ form.diferencia_neta }}
+                        </td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td>
+                            <div class="font-weight-bold">5% c/año de Tenencia</div>
+                            <div class="small text-muted d-none d-md-block">
+                            </div>
+                        </td>
+                        <td class="text-right font-weight-bold" colspan="4">
+                            {{ form.tenencia }}
+                        </td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td>
+                            <div class="font-weight-bold">Utilidad Imponible</div>
+                            <div class="small text-muted d-none d-md-block">
+                            </div>
+                        </td>
+                        <td class="text-right font-weight-bold" colspan="4">
+                            {{ form.base_rebajar_moneda }}
+                        </td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td>
+                            <div class="font-weight-bold">Rebaja por Desvalorización Moneda</div>
+                            <div class="small text-muted d-none d-md-block">
+                            </div>
+                        </td>
+                        <td class="text-right font-weight-bold" colspan="4">
+                            {{ form.rebaja_desvalorizacion }}
+                        </td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td>
+                            <div class="font-weight-bold">Base para rebajar por Desvalorización Moneda</div>
+                            <div class="small text-muted d-none d-md-block">
+                            </div>
+                        </td>
+                        <td class="text-right font-weight-bold" colspan="4">
+                            {{ form.utilidad_imponible }}
+                        </td>
+                    </tr>
+                    <!-- Invoice subtotal-->
+                    <tr>
+                        <td class="text-right pb-0" colspan="3">
+                            <div class="text-uppercase small font-weight-700 text-muted">Subtotal:</div>
+                        </td>
+                        <td class="text-right pb-0">
+                            <div class="h5 mb-0 font-weight-700">$,1925.00</div>
+                        </td>
+                    </tr>
+                    <!-- Invoice tax column-->
+                    <tr>
+                        <td class="text-right pb-0" colspan="3">
+                            <div class="text-uppercase small font-weight-700 text-muted">Tax (7%):</div>
+                        </td>
+                        <td class="text-right pb-0">
+                            <div class="h5 mb-0 font-weight-700">$134.75</div>
+                        </td>
+                    </tr>
+                    <!-- Invoice total-->
+                    <tr>
+                        <td class="text-right pb-0" colspan="3">
+                            <div class="text-uppercase small font-weight-700 text-muted">Total Amount Due:</div>
+                        </td>
+                        <td class="text-right pb-0">
+                            <div class="h5 mb-0 font-weight-700 text-green">$2059.75</div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit">
+                Guardar y continuar
+            </button>
+        </div>
+    </form>
+
+{% endblock %}
+
+{% block progress %} width: 50% {% endblock %}

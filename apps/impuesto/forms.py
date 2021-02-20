@@ -1,4 +1,5 @@
 from django import forms
+from datetime import datetime
 from .models import Multa, Impuesto, Vencimiento
 
 
@@ -31,6 +32,7 @@ class MultaForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control',
                     'required': True,
+                    'value': datetime.now().strftime('%Y-%m-%d'),
                     'type': 'date',
                 }
             ),

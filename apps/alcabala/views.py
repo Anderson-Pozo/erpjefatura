@@ -7,12 +7,20 @@ from apps.utils.ajax import AjaxList, AjaxCreate, AjaxUpdate, AjaxDelete
 from .forms import AlcabalaForm
 from .models import Alcabala
 
+class ListaAlcabala(AjaxList, ListView):
+    model = Alcabala
+    template_name = 'alcabala/index.html'
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, *kwargs)
+
 
 class CrearAlcabala(CreateView):
     model = Alcabala
     form_class =  AlcabalaForm
-    template_name = 'alcabala/crear_alcabala.html'
-    success_url = reverse_lazy('establecimiento:lista_establecimientos')
+    template_name = 'alcabala-plusvalia/registro/paso1_alcabala.html'
+    success_url = reverse_lazy('alcabala:lista_alcabala')
 
     # @method_decorator(csrf_exempt)
     # def dispatch(self, request, *args, **kwargs):

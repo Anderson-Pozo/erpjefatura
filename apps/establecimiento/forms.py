@@ -1,4 +1,5 @@
 from django import forms
+from datetime import datetime
 from .models import Establecimiento, TipoActividad
 from apps.direccion.models import Direccion
 
@@ -60,6 +61,7 @@ class EstablecimientoForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control',
                     'required': True,
+                    'value': datetime.now().strftime('%Y-%m-%d'),
                     'type': 'date',
                 }
             ),

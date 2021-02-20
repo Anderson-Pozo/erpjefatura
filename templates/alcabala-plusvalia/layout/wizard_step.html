@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block collapse_patente %}collapse show{% endblock %}
+
+{% block title %}<title>Crear alcabalas y plusvalias</title>{% endblock %}
+
+{% block iconheader %}
+<div class="page-header-icon"><i class="fas fa-people-arrows"></i></div>
+{% endblock %}
+
+{% block titleheader %} Alcabalas y Plusvalias {% endblock %}
+
+{%block subtitleheader %}
+    En esta seccion se realizará el ingreso de los datos del
+    alcabalas y plusvalias
+{% endblock %}
+
+{% block buttondate %} {%endblock %}
+
+{% block centralbody %}
+<div class="container mt-n10">
+  <!-- Wizard card example with navigation-->
+  <div class="card card-progress">
+    <div class="card-header border-bottom">
+      <!-- Wizard navigation-->
+      <div
+        class="nav nav-pills nav-justified flex-column flex-xl-row nav-wizard"
+        id="cardTab"
+        role="tablist"
+      >
+        <!-- Wizard navigation item 1-->
+        <a
+          class="{% block link_paso1 %}nav-item nav-link{% endblock %}"
+          id="wizard1-tab"
+          href="{% url 'alcabala:crear_alcabala' %}"
+          aria-controls="wizard1"
+          aria-selected="true"
+        >
+          <div class="wizard-step-icon">1</div>
+          <div class="wizard-step-text">
+            <div class="wizard-step-text-name">Alcabala</div>
+            <div class="wizard-step-text-details">Aviso de alcabala</div>
+          </div>
+        </a>
+        <!-- Wizard navigation item 2-->
+        <a
+          class="{% block link_paso2 %}nav-item nav-link{% endblock %}"
+          id="wizard2-tab"
+          href="{% url 'plusvalia:crear_plusvalia' %}"
+          aria-controls="wizard2"
+          aria-selected="true"
+        >
+          <div class="wizard-step-icon">2</div>
+          <div class="wizard-step-text">
+            <div class="wizard-step-text-name">Plusvalia</div>
+            <div class="wizard-step-text-details">
+              Liquidacion de Plusvalia
+            </div>
+          </div>
+        </a>
+        <!-- Wizard navigation item 3-->
+        <a
+          class="{% block link_paso3 %}nav-item nav-link{% endblock %}"
+          id="wizard3-tab"
+          href=""
+          aria-controls="wizard3"
+          aria-selected="true"
+        >
+          <div class="wizard-step-icon">3</div>
+          <div class="wizard-step-text">
+            <div class="wizard-step-text-name">Revisar e imprimir</div>
+            <div class="wizard-step-text-details">
+              Imprimir datos del aviso de alcabala
+            </div>
+          </div>
+        </a>
+        <!-- Wizard navigation item 4-->
+        <a
+          class="{% block link_paso4 %}nav-item nav-link{% endblock %}"
+          id="wizard4-tab"
+          href=""
+          aria-controls="wizard4"
+          aria-selected="true"
+        >
+          <div class="wizard-step-icon">4</div>
+          <div class="wizard-step-text">
+            <div class="wizard-step-text-name">Revisar e imprimir</div>
+            <div class="wizard-step-text-details">
+              Imprimir datos de la liquidación de plusvalia
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="tab-content" id="cardTabContent">
+        <div
+          class="tab-pane py-2 py-xl-3 fade show active"
+          id="wizard1"
+          role="tabpanel"
+          aria-labelledby="wizard1-tab"
+        >
+        <div class="row justify-content-center">
+            <div class="col-xxl-6 col-xl-10">
+              {% block body_wizard %}
+              <div class="text-black">
+                <h1>Text here</h1>
+              </div>
+              {% endblock %}
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="progress rounded-0">
+      <div
+        class="progress-bar bg-gradient-primary-to-secondary"
+        role="progressbar"
+        style="{% block progress %} width: 0% {% endblock %}"
+        aria-valuenow="25"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      ></div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extrajs %}
+
+{% endblock %}

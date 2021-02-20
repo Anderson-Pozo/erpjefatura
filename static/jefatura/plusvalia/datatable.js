@@ -1,38 +1,46 @@
 function format(d) {
     return '<table cellpadding="5" cellspacing="0" style="padding-left:50px; border: hidden">' +
         '<tr>' +
-        '<td>Descripción del tramite:</td>' +
-        '<td>' + d.descripcion_tramite + '</td>' +
+        '<td>Valor en la escritura:</td>' +
+        '<td>' + d.valor_escritura + '</td>' +
         '</tr>' +
         '<tr>' +
-        '<td>valor de la compra y venta:</td>' +
-        '<td>' + d.valor_compra_venta + '</td>' +
+        '<td>valor de notaria:</td>' +
+        '<td>' + d.valor_notaria + '</td>' +
         '</tr>' +
         '<tr>' +
-        '<td>Impuesto Alcabalas:</td>' +
-        '<td>' + d.impuesto_alcabalas + '</td>' +
+        '<td>Precio de adquisición:</td>' +
+        '<td>' + d.precio_adquisicion + '</td>' +
         '</tr>' +
         '<tr>' +
-        '<td>Alcabalas Provinciales:</td>' +
-        '<td>' + d.alcabalas_provinciales + '</td>' +
+        '<td>Rebaja por mejoras:</td>' +
+        '<td>' + d.rebaja_mejoras + '</td>' +
         '</tr>' +
         '<tr>' +
-        '<td>Fondos Escolares:</td>' +
-        '<td>' + d.fondos_escolares + '</td>' +
+        '<td>Diferencia neta:</td>' +
+        '<td>' + d.diferenicia_neta + '</td>' +
         '</tr>' +
         '<tr>' +
-        '<td>fondo de prevención de riesgos:</td>' +
-        '<td>' + d.fondos_prevencion_riesgos + '</td>' +
+        '<td>Valor de tenencia:</td>' +
+        '<td>' + d.tenencia + '</td>' +
         '</tr>' +
         '<tr>' +
-        '<td>Agua Potable:</td>' +
-        '<td>' + d.agua_potable + '</td>' +
+        '<td>Base para rebajar por Desvalorización Moneda:</td>' +
+        '<td>' + d.base_rebajar_moneda + '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>Rebaja por Desvalorización Moneda:</td>' +
+        '<td>' + d.rebaja_desvalorizacion + '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>Utilidad imponible:</td>' +
+        '<td>' + d.utilidad_imponible + '</td>' +
         '</tr>' +
         '</table>';
 }
 
-function lista_alcabala() {
-    let table = $('#tableAlcabala').DataTable({
+function lista_plusvalia() {
+   let table = $('#tablePlusvalia').DataTable({
         language: {
             'url': 'https://raw.githubusercontent.com/Jhon-Paillacho/ERP-estaticos/main/language.json'
         },
@@ -64,7 +72,7 @@ function lista_alcabala() {
         autoWidth: true,
         destroy: true,
         deferRender: true,
-        ordering: true,
+       ordering: true,
         ajax: {
             url: window.location.pathname,
             type: 'POST',
@@ -87,16 +95,17 @@ function lista_alcabala() {
                 // }
             },
             {"data": "numero"},
-            {"data": "fecha"},
+            {"data": "fecha_tramite"},
             {"data": "comprador"},
             {"data": "vendedor"},
+            {"data": "precio_venta"},
         ],
 
         initComplete: function (settings, json) {
             // alert('Datos cargados');
         }
     });
-    $('#tableAlcabala tbody').on('click', 'td.details-control',
+       $('#tablePlusvalia tbody').on('click', 'td.details-control',
         function () {
             let tr = $(this).closest('tr');
             let row = table.row(tr);
@@ -117,8 +126,7 @@ function show_childs(variable) {
 
 }
 
-// $(document).ready(function () {
-//     lista_alcabala();
-// })
 
-$(document).ready(() => lista_alcabala());
+$(document).ready(function () {
+    lista_plusvalia();
+})

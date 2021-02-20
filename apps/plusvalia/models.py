@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import model_to_dict
 from apps.alcabala.models import Alcabala
 from apps.auditoria.mixins import AuditMixin
 
@@ -103,6 +104,11 @@ class Plusvalia(AuditMixin, models.Model):
         null=True
     )
     alcabala = models.ForeignKey(Alcabala, on_delete=models.CASCADE)
+    def to_json(self):
+        item = model_to_dict(self)
+        item['comprador'] = '{} {}'.format(self.alcabala.comprador.nombres, self.alcabala.comprador.apellidos)
+        item['vendedor'] = '{} {}'.format(self.alcabala.vendedor.nombres, self.alcabala.vendedor.apellidos)
+        return item
 
     class Meta:
         db_table = "plusvalia"

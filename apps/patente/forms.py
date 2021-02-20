@@ -1,4 +1,5 @@
 from django import forms
+from datetime import datetime
 from .models import Patente, DetallePatente
 from apps.contribuyente.models import Contribuyente
 from apps.establecimiento.models import Establecimiento
@@ -33,6 +34,7 @@ class PatenteForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control',
                     'required': True,
+                    'value': datetime.now().strftime('%Y-%m-%d'),
                     'type': 'date',
                 }
             ),

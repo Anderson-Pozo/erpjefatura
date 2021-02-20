@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import model_to_dict
 from apps.predio.models import Predio
 from apps.auditoria.mixins import AuditMixin
 
@@ -99,6 +100,12 @@ class Alcabala(AuditMixin, models.Model):
     comprador = models.ForeignKey(Comprador, on_delete=models.CASCADE)
     vendedor = models.ForeignKey(Vendedor, on_delete=models.CASCADE)
     predio = models.ForeignKey(Predio, on_delete=models.CASCADE)
+
+    def to_json(self):
+        item = model_to_dict(self)
+        item['comprador'] = '{} {}'.format(self.comprador.nombres, self.comprador.apellidos)
+        item['vendedor'] = '{} {}'.format(self.vendedor.nombres, self.vendedor.apellidos)
+        return item
 
     class Meta:
         db_table = "alcabala"
