@@ -39,7 +39,6 @@ class DetallePatente(AuditMixin, models.Model):
     movimientos de patente, ya se apertura o renovación
     """
     id = models.AutoField(primary_key=True)
-    zona = models.CharField('Zona urbana o rural', max_length=10, blank=True, null=True)
     fecha = models.DateField('Fecha de tramite', blank=True, null=True)
     impuesto = models.DecimalField(
         'Impuesto',
@@ -68,7 +67,7 @@ class DetallePatente(AuditMixin, models.Model):
     servicios_administrativos = models.DecimalField(
         'Servicios administrativos',
         decimal_places=2,
-        default=0.00,
+        default=0.99,
         max_digits=9,
         blank=True,
         null=True

@@ -49,6 +49,9 @@ class User(AuditMixin, AbstractUser):
     def __str__(self):
         return f'{self.first_name}, {self.last_name}'
 
+    def avatar_name(self):
+        return self.first_name[0] + self.last_name[0]
+
 
 class Grupo(Group):
     class Meta:

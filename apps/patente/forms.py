@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django import forms
 from datetime import datetime
 from .models import Patente, DetallePatente
@@ -25,7 +27,6 @@ class PatenteForm(forms.ModelForm):
             'establecimiento': {
                 'required': 'Seleccione el establecimiento'
             },
-
         }
 
         widgets = {
@@ -59,6 +60,65 @@ class PatenteForm(forms.ModelForm):
                     # 'required': True,
                     'readonly': True
                     # 'value': Establecimiento.objects.last().id,
+                }
+            ),
+
+        }
+
+
+class DetalleForm(forms.ModelForm):
+    class Meta:
+        model = DetallePatente
+        fields = '__all__'
+        error_messages = {
+            'fecha': {
+                'required': 'La fecha es obligatoria'
+            },
+            'impuesto': {
+                'required': 'El impuesto es obligatorio'
+            },
+            'interes': {
+                'required': 'El interes es requerido'
+            },
+            'multa': {
+                'required': 'El valor de multa es requerido'
+            },
+            'servicios_administrativos': {
+                'required': 'Los servicios administrativos son requeridos'
+            },
+        }
+        widgets = {
+            'fecha': forms.DateInput(
+                format='%Y-%m-%d',
+                attrs={
+                    'class': 'form-control form-control-sm',
+                    'required': True,
+                    'value': datetime.now().strftime('%Y-%m-%d'),
+                    'type': 'date',
+                }
+            ),
+            'impuesto': forms.NumberInput(
+                attrs={
+                    'class': 'form-control form-control-sm',
+                    'required': True,
+                }
+            ),
+            'interes': forms.NumberInput(
+                attrs={
+                    'class': 'form-control form-control-sm',
+                    'required': True,
+                }
+            ),
+            'multa': forms.NumberInput(
+                attrs={
+                    'class': 'form-control form-control-sm',
+                    'required': True,
+                }
+            ),
+            'servicios_administrativos': forms.NumberInput(
+                attrs={
+                    'class': 'form-control form-control-sm',
+                    'required': True,
                 }
             ),
 

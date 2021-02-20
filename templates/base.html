@@ -139,19 +139,22 @@
             </li>
             <!-- User Dropdown-->
             <li class="nav-item dropdown no-caret mr-3 mr-lg-0 dropdown-user">
-                <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage"
-                   href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false"><img class="img-fluid"
-                                              src="{% static 'assets/img/illustrations/profiles/profile-1.png' %}"/></a>
+                <a class="btn btn-icon btn-transparent-dark dropdown-toggle"
+                       id="navbarDropdownUserImage" href="javascript:void(0);"
+                       role="button" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">
+                        <button class="btn btn-green btn-icon" type="button">{{ user.avatar_name }}</button>
+{#                        <img class="img-fluid" src="{% static 'assets/img/illustrations/profiles/profile-1.png' %}" />#}
+                </a>
                 <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
                      aria-labelledby="navbarDropdownUserImage">
                     <h6 class="dropdown-header d-flex align-items-center">
-                        <img class="dropdown-user-img"
-                             src="{% static 'assets/img/illustrations/profiles/profile-1.png' %}"/>
-                        <div class="dropdown-user-details">
-                            <div class="dropdown-user-details-name">{{ user.username }}</div>
-                            <div class="dropdown-user-details-email">{{ user.first_name }}</div>
-                        </div>
+{#                            <img class="dropdown-user-img" src="{% static 'assets/img/illustrations/profiles/profile-1.png' %}" />#}
+{#                            <button class="btn btn-red btn-icon" type="button">AP</button>#}
+                            <div class="dropdown-user-details">
+                                <div class="dropdown-user-details-name">{{ user.username }}</div>
+                                <div class="dropdown-user-details-email">{{ user.first_name }} {{ user.last_name }}</div>
+                            </div>
                     </h6>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{% url 'usuario:account' user.id %}">
@@ -196,7 +199,7 @@
                                 </a>
                             </nav>
                         </div>
-
+                    
                         <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseContribuyentes"
                            aria-expanded="false" aria-controls="collapseContribuyentes">
                             <div class="nav-link-icon"><i class="fas fa-street-view"></i></div>

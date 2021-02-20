@@ -1,8 +1,8 @@
 {% extends 'patente/layout/wizard_step.html' %}
 
-{% block title %}<title>Formulario declaración</title>{% endblock %}
+{% block title %}<title>Revisión formulario declaración</title>{% endblock %}
 
-{% block link_paso4 %}nav-item nav-link active{% endblock %}
+{% block link_paso3 %}nav-item nav-link active{% endblock %}
 
 {% block body_wizard %}
     <div class="row justify-content-center">
@@ -77,15 +77,27 @@
             </div>
             <hr class="my-4"/>
             <div class="d-flex justify-content-between">
-                <a class="btn btn-primary-soft btn-flat"
-                    target="_blank"
-                    href="{% url 'patente:report_declaracion' patente.id %}">
-                    <i class="fas fa-print"></i> Imprimir formulario
-                </a>
-                <button class="btn btn-primary" type="button">Submit</button>
+                <div>
+                    <a class="btn btn-green btn-icon mr-2"
+                       target="_blank"
+                       href="{% url 'patente:report_declaracion' patente.id %}">
+                        <i class="fas fa-print"></i>
+                    </a>
+                    <a class="btn btn-teal btn-icon mr-2"
+                       href="{% url 'patente:report_declaracion' patente.id %}"
+                       download="">
+                        <i class="fas fa-download"></i>
+                    </a>
+                </div>
+                {#                <a class="btn btn-primary-soft btn-flat"#}
+                {#                   target="_blank"#}
+                {#                   href="{% url 'patente:report_declaracion' patente.id %}">#}
+                {#                    <i class="fas fa-print"></i> Imprimir formulario#}
+                {#                </a>#}
+                <button class="btn btn-primary" type="button">Continuar</button>
             </div>
         </div>
     </div>
 {% endblock %}
 
-{% block progress %} width: 100% {% endblock %}
+{% block progress %} width: 65.4% {% endblock %}

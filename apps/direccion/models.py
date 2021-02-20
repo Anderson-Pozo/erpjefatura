@@ -17,6 +17,12 @@ class Parroquia(AuditMixin, models.Model):
         db_table = "parroquia"
 
 
+ZONA = (
+    ('Urbana', 'Urbana'),
+    ('Rural', 'Rural')
+)
+
+
 class Barrio(AuditMixin, models.Model):
     """
     Clase Barrio almacena el nombre, la zona (Rural, Urbana), y su relacion con la
@@ -24,7 +30,7 @@ class Barrio(AuditMixin, models.Model):
     """
     id = models.AutoField(primary_key=True)
     nombre = models.CharField('Nombre del barrio', max_length=25, blank=True, null=True)
-    zona = models.CharField('Zona', max_length=6, blank=True, null=True)
+    zona = models.CharField('Zona', max_length=6, blank=True, null=True, choices=ZONA)
     parroquia = models.ForeignKey(Parroquia, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -45,10 +51,10 @@ class Direccion(AuditMixin, models.Model):
     barrio = models.ForeignKey(Barrio, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.calle_principal + ' y ' + self.calle_secundaria
+        return self.get_all_direccion()
 
     def get_all_direccion(self):
-        return 'Barrio ' + self.barrio.nombre + ', calle ' + self.calle_principal + ' y ' + self.calle_secundaria
+        return 'B. ' + self.barrio.nombre + ', cl. ' + self.calle_principal + ' y ' + self.calle_secundaria
 
     class Meta:
         db_table = "direccion"
