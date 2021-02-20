@@ -150,14 +150,14 @@ class ReportDeclaracion(View):
         return HttpResponseRedirect(reverse_lazy('patente:lista_catastro'))
 
 
-class EspeciePatente(CreateView):
-    template_name = 'patente/especie/especie.html'
+class CreacionEspecie(CreateView):
+    template_name = 'patente/apertura/paso4_especie.html'
     form_class = DetalleForm
     success_url = reverse_lazy('patente:crear_patente')
 
     def get_context_data(self, **kwargs):
         context = {
-            'patente': Patente.objects.get(pk=self.kwargs['pk']),
+            'patente': Patente.objects.last(),
             'form': self.form_class,
         }
         return context

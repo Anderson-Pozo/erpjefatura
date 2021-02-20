@@ -90,7 +90,7 @@ class DetalleForm(forms.ModelForm):
             'fecha': forms.DateInput(
                 format='%Y-%m-%d',
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-control form-control-sm',
                     'required': True,
                     'value': datetime.now().strftime('%Y-%m-%d'),
                     'type': 'date',
@@ -98,19 +98,25 @@ class DetalleForm(forms.ModelForm):
             ),
             'impuesto': forms.NumberInput(
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-control form-control-sm',
+                    'required': True,
+                }
+            ),
+            'interes': forms.NumberInput(
+                attrs={
+                    'class': 'form-control form-control-sm',
                     'required': True,
                 }
             ),
             'multa': forms.NumberInput(
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-control form-control-sm',
                     'required': True,
                 }
             ),
             'servicios_administrativos': forms.NumberInput(
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-control form-control-sm',
                     'required': True,
                 }
             ),
