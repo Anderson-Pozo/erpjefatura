@@ -255,12 +255,12 @@
                             Alcabala y Plusvalia
                             <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="{% block collapse_Alcabala-Plusvalia %}collapse{% endblock %}"
+                        <div class="{% block collapse_alcabala %}collapse{% endblock %}"
                              id="collapseAlcabala-Plusvalia"
                              data-parent="#accordionSidenav">
                             <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
                                 <a class="nav-link" href="{% url 'alcabala:crear_alcabala' %}">
-                                    Crear Alcabala y Plusvalia
+                                    Crear registro
                                 </a>
                                 <a class="nav-link" href="{% url 'alcabala:lista_alcabala' %}">
                                     Registro de Alcabala
@@ -268,7 +268,6 @@
                                 <a class="nav-link" href="{% url 'plusvalia:lista_plusvalia' %}">
                                     Registro de Plusvalia
                                 </a>
-
                             </nav>
                         </div>
                         {#                        <a class="nav-link" href="{% url 'alcabala:crear_alcabala' %}">#}
