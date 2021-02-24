@@ -1,15 +1,12 @@
 from django import forms
 from datetime import datetime
-from .models import Plusvalia,Alcabala
-from apps.alcabala.models import Vendedor,Comprador
+from .models import Plusvalia
+
 
 
 class PlusvaliaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # self.fields['alcabala'].queryset = Alcabala.objects.all()
-        # self.fields['vendedor'].queryset = Vendedor.objects.all()
-        # self.fields['comprador'].queryset = Comprador.objects.all()
 
 
 

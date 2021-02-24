@@ -1,15 +1,35 @@
 from django import forms
 from datetime import datetime
 from .models import Alcabala,Comprador,Vendedor,Predio
+from django.forms import Form, ModelChoiceField, Select, CharField, TextInput
 from apps.direccion.models import Direccion
 
 
 class AlcabalaForm(forms.ModelForm):
+
+    # comprador = ModelChoiceField(
+    #     queryset=Comprador.objects.none(),
+    #     widget=forms.Select(
+    #         attrs={
+    #             'class': 'form-control select2',
+    #             'required': True,
+    #             'name': 'input_comprador'
+    #         }
+    #     )
+    # )
+
+    search = CharField(widget=TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Ingrese valor',
+        'id' : 'search_input'
+    }))
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['comprador'].queryset = Comprador.objects.all()
+        self.fields['comprador'].queryset = Comprador.objects.none()
         self.fields['vendedor'].queryset = Vendedor.objects.all()
         self.fields['predio'].queryset = Predio.objects.all()
+
 
 
     class Meta:
@@ -17,12 +37,12 @@ class AlcabalaForm(forms.ModelForm):
         fields = '__all__'
         # exclude = ''
         error_messages = {
-            'vendedor': {
-                'required': 'El vendedor es obligatorio'
-            },
-            'comprador': {
-                'required': 'El comprador es obligatorio'
-            },
+            # 'vendedor': {
+            #     'required': 'El vendedor es obligatorio'
+            # },
+            # 'comprador': {
+            #     'required': 'El comprador es obligatorio'
+            # },
             'descripcion_tramite': {
                 'required': 'La descripción del tramite es obligatoria'
             },
@@ -69,10 +89,11 @@ class AlcabalaForm(forms.ModelForm):
                     'required': True,
                 }
             ),
-            'comprador': forms.Select(
+            'comprador': Select(
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-control select2',
                     'required': True,
+                    'id' : 'input_comprador'
                 }
             ),
             'predio': forms.Select(
@@ -133,3 +154,4 @@ class AlcabalaForm(forms.ModelForm):
 
 
         }
+

@@ -10,7 +10,7 @@ from .models import Plusvalia
 
 class ListaPlusvalia(AjaxList, ListView):
     model = Plusvalia
-    template_name = 'plusvalia/index.html'
+    template_name = 'alcabala-plusvalia/index-plusvalia.html'
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -21,4 +21,4 @@ class CrearPlusvalia(CreateView):
     model = Plusvalia
     form_class =  PlusvaliaForm
     template_name = 'alcabala-plusvalia/registro/paso2_plusvalia.html'
-    success_url = reverse_lazy('establecimiento:lista_establecimiento')
+    success_url = reverse_lazy('plusvalia:lista_plusvalia')
