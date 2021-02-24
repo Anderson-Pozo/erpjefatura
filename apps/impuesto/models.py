@@ -37,7 +37,7 @@ class Impuesto(AuditMixin, models.Model):
     impuesto_fraccion_basica = models.IntegerField('Impuesto fraccion basica', blank=False, null=True)
     porcentaje_fraccion_excedente = models.DecimalField(
         'Porcentaje fraccion excedente',
-        decimal_places=3,
+        decimal_places=5,
         default=0.000,
         max_digits=9,
         blank=False,
@@ -45,9 +45,19 @@ class Impuesto(AuditMixin, models.Model):
     )
     estado = models.BooleanField('Activo/Inactivo', blank=True, null=True, default=True)
 
+    def __str__(self):
+        return '{}) {}'.format(self.numero, self.fraccion_basica)
+
     def to_json(self):
         item = model_to_dict(self)
         return item
+
+    def calculo(self):
+        for i in self.objects.all():
+            if 600 > i.fraccion_basica:
+                return format(i.fraccion_basica, '.2f')
+            else:
+                return None
 
     def calcular_impuesto(self, capital):
         if 0 <= capital <= 600:
@@ -66,6 +76,12 @@ class Impuesto(AuditMixin, models.Model):
             return 'Es mayor'
         else:
             return 'Es menor'
+
+    def impuesto_patente(self, capital):
+        if capital > self.fraccion_basica:
+            return self.fraccion_basica
+        else:
+            return None
 
     def total_impuesto(self, capital):
         diferencia = capital - self.fraccion_basica
@@ -114,3 +130,21 @@ class Multa(AuditMixin, models.Model):
 
     class Meta:
         db_table = "multa"
+
+
+def calcular_test(capital):
+    row = Impuesto.objects.order_by('-fraccion_basica').filter(
+        fraccion_basica__lte=capital
+    )[0:1]
+    # obj = Impuesto.objects.get(fraccion_basica=fraccion_b)
+
+    diferencia = capital - row[0].fraccion_basica
+    suma = row[0].impuesto_fraccion_basica + (diferencia * row[0].porcentaje_fraccion_excedente)
+    return format(suma, '.2f')
+
+
+def calcular_impuesto(capital):
+    row = Impuesto.objects.get(fraccion_basica__lt=capital, fraccion_excedente__gte=capital)
+    diferencia = capital - row.fraccion_basica
+    suma = row.impuesto_fraccion_basica + (diferencia * row.porcentaje_fraccion_excedente)
+    return format(suma, '.2f')

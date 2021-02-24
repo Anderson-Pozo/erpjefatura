@@ -36,7 +36,8 @@
                             <div class="font-weight-bold">Impuesto patente anual</div>
                         </td>
                         <td class="text-right font-weight-bold">
-                            {{ form.impuesto }}
+{#                            {{ form.impuesto }}#}
+                            <input type="number" value="{{ patente.calcular_impuesto }}">
                         </td>
                         <td>&nbsp;</td>
                     </tr>
@@ -84,6 +85,11 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit">
+                Guardar y continuar
+            </button>
         </div>
     </div>
     {#    <form method="post" action="{% url 'patente:especie_patente' %}">#}
