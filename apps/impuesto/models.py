@@ -52,42 +52,6 @@ class Impuesto(AuditMixin, models.Model):
         item = model_to_dict(self)
         return item
 
-    def calculo(self):
-        for i in self.objects.all():
-            if 600 > i.fraccion_basica:
-                return format(i.fraccion_basica, '.2f')
-            else:
-                return None
-
-    def calcular_impuesto(self, capital):
-        if 0 <= capital <= 600:
-            return 0
-        if 600 <= capital <= 800:
-            return 600
-        if 800 <= capital <= 1000:
-            return 800
-        if 1000 <= capital <= 1200:
-            return 1000
-        if 1200 <= capital <= 1500:
-            return 1200
-        if 1500 <= capital <= 3000:
-            return 1500
-        if capital > self.fraccion_basica:
-            return 'Es mayor'
-        else:
-            return 'Es menor'
-
-    def impuesto_patente(self, capital):
-        if capital > self.fraccion_basica:
-            return self.fraccion_basica
-        else:
-            return None
-
-    def total_impuesto(self, capital):
-        diferencia = capital - self.fraccion_basica
-        suma = self.impuesto_fraccion_basica + (diferencia * self.porcentaje_fraccion_excedente)
-        return format(suma, '.2f')
-
     class Meta:
         db_table = "impuesto"
 
@@ -136,7 +100,6 @@ def calcular_test(capital):
     row = Impuesto.objects.order_by('-fraccion_basica').filter(
         fraccion_basica__lte=capital
     )[0:1]
-    # obj = Impuesto.objects.get(fraccion_basica=fraccion_b)
 
     diferencia = capital - row[0].fraccion_basica
     suma = row[0].impuesto_fraccion_basica + (diferencia * row[0].porcentaje_fraccion_excedente)

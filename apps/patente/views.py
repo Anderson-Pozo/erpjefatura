@@ -153,7 +153,7 @@ class ReportDeclaracion(View):
 class CreacionEspecie(CreateView):
     template_name = 'patente/apertura/paso4_especie.html'
     form_class = DetalleForm
-    success_url = reverse_lazy('patente:crear_patente')
+    success_url = reverse_lazy('patente:lista_catastro')
 
     def get_context_data(self, **kwargs):
         context = {

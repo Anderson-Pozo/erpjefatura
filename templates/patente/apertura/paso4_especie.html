@@ -9,9 +9,6 @@
         <div class="card-header p-4 p-md-5 border-bottom-0 bg-gradient-primary-to-secondary text-white-50">
             <div class="row justify-content-between align-items-center">
                 <div class="col-12 col-lg-auto mb-5 mb-lg-0 text-center text-lg-left">
-                    <!-- Invoice branding-->
-                    {#                    <img class="invoice-brand-img rounded-circle mb-4"#}
-                    {#                         src="assets/img/demo/demo-logo.svg" alt=""/>#}
                     <div class="h2 text-white mb-0">{{ patente.establecimiento.nombre }}</div>
                     {{ patente.establecimiento.direccion.get_all_direccion }}
                 </div>
@@ -19,78 +16,94 @@
                     <!-- Invoice details-->
                     <div class="h4 text-white">RUC: {{ patente.contribuyente.ruc }}</div>
                     Nº patente {{ patente.numero_patente }}
-                    <br/>
-                    {{ form.fecha }}
-{#                    January 1, 2020#}
                 </div>
             </div>
         </div>
-        <div class="card-body p-4 p-md-5">
-            <!-- Invoice table-->
-            <div class="table-responsive">
-                <table class="table table-borderless mb-0">
-                    <tbody>
-                    <!-- Invoice item 1-->
-                    <tr class="border-bottom">
-                        <td>
-                            <div class="font-weight-bold">Impuesto patente anual</div>
-                        </td>
-                        <td class="text-right font-weight-bold">
-{#                            {{ form.impuesto }}#}
-                            <input type="number" value="{{ patente.calcular_impuesto }}">
-                        </td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <!-- Invoice item 2-->
-                    <tr class="border-bottom">
-                        <td>
-                            <div class="font-weight-bold">Interes por mora</div>
-                        </td>
-                        <td class="text-right font-weight-bold">
-                            {{ form.interes }}
-                        </td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <!-- Invoice item 3-->
-                    <tr class="border-bottom">
-                        <td>
-                            <div class="font-weight-bold">Multa</div>
-                        </td>
-                        <td class="text-right font-weight-bold">
-                            {{ form.multa }}
-                        </td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr class="border-bottom">
-                        <td>
-                            <div class="font-weight-bold">Servicios administrativos</div>
-                        </td>
-                        <td class="text-right font-weight-bold">
-                            {{ form.servicios_administrativos }}
-                        </td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <!-- Invoice total-->
-                    <tr>
-                        <td class="text-right pb-0">
-                            <div class="text-uppercase small font-weight-700 text-muted">
-                                Total a pagar
-                            </div>
-                        </td>
-                        <td class="text-right pb-0">
-                            <div class="h5 mb-0 font-weight-700 text-green">$2059.75</div>
-                        </td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    </tbody>
-                </table>
+        <form action="{% url 'patente:especie_patente' %}" method="POST">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    {{ form.errors }}
+                </div>
+            {% endif %}
+            <div class="card-body p-4 p-md-5">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label class="small mb-1" for="fecha">Fecha</label>
+                        {{ form.fecha }}
+                        <input class="form-control form-control-sm"
+                               name="patente"
+                               required
+                               value="{{ patente.id }}" hidden>
+                    </div>
+                </div>
+                <!-- Invoice table-->
+                <div class="table-responsive">
+                    <table class="table table-borderless mb-0">
+                        <tbody>
+                        <!-- Invoice item 1-->
+                        <tr class="border-bottom">
+                            <td>
+                                <div class="font-weight-bold">Impuesto patente anual</div>
+                            </td>
+                            <td class="text-right font-weight-bold">
+                                {#                            {{ form.impuesto }}#}
+                                <input name="impuesto" type="number" class="form-control form-control-sm"
+                                       value="{{ patente.calcular_impuesto }}">
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <!-- Invoice item 2-->
+                        <tr class="border-bottom">
+                            <td>
+                                <div class="font-weight-bold">Interes por mora</div>
+                            </td>
+                            <td class="text-right font-weight-bold">
+                                {{ form.interes }}
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <!-- Invoice item 3-->
+                        <tr class="border-bottom">
+                            <td>
+                                <div class="font-weight-bold">Multa</div>
+                            </td>
+                            <td class="text-right font-weight-bold">
+                                {{ form.multa }}
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr class="border-bottom">
+                            <td>
+                                <div class="font-weight-bold">Servicios administrativos</div>
+                            </td>
+                            <td class="text-right font-weight-bold">
+                                {{ form.servicios_administrativos }}
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <!-- Invoice total-->
+                        <tr>
+                            <td class="text-right pb-0">
+                                <div class="text-uppercase small font-weight-700 text-muted">
+                                    Total a pagar
+                                </div>
+                            </td>
+                            <td class="text-right pb-0">
+                                <div class="h5 mb-0 font-weight-700 text-green">$2059.75</div>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="submit">
-                Guardar y continuar
-            </button>
-        </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit">
+                    Guardar y continuar
+                </button>
+            </div>
+        </form>
     </div>
     {#    <form method="post" action="{% url 'patente:especie_patente' %}">#}
     {#        {% csrf_token %}#}

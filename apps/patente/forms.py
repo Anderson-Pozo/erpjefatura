@@ -67,6 +67,8 @@ class PatenteForm(forms.ModelForm):
 
 
 class DetalleForm(forms.ModelForm):
+    patente = Patente.objects.last()
+
     class Meta:
         model = DetallePatente
         fields = '__all__'

@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.forms import model_to_dict
 from apps.contribuyente.models import Contribuyente
@@ -45,7 +46,7 @@ class DetallePatente(AuditMixin, models.Model):
     movimientos de patente, ya se apertura o renovación
     """
     id = models.AutoField(primary_key=True)
-    fecha = models.DateField('Fecha de tramite', blank=True, null=True)
+    fecha = models.DateField('Fecha de tramite', default=datetime.now(), blank=True, null=True)
     impuesto = models.DecimalField(
         'Impuesto',
         decimal_places=2,
