@@ -2,7 +2,7 @@ from django.db import models
 from django.forms import model_to_dict
 from apps.contribuyente.models import Contribuyente
 from apps.establecimiento.models import Establecimiento
-from apps.impuesto.models import Impuesto
+from apps.impuesto.models import Impuesto, calcular_impuesto
 from apps.auditoria.mixins import AuditMixin
 
 
@@ -20,6 +20,9 @@ class Patente(AuditMixin, models.Model):
     contribuyente = models.ForeignKey(Contribuyente, on_delete=models.CASCADE)
     establecimiento = models.ForeignKey(Establecimiento, on_delete=models.CASCADE)
 
+    def get_estado(self):
+        pass
+
     def to_json(self):
         item = model_to_dict(self)
         item['ruc'] = self.contribuyente.ruc
@@ -28,6 +31,9 @@ class Patente(AuditMixin, models.Model):
         item['total_patrimonio'] = self.establecimiento.total_patrimonio
         item['nombre_contribuyente'] = self.contribuyente.get_nombre(self.contribuyente.ruc)
         return item
+
+    def calcular_impuesto(self):
+        return calcular_impuesto(self.establecimiento.total_patrimonio)
 
     class Meta:
         db_table = "patente"
@@ -77,10 +83,6 @@ class DetallePatente(AuditMixin, models.Model):
     def to_json(self):
         item = model_to_dict(self)
         return item
-
-    def calcular_impuesto(self):
-        for i in Impuesto.objects.all():
-            print(i)
 
     class Meta:
         db_table = "detalle_patente"
