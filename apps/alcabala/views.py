@@ -6,7 +6,7 @@ from django.views.generic import ListView, TemplateView, CreateView, UpdateView,
 from django.http import HttpResponse, JsonResponse
 from apps.utils.ajax import AjaxList, AjaxCreate, AjaxUpdate, AjaxDelete
 from .forms import AlcabalaForm
-from .models import Alcabala, Comprador, Vendedor
+from .models import Alcabala, Comprador, Vendedor, Predio
 
 
 class ListaAlcabala(AjaxList, ListView):
@@ -22,7 +22,7 @@ class CrearAlcabala(CreateView):
     model = Alcabala
     form_class = AlcabalaForm
     template_name = 'alcabala-plusvalia/registro/paso1_alcabala.html'
-    success_url = reverse_lazy('alcabala:lista_alcabala')
+    success_url = reverse_lazy('plusvalia:crear_plusvalia')
 
 
 class GetPersonas(View):
@@ -47,9 +47,14 @@ class GetPersonas(View):
                     item = i.to_json()
                     item['text'] = i.nombres + ' ' + i.apellidos
                     data.append(item)
+            elif action == 'getpredio':
+                data = []
+                for i in Predio.objects.filter(clave_catastral__icontains=request.POST['term'])[0:5]:
+                    item = i.to_json()
+                    item['text'] = i.clave_catastral
+                    data.append(item)
             else:
                 data['error'] = 'Ha ocurrido un error'
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
-

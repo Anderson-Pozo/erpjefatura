@@ -20,8 +20,8 @@ class AlcabalaForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['vendedor'].queryset = Vendedor.objects.all()
-        self.fields['predio'].queryset = Predio.objects.all()
+        # self.fields['vendedor'].queryset = Vendedor.objects.all()
+        # self.fields['predio'].queryset = Predio.objects.all()
 
     class Meta:
         model = Alcabala
@@ -73,12 +73,12 @@ class AlcabalaForm(forms.ModelForm):
                     'required': True,
                 }
             ),
-            'vendedor': forms.Select(
-                attrs={
-                    'class': 'form-control',
-                    'required': True,
-                }
-            ),
+            # 'vendedor': forms.Select(
+            #     attrs={
+            #         'class': 'form-control',
+            #         'required': True,
+            #     }
+            # ),
             # 'comprador': forms.Select(
             #     attrs={
             #         'class': 'form-control',
@@ -87,12 +87,12 @@ class AlcabalaForm(forms.ModelForm):
             #         'style': 'width: 100%',
             #     }
             # ),
-            'predio': forms.Select(
-                attrs={
-                    'class': 'form-control',
-                    'required': True,
-                }
-            ),
+            # 'predio': forms.Select(
+            #     attrs={
+            #         'class': 'form-control',
+            #         'required': True,
+            #     }
+            # ),
             'descripcion_tramite': forms.Textarea(
                 attrs={
                     'class': 'form-control',

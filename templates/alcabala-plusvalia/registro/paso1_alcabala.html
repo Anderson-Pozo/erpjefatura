@@ -25,15 +25,19 @@
             </div>
             <!-- Form Group (last name)-->
             <div class="form-group col-md-6">
-                <label class="small mb-1" for="inputLastName">Número</label>
-                {{ form.numero }}
+                <label class="small mb-1" for="callePrincipal">Clave catastral</label>
+                <select class="form-control" id="search_predio">
+                </select>
+                <input name="predio" hidden>
             </div>
         </div>
         <div class="form-row">
             <!-- Form Group (first name)-->
             <div class="form-group col-md-6">
                 <label class="small mb-1" for="inputFirstName">Propietario</label>
-                {{ form.vendedor }}
+                <select class="form-control" id="search_vendedor">
+                </select>
+                <input name="vendedor" hidden>
             </div>
             <!-- Form Group (last name)-->
             <div class="form-group col-md-6">
@@ -43,10 +47,12 @@
                 <input name="comprador" hidden>
             </div>
         </div>
-        <div class="form-group">
-            <label class="small mb-1" for="callePrincipal">Clave catastral</label>
-            {{ form.predio }}
-        </div>
+{#        <div class="form-group">#}
+{#            <label class="small mb-1" for="callePrincipal">Clave catastral</label>#}
+{#            <select class="form-control" id="search_predio">#}
+{#            </select>#}
+{#            <input name="predio" hidden>#}
+{#        </div>#}
         <!-- Form Row        -->
         <div class="form-group">
             <!-- Form Group (organization name)-->
@@ -55,38 +61,114 @@
                 {{ form.descripcion_tramite }}
             </div>
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label class="small mb-1" for="inputLocation">Valor del compra venta</label>
-                {{ form.valor_compra_venta }}
-            </div>
-            <div class="form-group col-md-4">
-                <label class="small mb-1" for="inputUsername"> Impuesto alacabala</label>
-                {{ form.impuesto_alcabalas }}
-            </div>
-            <div class="form-group col-md-4">
-                <label class="small mb-1" for="inputOrgName">Alcabala provincial </label>
-                {{ form.alcabalas_provinciales }}
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label class="small mb-1" for="inputLocation">Fondos escolares</label>
-                {{ form.fondos_escolares }}
-            </div>
-            <!-- Form Group (organization name)-->
-            <div class="form-group col-md-4">
-                <label class="small mb-1" for="inputOrgName">Prevención de
-                    riesgos </label>
-                {{ form.fondos_prevencion_riesgos }}
-            </div>
-            <!-- Form Group (location)-->
-            <div class="form-group col-md-4">
-                <label class="small mb-1" for="inputLocation">Agua potable</label>
-                {{ form.agua_potable }}
-            </div>
-        </div>
         <!-- Save changes button-->
+        <div class="card-body p-4 p-md-5">
+            <!-- Invoice table-->
+            <div class="table-responsive">
+                <table class="table table-borderless mb-0">
+                    <thead class="border-bottom">
+                    <tr class="small mb-1">
+                        <th scope="col">Impuestos</th>
+                        <th class="text-right" colspan="4" scope="col">Montos</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Invoice item 1-->
+                    <tr class="border-bottom">
+                        <td>
+                            <div class="small mb-1">Valor del compra venta</div>
+                            <div class="small text-muted d-none d-md-block">
+                            </div>
+                        </td>
+                        <td class="text-right font-weight-bold" colspan="4">
+                            {{ form.valor_compra_venta }}
+                        </td>
+                    </tr>
+                    <!-- Invoice item 2-->
+                    <tr class="border-bottom">
+                        <td>
+                            <div class="small mb-1">Impuesto alcabala</div>
+                            <div class="small text-muted d-none d-md-block">
+                            </div>
+                        </td>
+
+                        <td class="text-right font-weight-bold" colspan="4">
+                            {{ form.impuesto_alcabalas }}
+                        </td>
+                    </tr>
+                    <!-- Invoice item 3-->
+                    <tr class="border-bottom">
+                        <td>
+                            <div class="small mb-1">Alcabala provincial</div>
+                            <div class="small text-muted d-none d-md-block">
+                            </div>
+                        </td>
+                        <td class="text-right font-weight-bold" colspan="4">
+                            {{ form.alcabalas_provinciales }}
+                        </td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td>
+                            <div class="small mb-1">Fondos escolares</div>
+                            <div class="small text-muted d-none d-md-block">
+                            </div>
+                        </td>
+                        <td class="text-right font-weight-bold" colspan="4">
+                            {{ form.fondos_escolares }}
+                        </td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td>
+                            <div class="small mb-1">Prevención de riesgos</div>
+                            <div class="small text-muted d-none d-md-block">
+                            </div>
+                        </td>
+                        <td class="text-right font-weight-bold" colspan="4">
+                            {{ form.fondos_prevencion_riesgos }}
+                        </td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td>
+                            <div class="small mb-1">Agua potable</div>
+                            <div class="small text-muted d-none d-md-block">
+                            </div>
+                        </td>
+                        <td class="text-right font-weight-bold" colspan="4">
+                            {{ form.agua_potable }}
+                        </td>
+                    </tr>
+
+                    <!-- Invoice subtotal-->
+                    <tr>
+                        <td class="text-right pb-0" colspan="3">
+                            <div class="text-uppercase small font-weight-700 text-muted">Subtotal:</div>
+                        </td>
+                        <td class="text-right pb-0">
+                            <div class="h5 mb-0 font-weight-700">$,1925.00</div>
+                        </td>
+                    </tr>
+                    <!-- Invoice tax column-->
+                    <tr>
+                        <td class="text-right pb-0" colspan="3">
+                            <div class="text-uppercase small font-weight-700 text-muted">Tax (7%):</div>
+                        </td>
+                        <td class="text-right pb-0">
+                            <div class="h5 mb-0 font-weight-700">$134.75</div>
+                        </td>
+                    </tr>
+                    <!-- Invoice total-->
+                    <tr>
+                        <td class="text-right pb-0" colspan="3">
+                            <div class="text-uppercase small font-weight-700 text-muted">Total Amount Due:</div>
+                        </td>
+                        <td class="text-right pb-0">
+                            <div class="h5 mb-0 font-weight-700 text-green">$2059.75</div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <div class="modal-footer">
             <button class="btn btn-primary" type="submit">
                 Guardar y continuar

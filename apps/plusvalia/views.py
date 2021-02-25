@@ -5,7 +5,8 @@ from django.views.generic import ListView, TemplateView, CreateView, UpdateView,
 from django.http import HttpResponse, JsonResponse
 from apps.utils.ajax import AjaxList, AjaxCreate, AjaxUpdate, AjaxDelete
 from .forms import PlusvaliaForm
-from .models import Plusvalia
+from .models import Plusvalia, Alcabala
+from django.shortcuts import render
 
 
 class ListaPlusvalia(AjaxList, ListView):
@@ -22,3 +23,13 @@ class CrearPlusvalia(CreateView):
     form_class =  PlusvaliaForm
     template_name = 'alcabala-plusvalia/registro/paso2_plusvalia.html'
     success_url = reverse_lazy('plusvalia:lista_plusvalia')
+
+    def get_context_data(self, **kwargs):
+        context = {
+            'alcabala' : Alcabala.objects.last(),
+            'form' : self.form_class,
+        }
+        return context
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.get_context_data())

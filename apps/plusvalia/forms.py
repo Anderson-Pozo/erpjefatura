@@ -78,20 +78,20 @@ class PlusvaliaForm(forms.ModelForm):
                     'type': 'date',
                 }
             ),
-            'vendedor': forms.Select(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Ingrese el vendedor',
-                    # 'required': True,
-                }
-            ),
-            'comprador': forms.Select(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Ingrese el comprador',
-                    # 'required': True,
-                }
-            ),
+            # 'vendedor': forms.Select(
+            #     attrs={
+            #         'class': 'form-control',
+            #         'placeholder': 'Ingrese el vendedor',
+            #         # 'required': True,
+            #     }
+            # ),
+            # 'comprador': forms.Select(
+            #     attrs={
+            #         'class': 'form-control',
+            #         'placeholder': 'Ingrese el comprador',
+            #         # 'required': True,
+            #     }
+            # ),
             'valor_escritura': forms.NumberInput(
                 attrs={
                     'class': 'form-control',

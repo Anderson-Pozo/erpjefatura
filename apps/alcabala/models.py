@@ -18,8 +18,8 @@ class Comprador(AuditMixin, models.Model):
     def __str__(self):
         return '{} {}'.format(self.nombres, self.apellidos)
 
-    # def get_nombres(self):
-    #     return '{} {}'.format(self.nombres, self.apellidos)
+    def get_nombres(self):
+        return '{} {}'.format(self.nombres, self.apellidos)
 
     class Meta:
         db_table = "comprador"
@@ -46,7 +46,13 @@ class Vendedor(AuditMixin, models.Model):
         db_table = "vendedor"
 
     def __str__(self):
-        return self.nombres + ' ' + self.apellidos
+        return '{} {}'.format(self.nombres, self.apellidos)
+
+    def get_nombres(self):
+        return '{} {}'.format(self.nombres, self.apellidos)
+
+    # def __str__(self):
+    #     return self.nombres + ' ' + self.apellidos
 
     def to_json(self):
         item = model_to_dict(self)
@@ -61,7 +67,7 @@ class Alcabala(AuditMixin, models.Model):
     """
     id = models.AutoField(primary_key=True)
     fecha = models.DateField('Fecha', blank=True, null=True)
-    numero = models.IntegerField('Numero', blank=True, null=True)
+    # numero = models.IntegerField('Numero', blank=True, null=True)
     descripcion_tramite = models.TextField('Descripcion del tramite', max_length=300, blank=True, null=True)
     valor_compra_venta = models.DecimalField(
         'Valor de la compra-venta',
@@ -119,6 +125,7 @@ class Alcabala(AuditMixin, models.Model):
         item = model_to_dict(self)
         item['comprador'] = '{} {}'.format(self.comprador.nombres, self.comprador.apellidos)
         item['vendedor'] = '{} {}'.format(self.vendedor.nombres, self.vendedor.apellidos)
+        item['predio'] = self.predio.clave_catastral
         return item
 
     class Meta:

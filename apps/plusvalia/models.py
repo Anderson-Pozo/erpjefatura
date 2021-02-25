@@ -11,7 +11,7 @@ class Plusvalia(AuditMixin, models.Model):
     plusvalia y su relacion con la entidad Alcabala
     """
     id = models.AutoField(primary_key=True)
-    numero = models.IntegerField('Número de plusvalia', blank=True, null=True)
+    # numero = models.IntegerField('Número de plusvalia', blank=True, null=True)
     fecha_tramite = models.DateField('Fecha del tramite', blank=True, null=True)
     fecha_escritura = models.DateField('Fecha de la escritura', blank=True, null=True)
     # fecha_notaria = models.DateField('Fecha de la notaria', blank=True, null=True)
@@ -104,6 +104,7 @@ class Plusvalia(AuditMixin, models.Model):
         null=True
     )
     alcabala = models.ForeignKey(Alcabala, on_delete=models.CASCADE)
+
     def to_json(self):
         item = model_to_dict(self)
         item['comprador'] = '{} {}'.format(self.alcabala.comprador.nombres, self.alcabala.comprador.apellidos)

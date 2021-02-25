@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import model_to_dict
 from apps.direccion.models import Direccion
 from apps.auditoria.mixins import AuditMixin
 
@@ -19,6 +20,11 @@ class Predio(AuditMixin, models.Model):
 
     def __str__(self):
         return self.clave_catastral
+
+
+    def to_json(self):
+        item = model_to_dict(self)
+        return item
 
     class Meta:
         db_table = "predio"

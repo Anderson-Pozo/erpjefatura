@@ -18,28 +18,31 @@
     <div class="form-row">
             <!-- Form Group (first name)-->
             <div class="form-group col-md-4">
-                <label class="small mb-1" for="inputFirstName">Número</label>
-                {{ form.numero }}
+{#                <label class="small mb-1" for="inputFirstName">Número</label>#}
+{#                {{ form.numero }}#}
+                <input value="{{ alcabala.id }}" name="alcabala" hidden>
             </div>
         </div>
         <div class="form-row">
             <!-- Form Group (first name)-->
             <div class="form-group col-md-6">
                 <label class="small mb-1" for="inputFirstName">Vendedor</label>
-                <input class="form-control" id="inputVendedor" type="text"
-                       placeholder="Ingresa el nombre del vendedor"/>
+{#                <input class="form-control" id="inputVendedor" type="text"#}
+{#                       placeholder="Ingresa el nombre del vendedor"/>#}
+                <input class="form-control" value="{{ alcabala.vendedor.get_nombres }}" disabled>
             </div>
             <!-- Form Group (last name)-->
             <div class="form-group col-md-6">
                 <label class="small mb-1" for="inputLastName">Comprador</label>
-                <input class="form-control" id="inputComprador" type="text"
-                       placeholder="Ingresa el nombre del Comprador"/>
+{#                <input class="form-control" id="inputComprador" type="text"#}
+{#                       placeholder="Ingresa el nombre del Comprador"/>#}
+                <input class="form-control" value="{{ alcabala.comprador.get_nombres }}" disabled>
             </div>
         </div>
         <div class="form-row">
             <!-- Form Group (first name)-->
             <div class="form-group col-md-6">
-                <label class="small mb-1" for="inputFirstName">Fecha</label>
+                <label class="small mb-1" for="inputFirstName">Fecha escritura</label>
                 {{ form.fecha_escritura }}
             </div>
             <!-- Form Group (last name)-->
@@ -51,7 +54,7 @@
         <div class="form-row">
             <!-- Form Group (first name)-->
             <div class="form-group col-md-6">
-                <label class="small mb-1" for="inputFirstName">valor</label>
+                <label class="small mb-1" for="inputFirstName">valor de escritura</label>
                 {{ form.valor_escritura }}
             </div>
             <!-- Form Group (last name)-->
@@ -65,7 +68,7 @@
             <div class="table-responsive">
                 <table class="table table-borderless mb-0">
                     <thead class="border-bottom">
-                    <tr class="small text-uppercase text-muted">
+                    <tr class="small mb-1">
                         <th scope="col">Impuestos</th>
                         <th class="text-right" colspan="4" scope="col">Montos</th>
                     </tr>
@@ -74,7 +77,7 @@
                     <!-- Invoice item 1-->
                     <tr class="border-bottom">
                         <td>
-                            <div class="font-weight-bold">Precio de venta</div>
+                            <div class="small mb-1">Precio de venta</div>
                             <div class="small text-muted d-none d-md-block">
                             </div>
                         </td>
@@ -85,7 +88,7 @@
                     <!-- Invoice item 2-->
                     <tr class="border-bottom">
                         <td>
-                            <div class="font-weight-bold">Precio de adquisicion</div>
+                            <div class="small mb-1">Precio de adquisicion</div>
                             <div class="small text-muted d-none d-md-block">
                             </div>
                         </td>
@@ -97,7 +100,7 @@
                     <!-- Invoice item 3-->
                     <tr class="border-bottom">
                         <td>
-                            <div class="font-weight-bold">Diferencia Bruta</div>
+                            <div class="small mb-1">Diferencia Bruta</div>
                             <div class="small text-muted d-none d-md-block">
                             </div>
                         </td>
@@ -107,7 +110,7 @@
                     </tr>
                     <tr class="border-bottom">
                         <td>
-                            <div class="font-weight-bold">Mejoras</div>
+                            <div class="small mb-1">Mejoras</div>
                             <div class="small text-muted d-none d-md-block">
                             </div>
                         </td>
@@ -117,7 +120,7 @@
                     </tr>
                     <tr class="border-bottom">
                         <td>
-                            <div class="font-weight-bold">Diferencia Neta</div>
+                            <div class="small mb-1">Diferencia Neta</div>
                             <div class="small text-muted d-none d-md-block">
                             </div>
                         </td>
@@ -127,7 +130,7 @@
                     </tr>
                     <tr class="border-bottom">
                         <td>
-                            <div class="font-weight-bold">5% c/año de Tenencia</div>
+                            <div class="small mb-1">5% c/año de Tenencia</div>
                             <div class="small text-muted d-none d-md-block">
                             </div>
                         </td>
@@ -137,7 +140,7 @@
                     </tr>
                     <tr class="border-bottom">
                         <td>
-                            <div class="font-weight-bold">Utilidad Imponible</div>
+                            <div class="small mb-1">Utilidad Imponible</div>
                             <div class="small text-muted d-none d-md-block">
                             </div>
                         </td>
@@ -147,7 +150,7 @@
                     </tr>
                     <tr class="border-bottom">
                         <td>
-                            <div class="font-weight-bold">Rebaja por Desvalorización Moneda</div>
+                            <div class="small mb-1">Rebaja por Desvalorización Moneda</div>
                             <div class="small text-muted d-none d-md-block">
                             </div>
                         </td>
@@ -157,7 +160,7 @@
                     </tr>
                     <tr class="border-bottom">
                         <td>
-                            <div class="font-weight-bold">Base para rebajar por Desvalorización Moneda</div>
+                            <div class="small mb-1">Base para rebajar por Desvalorización Moneda</div>
                             <div class="small text-muted d-none d-md-block">
                             </div>
                         </td>

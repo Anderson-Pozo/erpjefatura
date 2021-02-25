@@ -94,10 +94,11 @@ function lista_plusvalia() {
                 //     // return '<button onclick="show_childs(\'' + datos +'\')">aC</button>';
                 // }
             },
-            {"data": "numero"},
+
             {"data": "fecha_tramite"},
             {"data": "comprador"},
             {"data": "vendedor"},
+            {"data": "valor_escritura"},
             {"data": "precio_venta"},
         ],
 
