@@ -38,7 +38,9 @@
             <!-- Form Group (last name)-->
             <div class="form-group col-md-6">
                 <label class="small mb-1" for="inputLastName">Comprador</label>
-                {{ form.search }}
+                <select class="form-control" id="search">
+                </select>
+                <input name="comprador" hidden>
             </div>
         </div>
         <div class="form-group">
@@ -82,10 +84,6 @@
             <div class="form-group col-md-4">
                 <label class="small mb-1" for="inputLocation">Agua potable</label>
                 {{ form.agua_potable }}
-            </div>
-            <div class="ui-widget">
-                <label for="tags">Tags: </label>
-                <input id="tags">
             </div>
         </div>
         <!-- Save changes button-->

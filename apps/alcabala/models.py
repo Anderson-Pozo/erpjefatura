@@ -3,6 +3,7 @@ from django.forms import model_to_dict
 from apps.predio.models import Predio
 from apps.auditoria.mixins import AuditMixin
 
+
 # Create your models here.
 class Comprador(AuditMixin, models.Model):
     """
@@ -15,18 +16,20 @@ class Comprador(AuditMixin, models.Model):
     casado = models.BooleanField('Casado', default=False, blank=True, null=True)
 
     def __str__(self):
-        return self.id
+        return '{} {}'.format(self.nombres, self.apellidos)
+
+    # def get_nombres(self):
+    #     return '{} {}'.format(self.nombres, self.apellidos)
 
     class Meta:
         db_table = "comprador"
 
-    def __str__(self):
-        return self.nombres + ' ' + self.apellidos
+    # def __str__(self):
+    #     return self.nombres + ' ' + self.apellidos
 
     def to_json(self):
         item = model_to_dict(self)
         return item
-
 
 
 class Vendedor(AuditMixin, models.Model):
