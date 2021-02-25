@@ -37,13 +37,13 @@ class GetPersonas(View):
             action = request.POST['action']
             if action == 'autoselect':
                 data = []
-                for i in Comprador.objects.filter(nombres__icontains=request.POST['term'])[0:5]:
+                for i in Comprador.objects.filter(numero_cedula__icontains=request.POST['term'])[0:5]:
                     item = i.to_json()
                     item['text'] = i.nombres + ' ' + i.apellidos
                     data.append(item)
             elif action == 'getvendedor':
                 data = []
-                for i in Vendedor.objects.filter(nombres__icontains=request.POST['term'])[0:5]:
+                for i in Vendedor.objects.filter(numero_cedula__icontains=request.POST['term'])[0:5]:
                     item = i.to_json()
                     item['text'] = i.nombres + ' ' + i.apellidos
                     data.append(item)
