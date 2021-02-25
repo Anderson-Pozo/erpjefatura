@@ -6,131 +6,168 @@
 {% block title %}<title>Crear contribuyente</title>{% endblock %}
 
 {% block iconheader %}
-<div class="page-header-icon"><i class="fas fa-file-signature"></i></div>
+    <div class="page-header-icon"><i class="fas fa-file-signature"></i></div>
 {% endblock %}
 
 {% block titleheader %} Apertura de patente {% endblock %}
 
-{%block subtitleheader %}
+{% block subtitleheader %}
     En esta seccion se realizará el ingreso de los datos del
     contribuyente y establecimiento
 {% endblock %}
 
-{% block buttondate %} {%endblock %}
+{% block buttondate %} {% endblock %}
 
 {% block centralbody %}
-<div class="container mt-n10">
-  <!-- Wizard card example with navigation-->
-  <div class="card card-progress">
-    <div class="card-header border-bottom">
-      <!-- Wizard navigation-->
-      <div
-        class="nav nav-pills nav-justified flex-column flex-xl-row nav-wizard"
-        id="cardTab"
-        role="tablist"
-      >
-        <!-- Wizard navigation item 1-->
-        <a
-          class="{% block link_paso1 %}nav-item nav-link{% endblock %}"
-          id="wizard1-tab"
-          href="{% url 'patente:crear_natural' %}"
-          aria-controls="wizard1"
-          aria-selected="true"
-        >
-          <div class="wizard-step-icon">1</div>
-          <div class="wizard-step-text">
-            <div class="wizard-step-text-name">Contribuyente</div>
-            <div class="wizard-step-text-details">Datos del contribuyente</div>
-          </div>
-        </a>
-        <!-- Wizard navigation item 2-->
-        <a
-          class="{% block link_paso2 %}nav-item nav-link{% endblock %}"
-          id="wizard2-tab"
-          href="{% url 'patente:crear_establecimiento' %}"
-          aria-controls="wizard2"
-          aria-selected="true"
-        >
-          <div class="wizard-step-icon">2</div>
-          <div class="wizard-step-text">
-            <div class="wizard-step-text-name">Establecimiento</div>
-            <div class="wizard-step-text-details">
-              Datos del establecimiento
+    <div class="container mt-n10">
+        <!-- Wizard card example with navigation-->
+        <div class="card card-progress">
+            <div class="card-header border-bottom">
+                <!-- Wizard navigation-->
+                <div
+                        class="nav nav-pills nav-justified flex-column flex-xl-row nav-wizard"
+                        id="cardTab"
+                        role="tablist"
+                >
+                    <!-- Wizard navigation item 1-->
+                    <a
+                            class="{% block link_paso1 %}nav-item nav-link{% endblock %}"
+                            id="wizard1-tab"
+                            href="{% url 'patente:crear_natural' %}"
+                            aria-controls="wizard1"
+                            aria-selected="true"
+                    >
+                        <div class="wizard-step-icon">1</div>
+                        <div class="wizard-step-text">
+                            <div class="wizard-step-text-name">Contribuyente</div>
+                            <div class="wizard-step-text-details">Datos del contribuyente</div>
+                        </div>
+                    </a>
+                    <!-- Wizard navigation item 2-->
+                    <a
+                            class="{% block link_paso2 %}nav-item nav-link{% endblock %}"
+                            id="wizard2-tab"
+                            href="{% url 'patente:crear_establecimiento' %}"
+                            aria-controls="wizard2"
+                            aria-selected="true"
+                    >
+                        <div class="wizard-step-icon">2</div>
+                        <div class="wizard-step-text">
+                            <div class="wizard-step-text-name">Establecimiento</div>
+                            <div class="wizard-step-text-details">
+                                Datos del establecimiento
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Wizard navigation item 3-->
+                    <a
+                            class="{% block link_paso3 %}nav-item nav-link{% endblock %}"
+                            id="wizard3-tab"
+                            href="{% url 'patente:crear_patente' %}"
+                            aria-controls="wizard3"
+                            aria-selected="true"
+                    >
+                        <div class="wizard-step-icon">3</div>
+                        <div class="wizard-step-text">
+                            <div class="wizard-step-text-name">Formulario de declaración</div>
+                            <div class="wizard-step-text-details">
+                                Creación y revisión del formulario de declaración
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Wizard navigation item 4-->
+                    <a
+                            class="{% block link_paso4 %}nav-item nav-link{% endblock %}"
+                            id="wizard4-tab"
+                            href="{% url 'patente:especie_patente' %}"
+                            aria-controls="wizard4"
+                            aria-selected="true"
+                    >
+                        <div class="wizard-step-icon">4</div>
+                        <div class="wizard-step-text">
+                            <div class="wizard-step-text-name">Patente Municipal</div>
+                            <div class="wizard-step-text-details">
+                                Impresión de la especie de patente municipal
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
-          </div>
-        </a>
-        <!-- Wizard navigation item 3-->
-        <a
-          class="{% block link_paso3 %}nav-item nav-link{% endblock %}"
-          id="wizard3-tab"
-          href="{% url 'patente:crear_patente' %}"
-          aria-controls="wizard3"
-          aria-selected="true"
-        >
-          <div class="wizard-step-icon">3</div>
-          <div class="wizard-step-text">
-            <div class="wizard-step-text-name">Formulario de declaración</div>
-            <div class="wizard-step-text-details">
-              Creación y revisión del formulario de declaración
+            <div class="card-body">
+                <div class="tab-content" id="cardTabContent">
+                    <div
+                            class="tab-pane py-2 py-xl-3 fade show active"
+                            id="wizard1"
+                            role="tabpanel"
+                            aria-labelledby="wizard1-tab"
+                    >
+                        <div class="row justify-content-center">
+                            <div class="col-xxl-6 col-xl-10">
+                                {% block body_wizard %}
+                                    <div class="text-black">
+                                        <h1>Text here</h1>
+                                    </div>
+                                {% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </a>
-        <!-- Wizard navigation item 4-->
-        <a
-          class="{% block link_paso4 %}nav-item nav-link{% endblock %}"
-          id="wizard4-tab"
-          href="{% url 'patente:especie_patente' %}"
-          aria-controls="wizard4"
-          aria-selected="true"
-        >
-          <div class="wizard-step-icon">4</div>
-          <div class="wizard-step-text">
-            <div class="wizard-step-text-name">Patente Municipal</div>
-            <div class="wizard-step-text-details">
-              Impresión de la especie de patente municipal
+
+
+            <div class="progress rounded-0">
+                <div
+                        class="progress-bar bg-gradient-primary-to-secondary"
+                        role="progressbar"
+                        style="{% block progress %} width: 0% {% endblock %}"
+                        aria-valuenow="25"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                ></div>
             </div>
-          </div>
-        </a>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="tab-content" id="cardTabContent">
-        <div
-          class="tab-pane py-2 py-xl-3 fade show active"
-          id="wizard1"
-          role="tabpanel"
-          aria-labelledby="wizard1-tab"
-        >
-        <div class="row justify-content-center">
-            <div class="col-xxl-6 col-xl-10">
-              {% block body_wizard %}
-              <div class="text-black">
-                <h1>Text here</h1>
-              </div>
-              {% endblock %}
-            </div>
+
         </div>
-        </div>
-      </div>
     </div>
-
-
-    <div class="progress rounded-0">
-      <div
-        class="progress-bar bg-gradient-primary-to-secondary"
-        role="progressbar"
-        style="{% block progress %} width: 0% {% endblock %}"
-        aria-valuenow="25"
-        aria-valuemin="0"
-        aria-valuemax="100"
-      ></div>
-    </div>
-
-  </div>
-</div>
 
 {% endblock %}
 
 {% block extrajs %}
+    <script>
+        $(function () {
+            let i_impuesto = $('input[name="impuesto"]');
+            let i_interes = $('input[name="interes"]');
+            let i_multa = $('input[name="multa"]');
+            let i_serv = $('input[name="servicios_administrativos"]');
+            let i_total = $('#total');
 
+            function suma() {
+                let val_impuesto = parseFloat(i_impuesto.val());
+                let val_interes = parseFloat(i_interes.val());
+                let val_multa = parseFloat(i_multa.val());
+                let val_serv = parseFloat(i_serv.val());
+
+                let total = val_impuesto + val_interes + val_multa + val_serv;
+                i_total.text(parseFloat(total.toFixed(2)));
+            }
+
+            suma();
+
+            i_impuesto.on('change', () => {
+                suma();
+            });
+
+            i_interes.on('change', () => {
+                suma();
+            })
+
+            i_multa.on('change', () => {
+                suma();
+            })
+
+            i_serv.on('change', () => {
+                suma();
+            })
+
+        });
+    </script>
 {% endblock %}
