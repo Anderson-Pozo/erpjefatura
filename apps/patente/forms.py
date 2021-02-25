@@ -103,24 +103,28 @@ class DetalleForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control form-control-sm',
                     'required': True,
+                    'step': '0.01'
                 }
             ),
             'interes': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm',
                     'required': True,
+                    'step': '0.01'
                 }
             ),
             'multa': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm',
                     'required': True,
+                    'step': '0.01'
                 }
             ),
             'servicios_administrativos': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm',
                     'required': True,
+                    'step': '0.01'
                 }
             ),
 
