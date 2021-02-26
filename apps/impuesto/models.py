@@ -111,3 +111,12 @@ def calcular_impuesto(capital):
     diferencia = capital - row.fraccion_basica
     suma = row.impuesto_fraccion_basica + (diferencia * row.porcentaje_fraccion_excedente)
     return format(suma, '.2f')
+
+
+def get_date_digito(digito, obligado):
+    if obligado:
+        fecha = Vencimiento.objects.get(digito=digito).obligado
+        return fecha
+    else:
+        fecha = Vencimiento.objects.get(digito=digito).no_obligado
+        return fecha

@@ -1,6 +1,7 @@
 from django.db import models
 from django.forms import model_to_dict
 from apps.auditoria.mixins import AuditMixin
+from apps.impuesto.models import get_date_digito
 
 
 # Create your models here.
@@ -50,18 +51,15 @@ class Contribuyente(models.Model):
 
     def __str__(self):
         return self.ruc
-    #     contribuyente = self.objects.get(self.id)
-    #     if self.tipocontribuyente.id == 1:
-    #         return contribuyente.natural.numero_cedula
-    #     else:
-    #         # return object.juridico.razon_social
-    #         return contribuyente.juridico.razon_social
 
     def get_nombre(self, ruc):
         if self.tipocontribuyente.id == 1:
             return Natural.objects.get(ruc=ruc).get_nombre()
         else:
             return Juridico.objects.get(ruc=ruc).get_nombre()
+
+    def get_fecha_vencimiento(self):
+        return get_date_digito(self.ruc[8], self.tipocontribuyente.obligado_contabilidad)
 
     class Meta:
         db_table = "contribuyente"

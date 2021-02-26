@@ -44,19 +44,19 @@
                         <!-- Invoice item 1-->
                         <tr class="border-bottom">
                             <td>
-                                <div class="font-weight-bold">Impuesto patente anual</div>
+                                <div class="small mb-1">Impuesto patente anual</div>
                             </td>
                             <td class="text-right font-weight-bold">
                                 {#                            {{ form.impuesto }}#}
                                 <input name="impuesto" type="number" class="form-control form-control-sm"
-                                       value="{{ patente.calcular_impuesto }}">
+                                       value="{{ patente.get_impuesto }}">
                             </td>
                             <td>&nbsp;</td>
                         </tr>
                         <!-- Invoice item 2-->
                         <tr class="border-bottom">
                             <td>
-                                <div class="font-weight-bold">Interes por mora</div>
+                                <div class="small mb-1">Interes por mora</div>
                             </td>
                             <td class="text-right font-weight-bold">
                                 {{ form.interes }}
@@ -66,7 +66,7 @@
                         <!-- Invoice item 3-->
                         <tr class="border-bottom">
                             <td>
-                                <div class="font-weight-bold">Multa</div>
+                                <div class="small mb-1">Multa</div>
                             </td>
                             <td class="text-right font-weight-bold">
                                 {{ form.multa }}
@@ -75,7 +75,7 @@
                         </tr>
                         <tr class="border-bottom">
                             <td>
-                                <div class="font-weight-bold">Servicios administrativos</div>
+                                <div class="small mb-1">Servicios administrativos</div>
                             </td>
                             <td class="text-right font-weight-bold">
                                 {{ form.servicios_administrativos }}

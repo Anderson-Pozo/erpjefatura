@@ -152,6 +152,7 @@ dmypy.json
 #apps/migrations/**
 #!apps/migrations
 #!apps/migrations/__init__.py
+tests.py
 
 **/migrations/**
 !**/migrations

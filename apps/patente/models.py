@@ -33,7 +33,7 @@ class Patente(AuditMixin, models.Model):
         item['nombre_contribuyente'] = self.contribuyente.get_nombre(self.contribuyente.ruc)
         return item
 
-    def calcular_impuesto(self):
+    def get_impuesto(self):
         return calcular_impuesto(self.establecimiento.total_patrimonio)
 
     class Meta:
