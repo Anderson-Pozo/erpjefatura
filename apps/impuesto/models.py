@@ -96,16 +96,6 @@ class Multa(AuditMixin, models.Model):
         db_table = "multa"
 
 
-def calcular_test(capital):
-    row = Impuesto.objects.order_by('-fraccion_basica').filter(
-        fraccion_basica__lte=capital
-    )[0:1]
-
-    diferencia = capital - row[0].fraccion_basica
-    suma = row[0].impuesto_fraccion_basica + (diferencia * row[0].porcentaje_fraccion_excedente)
-    return format(suma, '.2f')
-
-
 def calcular_impuesto(capital):
     row = Impuesto.objects.get(fraccion_basica__lt=capital, fraccion_excedente__gte=capital)
     diferencia = capital - row.fraccion_basica
@@ -113,7 +103,7 @@ def calcular_impuesto(capital):
     return format(suma, '.2f')
 
 
-def get_date_digito(digito, obligado):
+def get_date_digito(digito, obligado) :
     if obligado:
         fecha = Vencimiento.objects.get(digito=digito).obligado
         return fecha

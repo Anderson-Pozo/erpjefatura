@@ -50,6 +50,13 @@
                                 {#                            {{ form.impuesto }}#}
                                 <input name="impuesto" type="number" class="form-control form-control-sm"
                                        value="{{ patente.get_impuesto }}">
+                                <br>
+                                <label>Ultimo pago</label>
+                                <input value="{{ patente.get_ultimo_pago }}">
+                                <br>
+                                <br>
+                                <label>Vencimiento</label>
+                                <input value="{{ patente.get_vencimiento }}">
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -59,7 +66,8 @@
                                 <div class="small mb-1">Interes por mora</div>
                             </td>
                             <td class="text-right font-weight-bold">
-                                {{ form.interes }}
+                                <input type="number" value="{{ patente.get_interes }}">
+{#                                {{ form.interes }}#}
                             </td>
                             <td>&nbsp;</td>
                         </tr>

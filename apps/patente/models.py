@@ -1,10 +1,13 @@
-from datetime import datetime
+from datetime import date, datetime
 from django.db import models
 from django.forms import model_to_dict
+from django.utils.timezone import now
 from apps.contribuyente.models import Contribuyente
 from apps.establecimiento.models import Establecimiento
 from apps.impuesto.models import Impuesto, calcular_impuesto
 from apps.auditoria.mixins import AuditMixin
+
+from apps.utils.calc_months import calcular_meses
 
 
 # Create your models here.
@@ -36,6 +39,32 @@ class Patente(AuditMixin, models.Model):
     def get_impuesto(self):
         return calcular_impuesto(self.establecimiento.total_patrimonio)
 
+    def get_ultimo_pago(self):
+        return fecha_ultimo_pago(self.id)
+
+    def get_vencimiento(self):
+        ultimo_anio = self.get_ultimo_pago().year
+        anio_actual = datetime.now().year
+
+        if ultimo_anio == anio_actual:
+            fecha_vencimiento = self.contribuyente.get_fecha_vencimiento().replace(year=anio_actual)
+            return fecha_vencimiento
+        else:
+            fecha_vencimiento = self.contribuyente.get_fecha_vencimiento().replace(year=ultimo_anio+1)
+            return fecha_vencimiento
+
+    def get_interes(self):
+        fecha_actual = date.today()
+        fecha_vencimiento = self.get_vencimiento()
+
+        if fecha_actual > fecha_vencimiento:
+            meses_retraso = calcular_meses(fecha_vencimiento, fecha_actual)
+            impuesto = float(self.get_impuesto())
+            total = impuesto * meses_retraso * 0.03
+            return format(total, '.2f')
+        else:
+            return format(0.00, '.2f')
+
     class Meta:
         db_table = "patente"
 
@@ -46,7 +75,7 @@ class DetallePatente(AuditMixin, models.Model):
     movimientos de patente, ya se apertura o renovación
     """
     id = models.AutoField(primary_key=True)
-    fecha = models.DateField('Fecha de tramite', default=datetime.now(), blank=True, null=True)
+    fecha = models.DateField('Fecha de tramite', default=now, blank=True, null=True)
     impuesto = models.DecimalField(
         'Impuesto',
         decimal_places=2,
@@ -87,3 +116,11 @@ class DetallePatente(AuditMixin, models.Model):
 
     class Meta:
         db_table = "detalle_patente"
+
+
+def fecha_ultimo_pago(id_patente):
+    try:
+        fecha = DetallePatente.objects.filter(patente__id=id_patente).order_by('-fecha')[0]
+        return fecha.fecha
+    except IndexError:
+        return date(1111, 1, 1)
