@@ -47,19 +47,19 @@
             </div>
             <!-- Form Group (last name)-->
             <div class="form-group col-md-6">
-                <label class="small mb-1" for="inputLastName">Fecha</label>
+                <label class="small mb-1" for="inputLastName">Fecha de notaria</label>
                 {{ form.fecha_tramite }}
             </div>
         </div>
         <div class="form-row">
             <!-- Form Group (first name)-->
             <div class="form-group col-md-6">
-                <label class="small mb-1" for="inputFirstName">valor de escritura</label>
+                <label class="small mb-1" for="inputFirstName">Valor de escritura</label>
                 {{ form.valor_escritura }}
             </div>
             <!-- Form Group (last name)-->
             <div class="form-group col-md-6">
-                <label class="small mb-1" for="inputLastName">valor</label>
+                <label class="small mb-1" for="inputLastName">Valor de notaria</label>
                 {{ form.valor_notaria }}
             </div>
         </div>
@@ -78,8 +78,6 @@
                     <tr class="border-bottom">
                         <td>
                             <div class="small mb-1">Precio de venta</div>
-                            <div class="small text-muted d-none d-md-block">
-                            </div>
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
                             {{ form.precio_venta }}
@@ -89,8 +87,6 @@
                     <tr class="border-bottom">
                         <td>
                             <div class="small mb-1">Precio de adquisicion</div>
-                            <div class="small text-muted d-none d-md-block">
-                            </div>
                         </td>
 
                         <td class="text-right font-weight-bold" colspan="4">
@@ -101,8 +97,6 @@
                     <tr class="border-bottom">
                         <td>
                             <div class="small mb-1">Diferencia Bruta</div>
-                            <div class="small text-muted d-none d-md-block">
-                            </div>
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
                             {{ form.diferencia_bruta }}
@@ -111,8 +105,6 @@
                     <tr class="border-bottom">
                         <td>
                             <div class="small mb-1">Mejoras</div>
-                            <div class="small text-muted d-none d-md-block">
-                            </div>
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
                             {{ form.rebaja_mejoras }}
@@ -121,8 +113,6 @@
                     <tr class="border-bottom">
                         <td>
                             <div class="small mb-1">Diferencia Neta</div>
-                            <div class="small text-muted d-none d-md-block">
-                            </div>
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
                             {{ form.diferencia_neta }}
@@ -131,8 +121,6 @@
                     <tr class="border-bottom">
                         <td>
                             <div class="small mb-1">5% c/año de Tenencia</div>
-                            <div class="small text-muted d-none d-md-block">
-                            </div>
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
                             {{ form.tenencia }}
@@ -141,8 +129,6 @@
                     <tr class="border-bottom">
                         <td>
                             <div class="small mb-1">Utilidad Imponible</div>
-                            <div class="small text-muted d-none d-md-block">
-                            </div>
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
                             {{ form.base_rebajar_moneda }}
@@ -151,8 +137,6 @@
                     <tr class="border-bottom">
                         <td>
                             <div class="small mb-1">Rebaja por Desvalorización Moneda</div>
-                            <div class="small text-muted d-none d-md-block">
-                            </div>
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
                             {{ form.rebaja_desvalorizacion }}
@@ -161,38 +145,21 @@
                     <tr class="border-bottom">
                         <td>
                             <div class="small mb-1">Base para rebajar por Desvalorización Moneda</div>
-                            <div class="small text-muted d-none d-md-block">
-                            </div>
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
                             {{ form.utilidad_imponible }}
                         </td>
                     </tr>
-                    <!-- Invoice subtotal-->
-                    <tr>
-                        <td class="text-right pb-0" colspan="3">
-                            <div class="text-uppercase small font-weight-700 text-muted">Subtotal:</div>
-                        </td>
-                        <td class="text-right pb-0">
-                            <div class="h5 mb-0 font-weight-700">$,1925.00</div>
-                        </td>
-                    </tr>
-                    <!-- Invoice tax column-->
-                    <tr>
-                        <td class="text-right pb-0" colspan="3">
-                            <div class="text-uppercase small font-weight-700 text-muted">Tax (7%):</div>
-                        </td>
-                        <td class="text-right pb-0">
-                            <div class="h5 mb-0 font-weight-700">$134.75</div>
-                        </td>
-                    </tr>
                     <!-- Invoice total-->
                     <tr>
-                        <td class="text-right pb-0" colspan="3">
-                            <div class="text-uppercase small font-weight-700 text-muted">Total Amount Due:</div>
+                        <td class="text-right pb-0">
+                            <div class="text-uppercase small font-weight-700 text-muted">
+                                Total a pagar
+                            </div>
                         </td>
                         <td class="text-right pb-0">
-                            <div class="h5 mb-0 font-weight-700 text-green">$2059.75</div>
+                            <div class="h5 mb-0 font-weight-700 text-green" id="totalp">
+                            </div>
                         </td>
                     </tr>
                     </tbody>
