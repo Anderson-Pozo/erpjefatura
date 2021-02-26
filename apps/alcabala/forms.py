@@ -73,26 +73,6 @@ class AlcabalaForm(forms.ModelForm):
                     'required': True,
                 }
             ),
-            # 'vendedor': forms.Select(
-            #     attrs={
-            #         'class': 'form-control',
-            #         'required': True,
-            #     }
-            # ),
-            # 'comprador': forms.Select(
-            #     attrs={
-            #         'class': 'form-control',
-            #         'required': True,
-            #         'id': 'input_comprador',
-            #         'style': 'width: 100%',
-            #     }
-            # ),
-            # 'predio': forms.Select(
-            #     attrs={
-            #         'class': 'form-control',
-            #         'required': True,
-            #     }
-            # ),
             'descripcion_tramite': forms.Textarea(
                 attrs={
                     'class': 'form-control',
@@ -102,42 +82,42 @@ class AlcabalaForm(forms.ModelForm):
             ),
             'valor_compra_venta': forms.NumberInput(
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-control form-control-sm',
                     'placeholder': 'Ingrese el valor de compra-venta',
                     'required': True,
                 }
             ),
             'impuesto_alcabalas': forms.NumberInput(
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-control form-control-sm',
                     'placeholder': 'Ingrese el impuesto de alcabalas',
                     'required': True,
                 }
             ),
             'alcabalas_provinciales': forms.NumberInput(
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-control form-control-sm',
                     'placeholder': 'Ingrese el valor de las alcabalas provinciales',
                     'required': True,
                 }
             ),
             'fondos_escolares': forms.NumberInput(
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-control form-control-sm',
                     'placeholder': 'Ingrese el valor de los fondos escolares',
                     'required': True,
                 }
             ),
             'fondos_prevencion_riesgos': forms.NumberInput(
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-control form-control-sm',
                     'placeholder': 'Ingrese el valor de los fondos de prevención de riesgos',
                     'required': True,
                 }
             ),
             'agua_potable': forms.NumberInput(
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-control form-control-sm',
                     'placeholder': 'Ingrese el valor del agua potable',
                     'required': True,
                 }

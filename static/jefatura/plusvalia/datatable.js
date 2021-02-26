@@ -18,7 +18,7 @@ function format(d) {
         '</tr>' +
         '<tr>' +
         '<td>Diferencia neta:</td>' +
-        '<td>' + d.diferenicia_neta + '</td>' +
+        '<td>' + d.diferencia_neta + '</td>' +
         '</tr>' +
         '<tr>' +
         '<td>Valor de tenencia:</td>' +

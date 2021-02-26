@@ -47,13 +47,6 @@
                 <input name="comprador" hidden>
             </div>
         </div>
-{#        <div class="form-group">#}
-{#            <label class="small mb-1" for="callePrincipal">Clave catastral</label>#}
-{#            <select class="form-control" id="search_predio">#}
-{#            </select>#}
-{#            <input name="predio" hidden>#}
-{#        </div>#}
-        <!-- Form Row        -->
         <div class="form-group">
             <!-- Form Group (organization name)-->
             <div class="form-group">
@@ -77,8 +70,6 @@
                     <tr class="border-bottom">
                         <td>
                             <div class="small mb-1">Valor del compra venta</div>
-                            <div class="small text-muted d-none d-md-block">
-                            </div>
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
                             {{ form.valor_compra_venta }}
@@ -87,12 +78,9 @@
                     <!-- Invoice item 2-->
                     <tr class="border-bottom">
                         <td>
-                            <div class="small mb-1">Impuesto alcabala</div>
-                            <div class="small text-muted d-none d-md-block">
-                            </div>
+                            <div class="small mb-1" >Impuesto alcabala</div>
                         </td>
-
-                        <td class="text-right font-weight-bold" colspan="4">
+                        <td class="text-right font-weight-bold" colspan="4" >
                             {{ form.impuesto_alcabalas }}
                         </td>
                     </tr>
@@ -100,28 +88,23 @@
                     <tr class="border-bottom">
                         <td>
                             <div class="small mb-1">Alcabala provincial</div>
-                            <div class="small text-muted d-none d-md-block">
-                            </div>
                         </td>
-                        <td class="text-right font-weight-bold" colspan="4">
+                        <td class="text-right font-weight-bold" colspan="4" >
                             {{ form.alcabalas_provinciales }}
                         </td>
                     </tr>
                     <tr class="border-bottom">
                         <td>
                             <div class="small mb-1">Fondos escolares</div>
-                            <div class="small text-muted d-none d-md-block">
-                            </div>
                         </td>
-                        <td class="text-right font-weight-bold" colspan="4">
+                        <td class="text-right font-weight-bold" colspan="4" >
                             {{ form.fondos_escolares }}
                         </td>
                     </tr>
                     <tr class="border-bottom">
                         <td>
                             <div class="small mb-1">Prevención de riesgos</div>
-                            <div class="small text-muted d-none d-md-block">
-                            </div>
+
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
                             {{ form.fondos_prevencion_riesgos }}
@@ -130,39 +113,21 @@
                     <tr class="border-bottom">
                         <td>
                             <div class="small mb-1">Agua potable</div>
-                            <div class="small text-muted d-none d-md-block">
-                            </div>
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
                             {{ form.agua_potable }}
                         </td>
                     </tr>
-
-                    <!-- Invoice subtotal-->
-                    <tr>
-                        <td class="text-right pb-0" colspan="3">
-                            <div class="text-uppercase small font-weight-700 text-muted">Subtotal:</div>
-                        </td>
-                        <td class="text-right pb-0">
-                            <div class="h5 mb-0 font-weight-700">$,1925.00</div>
-                        </td>
-                    </tr>
-                    <!-- Invoice tax column-->
-                    <tr>
-                        <td class="text-right pb-0" colspan="3">
-                            <div class="text-uppercase small font-weight-700 text-muted">Tax (7%):</div>
-                        </td>
-                        <td class="text-right pb-0">
-                            <div class="h5 mb-0 font-weight-700">$134.75</div>
-                        </td>
-                    </tr>
                     <!-- Invoice total-->
                     <tr>
-                        <td class="text-right pb-0" colspan="3">
-                            <div class="text-uppercase small font-weight-700 text-muted">Total Amount Due:</div>
+                        <td class="text-right pb-0">
+                            <div class="text-uppercase small font-weight-700 text-muted">
+                                Total a pagar
+                            </div>
                         </td>
                         <td class="text-right pb-0">
-                            <div class="h5 mb-0 font-weight-700 text-green">$2059.75</div>
+                            <div class="h5 mb-0 font-weight-700 text-green" id="total">
+                            </div>
                         </td>
                     </tr>
                     </tbody>
