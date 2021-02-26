@@ -15,11 +15,11 @@
             </div>
         {% endif %}
         <!-- Form Row-->
-    <div class="form-row">
+        <div class="form-row">
             <!-- Form Group (first name)-->
             <div class="form-group col-md-4">
-{#                <label class="small mb-1" for="inputFirstName">Número</label>#}
-{#                {{ form.numero }}#}
+                {#                <label class="small mb-1" for="inputFirstName">Número</label>#}
+                {#                {{ form.numero }}#}
                 <input value="{{ alcabala.id }}" name="alcabala" hidden>
             </div>
         </div>
@@ -27,15 +27,15 @@
             <!-- Form Group (first name)-->
             <div class="form-group col-md-6">
                 <label class="small mb-1" for="inputFirstName">Vendedor</label>
-{#                <input class="form-control" id="inputVendedor" type="text"#}
-{#                       placeholder="Ingresa el nombre del vendedor"/>#}
+                {#                <input class="form-control" id="inputVendedor" type="text"#}
+                {#                       placeholder="Ingresa el nombre del vendedor"/>#}
                 <input class="form-control" value="{{ alcabala.vendedor.get_nombres }}" disabled>
             </div>
             <!-- Form Group (last name)-->
             <div class="form-group col-md-6">
                 <label class="small mb-1" for="inputLastName">Comprador</label>
-{#                <input class="form-control" id="inputComprador" type="text"#}
-{#                       placeholder="Ingresa el nombre del Comprador"/>#}
+                {#                <input class="form-control" id="inputComprador" type="text"#}
+                {#                       placeholder="Ingresa el nombre del Comprador"/>#}
                 <input class="form-control" value="{{ alcabala.comprador.get_nombres }}" disabled>
             </div>
         </div>
@@ -55,12 +55,15 @@
             <!-- Form Group (first name)-->
             <div class="form-group col-md-6">
                 <label class="small mb-1" for="inputFirstName">Valor de escritura</label>
-                {{ form.valor_escritura }}
+{# {{ form.valor_escritura }}#}
+
+                {{ form.precio_adquisicion }}
             </div>
             <!-- Form Group (last name)-->
             <div class="form-group col-md-6">
                 <label class="small mb-1" for="inputLastName">Valor de notaria</label>
-                {{ form.valor_notaria }}
+                {# {{ form.valor_notaria }}#}
+                  {{ form.precio_venta }}
             </div>
         </div>
         <div class="card-body p-4 p-md-5">
@@ -75,24 +78,24 @@
                     </thead>
                     <tbody>
                     <!-- Invoice item 1-->
-                    <tr class="border-bottom">
-                        <td>
-                            <div class="small mb-1">Precio de venta</div>
-                        </td>
-                        <td class="text-right font-weight-bold" colspan="4">
-                            {{ form.precio_venta }}
-                        </td>
-                    </tr>
-                    <!-- Invoice item 2-->
-                    <tr class="border-bottom">
-                        <td>
-                            <div class="small mb-1">Precio de adquisicion</div>
-                        </td>
-
-                        <td class="text-right font-weight-bold" colspan="4">
-                            {{ form.precio_adquisicion }}
-                        </td>
-                    </tr>
+{#                    <tr class="border-bottom">#}
+{#                        <td>#}
+{#                            <div class="small mb-1">Precio de venta</div>#}
+{#                        </td>#}
+{#                        <td class="text-right font-weight-bold" colspan="4">#}
+{#                            {{ form.precio_venta }}#}
+{#                        </td>#}
+{#                    </tr>#}
+{#                    <!-- Invoice item 2-->#}
+{#                    <tr class="border-bottom">#}
+{#                        <td>#}
+{#                            <div class="small mb-1">Precio de adquisicion</div>#}
+{#                        </td>#}
+{##}
+{#                        <td class="text-right font-weight-bold" colspan="4">#}
+{#                            {{ form.precio_adquisicion }}#}
+{#                        </td>#}
+{#                    </tr>#}
                     <!-- Invoice item 3-->
                     <tr class="border-bottom">
                         <td>
@@ -128,11 +131,12 @@
                     </tr>
                     <tr class="border-bottom">
                         <td>
-                            <div class="small mb-1">Utilidad Imponible</div>
+                            <div class="small mb-1">Base para rebajar por Desvalorización Moneda</div>
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
                             {{ form.base_rebajar_moneda }}
                         </td>
+
                     </tr>
                     <tr class="border-bottom">
                         <td>
@@ -144,7 +148,7 @@
                     </tr>
                     <tr class="border-bottom">
                         <td>
-                            <div class="small mb-1">Base para rebajar por Desvalorización Moneda</div>
+                            <div class="small mb-1">Utilidad Imponible</div>
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
                             {{ form.utilidad_imponible }}
