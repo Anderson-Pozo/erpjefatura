@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Imprimir formulario</title>
+    <style>
+        @page {
+            size: A5 landscape;
+            margin-top: 5.5cm;
+            margin-left: 2cm;
+            margin-right: 2cm;
+        }
+    </style>
+</head>
+<body>
+<h1>{{ detalle.patente.numero_patente }}</h1>
+<br>
+<em>Número de patente: {{ detalle.patente.numero_patente }}</em>
+<br>
+<em>Fecha: {{ detalle.fecha }}</em>
+<br>
+<em>RUC contribuyente: {{ detalle.patente.contribuyente.ruc }}</em>
+<br>
+{% if detalle.patente.contribuyente.tipocontribuyente.id == 1 %}
+    <div>
+        <em>Nombres o razón social: {{ detalle.patente.contribuyente.natural.nombres }}</em>
+    </div>
+{% else %}
+    <div>
+        <em>Nombres o razón social: {{ detalle.patente.contribuyente.juridico.razon_social }}</em>
+    </div>
+{% endif %}
+<br>
+<em>Establecimiento: {{ detalle.patente.establecimiento.nombre }}</em>
+<br>
+<em>Impuesto: {{ detalle.impuesto }}</em>
+<br>
+<em>Interes: {{ detalle.interes }}</em>
+<br>
+<em>Multa: {{ detalle.multa }}</em>
+<br>
+<em>Servicios administrativos: {{ detalle.servicios_administrativos }}</em>
+<br>
+<em>Total a pagar: <b>{{ detalle.get_total }}</b></em>
+</body>
+</html>

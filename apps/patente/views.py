@@ -153,7 +153,7 @@ class ReportDeclaracion(View):
 class CreacionEspecie(CreateView):
     template_name = 'patente/apertura/paso4_especie.html'
     form_class = DetalleForm
-    success_url = reverse_lazy('patente:lista_catastro')
+    success_url = reverse_lazy('patente:revision_especie')
 
     def get_context_data(self, **kwargs):
         context = {
@@ -165,3 +165,29 @@ class CreacionEspecie(CreateView):
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, self.get_context_data())
 
+
+class RevisionEspecie(TemplateView):
+    template_name = "patente/apertura/paso4_revision_especie.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['detalle'] = DetallePatente.objects.last()
+        return context
+
+
+class ReportEspecie(View):
+    def get(self, request, *args, **kwargs):
+        try:
+            template = get_template('patente/reportes/especie_report.html')
+            context = {
+                'detalle': DetallePatente.objects.get(pk=self.kwargs['pk'])
+            }
+            html = template.render(context)
+            response = HttpResponse(content_type='application/pdf')
+            # response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+            pisa_status = pisa.CreatePDF(
+                html, dest=response)
+            return response
+        except:
+            pass
+        return HttpResponseRedirect(reverse_lazy('patente:lista_catastro'))

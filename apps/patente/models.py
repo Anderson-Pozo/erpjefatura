@@ -4,7 +4,7 @@ from django.forms import model_to_dict
 from django.utils.timezone import now
 from apps.contribuyente.models import Contribuyente
 from apps.establecimiento.models import Establecimiento
-from apps.impuesto.models import Impuesto, calcular_impuesto
+from apps.impuesto.models import Impuesto, calcular_impuesto, calc_meses_multa
 from apps.auditoria.mixins import AuditMixin
 
 from apps.utils.calc_months import calcular_meses
@@ -65,6 +65,20 @@ class Patente(AuditMixin, models.Model):
         else:
             return format(0.00, '.2f')
 
+    def get_multa(self):
+        fecha_vencimiento = self.get_vencimiento()
+        fecha_actual = date.today()
+        impuesto = float(self.get_impuesto())
+
+        if fecha_actual > fecha_vencimiento:
+            suma = 0.0
+            multas = calc_meses_multa(fecha_vencimiento, fecha_actual)
+            for i in multas:
+                suma += impuesto * float(i.porcentaje)
+            return format(suma, '.2f')
+        else:
+            return format(0.00, '.2f')
+
     class Meta:
         db_table = "patente"
 
@@ -110,6 +124,10 @@ class DetallePatente(AuditMixin, models.Model):
     )
     patente = models.ForeignKey(Patente, on_delete=models.CASCADE)
 
+    def get_total(self):
+        total = self.impuesto + self.interes + self.multa + self.servicios_administrativos
+        return format(total, '.2f')
+
     def to_json(self):
         item = model_to_dict(self)
         return item
@@ -123,4 +141,4 @@ def fecha_ultimo_pago(id_patente):
         fecha = DetallePatente.objects.filter(patente__id=id_patente).order_by('-fecha')[0]
         return fecha.fecha
     except IndexError:
-        return date(1111, 1, 1)
+        return date.today()

@@ -50,13 +50,17 @@
                                 {#                            {{ form.impuesto }}#}
                                 <input name="impuesto" type="number" class="form-control form-control-sm"
                                        value="{{ patente.get_impuesto }}">
-                                <br>
-                                <label>Ultimo pago</label>
-                                <input value="{{ patente.get_ultimo_pago }}">
-                                <br>
-                                <br>
-                                <label>Vencimiento</label>
-                                <input value="{{ patente.get_vencimiento }}">
+{#                                <br>#}
+{#                                <label>Ultimo pago</label>#}
+{#                                <input value="{{ patente.get_ultimo_pago }}">#}
+{#                                <br>#}
+{#                                <br>#}
+{#                                <label>Vencimiento</label>#}
+{#                                <input value="{{ patente.get_vencimiento }}">#}
+{#                                <br>#}
+{#                                <br>#}
+{#                                <label>Multas</label>#}
+{#                                <input type="number" value="{{ patente.get_multa }}">#}
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -66,8 +70,10 @@
                                 <div class="small mb-1">Interes por mora</div>
                             </td>
                             <td class="text-right font-weight-bold">
-                                <input type="number" value="{{ patente.get_interes }}">
-{#                                {{ form.interes }}#}
+                                <input type="number"
+                                       name="interes"
+                                       value="{{ patente.get_interes }}"
+                                       class="form-control form-control-sm">
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -77,7 +83,10 @@
                                 <div class="small mb-1">Multa</div>
                             </td>
                             <td class="text-right font-weight-bold">
-                                {{ form.multa }}
+                                <input type="number"
+                                       name="multa"
+                                       value="{{ patente.get_multa }}"
+                                       class="form-control form-control-sm">
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -99,8 +108,8 @@
                             </td>
                             <td class="text-right pb-0">
                                 <div class="h5 mb-0 font-weight-700 text-green" id="total">
-{#                                    $2059.75#}
-{#                                    <input name="total" type="number">#}
+                                    {#                                    $2059.75#}
+                                    {#                                    <input name="total" type="number">#}
                                 </div>
                             </td>
                             <td>&nbsp;</td>

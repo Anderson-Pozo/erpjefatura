@@ -2,6 +2,7 @@ from _ast import mod
 from django.forms import model_to_dict
 from django.db import models
 from apps.auditoria.mixins import AuditMixin
+from apps.utils.calc_months import calcular_meses
 
 
 # Create your models here.
@@ -56,25 +57,9 @@ class Impuesto(AuditMixin, models.Model):
         db_table = "impuesto"
 
 
-MESES = (
-    ('Enero', 'Enero'),
-    ('Febrero', 'Febrero'),
-    ('Marzo', 'Marzo'),
-    ('Abril', 'Abril'),
-    ('Mayo', 'Mayo'),
-    ('Junio', 'Junio'),
-    ('Julio', 'Julio'),
-    ('Agosto', 'Agosto'),
-    ('Septiembre', 'Septiembre'),
-    ('Octubre', 'Octubre'),
-    ('Noviembre', 'Noviembre'),
-    ('Diciembre', 'Diciembre'),
-)
-
-
 class Multa(AuditMixin, models.Model):
     """
-    Modelo Multa que contiene los porcentajes de mmulta de mora por cada mes del año
+    Modelo Multa que contiene los porcentajes de multa de mora por cada mes del año
     """
     id = models.AutoField(primary_key=True)
     fecha = models.DateField('Fecha', blank=False, null=True)
@@ -87,6 +72,9 @@ class Multa(AuditMixin, models.Model):
         null=True
     )
     estado = models.BooleanField('Activo/Inactivo', blank=True, null=True, default=True)
+
+    def __str__(self):
+        return self.fecha.strftime('%d %B, %Y')
 
     def to_json(self):
         item = model_to_dict(self)
@@ -103,10 +91,16 @@ def calcular_impuesto(capital):
     return format(suma, '.2f')
 
 
-def get_date_digito(digito, obligado) :
+def get_date_digito(digito, obligado):
     if obligado:
         fecha = Vencimiento.objects.get(digito=digito).obligado
         return fecha
     else:
         fecha = Vencimiento.objects.get(digito=digito).no_obligado
         return fecha
+
+
+def calc_meses_multa(fecha_vencimiento, fecha_actual):
+    n_fechas = calcular_meses(fecha_vencimiento, fecha_actual)
+    multas = Multa.objects.filter(fecha__range=(fecha_vencimiento, fecha_actual))[0:n_fechas]
+    return multas
