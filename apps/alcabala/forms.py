@@ -60,7 +60,7 @@ class AlcabalaForm(forms.ModelForm):
             'fecha': forms.DateInput(
                 format='%Y-%m-%d',
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-control form-control-sm',
                     'required': True,
                     'value': datetime.now().strftime('%Y-%m-%d'),
                     'type': 'date',

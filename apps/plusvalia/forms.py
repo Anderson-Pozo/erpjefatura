@@ -1,5 +1,5 @@
 from django import forms
-from datetime import datetime
+from datetime import datetime, date
 from .models import Plusvalia
 
 
@@ -66,6 +66,7 @@ class PlusvaliaForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control',
                     'required': True,
+                    # 'value' : date(2016,1,10).strftime('%Y-%m-%d'),
                     'type': 'date',
                 }
             ),
@@ -78,80 +79,74 @@ class PlusvaliaForm(forms.ModelForm):
                     'type': 'date',
                 }
             ),
-            'valor_escritura': forms.NumberInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Ingrese el valor inicial',
-                    'required': True,
-                }
-            ),
-            'valor_notaria': forms.NumberInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Ingrese el valor actual',
-                    'required': True,
-                }
-            ),
+            # 'valor_escritura': forms.NumberInput(
+            #     attrs={
+            #         'class': 'form-control',
+            #         'placeholder': 'Ingrese el valor inicial',
+            #         'required': True,
+            #     }
+            # ),
+            # 'valor_notaria': forms.NumberInput(
+            #     attrs={
+            #         'class': 'form-control',
+            #         'placeholder': 'Ingrese el valor actual',
+            #         'required': True,
+            #     }
+            # ),
             'precio_venta': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm',
-                    'placeholder': 'Ingrese el precio de venta',
                     'required': True,
                 }
             ),
             'precio_adquisicion': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm',
-                    'placeholder': 'Ingrese el precio de adquisición',
                     'required': True,
                 }
             ),
             'diferencia_bruta': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm',
-                    'placeholder': 'Ingrese la diferencia bruta',
                     'required': True,
                 }
             ),
             'rebaja_mejoras': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm',
-                    'placeholder': 'Ingrese el valor de mejoras',
                     'required': True,
                 }
             ),
             'diferencia_neta': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm',
-                    'placeholder': 'Ingrese la diferencia neta',
                     'required': True,
                 }
             ),
             'tenencia': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm',
-                    'placeholder': 'Ingrese el 5% c/año de tenencia',
                     'required': True,
+                    'type' : 'number'
                 }
             ),
             'base_rebajar_moneda': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm',
-                    'placeholder': 'Ingrese la base para rebajar por Desvalorización Moneda',
                     'required': True,
+                    'type': 'number'
                 }
             ),
             'rebaja_desvalorizacion': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm',
-                    'placeholder': 'Ingrese la rebaja por Desvalorización Moneda',
                     'required': True,
+                    'type': 'number'
                 }
             ),
             'utilidad_imponible': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm',
-                    'placeholder': 'Ingrese la Utilidad Imponible',
                     'required': True,
                 }
             ),

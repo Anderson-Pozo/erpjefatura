@@ -2,11 +2,7 @@ function format(d) {
     return '<table cellpadding="5" cellspacing="0" style="padding-left:50px; border: hidden">' +
         '<tr>' +
         '<td>Valor en la escritura:</td>' +
-        '<td>' + d.valor_escritura + '</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>valor de notaria:</td>' +
-        '<td>' + d.valor_notaria + '</td>' +
+        '<td>' + d.precio_venta + '</td>' +
         '</tr>' +
         '<tr>' +
         '<td>Precio de adquisición:</td>' +
@@ -98,7 +94,7 @@ function lista_plusvalia() {
             {"data": "fecha_tramite"},
             {"data": "comprador"},
             {"data": "vendedor"},
-            {"data": "valor_escritura"},
+            {"data": "precio_adquisicion"},
             {"data": "precio_venta"},
         ],
 

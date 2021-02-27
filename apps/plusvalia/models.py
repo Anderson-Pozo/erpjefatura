@@ -15,22 +15,22 @@ class Plusvalia(AuditMixin, models.Model):
     fecha_tramite = models.DateField('Fecha del tramite', blank=True, null=True)
     fecha_escritura = models.DateField('Fecha de la escritura', blank=True, null=True)
     # fecha_notaria = models.DateField('Fecha de la notaria', blank=True, null=True)
-    valor_escritura = models.DecimalField(
-        'Valor del predio',
-        decimal_places=2,
-        default=0.00,
-        max_digits=9,
-        blank=False,
-        null=True
-    )
-    valor_notaria = models.DecimalField(
-        'Valor de cuantia de la notaria',
-        decimal_places=2,
-        default=0.00,
-        max_digits=9,
-        blank=False,
-        null=True
-    )
+    # valor_escritura = models.DecimalField(
+    #     'Valor del predio',
+    #     decimal_places=2,
+    #     default=0.00,
+    #     max_digits=9,
+    #     blank=False,
+    #     null=True
+    # )
+    # valor_notaria = models.DecimalField(
+    #     'Valor de cuantia de la notaria',
+    #     decimal_places=2,
+    #     default=0.00,
+    #     max_digits=9,
+    #     blank=False,
+    #     null=True
+    # )
     precio_venta = models.DecimalField(
         'Precio de venta',
         decimal_places=2,
