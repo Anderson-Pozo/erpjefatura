@@ -3,12 +3,9 @@ from datetime import datetime, date
 from .models import Plusvalia
 
 
-
 class PlusvaliaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-
 
     class Meta:
         model = Plusvalia
@@ -66,7 +63,7 @@ class PlusvaliaForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control',
                     'required': True,
-                    # 'value' : date(2016,1,10).strftime('%Y-%m-%d'),
+                    'value': date.today(),
                     'type': 'date',
                 }
             ),
@@ -75,7 +72,7 @@ class PlusvaliaForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control',
                     'required': True,
-                    'value': datetime.now().strftime('%Y-%m-%d'),
+                    'value': date.today(),
                     'type': 'date',
                 }
             ),
@@ -127,7 +124,7 @@ class PlusvaliaForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control form-control-sm',
                     'required': True,
-                    'type' : 'number'
+                    'type': 'number'
                 }
             ),
             'base_rebajar_moneda': forms.NumberInput(

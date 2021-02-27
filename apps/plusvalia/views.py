@@ -20,14 +20,14 @@ class ListaPlusvalia(AjaxList, ListView):
 
 class CrearPlusvalia(CreateView):
     model = Plusvalia
-    form_class =  PlusvaliaForm
+    form_class = PlusvaliaForm
     template_name = 'alcabala-plusvalia/registro/paso2_plusvalia.html'
     success_url = reverse_lazy('plusvalia:lista_plusvalia')
 
     def get_context_data(self, **kwargs):
         context = {
-            'alcabala' : Alcabala.objects.last(),
-            'form' : self.form_class,
+            'alcabala': Alcabala.objects.last(),
+            'form': self.form_class,
         }
         return context
 

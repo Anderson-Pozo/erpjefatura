@@ -66,6 +66,7 @@
                 {{ form.precio_venta }}
             </div>
         </div>
+        <input name="zona" value="{{ alcabala.predio.zona }}">
         <div class="card-body p-4 p-md-5">
             <!-- Invoice table-->
             <div class="table-responsive">
@@ -77,26 +78,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <!-- Invoice item 1-->
-                    {#                    <tr class="border-bottom">#}
-                    {#                        <td>#}
-                    {#                            <div class="small mb-1">Precio de venta</div>#}
-                    {#                        </td>#}
-                    {#                        <td class="text-right font-weight-bold" colspan="4">#}
-                    {#                            {{ form.precio_venta }}#}
-                    {#                        </td>#}
-                    {#                    </tr>#}
-                    {#                    <!-- Invoice item 2-->#}
-                    {#                    <tr class="border-bottom">#}
-                    {#                        <td>#}
-                    {#                            <div class="small mb-1">Precio de adquisicion</div>#}
-                    {#                        </td>#}
-                    {##}
-                    {#                        <td class="text-right font-weight-bold" colspan="4">#}
-                    {#                            {{ form.precio_adquisicion }}#}
-                    {#                        </td>#}
-                    {#                    </tr>#}
-                    <!-- Invoice item 3-->
                     <tr class="border-bottom">
                         <td>
                             <div class="small mb-1">Diferencia Bruta</div>
@@ -166,9 +147,6 @@
                             </div>
                         </td>
                     </tr>
-                    <div id="res">
-
-                    </div>
                     </tbody>
                 </table>
             </div>

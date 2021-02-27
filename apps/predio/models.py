@@ -17,10 +17,8 @@ class Predio(AuditMixin, models.Model):
     zona = models.CharField('Zona urbana o rural', max_length=20, blank=True, null=True)
     direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
 
-
     def __str__(self):
         return self.clave_catastral
-
 
     def to_json(self):
         item = model_to_dict(self)
