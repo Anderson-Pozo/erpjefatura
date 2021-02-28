@@ -24,3 +24,205 @@
 
 {% block buttondate %}
 {% endblock %}
+
+{#{% block welcomecard %}#}
+{##}
+{#{% endblock %}#}
+
+{% block centralbody %}
+    {#    {% for i in logs %}#}
+    {#        <h1>{{ i.user }}</h1>#}
+    {#    {% endfor %}#}
+    <div class="container mt-n10">
+        <div class="row">
+            <div class="col-xl-3 col-md-6 mb-4">
+                <!-- Dashboard info widget 1-->
+                <div class="card border-top-0 border-bottom-0 border-right-0 border-left-lg border-primary h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                                <div class="small font-weight-bold text-primary mb-1">Impuesto patente</div>
+                                <div class="h5">$ {{ total }}</div>
+                                <div class="text-xs font-weight-bold text-success d-inline-flex align-items-center">
+                                    <i class="mr-1" data-feather="trending-up"></i>
+                                    12%
+                                </div>
+                            </div>
+                            <div class="ml-2"><i class="fas fa-dollar-sign fa-2x text-gray-200"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <!-- Dashboard info widget 2-->
+                <div class="card border-top-0 border-bottom-0 border-right-0 border-left-lg border-secondary h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                                <div class="small font-weight-bold text-secondary mb-1">Average sale price</div>
+                                <div class="h5">$27.00</div>
+                                <div class="text-xs font-weight-bold text-danger d-inline-flex align-items-center">
+                                    <i class="mr-1" data-feather="trending-down"></i>
+                                    3%
+                                </div>
+                            </div>
+                            <div class="ml-2"><i class="fas fa-tag fa-2x text-gray-200"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <!-- Dashboard info widget 3-->
+                <div class="card border-top-0 border-bottom-0 border-right-0 border-left-lg border-success h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                                <div class="small font-weight-bold text-success mb-1">Clicks</div>
+                                <div class="h5">11,291</div>
+                                <div class="text-xs font-weight-bold text-success d-inline-flex align-items-center">
+                                    <i class="mr-1" data-feather="trending-up"></i>
+                                    12%
+                                </div>
+                            </div>
+                            <div class="ml-2"><i class="fas fa-mouse-pointer fa-2x text-gray-200"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <!-- Dashboard info widget 4-->
+                <div class="card border-top-0 border-bottom-0 border-right-0 border-left-lg border-info h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                                <div class="small font-weight-bold text-info mb-1">Conversion rate</div>
+                                <div class="h5">1.23%</div>
+                                <div class="text-xs font-weight-bold text-danger d-inline-flex align-items-center">
+                                    <i class="mr-1" data-feather="trending-down"></i>
+                                    1%
+                                </div>
+                            </div>
+                            <div class="ml-2"><i class="fas fa-percentage fa-2x text-gray-200"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">Area Chart Example</div>
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="myAreaChart" width="100%" height="30"></canvas>
+                </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>
+        <div class="row">
+            <div class="col-xl-6 mb-4">
+                <!-- Dashboard activity timeline example-->
+                <div class="card card-header-actions h-100">
+                    <div class="card-header">
+                        Actividad reciente
+                        <div class="dropdown no-caret">
+                            <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton"
+                                    type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                                    class="text-gray-500" data-feather="more-vertical"></i></button>
+                            <div class="dropdown-menu dropdown-menu-right animated--fade-in-up"
+                                 aria-labelledby="dropdownMenuButton">
+                                <h6 class="dropdown-header">Filter Activity:</h6>
+                                <a class="dropdown-item" href="#!"><span class="badge badge-green-soft text-green my-1">Commerce</span></a>
+                                <a class="dropdown-item" href="#!"><span class="badge badge-blue-soft text-blue my-1">Reporting</span></a>
+                                <a class="dropdown-item" href="#!"><span
+                                        class="badge badge-yellow-soft text-yellow my-1">Server</span></a>
+                                <a class="dropdown-item" href="#!"><span
+                                        class="badge badge-purple-soft text-purple my-1">Users</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="timeline timeline-xs">
+                            <!-- Timeline Item 1-->
+                            <div class="timeline-item">
+                                <div class="timeline-item-marker">
+                                    <div class="timeline-item-marker-text">12/02/27</div>
+                                    <div class="timeline-item-marker-indicator bg-green"></div>
+                                </div>
+                                <div class="timeline-item-content">
+                                    Objeto plusavlia modificado por
+                                    <a class="font-weight-bold text-dark" href="#!">Anderson Ramiro Pozo Imbaquingo</a>
+                                    has been successfully placed.
+                                </div>
+                            </div>
+                            <!-- Timeline Item 7-->
+                            <div class="timeline-item">
+                                <div class="timeline-item-marker">
+                                    <div class="timeline-item-marker-text">2 days</div>
+                                    <div class="timeline-item-marker-indicator bg-green"></div>
+                                </div>
+                                <div class="timeline-item-content">
+                                    New order placed!
+                                    <a class="font-weight-bold text-dark" href="#!">Order #2910</a>
+                                    has been successfully placed.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 mb-4">
+                <!-- Pie chart with legend example-->
+                <div class="card mb-4">
+                    <div class="card-header">Accesos recientes</div>
+                    <div class="card-body">
+                        {#                        <h1>{{ users.first_name }}</h1>#}
+                        {% for user in users %}
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div class="d-flex align-items-center flex-shrink-0 mr-3">
+                                    <div class="avatar avatar-xl mr-3 bg-gray-200">
+                                        <button class="btn btn-green btn-icon" type="button">
+                                            {{ user.avatar_name }}
+                                        </button>
+                                    </div>
+                                    <div class="d-flex flex-column font-weight-bold">
+                                        <a class="text-dark line-height-normal mb-1" href="#">{{ user }}</a>
+                                        {% if user.is_superuser %}
+                                            <div class="small text-muted line-height-normal">Administrador</div>
+                                        {% else %}
+                                            <div class="small text-muted line-height-normal">Contribuyente</div>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <!-- Item 6-->
+                        {#                        <div class="d-flex align-items-center justify-content-between">#}
+                        {#                            <div class="d-flex align-items-center flex-shrink-0 mr-3">#}
+                        {#                                <div class="avatar avatar-xl mr-3 bg-gray-200"><img class="avatar-img img-fluid"#}
+                        {#                                                                                    src="assets/img/illustrations/profiles/profile-6.png"#}
+                        {#                                                                                    alt=""/></div>#}
+                        {#                                <div class="d-flex flex-column font-weight-bold">#}
+                        {#                                    <a class="text-dark line-height-normal mb-1" href="#!">Wilf Ingram</a>#}
+                        {#                                    <div class="small text-muted line-height-normal">Position</div>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                            <div class="dropdown no-caret">#}
+                        {#                                <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownPeople6"#}
+                        {#                                        type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+                        {#                                    <i data-feather="more-vertical"></i></button>#}
+                        {#                                <div class="dropdown-menu dropdown-menu-right animated--fade-in-up"#}
+                        {#                                     aria-labelledby="dropdownPeople6">#}
+                        {#                                    <a class="dropdown-item" href="#!">Action</a>#}
+                        {#                                    <a class="dropdown-item" href="#!">Another action</a>#}
+                        {#                                    <a class="dropdown-item" href="#!">Something else here</a>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

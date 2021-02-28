@@ -50,7 +50,10 @@ class User(AuditMixin, AbstractUser):
         return f'{self.first_name}, {self.last_name}'
 
     def avatar_name(self):
-        return self.first_name[0] + self.last_name[0]
+        if self.first_name and self.last_name is not None:
+            return self.first_name[0] + self.last_name[0]
+        else:
+            return 'NoN'
 
 
 class Grupo(Group):
