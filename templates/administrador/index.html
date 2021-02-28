@@ -142,29 +142,22 @@
                     <div class="card-body">
                         <div class="timeline timeline-xs">
                             <!-- Timeline Item 1-->
-                            <div class="timeline-item">
-                                <div class="timeline-item-marker">
-                                    <div class="timeline-item-marker-text">12/02/27</div>
-                                    <div class="timeline-item-marker-indicator bg-green"></div>
+                            {% for lg in logs %}
+                                <div class="timeline-item">
+                                    <div class="timeline-item-marker">
+                                        <div class="timeline-item-marker-text">
+                                            {{ lg.get_days }}
+                                        </div>
+                                        <div class="{{ lg.get_action_color }}"></div>
+                                    </div>
+                                    <div class="timeline-item-content">
+                                        Objeto {{ lg.object_repr }} {{ lg.get_action_text }} por
+                                        <a class="font-weight-bold text-dark" href="#">
+                                            {{ lg.user }}
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="timeline-item-content">
-                                    Objeto plusavlia modificado por
-                                    <a class="font-weight-bold text-dark" href="#!">Anderson Ramiro Pozo Imbaquingo</a>
-                                    has been successfully placed.
-                                </div>
-                            </div>
-                            <!-- Timeline Item 7-->
-                            <div class="timeline-item">
-                                <div class="timeline-item-marker">
-                                    <div class="timeline-item-marker-text">2 days</div>
-                                    <div class="timeline-item-marker-indicator bg-green"></div>
-                                </div>
-                                <div class="timeline-item-content">
-                                    New order placed!
-                                    <a class="font-weight-bold text-dark" href="#!">Order #2910</a>
-                                    has been successfully placed.
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

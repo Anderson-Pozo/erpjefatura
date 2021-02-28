@@ -24,6 +24,9 @@ class Patente(AuditMixin, models.Model):
     contribuyente = models.ForeignKey(Contribuyente, on_delete=models.CASCADE)
     establecimiento = models.ForeignKey(Establecimiento, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return 'Patente Nº {}'.format(self.id)
+
     def get_estado(self):
         pass
 
@@ -123,6 +126,9 @@ class DetallePatente(AuditMixin, models.Model):
         null=True
     )
     patente = models.ForeignKey(Patente, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return 'Detalle patente {}'.format(self.id)
 
     def get_total(self):
         total = self.impuesto + self.interes + self.multa + self.servicios_administrativos

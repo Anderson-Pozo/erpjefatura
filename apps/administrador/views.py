@@ -18,10 +18,11 @@ class Index(TemplateView):
 
     @staticmethod
     def get_last_logs():
-        data = []
-        for i in Logs.objects.all().order_by('-action_time')[0:7]:
-            data.append(i)
-        return data
+        try:
+            return Logs.objects.all().order_by('-action_time')[0:8]
+        except:
+            pass
+        return []
 
     @staticmethod
     def get_last_users():
