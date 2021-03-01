@@ -55,7 +55,7 @@ function lista_logs() {
                 }else if (row.action_flag == 2){
                     return `<i class="fas fa-pen-square mr-2 text-yellow"></i> ${row.change_message}`;
                 }else {
-                    return `<i class="fas fa-minus-circle mr-2 text-red"></i> ${row.change_message}`;
+                    return `<i class="fas fa-minus-circle mr-2 text-red"></i> Eliminado`;
                 }
             }
         },

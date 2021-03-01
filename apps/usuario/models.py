@@ -1,3 +1,4 @@
+from datetime import datetime, date
 from django.db import models
 from django.forms import model_to_dict
 from django.contrib.auth.models import AbstractUser, BaseUserManager, Group, Permission
@@ -50,7 +51,10 @@ class User(AuditMixin, AbstractUser):
         return f'{self.first_name}, {self.last_name}'
 
     def avatar_name(self):
-        return self.first_name[0] + self.last_name[0]
+        if self.first_name and self.last_name is not None:
+            return self.first_name[0] + self.last_name[0]
+        else:
+            return 'NoN'
 
 
 class Grupo(Group):
@@ -76,6 +80,34 @@ class Permisos(Permission):
 class Logs(LogEntry):
     class Meta:
         proxy = True
+
+    def get_action_color(self):
+        if self.action_flag == 1:
+            return 'timeline-item-marker-indicator bg-green'
+        elif self.action_flag == 2:
+            return 'timeline-item-marker-indicator bg-yellow'
+        else:
+            return 'timeline-item-marker-indicator bg-red'
+
+    def get_action_text(self):
+        if self.action_flag == 1:
+            return 'creado'
+        elif self.action_flag == 2:
+            return 'modificado'
+        else:
+            return 'eliminado'
+
+    def get_days(self):
+        current_date = date.today()
+        past_date = self.action_time.date()
+        days = (current_date - past_date).days
+        if days == 0:
+            return 'Hoy'
+        elif days == 1:
+            return '{} día'.format(days)
+        else:
+            return '{} días'.format(days)
+        # return days
 
     def to_json(self):
         item = model_to_dict(self)
