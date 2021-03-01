@@ -39,7 +39,8 @@ urlpatterns += [
     path('establecimiento/', include(('apps.establecimiento.urls', 'establecimiento'))),
     path('patente/', include(('apps.patente.urls', 'patente'))),
     path('alcabala/', include(('apps.alcabala.urls', 'alcabala'))),
-    path('plusvalia/', include(('apps.plusvalia.urls', 'plusvalia')))
+    path('plusvalia/', include(('apps.plusvalia.urls', 'plusvalia'))),
+    path('direccion/', include(('apps.direccion.urls', 'direccion')))
 ]
 
 urlpatterns += staticfiles_urlpatterns()

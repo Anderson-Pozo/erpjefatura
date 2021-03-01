@@ -20,13 +20,13 @@
         <div class="form-row">
             <!-- Form Group (first name)-->
             <div class="form-group col-md-6">
-                <label class="small mb-sm-2"  for="inputFirstName">Fecha</label>
+                <label class="small mb-sm-2" for="inputFirstName">Fecha</label>
                 {{ form.fecha }}
             </div>
             <!-- Form Group (last name)-->
             <div class="form-group col-md-6">
-                <label class="small mb-1" for="callePrincipal">Clave catastral</label>
-                <select class="form-control table-responsive-sm"  id="search_predio">
+                <label class="small mb-2" for="callePrincipal">Clave catastral</label>
+                <select class="form-control table-responsive-sm" id="search_predio">
                 </select>
                 <input name="predio" hidden>
             </div>
@@ -78,9 +78,9 @@
                     <!-- Invoice item 2-->
                     <tr class="border-bottom">
                         <td>
-                            <div class="small mb-1" >Impuesto alcabala</div>
+                            <div class="small mb-1">Impuesto alcabala</div>
                         </td>
-                        <td class="text-right font-weight-bold" colspan="4" >
+                        <td class="text-right font-weight-bold" colspan="4">
                             {{ form.impuesto_alcabalas }}
                         </td>
                     </tr>
@@ -89,7 +89,7 @@
                         <td>
                             <div class="small mb-1">Alcabala provincial</div>
                         </td>
-                        <td class="text-right font-weight-bold" colspan="4" >
+                        <td class="text-right font-weight-bold" colspan="4">
                             {{ form.alcabalas_provinciales }}
                         </td>
                     </tr>
@@ -97,7 +97,7 @@
                         <td>
                             <div class="small mb-1">Fondos escolares</div>
                         </td>
-                        <td class="text-right font-weight-bold" colspan="4" >
+                        <td class="text-right font-weight-bold" colspan="4">
                             {{ form.fondos_escolares }}
                         </td>
                     </tr>

@@ -7,17 +7,6 @@ from apps.direccion.models import Direccion
 
 class AlcabalaForm(forms.ModelForm):
 
-    # search = ModelChoiceField(
-    #     queryset=Comprador.objects.none(),
-    #     widget=forms.Select(
-    #         attrs={
-    #             'class': 'form-control',
-    #             'style': 'width: 100%',
-    #             'id': 'search'
-    #         }
-    #     )
-    # )
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # self.fields['vendedor'].queryset = Vendedor.objects.all()
@@ -60,10 +49,11 @@ class AlcabalaForm(forms.ModelForm):
             'fecha': forms.DateInput(
                 format='%Y-%m-%d',
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control',
                     'required': True,
                     'value': datetime.now().strftime('%Y-%m-%d'),
                     'type': 'date',
+                    'style': 'height:45%'
                 }
             ),
             'numero': forms.NumberInput(

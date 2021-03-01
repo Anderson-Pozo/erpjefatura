@@ -1,5 +1,6 @@
 from django.db import models
 from apps.auditoria.mixins import AuditMixin
+from django.forms import model_to_dict
 
 
 # Create your models here.
@@ -55,6 +56,18 @@ class Direccion(AuditMixin, models.Model):
 
     def get_all_direccion(self):
         return 'B. ' + self.barrio.nombre + ', cl. ' + self.calle_principal + ' y ' + self.calle_secundaria
+
+    def get_select2(self):
+        return '{}, B. {} cl. {} y {}'.format(
+            self.barrio.parroquia.nombre,
+            self.barrio.nombre,
+            self.calle_principal,
+            self.calle_secundaria
+        )
+
+    def to_json(self):
+        item = model_to_dict(self)
+        return item
 
     class Meta:
         db_table = "direccion"

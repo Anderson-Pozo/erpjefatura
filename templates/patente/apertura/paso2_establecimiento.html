@@ -32,7 +32,10 @@
         </div>
         <div class="form-group">
             <label class="small mb-1" for="callePrincipal">Dirección</label>
-            {{ form.direccion }}
+            {#            {{ form.direccion }}#}
+            <select class="form-control table-responsive-sm" id="search_direccion">
+            </select>
+            <input name="direccion" hidden>
         </div>
 
         <!-- Form Row-->
