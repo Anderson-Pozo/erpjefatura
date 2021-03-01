@@ -1,10 +1,111 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'alcabala-plusvalia/layout/wizard_step.html' %}
 
-</body>
-</html>
+{% block title %}<title>Revisión formulario de liquidación de plusvalia</title>{% endblock %}
+
+{% block link_paso4 %}nav-item nav-link active{% endblock %}
+
+{% block body_wizard %}
+    <div class="row justify-content-center">
+        <div class="col-xl-8">
+            <h3 class="text-primary">Formulario de liquidación de plusvalia</h3>
+            <h5 class="card-title">Revise la información de liquidación de plusvalia</h5>
+
+            <div class="row small">
+                <div class="col-sm-10 text-truncate">
+                    <em>Datos de
+                        vendedor: {{ plusvalia.alcabala.vendedor.nombres }} {{ plusvalia.alcabala.vendedor.apellidos }}</em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-10 text-truncate">
+                    <em>Datos de comprador: {{ plusvalia.alcabala.comprador.nombres }} {{ plusvalia.alcabala.comprador.apellidos }} </em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-10 text-truncate">
+                    <em>Fecha de escritura: {{ plusvalia.fecha_escritura }}</em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-10 text-truncate">
+                    <em>Fecha de notaria: {{ plusvalia.fecha_tramite }}</em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-6 text-truncate">
+                    <em>Valor de escritura: {{ plusvalia.precio_adquisicion }}</em>
+                </div>
+                <div class="col-sm-6 text-truncate">
+                    <em>Valor de venta: {{ plusvalia.precio_venta }}</em>
+                </div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-10 text-truncate">
+                    <em>Diferencia bruta: {{ plusvalia.diferencia_bruta }} </em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-10 text-truncate">
+                    <em>Rebaja por mejoras: {{ plusvalia.rebaja_mejoras }} </em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-10 text-truncate">
+                    <em>Diferencia neta: {{ plusvalia.diferencia_neta }} </em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-10 text-truncate">
+                    <em>5% de tenencia: {{ plusvalia.tenencia }} </em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-10 text-truncate">
+                    <em>Base por desvalorización moneda: {{ plusvalia.base_rebajar_moneda }} </em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-10 text-truncate">
+                    <em>Rebaja por desvalorización moneda: {{ plusvalia.rebaja_desvalorizacion }} </em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-10 text-truncate">
+                    <em>Utilidad imponible: {{ plusvalia.utilidad_imponible }} </em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <hr class="my-4"/>
+            {#            <hr class="my-4"/>#}
+            {#            #}
+            {#            <hr class="my-4"/>#}
+            <div class="d-flex justify-content-between">
+                <div>
+                    <a class="btn btn-green btn-icon mr-2"
+                       target="_blank"
+                       href="{% url 'plusvalia:report_plusvalia' plusvalia.id %}">
+                        <i class="fas fa-print"></i>
+                    </a>
+                    <a class="btn btn-teal btn-icon mr-2"
+                       href="{% url 'plusvalia:report_plusvalia' plusvalia.id %}"
+                       download="">
+                        <i class="fas fa-download"></i>
+                    </a>
+                </div>
+                <a href="{% url 'plusvalia:lista_plusvalia' %}" class="btn btn-primary" type="button">Continuar</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block progress %} width: 100% {% endblock %}

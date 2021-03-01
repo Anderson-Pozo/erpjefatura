@@ -3,10 +3,13 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, TemplateView, CreateView, UpdateView, DeleteView, View
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from apps.utils.ajax import AjaxList, AjaxCreate, AjaxUpdate, AjaxDelete
 from .forms import AlcabalaForm
 from .models import Alcabala, Comprador, Vendedor, Predio
+
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 
 
 class ListaAlcabala(AjaxList, ListView):
@@ -58,3 +61,33 @@ class GetPersonas(View):
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
+
+
+class RevisionAlcabala(TemplateView):
+    template_name = "alcabala-plusvalia/registro/paso3_revision1.html"
+    form_class = AlcabalaForm
+    success_url = reverse_lazy('plusvalia:revision_plusvalia')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['alcabala'] = Alcabala.objects.last()
+        return context
+
+
+class ReportAlcabala(View):
+    def get(self, request, *args, **kwargs):
+        try:
+            template = get_template('alcabala-plusvalia/reportes/report_alcabala.html')
+            context = {
+                'alcabala': Alcabala.objects.get(pk=self.kwargs['pk'])
+            }
+            html = template.render(context)
+            response = HttpResponse(content_type='application/pdf')
+            # response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+            pisa_status = pisa.CreatePDF(
+                html, dest=response)
+            return response
+        except:
+            pass
+        return HttpResponseRedirect(reverse_lazy('plusvalia:revision_plusvalia'))
+

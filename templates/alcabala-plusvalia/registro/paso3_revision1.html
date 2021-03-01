@@ -1,0 +1,92 @@
+{% extends 'alcabala-plusvalia/layout/wizard_step.html' %}
+
+{% block title %}<title>Revisión formulario de avíso de alcabala</title>{% endblock %}
+
+{% block link_paso3 %}nav-item nav-link active{% endblock %}
+
+{% block body_wizard %}
+    <div class="row justify-content-center">
+        <div class="col-xl-8">
+            <h3 class="text-primary">Formulario de aviso de alcabala</h3>
+            <h5 class="card-title">Revise la información de aviso de alcabala</h5>
+
+            <div class="row small">
+                <div class="col-sm-10 text-truncate">
+                    <em>Datos de vendedor: {{ alcabala.vendedor.nombres }} {{ alcabala.vendedor.apellidos }}</em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-10 text-truncate">
+                    <em>Datos de comprador: {{ alcabala.comprador.nombres }} {{ alcabala.comprador.apellidos }} </em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-10 text-truncate">
+                    <em>Descripción: {{ alcabala.descripcion_tramite }} </em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-6 text-truncate">
+                    <em>Valor de venta: {{ alcabala.valor_compra_venta }}</em>
+                </div>
+                <div class="col-sm-6 text-truncate">
+                    <em>Fecha: {{ alcabala.fecha }}</em>
+                </div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-10 text-truncate" >
+                    <em>Impuesto alcabala: {{ alcabala.impuesto_alcabalas }} </em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-10 text-truncate">
+                    <em>Alcabala provincial: {{ alcabala.alcabalas_provinciales }} </em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-10 text-truncate">
+                    <em>Fondos escolares: {{ alcabala.fondos_escolares }} </em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-10 text-truncate">
+                    <em>Prevención de riesgos: {{ alcabala.fondos_prevencion_riesgos }} </em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-10 text-truncate">
+                    <em>Agua potable: {{ alcabala.agua_potable }} </em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <hr class="my-4"/>
+            {#            <hr class="my-4"/>#}
+            {#            #}
+            {#            <hr class="my-4"/>#}
+            <div class="d-flex justify-content-between">
+                <div>
+                    <a class="btn btn-green btn-icon mr-2"
+                       target="_blank"
+                       href="{% url 'alcabala:report_alcabala' alcabala.id %}">
+                        <i class="fas fa-print"></i>
+                    </a>
+                    <a class="btn btn-teal btn-icon mr-2"
+                       href="{% url 'alcabala:report_alcabala' alcabala.id %}"
+                       download="">
+                        <i class="fas fa-download"></i>
+                    </a>
+                </div>
+                <a href="{% url 'plusvalia:revision_plusvalia' %}" class="btn btn-primary" type="button">Continuar</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block progress %} width: 75% {% endblock %}

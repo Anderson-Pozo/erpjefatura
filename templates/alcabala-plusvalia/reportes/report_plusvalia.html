@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Imprimir formulario</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin-top: 5.5cm;
+            margin-left: 2cm;
+            margin-right: 2cm;
+        }
+
+        .fecha {
+            text-align: left;
+            margin-left: 3.5cm;
+            text-transform: uppercase;
+        }
+
+        .ruc {
+            margin-left: 1.5cm;
+            padding-top: 2px;
+        }
+
+        .direccion {
+            margin-left: 11.5cm;
+        }
+
+        .fecha_f {
+            margin-left: 11.5cm;
+        }
+
+        .row-capital {
+            margin-left: 8cm;
+        }
+
+        .row-situacion {
+            margin-left: 7cm;
+        }
+
+        .row-fecha {
+            margin-left: 9cm;
+        }
+
+        .row-contabilidad {
+            margin-left: 8cm;
+        }
+
+        .activos {
+            margin-left: 5cm;
+        }
+
+        p {
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="fecha">
+    <p>
+        Parroquia: {{ plusvalia.alcabala.predio.direccion.barrio.parroquia.nombre }}
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        zona: {{ plusvalia.alcabala.predio.direccion.barrio.zona }}
+    </p>
+
+    </p>
+    {#    {% if plusvalia.alcabala.predio.direccion.barrio.zona == 'Urbana' %}#}
+    {#        <p style="padding-top: 10px">#}
+    {#           X#}
+    {#        </p>#}
+    {#    {% else plusvalia.alcabala.predio.direccion.barrio.zona == 'Rural' %}#}
+    {#        <p style="padding-top: 10px">#}
+    {#        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp#}
+    {#        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp#}
+    {#        X#}
+    {#    {% endif %}#}
+    {#    </p>#}
+</div>
+<br>
+<div class="ruc">
+    <p> {{ plusvalia.alcabala.vendedor.nombres }} {{ plusvalia.alcabala.vendedor.apellidos }}
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        {{ plusvalia.alcabala.comprador.nombres }} {{ plusvalia.alcabala.vendedor.apellidos }}
+    </p>
+    <p> barrio {{ plusvalia.alcabala.predio.direccion.barrio.nombre }},
+        parroquia {{ plusvalia.alcabala.predio.direccion.barrio.parroquia.nombre }}
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        barrio {{ plusvalia.alcabala.predio.direccion.barrio.nombre }},
+        parroquia {{ plusvalia.alcabala.predio.direccion.barrio.parroquia.nombre }}
+    </p>
+    <p> {{ plusvalia.fecha_escritura }}
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        {{ plusvalia.fecha_tramite }}
+    </p>
+    <p> {{ plusvalia.precio_adquisicion }}
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp
+        {{ plusvalia.precio_venta }}
+    </p>
+</div>
+
+<div class="direccion">
+    <p style="padding-top: 30px">
+         {{ plusvalia.precio_venta }}
+    </p>
+    <p>
+        {{ plusvalia.precio_adquisicion }}
+    </p>
+    <p>
+        {{ plusvalia.diferencia_bruta }}
+    </p>
+    <p>
+        {{ plusvalia.rebaja_mejoras }}
+    </p>
+    <p>
+        {{ plusvalia.diferencia_neta }}
+    </p>
+    <p>
+        {{ plusvalia.tenencia }}
+    </p>
+    <p>
+        {{ plusvalia.base_rebajar_moneda }}
+    </p>
+    <p>
+        {{ plusvalia.rebaja_desvalorizacion }}
+    </p>
+    <p>
+        {{ plusvalia.utilidad_imponible }}
+    </p>
+</div>
+
+<div class="fecha_f">
+     <p style="padding-top: 30px">
+         {{ plusvalia.fecha_tramite }}
+     </p>
+
+</div>
+</body>
+</html>

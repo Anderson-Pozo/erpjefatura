@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Imprimir formulario</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin-top: 3.5cm;
+            margin-left: 1cm;
+            margin-right: 1cm;
+        }
+
+        .persona {
+            text-align: left;
+            margin-left: 1cm;
+        {#text-transform: uppercase;#}
+        }
+
+        .impuestos {
+            margin-left: 11.5cm;
+        }
+
+
+        p {
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="persona">
+    <p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        Fecha: {{ alcabala.fecha }}</p>
+    <p>
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        {{ alcabala.vendedor.nombres }} {{ alcabala.vendedor.apellidos }}
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        {{ alcabala.comprador.nombres }} {{ alcabala.comprador.apellidos }}</p>
+    <p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        {{ alcabala.descripcion_tramite }}
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        {{ alcabala.valor_compra_venta }}
+    </p>
+    <p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        barrio {{ alcabala.predio.direccion.barrio.nombre }}
+        de la parroquia {{ alcabala.predio.direccion.barrio.parroquia.nombre }}
+    </p>
+    <p style="padding-top: 15px">
+        {{ alcabala.predio.clave_catastral }}
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        {{ alcabala.valor_compra_venta }}
+    </p>
+</div>
+<br>
+
+<div class="impuestos">
+    <p style="padding-top: 20px">
+        {{ alcabala.impuesto_alcabalas }}
+    </p>
+    <p>
+        {{ alcabala.alcabalas_provinciales }}
+    </p>
+    <p>
+        {{ alcabala.fondos_escolares }}
+    </p>
+    <p>
+        {{ alcabala.fondos_prevencion_riesgos }}
+    </p>
+    <p>
+        {{ alcabala.agua_potable }}
+    </p>
+</div>
+
+</div>
+</body>
+</html>
