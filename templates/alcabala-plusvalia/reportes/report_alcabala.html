@@ -6,29 +6,46 @@
     <style>
         @page {
             size: A4 portrait;
-            margin-top: 3.5cm;
+            margin-top: 3.7cm;
             margin-left: 1cm;
             margin-right: 1cm;
         }
 
         .persona {
             text-align: left;
-            margin-left: 1cm;
+            margin-left: 0.5cm;
         {#text-transform: uppercase;#}
         }
 
         .impuestos {
             margin-left: 11.5cm;
         }
-
-
+        .proviciales {
+            margin-left: 11.5cm;
+        }
+        .escolares {
+            margin-left: 11.5cm;
+        }
+        .prevencion {
+            margin-left: 11.5cm;
+        }
+        .agua {
+            margin-left: 11.5cm;
+        }
+        .total {
+            margin-left: 11.5cm;
+        }
+        em{
+            font-size: 15px;
+            font-style: normal;
+        }
         p {
             font-size: 15px;
         }
     </style>
 </head>
 <body>
-<div class="persona">
+<div class="persona" style="padding-top: -10px">
     <p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
@@ -42,7 +59,7 @@
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         Fecha: {{ alcabala.fecha }}</p>
-    <p>
+    <p style="padding-top: 10px">
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
@@ -52,9 +69,7 @@
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         {{ alcabala.comprador.nombres }} {{ alcabala.comprador.apellidos }}</p>
-    <p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+    <p style="padding-top: 5px">
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
@@ -63,19 +78,23 @@
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         {{ alcabala.valor_compra_venta }}
     </p>
-    <p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+    <p style="padding-top: -18px">
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        barrio {{ alcabala.predio.direccion.barrio.nombre }}
-        de la parroquia {{ alcabala.predio.direccion.barrio.parroquia.nombre }}
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        B. {{ alcabala.predio.direccion.barrio.nombre }}
+        de la P.{{ alcabala.predio.direccion.barrio.parroquia.nombre }}
     </p>
-    <p style="padding-top: 15px">
+    <p style="padding-top: 5px">
         {{ alcabala.predio.clave_catastral }}
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         {{ alcabala.valor_compra_venta }}
@@ -83,24 +102,36 @@
 </div>
 <br>
 
-<div class="impuestos">
-    <p style="padding-top: 20px">
+<div class="impuestos"  style="padding-top: 55px">
+    <em>
         {{ alcabala.impuesto_alcabalas }}
-    </p>
-    <p>
-        {{ alcabala.alcabalas_provinciales }}
-    </p>
-    <p>
-        {{ alcabala.fondos_escolares }}
-    </p>
-    <p>
-        {{ alcabala.fondos_prevencion_riesgos }}
-    </p>
-    <p>
-        {{ alcabala.agua_potable }}
-    </p>
+    </em>
 </div>
-
+<div class="proviciales" style="padding-top: 5px">
+    <em>
+        {{ alcabala.alcabalas_provinciales }}
+    </em>
+</div>
+<div class="escolares" style="padding-top: 5px">
+    <em>
+        {{ alcabala.fondos_escolares }}
+    </em>
+</div>
+<div class="prevencion" style="padding-top: 2px">
+    <em>
+        {{ alcabala.fondos_prevencion_riesgos }}
+    </em>
+</div>
+<div class="agua" style="padding-top: 2px">
+    <em>
+        {{ alcabala.agua_potable }}
+    </em>
+</div>
+<div class="total" style="padding-top: 2px">
+    <em>
+        {{ alcabala.get_total }}
+    </em>
+</div>
 </div>
 </body>
 </html>
