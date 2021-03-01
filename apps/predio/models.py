@@ -14,14 +14,18 @@ class Predio(AuditMixin, models.Model):
     clave_catastral = models.CharField('Clave catastral', max_length=25, blank=True, null=True)
     avaluo_comercial = models.FloatField('Avaluo comercial', blank=True, null=True)
     area_terreno = models.FloatField('Área del terreno', blank=True, null=True)
-    zona = models.CharField('Zona urbana o rural', max_length=20, blank=True, null=True)
     direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
+
+    def get_zona(self):
+        zona = self.direccion.barrio.zona
+        return zona
 
     def __str__(self):
         return self.clave_catastral
 
     def to_json(self):
         item = model_to_dict(self)
+        item['zona'] = self.get_zona()
         return item
 
     class Meta:

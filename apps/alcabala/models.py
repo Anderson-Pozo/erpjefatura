@@ -126,6 +126,10 @@ class Alcabala(AuditMixin, models.Model):
                self.fondos_escolares + self.fondos_prevencion_riesgos + self.agua_potable
         return format(total, '.2f')
 
+    def get_zona(self):
+        zona = self.predio.direccion.barrio.zona
+        return zona
+
     def to_json(self):
         item = model_to_dict(self)
         item['comprador'] = '{} {}'.format(self.comprador.nombres, self.comprador.apellidos)

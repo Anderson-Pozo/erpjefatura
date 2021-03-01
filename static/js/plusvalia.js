@@ -1,7 +1,5 @@
 $(function () {
     // Plusvalia
-    let i_predio = $('input[name="zona"]')
-
     let i_fecha_escritura = $('input[name="fecha_escritura"]');
     let i_fecha_tramite = $('input[name="fecha_tramite"]');
 
@@ -40,10 +38,7 @@ $(function () {
 
         //3 tenencia
         let val_diferencia_neta = parseFloat(i_diferencia_neta.val());
-        // i_tenencia.val(0.00)
-        // let val_tenencia = parseFloat(i_tenencia.val());
         let dif_tenencia = (val_diferencia_neta * 0.05) * anios
-        console.log(parseInt(anios));
         i_tenencia.val(parseFloat(dif_tenencia.toFixed((2))));
 
         //4 Base Rebaja Moneda
@@ -58,9 +53,6 @@ $(function () {
 
         let val_rebaja_mejoras = parseFloat(i_rebaja_mejoras.val());
 
-        if (i_predio === 'Urbana'){
-            i_utilidad_imponible.val(5.00)
-        }
         let val_utilidad_imponible = parseFloat(i_utilidad_imponible.val());
 
         let totalp = ((val_rebaja_desvalorizacion * 0.05) + val_rebaja_mejoras +
@@ -80,30 +72,6 @@ $(function () {
 
     i_utilidad_imponible.on('change', () => sumap());
 
-    // i_diferencia_bruta.on('change', () => {
-    //     sumap();
-    // })
-    //
-    // i_rebaja_mejoras.on('change', () => {
-    //     sumap();
-    // })
-    //
-    // i_diferencia_neta.on('change', () => {
-    //     sumap();
-    // })
-    //
-    // i_tenencia.on('change', () => {
-    //     sumap();
-    // })
-    // i_base_rebajar_moneda.on('change', () => {
-    //     sumap();
-    // })
-    //
-    // i_rebaja_desvalorizacion.on('change', () => {
-    //     sumap();
-    // })
-    //
-    // i_utilidad_imponible.on('change', () => {
-    //     sumap();
-    // })
-})(jQuery);
+    i_rebaja_mejoras.on('change', () => sumap());
+
+});

@@ -1,4 +1,5 @@
 $(function () {
+    // Select comprador
     const select_search = $('#search');
     const input_comprador = $('input[name="comprador"]');
 
@@ -41,7 +42,7 @@ $(function () {
         minimumInputLength: 2,
     });
 
-
+    // Select vendedor
     const select_search_vendedor = $('#search_vendedor');
     const input_vendedor = $('input[name="vendedor"]');
 
@@ -74,7 +75,7 @@ $(function () {
                 return queryParameters;
             },
             processResults: function (data) {
-                console.log(data);
+                // console.log(data);
                 return {
                     results: data
                 };
@@ -84,15 +85,8 @@ $(function () {
         minimumInputLength: 2,
     });
 
-
+    // Select predio
     const select_search_predio = $('#search_predio');
-    const input_predio = $('input[name="predio"]');
-
-    select_search_predio.on('change', function () {
-        const value = select_search_predio.select2('data')[0].id;
-        input_predio.val(value);
-        //console.log(input_comprador);
-    });
 
     select_search_predio.select2({
         theme: "bootstrap4",
@@ -117,7 +111,7 @@ $(function () {
                 return queryParameters;
             },
             processResults: function (data) {
-                console.log(data);
+                // console.log(data);
                 return {
                     results: data
                 };

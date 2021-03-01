@@ -106,6 +106,7 @@ class PlusvaliaForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control form-control-sm',
                     'required': True,
+                    'readonly': True
                 }
             ),
             'rebaja_mejoras': forms.NumberInput(
@@ -118,13 +119,15 @@ class PlusvaliaForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control form-control-sm',
                     'required': True,
+                    'readonly': True
                 }
             ),
             'tenencia': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm',
                     'required': True,
-                    'type': 'number'
+                    'type': 'number',
+                    'readonly': True
                 }
             ),
             'base_rebajar_moneda': forms.NumberInput(
@@ -147,5 +150,4 @@ class PlusvaliaForm(forms.ModelForm):
                     'required': True,
                 }
             ),
-
         }

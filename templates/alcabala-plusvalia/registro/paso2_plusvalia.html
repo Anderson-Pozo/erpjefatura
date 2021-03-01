@@ -18,8 +18,6 @@
         <div class="form-row">
             <!-- Form Group (first name)-->
             <div class="form-group col-md-4">
-                {#                <label class="small mb-1" for="inputFirstName">Número</label>#}
-                {#                {{ form.numero }}#}
                 <input value="{{ alcabala.id }}" name="alcabala" hidden>
             </div>
         </div>
@@ -27,15 +25,11 @@
             <!-- Form Group (first name)-->
             <div class="form-group col-md-6">
                 <label class="small mb-1" for="inputFirstName">Vendedor</label>
-                {#                <input class="form-control" id="inputVendedor" type="text"#}
-                {#                       placeholder="Ingresa el nombre del vendedor"/>#}
                 <input class="form-control" value="{{ alcabala.vendedor.get_nombres }}" disabled>
             </div>
             <!-- Form Group (last name)-->
             <div class="form-group col-md-6">
                 <label class="small mb-1" for="inputLastName">Comprador</label>
-                {#                <input class="form-control" id="inputComprador" type="text"#}
-                {#                       placeholder="Ingresa el nombre del Comprador"/>#}
                 <input class="form-control" value="{{ alcabala.comprador.get_nombres }}" disabled>
             </div>
         </div>
@@ -66,7 +60,6 @@
                 {{ form.precio_venta }}
             </div>
         </div>
-        <input name="zona" value="{{ alcabala.predio.zona }}">
         <div class="card-body p-4 p-md-5">
             <!-- Invoice table-->
             <div class="table-responsive">
@@ -132,7 +125,21 @@
                             <div class="small mb-1">Utilidad Imponible</div>
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
-                            {{ form.utilidad_imponible }}
+                            {% if alcabala.get_zona == 'Urbana' %}
+                                <input class="form-control form-control-sm"
+                                       name="utilidad_imponible"
+                                       type="number"
+                                       value="5.00"
+                                       readonly
+                                >
+                            {% else %}
+                                <input class="form-control form-control-sm"
+                                       name="utilidad_imponible"
+                                       type="number"
+                                       value="0.00"
+                                       readonly
+                                >
+                            {% endif %}
                         </td>
                     </tr>
                     <!-- Invoice total-->

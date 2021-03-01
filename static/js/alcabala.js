@@ -1,5 +1,8 @@
 $(function () {
 
+    const select_search_predio = $('#search_predio');
+    const input_predio = $('input[name="predio"]');
+
     let i_valor_compra_venta = $('input[name="valor_compra_venta"]');
     let i_impuesto_alcabalas = $('input[name="impuesto_alcabalas"]');
     let i_alcabalas_provinciales = $('input[name="alcabalas_provinciales"]');
@@ -29,34 +32,36 @@ $(function () {
         let total = val_impuesto_alcabalas + val_alcabalas_provinciales
             + val_fondos_escolares + val_fondos_prevencion_riesgos + val_agua_potable;
 
-        console.log(total);
+        // console.log(total);
 
         i_total.text(parseFloat(total.toFixed(2)));
     }
 
     suma();
 
-    i_valor_compra_venta.on('change', () => {
+    select_search_predio.on('change', () => {
+        const value = select_search_predio.select2('data')[0].id;
+        const zona = select_search_predio.select2('data')[0].zona;
+        input_predio.val(value);
+
+        if (zona === 'Rural'){
+            i_fondos_prevencion_riesgos.val(5.00.toFixed(2));
+        }else {
+            i_fondos_prevencion_riesgos.val(0.00.toFixed(2));
+        }
         suma();
     });
 
-    i_impuesto_alcabalas.on('change', () => {
-        suma();
-    })
+    i_valor_compra_venta.on('change', () => suma());
 
-    i_alcabalas_provinciales.on('change', () => {
-        suma();
-    })
+    i_impuesto_alcabalas.on('change', () => suma());
 
-    i_fondos_escolares.on('change', () => {
-        suma();
-    })
-    i_fondos_prevencion_riesgos.on('change', () => {
-        suma();
-    })
+    i_alcabalas_provinciales.on('change', () => suma());
 
-    i_agua_potable.on('change', () => {
-        suma();
-    })
+    i_fondos_escolares.on('change', () => suma());
 
-})(jQuery);
+    i_fondos_prevencion_riesgos.on('change', () => suma());
+
+    i_agua_potable.on('change', () => suma());
+
+});
