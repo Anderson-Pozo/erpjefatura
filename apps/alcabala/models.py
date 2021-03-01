@@ -121,6 +121,11 @@ class Alcabala(AuditMixin, models.Model):
     vendedor = models.ForeignKey(Vendedor, on_delete=models.CASCADE)
     predio = models.ForeignKey(Predio, on_delete=models.CASCADE)
 
+    def get_total(self):
+        total = self.impuesto_alcabalas + self.alcabalas_provinciales + \
+               self.fondos_escolares + self.fondos_prevencion_riesgos + self.agua_potable
+        return format(total, '.2f')
+
     def to_json(self):
         item = model_to_dict(self)
         item['comprador'] = '{} {}'.format(self.comprador.nombres, self.comprador.apellidos)

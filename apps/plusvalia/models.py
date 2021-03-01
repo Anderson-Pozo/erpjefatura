@@ -105,6 +105,11 @@ class Plusvalia(AuditMixin, models.Model):
     )
     alcabala = models.ForeignKey(Alcabala, on_delete=models.CASCADE)
 
+    def get_total(self):
+        total = (float(self.rebaja_desvalorizacion) * 0.05) + float(self.rebaja_mejoras) + \
+                float(self.utilidad_imponible)
+        return format(total, '.2f')
+
     def to_json(self):
         item = model_to_dict(self)
         item['comprador'] = '{} {}'.format(self.alcabala.comprador.nombres, self.alcabala.comprador.apellidos)
