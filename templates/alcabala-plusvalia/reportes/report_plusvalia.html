@@ -6,7 +6,7 @@
     <style>
         @page {
             size: A4 portrait;
-            margin-top: 5.5cm;
+            margin-top: 4.8cm;
             margin-left: 2cm;
             margin-right: 2cm;
         }
@@ -28,6 +28,10 @@
 
         .fecha_f {
             margin-left: 11.5cm;
+        }
+        em{
+            font-size: 15px;
+            font-style: normal;
         }
 
         .row-capital {
@@ -64,8 +68,6 @@
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         zona: {{ plusvalia.alcabala.predio.direccion.barrio.zona }}
     </p>
-
-    </p>
     {#    {% if plusvalia.alcabala.predio.direccion.barrio.zona == 'Urbana' %}#}
     {#        <p style="padding-top: 10px">#}
     {#           X#}
@@ -80,63 +82,77 @@
 </div>
 <br>
 <div class="ruc">
-    <p> {{ plusvalia.alcabala.vendedor.nombres }} {{ plusvalia.alcabala.vendedor.apellidos }}
+    <p style="padding-top: 13px">
+        {{ plusvalia.alcabala.vendedor.nombres }} {{ plusvalia.alcabala.vendedor.apellidos }}
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        {{ plusvalia.alcabala.comprador.nombres }} {{ plusvalia.alcabala.vendedor.apellidos }}
+        &nbsp &nbsp &nbsp &nbsp
+        {{ plusvalia.alcabala.comprador.nombres }} {{ plusvalia.alcabala.comprador.apellidos }}
     </p>
-    <p> barrio {{ plusvalia.alcabala.predio.direccion.barrio.nombre }},
-        parroquia {{ plusvalia.alcabala.predio.direccion.barrio.parroquia.nombre }}
+    <p style="padding-top: -13px">
+        B. {{ plusvalia.alcabala.predio.direccion.barrio.nombre }},
+        P. {{ plusvalia.alcabala.predio.direccion.barrio.parroquia.nombre }}
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        barrio {{ plusvalia.alcabala.predio.direccion.barrio.nombre }},
-        parroquia {{ plusvalia.alcabala.predio.direccion.barrio.parroquia.nombre }}
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        B. {{ plusvalia.alcabala.predio.direccion.barrio.nombre }},
+        P. {{ plusvalia.alcabala.predio.direccion.barrio.parroquia.nombre }}
     </p>
-    <p> {{ plusvalia.fecha_escritura }}
+    <p style="padding-top: -13px">
+        {{ plusvalia.fecha_escritura }}
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp
         {{ plusvalia.fecha_tramite }}
     </p>
-    <p> {{ plusvalia.precio_adquisicion }}
+    <p style="padding-top: 40px">
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        {{ plusvalia.precio_adquisicion }}
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         {{ plusvalia.precio_venta }}
     </p>
 </div>
 
 <div class="direccion">
-    <p style="padding-top: 30px">
+    <p style="padding-top: 40px">
          {{ plusvalia.precio_venta }}
     </p>
-    <p>
+    <p style="padding-top: -10px">
         {{ plusvalia.precio_adquisicion }}
     </p>
-    <p>
+    <p style="padding-top: -15px">
         {{ plusvalia.diferencia_bruta }}
     </p>
-    <p>
+    <p style="padding-top: -15px">
         {{ plusvalia.rebaja_mejoras }}
     </p>
-    <p>
+    <p style="padding-top: -15px">
         {{ plusvalia.diferencia_neta }}
     </p>
-    <p>
+    <p style="padding-top: -15px">
         {{ plusvalia.tenencia }}
     </p>
-    <p>
+    <p style="padding-top: -15px">
         {{ plusvalia.base_rebajar_moneda }}
     </p>
-    <p>
+    <p style="padding-top: -15px">
         {{ plusvalia.rebaja_desvalorizacion }}
     </p>
-    <p>
+    <p style="padding-top: -15px">
         {{ plusvalia.utilidad_imponible }}
+    </p>
+    <p style="padding-top: -15px">
+        {{ plusvalia.get_total }}
     </p>
 </div>
 
 <div class="fecha_f">
-     <p style="padding-top: 30px">
+     <p style="padding-top: 40px">
          {{ plusvalia.fecha_tramite }}
      </p>
 
