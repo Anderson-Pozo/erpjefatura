@@ -1,19 +1,20 @@
 from django.test import TestCase
-from .models import Impuesto
+from apps.impuesto.models import Impuesto, calcular_impuesto
+
 
 # Create your tests here.
-for i in Impuesto.objects.all():
-    print(i.fraccion_basica)
+class ImpuestoTest(TestCase):
+    def setUp(self) -> None:
+        Impuesto.objects.create(
+            numero=0,
+            fraccion_basica=0,
+            fraccion_excedente=600,
+            impuesto_fraccion_basica=10,
+            porcentaje_fraccion_excedente=0.00
+        )
 
-#
-# class AnimalTestCase(TestCase):
-#     def setUp(self):
-#         Animal.objects.create(name="lion", sound="roar")
-#         Animal.objects.create(name="cat", sound="meow")
-#
-#     def test_animals_can_speak(self):
-#         """Animals that can speak are correctly identified"""
-#         lion = Animal.objects.get(name="lion")
-#         cat = Animal.objects.get(name="cat")
-#         self.assertEqual(lion.speak(), 'The lion says "roar"')
-#         self.assertEqual(cat.speak(), 'The cat says "meow"')
+    def test_calc_impuesto(self):
+        row = Impuesto.objects.get(fraccion_basica__lt=500, fraccion_excedente__gte=500)
+        diferencia = 500 - row.fraccion_basica
+        suma = row.impuesto_fraccion_basica + (diferencia * row.porcentaje_fraccion_excedente)
+        self.assertEqual(suma, 10.00)
