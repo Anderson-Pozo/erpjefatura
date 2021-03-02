@@ -101,10 +101,10 @@ function lista_alcabala() {
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    let buttons = '<button class="btn btn-datatable btn-icon btn-outline-secondary mr-2"' +
+                    let buttons = '<a class="btn btn-datatable btn-icon btn-outline-secondary mr-2"' +
                         ' onclick="window.open(\'/alcabala/report_alcabala/' + row.id + '/\')">' +
                         '<i class="fas fa-print"></i>' +
-                        '</button>';
+                        '</a>';
                     return buttons;
                 }
             },
