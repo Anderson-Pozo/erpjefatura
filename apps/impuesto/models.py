@@ -17,6 +17,9 @@ class Vencimiento(AuditMixin, models.Model):
     obligado = models.DateField('Obligado', blank=False, null=True)
     estado = models.BooleanField('Activo/Inactivo', blank=True, null=True, default=True)
 
+    def __str__(self):
+        return 'Digito cédula {}'.format(self.digito)
+
     def to_json(self):
         item = model_to_dict(self)
         return item
@@ -47,7 +50,7 @@ class Impuesto(AuditMixin, models.Model):
     estado = models.BooleanField('Activo/Inactivo', blank=True, null=True, default=True)
 
     def __str__(self):
-        return '{}) {}'.format(self.numero, self.fraccion_basica)
+        return '{}) {} - {}'.format(self.numero, self.fraccion_basica, self.fraccion_excedente)
 
     def to_json(self):
         item = model_to_dict(self)
