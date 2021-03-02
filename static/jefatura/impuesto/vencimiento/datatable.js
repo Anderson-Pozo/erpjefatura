@@ -43,11 +43,16 @@ function lista_vencimiento() {
         },
         columns: [
             {"data": "digito"},
-            {"data": "no_obligado"},
-            {"data": "obligado"},
+            {"data": "fecha_no_obligado"},
+            {"data": "fecha_obligado"},
             {"data": "acciones"},
         ],
         columnDefs: [
+            {
+                targets: [0],
+                class: 'text-center',
+                width: "20%"
+            },
             {
                 targets: [-1],
                 class: 'text-center',

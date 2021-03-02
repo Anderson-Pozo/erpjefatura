@@ -3,6 +3,7 @@ from django.forms import model_to_dict
 from django.db import models
 from apps.auditoria.mixins import AuditMixin
 from apps.utils.calc_months import calcular_meses
+from apps.utils.format_date import format_month_day, format_month_year
 
 
 # Create your models here.
@@ -22,6 +23,8 @@ class Vencimiento(AuditMixin, models.Model):
 
     def to_json(self):
         item = model_to_dict(self)
+        item['fecha_obligado'] = format_month_day(self.obligado)
+        item['fecha_no_obligado'] = format_month_day(self.no_obligado)
         return item
 
     class Meta:
@@ -81,6 +84,7 @@ class Multa(AuditMixin, models.Model):
 
     def to_json(self):
         item = model_to_dict(self)
+        item['fecha_anio'] = format_month_year(self.fecha)
         return item
 
     class Meta:

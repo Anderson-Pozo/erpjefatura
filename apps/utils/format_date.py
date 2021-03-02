@@ -2,7 +2,8 @@ from datetime import datetime
 
 
 def current_date_format(date):
-    months = ("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
+    months = ("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+              "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
     day = date.day
     month = months[date.month - 1]
     year = date.year
@@ -12,5 +13,20 @@ def current_date_format(date):
     return messsage
 
 
-# now = datetime.now()
-# print(current_date_format(now))
+def format_month_day(date):
+    months = ("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+              "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
+    day = date.day
+    month = months[date.month - 1]
+    message = "{} de {}".format(day, month)
+    return message
+
+
+def format_month_year(date):
+    months = ("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+              "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
+    month = months[date.month - 1]
+    year = date.year
+    message = "{} - {}".format(year, month)
+    return message
+

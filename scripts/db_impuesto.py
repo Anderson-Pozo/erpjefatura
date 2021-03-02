@@ -88,8 +88,8 @@ def db_vencimiento():
     for i in vencimiento:
         Vencimiento.objects.create(
             digito=i[0],
-            obligado=i[1],
-            no_obligado=i[2]
+            no_obligado=i[1],
+            obligado=i[2]
         )
 
 

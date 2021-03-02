@@ -42,7 +42,7 @@ function lista_multa() {
             dataSrc: ""
         },
         columns: [
-            {"data": "fecha"},
+            {"data": "fecha_anio"},
             {"data": "porcentaje"},
             {"data": "acciones"},
         ],
