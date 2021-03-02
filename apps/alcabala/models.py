@@ -135,6 +135,7 @@ class Alcabala(AuditMixin, models.Model):
         item['comprador'] = '{} {}'.format(self.comprador.nombres, self.comprador.apellidos)
         item['vendedor'] = '{} {}'.format(self.vendedor.nombres, self.vendedor.apellidos)
         item['predio'] = self.predio.clave_catastral
+        item['total'] = self.get_total()
         return item
 
     class Meta:

@@ -32,11 +32,14 @@ function format(d) {
         '<td>Utilidad imponible:</td>' +
         '<td>' + d.utilidad_imponible + '</td>' +
         '</tr>' +
+        '<td>Total:</td>' +
+        '<td>' + d.total + '</td>' +
+        '</tr>' +
         '</table>';
 }
 
 function lista_plusvalia() {
-   let table = $('#tablePlusvalia').DataTable({
+    let table = $('#tablePlusvalia').DataTable({
         language: {
             'url': 'https://raw.githubusercontent.com/Jhon-Paillacho/ERP-estaticos/main/language.json'
         },
@@ -68,7 +71,7 @@ function lista_plusvalia() {
         autoWidth: true,
         destroy: true,
         deferRender: true,
-       ordering: true,
+        ordering: true,
         ajax: {
             url: window.location.pathname,
             type: 'POST',
@@ -96,13 +99,28 @@ function lista_plusvalia() {
             {"data": "vendedor"},
             {"data": "precio_adquisicion"},
             {"data": "precio_venta"},
+            {"data": "acciones"},
+        ],
+        columnDefs: [
+            {
+                targets: [-1],
+                class: 'text-center',
+                orderable: false,
+                render: function (data, type, row) {
+                    let buttons = '<button class="btn btn-datatable btn-icon btn-outline-secondary mr-2"' +
+                        ' onclick="window.open(\'/plusvalia/report_plusvalia/' + row.id + '/\')">' +
+                        '<i class="fas fa-print"></i>' +
+                        '</button>';
+                    return buttons;
+                }
+            },
         ],
 
         initComplete: function (settings, json) {
             // alert('Datos cargados');
         }
     });
-       $('#tablePlusvalia tbody').on('click', 'td.details-control',
+    $('#tablePlusvalia tbody').on('click', 'td.details-control',
         function () {
             let tr = $(this).closest('tr');
             let row = table.row(tr);

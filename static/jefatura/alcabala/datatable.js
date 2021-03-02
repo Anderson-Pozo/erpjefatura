@@ -28,6 +28,9 @@ function format(d) {
         '<td>Agua Potable:</td>' +
         '<td>' + d.agua_potable + '</td>' +
         '</tr>' +
+        '<td>Total:</td>' +
+        '<td>' + d.total + '</td>' +
+        '</tr>' +
         '</table>';
 }
 
@@ -90,6 +93,21 @@ function lista_alcabala() {
             {"data": "predio"},
             {"data": "comprador"},
             {"data": "vendedor"},
+            {"data": "acciones"},
+        ],
+                columnDefs: [
+            {
+                targets: [-1],
+                class: 'text-center',
+                orderable: false,
+                render: function (data, type, row) {
+                    let buttons = '<button class="btn btn-datatable btn-icon btn-outline-secondary mr-2"' +
+                        ' onclick="window.open(\'/alcabala/report_alcabala/' + row.id + '/\')">' +
+                        '<i class="fas fa-print"></i>' +
+                        '</button>';
+                    return buttons;
+                }
+            },
         ],
 
         initComplete: function (settings, json) {

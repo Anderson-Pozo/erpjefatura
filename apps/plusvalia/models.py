@@ -114,6 +114,7 @@ class Plusvalia(AuditMixin, models.Model):
         item = model_to_dict(self)
         item['comprador'] = '{} {}'.format(self.alcabala.comprador.nombres, self.alcabala.comprador.apellidos)
         item['vendedor'] = '{} {}'.format(self.alcabala.vendedor.nombres, self.alcabala.vendedor.apellidos)
+        item['total'] = self.get_total()
         return item
 
     class Meta:
