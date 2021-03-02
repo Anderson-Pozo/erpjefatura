@@ -101,7 +101,19 @@ class ContribuyenteNaturalForm(forms.ModelForm):
                     'required': True,
                     'readonly': True
                 }
-            )
+            ),
+            'adulto': forms.CheckboxInput(
+                attrs={
+                    'class': 'custom-control-input',
+                    'type': 'checkbox',
+                }
+            ),
+            'artesano': forms.CheckboxInput(
+                attrs={
+                    'class': 'custom-control-input',
+                    'type': 'checkbox',
+                }
+            ),
         }
 
 

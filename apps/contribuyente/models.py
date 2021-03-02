@@ -77,6 +77,8 @@ class Natural(AuditMixin, Contribuyente):
     nacionalidad = models.CharField('Nacionalidad', max_length=20, blank=True, null=True, choices=NACIONALIDADES)
     nombres = models.CharField('Nombres', max_length=50, blank=False, null=True)
     apellidos = models.CharField('Apellidos', max_length=50, blank=False, null=True)
+    adulto = models.BooleanField('Tercera edad', blank=True, null=True, default=False)
+    artesano = models.BooleanField('Artesano', blank=True, null=True, default=False)
 
     def get_nombre(self):
         return '{} {}'.format(self.nombres, self.apellidos)

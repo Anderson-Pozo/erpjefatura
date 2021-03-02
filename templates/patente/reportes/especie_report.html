@@ -58,8 +58,6 @@
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp
         {{ detalle.patente.fecha }}
     </p>
     <div class="nombre" style="padding: -15px">
@@ -67,8 +65,7 @@
             {% if detalle.patente.contribuyente.tipocontribuyente.id == 1 %}
                 <div>
                 <em>
-                    {{ detalle.patente.contribuyente.natural.nombres }}
-                    {{ detalle.patente.contribuyente.natural.apellidos }}
+                    {{ detalle.patente.contribuyente.natural.get_nombre }}
                     &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
                     &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
                     &nbsp &nbsp &nbsp &nbsp
@@ -98,13 +95,10 @@
     </div>
     <div class="direccion" style="padding: -5px">
         <em>
-        B.
-        {{ detalle.patente.establecimiento.direccion.barrio.nombre }}, cl.
-        {{ detalle.patente.establecimiento.direccion.calle_principal }} y cl.
-        {{ detalle.patente.establecimiento.direccion.calle_secundaria }}
+        {{ detalle.patente.establecimiento.direccion.get_all_direccion }}
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        2021
+        {% now "Y" %}
     </em>
     </div>
 
