@@ -22,6 +22,13 @@ vencimiento = [
     [0, date(2015, 4, 28), date(2015, 5, 28)],
 ]
 
+impuestos = [
+    [1, 0, 600, 10, 0.0],
+    [2, 600, 800, 10, 0.03500],
+    [3, 800, 1000, 17, 0.01502],
+    [4, 1000, 1200, 20, 0.01000],
+]
+
 
 def db_vencimiento():
     for i in vencimiento:
@@ -29,4 +36,15 @@ def db_vencimiento():
             digito=i[0],
             obligado=i[1],
             no_obligado=i[2]
+        )
+
+
+def db_impuesto():
+    for i in impuestos:
+        Impuesto.objects.create(
+            numero=i[0],
+            fraccion_basica=i[1],
+            fraccion_excedente=i[2],
+            impuesto_fraccion_basica=i[3],
+            porcentaje_fraccion_excedente=i[4]
         )
