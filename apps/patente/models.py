@@ -28,7 +28,14 @@ class Patente(AuditMixin, models.Model):
         return 'Patente Nº {}'.format(self.id)
 
     def get_estado(self):
-        pass
+        # if (self.suspendida and self.exonerada) is False:
+        #     return '<span class="badge badge-light">Normal</span>'
+        if self.suspendida:
+            return '<span class="badge badge-danger">Suspendida</span>'
+        elif self.exonerada:
+            return '<span class="badge badge-success">Exonerada</span>'
+        else:
+            return '<span class="badge badge-light">Sin estado</span>'
 
     def to_json(self):
         item = model_to_dict(self)
@@ -37,6 +44,7 @@ class Patente(AuditMixin, models.Model):
         item['nombre_establecimiento'] = self.establecimiento.nombre
         item['total_patrimonio'] = self.establecimiento.total_patrimonio
         item['nombre_contribuyente'] = self.contribuyente.get_nombre(self.contribuyente.ruc)
+        item['estado'] = self.get_estado()
         return item
 
     def get_impuesto(self):

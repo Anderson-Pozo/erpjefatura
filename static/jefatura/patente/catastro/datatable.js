@@ -43,7 +43,7 @@ function lista_catastro() {
         },
         columns: [
             {"data": "ruc"},
-            { "data": "nombre_contribuyente"},
+            {"data": "nombre_contribuyente"},
             {"data": "tipocontribuyente"},
             {"data": "nombre_establecimiento"},
             {"data": "total_patrimonio"},
@@ -56,33 +56,34 @@ function lista_catastro() {
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    return '<div class="dropdown no-caret">\n' +
-                        ' <button class="btn btn-transparent-dark btn-datatable dropdown-toggle" ' +
-                        'id="dropdownPeople1" type="button" data-toggle="dropdown" aria-haspopup="true" ' +
-                        'aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>\n' +
-                        '    <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownPeople1">\n' +
-                        '        <button class="dropdown-item btn-light" href="#">Suspensión</button>\n' +
-                        '        <button class="dropdown-item btn-light" href="#">Exoneración</button>\n' +
-                        '        <button class="dropdown-item btn-light" href="#">Renovación</button>\n' +
-                        '        <button class="dropdown-item btn-light" href="#">Historial</button>\n' +
-                        '    </div>\n' +
-                        '</div>';
+                    return `<div class="dropdown no-caret">
+                        <button class="btn btn-transparent-dark btn-datatable dropdown-toggle"
+                        id="dropdownPeople1" type="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
+                        <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownPeople1">
+                                <a class="dropdown-item btn-light" href="/patente/actualizar_declaracion/${row.id}">Suspender</a>
+                                <a class="dropdown-item btn-light" href="/patente/actualizar_declaracion/${row.id}">Exonerar</a>
+                                <a class="dropdown-item btn-light" href="/patente/actualizar_declaracion/${row.id}">Renovar</a>
+                                <a class="dropdown-item btn-light" href="#">Historial</a>
+                            </div>
+                        </div>`
                 }
             },
             {
                 targets: [-2],
                 class: 'text-center',
-                orderable: false,
+                orderable: true,
                 render: function (data, type, row) {
-                    if (!row.suspendida && !row.exonerada) {
-                        return '<span class="badge badge-light">Normal</span>';
-                    }
-                    if (row.exonerada) {
-                        return '<span class="badge badge-success">Exonerada</span>';
-                    }
-                    if (row.suspendida) {
-                        return '<span class="badge badge-danger">Suspendida</span>';
-                    }
+                    return row.estado
+                    // if (!row.suspendida && !row.exonerada) {
+                    //     return '<span class="badge badge-light">Normal</span>';
+                    // }
+                    // if (row.exonerada) {
+                    //     return '<span class="badge badge-success">Exonerada</span>';
+                    // }
+                    // if (row.suspendida) {
+                    //     return '<span class="badge badge-danger">Suspendida</span>';
+                    // }
 
                 }
             }

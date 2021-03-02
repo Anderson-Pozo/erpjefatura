@@ -62,6 +62,18 @@ class PatenteForm(forms.ModelForm):
                     # 'value': Establecimiento.objects.last().id,
                 }
             ),
+            'exonerada': forms.CheckboxInput(
+                attrs={
+                    'class': 'custom-control-input',
+                    'type': 'checkbox',
+                }
+            ),
+            'suspendida': forms.CheckboxInput(
+                attrs={
+                    'class': 'custom-control-input',
+                    'type': 'checkbox',
+                }
+            ),
 
         }
 
