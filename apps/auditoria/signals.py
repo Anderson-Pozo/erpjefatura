@@ -5,7 +5,7 @@ from django.dispatch import receiver
 
 @receiver(post_save)
 def audit_log(sender, instance, created, raw, **kwargs):
-    list_models = ['Multa', 'Juridico', ]
+    list_models = ['Juridico', ]
 
     if sender.__name__ not in list_models:
         return
@@ -19,7 +19,7 @@ def audit_log(sender, instance, created, raw, **kwargs):
 
 @receiver(post_delete)
 def audit_delete_log(sender, instance, **kwargs):
-    list_models = ['Multa', ]
+    list_models = ['Juridico', ]
 
     if sender.__name__ not in list_models:
         return
