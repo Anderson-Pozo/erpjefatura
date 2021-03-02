@@ -1,0 +1,67 @@
+{% extends 'patente/layout/step_update.html' %}
+
+{% block title %}<title>Modificar patente</title>{% endblock %}
+
+{% block link_paso3 %}nav-item nav-link active{% endblock %}
+
+{% block body_wizard %}
+    <form action="{% url 'patente:actualizar_declaracion' object.id %}" method="POST">
+        {% csrf_token %}
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="text-danger text-xs">
+                        <li><strong>{{ error|escape }}</strong></li>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="text-danger text-xs">
+                    <li><strong>{{ error|escape }}</strong></li>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <br>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label class="small mb-1" for="fecha">Número de patente</label>
+                {{ form.numero_patente }}
+            </div>
+            <div class="form-group col-md-6">
+                <label class="small mb-1" for="fechaInicioActividad">Fecha</label>
+                {{ form.fecha }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label class="small mb-1" for="contribuyente">Escoja el contribuyente</label>
+                {# <input type="text" id="contribuyente" value="{{ form.contribuyente.ruc }}">#}
+                {{ form.contribuyente }}
+            </div>
+            <div class="form-group col-md-6">
+                <label class="small mb-1" for="establecimiento">Escoja el establecimiento</label>
+                {{ form.establecimiento }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <div class="custom-control custom-checkbox">
+                    {{ form.exonerada }}
+                    <label class="custom-control-label" for="id_exonerada">Exonerar</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    {{ form.suspendida }}
+                    <label class="custom-control-label" for="id_suspendida">Suspender</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit">
+                Guardar y continuar
+            </button>
+        </div>
+    </form>
+{% endblock %}
+
+{% block progress %} width: 48.8% {% endblock %}
