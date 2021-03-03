@@ -134,7 +134,7 @@ class DetallePatente(AuditMixin, models.Model):
     patente = models.ForeignKey(Patente, on_delete=models.CASCADE)
 
     def __str__(self):
-        return 'Detalle patente {}'.format(self.id)
+        return 'Detalle {} - Patente {}'.format(self.id, self.patente.establecimiento.nombre)
 
     def get_total(self):
         total = self.impuesto + self.interes + self.multa + self.servicios_administrativos
@@ -142,6 +142,7 @@ class DetallePatente(AuditMixin, models.Model):
 
     def to_json(self):
         item = model_to_dict(self)
+        item['total'] = self.get_total()
         return item
 
     class Meta:

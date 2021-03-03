@@ -42,12 +42,6 @@ $(() => {
             dataSrc: ""
         },
         columns: [
-            {
-                "className": 'details-control',
-                "orderable": false,
-                "data": null,
-                "defaultContent": ''
-            },
             {"data": "ruc"},
             {"data": "nombre_contribuyente"},
             {"data": "tipocontribuyente"},
@@ -62,17 +56,31 @@ $(() => {
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    return `<div class="dropdown no-caret">
+                    return `<div class="row"></div><div class="dropdown no-caret">
                         <button class="btn btn-transparent-dark btn-datatable dropdown-toggle"
                         id="dropdownPeople1" type="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
                         <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownPeople1">
-                                <a class="dropdown-item btn-light" href="/patente/actualizar_declaracion/${row.id}">Suspender</a>
-                                <a class="dropdown-item btn-light" href="/patente/actualizar_declaracion/${row.id}">Exonerar</a>
-                                <a class="dropdown-item btn-light" href="/patente/actualizar_declaracion/${row.id}">Renovar</a>
-                                <a rel="details" class="dropdown-item btn-light" href="#">Historial</a>
+                                <a class="dropdown-item btn-light" href="/patente/revision_modificada/${row.id}">
+                                    <div class="dropdown-item-icon">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </div>
+                                    Renovar
+                                </a>
+                                <a class="dropdown-item btn-light" href="/patente/report_declaracion/${row.id}" target="_blank">
+                                    <div class="dropdown-item-icon">
+                                        <i class="fas fa-print"></i>
+                                    </div>
+                                    Declaración
+                                </a>
+                                <a rel="details" class="dropdown-item btn-light">
+                                    <div class="dropdown-item-icon">
+                                        <i class="fas fa-funnel-dollar"></i>
+                                    </div>
+                                    Historial
+                                </a>
                             </div>
-                        </div>`
+                        </div>`;
                 }
             },
             {
@@ -92,57 +100,53 @@ $(() => {
             let data = tbl_catastro.row(tr.row).data();
             console.log(data);
 
-            // $('#tblDet').DataTable({
-            //     responsive: true,
-            //     autoWidth: false,
-            //     destroy: true,
-            //     deferRender: true,
-            //     //data: data.det,
-            //     ajax: {
-            //         url: window.location.pathname,
-            //         type: 'POST',
-            //         data: {
-            //             'action': 'search_details',
-            //             'id': data.id
-            //         },
-            //         dataSrc: ""
-            //     },
-            //     columns: [
-            //         {"data": "prod.name"},
-            //         {"data": "prod.cat.name"},
-            //         {"data": "price"},
-            //         {"data": "cant"},
-            //         {"data": "subtotal"},
-            //     ],
-            //     columnDefs: [
-            //         {
-            //             targets: [-1, -3],
-            //             class: 'text-center',
-            //             render: function (data, type, row) {
-            //                 return '$' + parseFloat(data).toFixed(2);
-            //             }
-            //         },
-            //         {
-            //             targets: [-2],
-            //             class: 'text-center',
-            //             render: function (data, type, row) {
-            //                 return data;
-            //             }
-            //         },
-            //     ],
-            //     initComplete: function (settings, json) {
-            //
-            //     }
-            // });
+            $('#tblDet').DataTable({
+                language: {
+                    'url': 'https://raw.githubusercontent.com/Jhon-Paillacho/ERP-estaticos/main/language.json'
+                },
+                responsive: true,
+                autoWidth: false,
+                destroy: true,
+                deferRender: true,
+                order: [[0, "desc"]],
+                //data: data.det,
+                ajax: {
+                    url: window.location.pathname,
+                    type: 'POST',
+                    data: {
+                        'action': 'search_details',
+                        'id': data.id
+                    },
+                    dataSrc: ""
+                },
+                columns: [
+                    {"data": "fecha"},
+                    {"data": "impuesto"},
+                    {"data": "interes"},
+                    {"data": "multa"},
+                    {"data": "servicios_administrativos"},
+                    {"data": "total"},
+                ],
+                // columnDefs: [
+                //     {
+                //         targets: [-1, -3],
+                //         class: 'text-center',
+                //         render: function (data, type, row) {
+                //             return '$' + parseFloat(data).toFixed(2);
+                //         }
+                //     },
+                //     {
+                //         targets: [-2],
+                //         class: 'text-center',
+                //         render: function (data, type, row) {
+                //             return data;
+                //         }
+                //     },
+                // ],
+                initComplete: function (settings, json) {
+
+                }
+            });
             $('#myModelDet').modal('show');
         })
 })
-
-
-// function lista_catastro() {
-//
-// }
-//
-// $(document).ready(function () {
-//     lista_catastro();
-// })

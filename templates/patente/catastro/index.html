@@ -35,7 +35,6 @@
                     <table class="table table-bordered table-hover" id="tableCatastro" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th></th>
                             <th>Ruc</th>
                             <th>Nombre contribuyente</th>
                             <th>Tipo</th>
@@ -47,7 +46,6 @@
                         </thead>
                         <tfoot>
                         <tr>
-                            <th></th>
                             <th>Ruc</th>
                             <th>Nombre contribuyente</th>
                             <th>Tipo</th>
@@ -70,27 +68,30 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-shopping-cart"></i> Historial de
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <i class="fas fa-file-signature"></i> Historial de
                         pago de patente</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-bordered" id="tblDet">
-                        <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Impuesto</th>
-                            <th>Interes</th>
-                            <th>Multa</th>
-                            <th>Serv. Administrativos</th>
-                            <th>Total</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                    <div class="datatable">
+                        <table class="table table-bordered table-hover" id="tblDet">
+                            <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Impuesto</th>
+                                <th>Interes</th>
+                                <th>Multa</th>
+                                <th>Serv. Administrativos</th>
+                                <th>Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

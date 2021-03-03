@@ -1,0 +1,116 @@
+{% extends 'patente/layout/card_step.html' %}
+
+{% block title %}<title>Modificar patente</title>{% endblock %}
+
+{% block nav_link3 %}nav-link active{% endblock %}
+
+{% block body_card %}
+    <div class="card invoice">
+        <div class="card-header p-4 p-md-5 border-bottom-0 bg-gradient-primary-to-secondary text-white-50">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-12 col-lg-auto mb-5 mb-lg-0 text-center text-lg-left">
+                    <div class="h2 text-white mb-0">{{ patente.establecimiento.nombre }}</div>
+                    {{ patente.establecimiento.direccion.get_all_direccion }}
+                </div>
+                <div class="col-12 col-lg-auto text-center text-lg-right">
+                    <!-- Invoice details-->
+                    <div class="h4 text-white">RUC: {{ patente.contribuyente.ruc }}</div>
+                    Nº patente {{ patente.numero_patente }}
+                </div>
+            </div>
+        </div>
+        <form action="{% url 'patente:especie_renovacion' patente.id %}" method="POST">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    {{ form.errors }}
+                </div>
+            {% endif %}
+            <div class="card-body p-4 p-md-5">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label class="small mb-1" for="fecha">Fecha</label>
+                        {{ form.fecha }}
+                        <input class="form-control form-control-sm"
+                               name="patente"
+                               required
+                               value="{{ patente.id }}" hidden>
+                    </div>
+                </div>
+                <!-- Invoice table-->
+                <div class="table-responsive">
+                    <table class="table table-borderless mb-0">
+                        <tbody>
+                        <!-- Invoice item 1-->
+                        <tr class="border-bottom">
+                            <td>
+                                <div class="small mb-1">Impuesto patente anual</div>
+                            </td>
+                            <td class="text-right font-weight-bold">
+                                <input name="impuesto" type="number" class="form-control form-control-sm"
+                                       value="{{ patente.get_impuesto }}">
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <!-- Invoice item 2-->
+                        <tr class="border-bottom">
+                            <td>
+                                <div class="small mb-1">Interes por mora</div>
+                            </td>
+                            <td class="text-right font-weight-bold">
+                                <input type="number"
+                                       name="interes"
+                                       value="{{ patente.get_interes }}"
+                                       class="form-control form-control-sm">
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <!-- Invoice item 3-->
+                        <tr class="border-bottom">
+                            <td>
+                                <div class="small mb-1">Multa</div>
+                            </td>
+                            <td class="text-right font-weight-bold">
+                                <input type="number"
+                                       name="multa"
+                                       value="{{ patente.get_multa }}"
+                                       class="form-control form-control-sm">
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr class="border-bottom">
+                            <td>
+                                <div class="small mb-1">Servicios administrativos</div>
+                            </td>
+                            <td class="text-right font-weight-bold">
+                                {{ form.servicios_administrativos }}
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <!-- Invoice total-->
+                        <tr>
+                            <td class="text-right pb-0">
+                                <div class="text-uppercase small font-weight-700 text-muted">
+                                    Total a pagar
+                                </div>
+                            </td>
+                            <td class="text-right pb-0">
+                                <div class="h5 mb-0 font-weight-700 text-green" id="total">
+                                    {#                                    $2059.75#}
+                                    {#                                    <input name="total" type="number">#}
+                                </div>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit">
+                    Guardar y continuar
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
