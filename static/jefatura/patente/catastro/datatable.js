@@ -1,5 +1,5 @@
-function lista_catastro() {
-    $('#tableCatastro').DataTable({
+$(() => {
+    let tbl_catastro = $('#tableCatastro').DataTable({
         language: {
             'url': 'https://raw.githubusercontent.com/Jhon-Paillacho/ERP-estaticos/main/language.json'
         },
@@ -42,6 +42,12 @@ function lista_catastro() {
             dataSrc: ""
         },
         columns: [
+            {
+                "className": 'details-control',
+                "orderable": false,
+                "data": null,
+                "defaultContent": ''
+            },
             {"data": "ruc"},
             {"data": "nombre_contribuyente"},
             {"data": "tipocontribuyente"},
@@ -64,7 +70,7 @@ function lista_catastro() {
                                 <a class="dropdown-item btn-light" href="/patente/actualizar_declaracion/${row.id}">Suspender</a>
                                 <a class="dropdown-item btn-light" href="/patente/actualizar_declaracion/${row.id}">Exonerar</a>
                                 <a class="dropdown-item btn-light" href="/patente/actualizar_declaracion/${row.id}">Renovar</a>
-                                <a class="dropdown-item btn-light" href="#">Historial</a>
+                                <a rel="details" class="dropdown-item btn-light" href="#">Historial</a>
                             </div>
                         </div>`
                 }
@@ -75,25 +81,68 @@ function lista_catastro() {
                 orderable: true,
                 render: function (data, type, row) {
                     return row.estado
-                    // if (!row.suspendida && !row.exonerada) {
-                    //     return '<span class="badge badge-light">Normal</span>';
-                    // }
-                    // if (row.exonerada) {
-                    //     return '<span class="badge badge-success">Exonerada</span>';
-                    // }
-                    // if (row.suspendida) {
-                    //     return '<span class="badge badge-danger">Suspendida</span>';
-                    // }
-
                 }
             }
         ],
-        initComplete: function (settings, json) {
-            // alert('Datos cargados');
-        }
     });
-}
 
-$(document).ready(function () {
-    lista_catastro();
+    $('#tableCatastro tbody')
+        .on('click', 'a[rel="details"]', function () {
+            let tr = tbl_catastro.cell($(this).closest('td, li')).index();
+            let data = tbl_catastro.row(tr.row).data();
+            console.log(data);
+
+            // $('#tblDet').DataTable({
+            //     responsive: true,
+            //     autoWidth: false,
+            //     destroy: true,
+            //     deferRender: true,
+            //     //data: data.det,
+            //     ajax: {
+            //         url: window.location.pathname,
+            //         type: 'POST',
+            //         data: {
+            //             'action': 'search_details',
+            //             'id': data.id
+            //         },
+            //         dataSrc: ""
+            //     },
+            //     columns: [
+            //         {"data": "prod.name"},
+            //         {"data": "prod.cat.name"},
+            //         {"data": "price"},
+            //         {"data": "cant"},
+            //         {"data": "subtotal"},
+            //     ],
+            //     columnDefs: [
+            //         {
+            //             targets: [-1, -3],
+            //             class: 'text-center',
+            //             render: function (data, type, row) {
+            //                 return '$' + parseFloat(data).toFixed(2);
+            //             }
+            //         },
+            //         {
+            //             targets: [-2],
+            //             class: 'text-center',
+            //             render: function (data, type, row) {
+            //                 return data;
+            //             }
+            //         },
+            //     ],
+            //     initComplete: function (settings, json) {
+            //
+            //     }
+            // });
+            $('#myModelDet').modal('show');
+        })
 })
+
+
+// function lista_catastro() {
+//
+// }
+//
+// $(document).ready(function () {
+//     lista_catastro();
+// })

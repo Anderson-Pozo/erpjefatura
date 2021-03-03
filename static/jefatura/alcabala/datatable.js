@@ -82,12 +82,6 @@ function lista_alcabala() {
                 "orderable": false,
                 "data": null,
                 "defaultContent": '',
-                // render: (data, type, row) =>{
-                //     let datos = new Object(data);
-                //     // console.log(datos);
-                //     // return `<button onclick="show_childs( ${datos})"></buttonon>`;
-                //     // return '<button onclick="show_childs(\'' + datos +'\')">aC</button>';
-                // }
             },
             {"data": "fecha"},
             {"data": "predio"},
@@ -132,11 +126,6 @@ function lista_alcabala() {
 
 function show_childs(variable) {
     console.log(JSON.parse(variable));
-
 }
-
-// $(document).ready(function () {
-//     lista_alcabala();
-// })
 
 $(document).ready(() => lista_alcabala());

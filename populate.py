@@ -2,8 +2,8 @@ from scripts.db_impuesto import db_vencimiento, db_impuesto, db_multa
 
 try:
     db_vencimiento()
-    # db_impuesto()
-    # db_multa()
-    print('Script DB completado')
+    db_impuesto()
+    db_multa()
+    print('--- Script DB finalizado ----')
 except BaseException as error:
     print('Ha ocurrido un error: {}'.format(error))

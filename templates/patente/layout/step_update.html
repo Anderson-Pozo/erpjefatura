@@ -31,6 +31,21 @@
                 >
                     <!-- Wizard navigation item 3-->
                     <a
+                            class="{% block link_paso2 %}nav-item nav-link{% endblock %}"
+                            id="wizard3-tab"
+                            href="{% url 'patente:crear_patente' %}"
+                            aria-controls="wizard3"
+                            aria-selected="true"
+                    >
+                        <div class="wizard-step-icon">3</div>
+                        <div class="wizard-step-text">
+                            <div class="wizard-step-text-name">Formulario de declaración</div>
+                            <div class="wizard-step-text-details">
+                                Creación y revisión del formulario de declaración
+                            </div>
+                        </div>
+                    </a>
+                    <a
                             class="{% block link_paso3 %}nav-item nav-link{% endblock %}"
                             id="wizard3-tab"
                             href="{% url 'patente:crear_patente' %}"

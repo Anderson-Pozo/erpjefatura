@@ -85,28 +85,40 @@ multa = [
 
 
 def db_vencimiento():
-    for i in vencimiento:
-        Vencimiento.objects.create(
-            digito=i[0],
-            no_obligado=i[1],
-            obligado=i[2]
-        )
+    if Vencimiento.objects.all().count() == 0:
+        for i in vencimiento:
+            Vencimiento.objects.create(
+                digito=i[0],
+                no_obligado=i[1],
+                obligado=i[2]
+            )
+        print('Vencimiento ejecutado ...')
+    else:
+        print('Ya hay registros en Vencimiento')
 
 
 def db_impuesto():
-    for i in impuestos:
-        Impuesto.objects.create(
-            numero=i[0],
-            fraccion_basica=i[1],
-            fraccion_excedente=i[2],
-            impuesto_fraccion_basica=i[3],
-            porcentaje_fraccion_excedente=i[4]
-        )
+    if Impuesto.objects.all().count() == 0:
+        for i in impuestos:
+            Impuesto.objects.create(
+                numero=i[0],
+                fraccion_basica=i[1],
+                fraccion_excedente=i[2],
+                impuesto_fraccion_basica=i[3],
+                porcentaje_fraccion_excedente=i[4]
+            )
+        print('Impuesto ejecutado ...')
+    else:
+        print('Ya hay registros en Impuesto')
 
 
 def db_multa():
-    for i in multa:
-        Multa.objects.create(
-            porcentaje=i[0],
-            fecha=i[1],
-        )
+    if Multa.objects.all().count() == 0:
+        for i in multa:
+            Multa.objects.create(
+                porcentaje=i[0],
+                fecha=i[1],
+            )
+        print('Multa ejecutado ...')
+    else:
+        print('Ya hay registros en Multa')
