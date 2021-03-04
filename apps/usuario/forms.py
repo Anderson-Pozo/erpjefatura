@@ -12,7 +12,7 @@ class LoginForm(AuthenticationForm):
 
     username = forms.CharField(
         required=True,
-        max_length=10,
+        max_length=13,
         label='Ingrese su número de cédula',
         help_text='Ingrese su número de cédula de 10 dígitos',
         error_messages={

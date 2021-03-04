@@ -2,6 +2,8 @@ from django.db import models
 from django.forms import model_to_dict
 from apps.auditoria.mixins import AuditMixin
 from apps.impuesto.models import get_date_digito
+from django.db.models.signals import post_save
+from apps.usuario.models import User
 
 
 # Create your models here.
@@ -94,3 +96,47 @@ class Juridico(AuditMixin, Contribuyente):
 
     def get_nombre(self):
         return '{}'.format(self.razon_social)
+
+
+def generate_user_natural(sender, instance, **kwargs):
+    try:
+        num = User.objects.filter(username=instance.ruc).count()
+        if num == 0:
+            new_user = User(
+                email=instance.email,
+                username=instance.ruc,
+                first_name=instance.nombres,
+                last_name=instance.apellidos,
+                is_superuser=False,
+                is_active=True,
+            )
+            new_user.set_password(instance.ruc)
+            new_user.save()
+        else:
+            pass
+    except Exception as error:
+        print(error)
+
+
+def generate_user_juridico(sender, instance, **kwargs):
+    try:
+        num = User.objects.filter(username=instance.ruc).count()
+        if num == 0:
+            new_user = User(
+                email=instance.email,
+                username=instance.ruc,
+                first_name=instance.razon_social,
+                last_name='',
+                is_superuser=False,
+                is_active=True,
+            )
+            new_user.set_password(instance.ruc)
+            new_user.save()
+        else:
+            pass
+    except Exception as error:
+        print(error)
+
+
+post_save.connect(generate_user_natural, sender=Natural)
+post_save.connect(generate_user_juridico, sender=Juridico)
