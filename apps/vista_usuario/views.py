@@ -20,3 +20,6 @@ class Index(AjaxList, ListView):
 def dispatch(self, request, *args, **kwargs):
     return super().dispatch(request, *args, *kwargs)
 
+class Help(TemplateView):
+    model = VistaUsuario
+    template_name = 'vista_usuario/help.html'
