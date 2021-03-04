@@ -52,14 +52,14 @@ class PatenteTest(TestCase):
             numero_patente=451289,
             fecha=date.today(),
             exonerada=True,
-            suspendida=False,
+            suspendida=True,
             contribuyente=contribuyente_test,
             establecimiento=establecimiento_test
         )
 
     def test_patente_estado(self):
         patente = Patente.objects.get(numero_patente=451289)
-        self.assertEqual(patente.get_estado(), '<span class="badge badge-success">Suspendida</span>')
+        self.assertEqual(patente.get_estado(), '<span class="badge badge-danger">Suspendida</span>')
 
     def test_patente_impuesto(self):
         patente = Patente.objects.get(numero_patente=451289)

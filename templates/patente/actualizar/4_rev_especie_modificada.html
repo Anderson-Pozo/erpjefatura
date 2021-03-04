@@ -1,0 +1,92 @@
+{% extends 'patente/layout/card_step.html' %}
+
+{% block title %}<title>Modificar patente</title>{% endblock %}
+
+{% block nav_link4 %}nav-link active{% endblock %}
+
+{% block body_card %}
+    <div class="row justify-content-center">
+        <div class="col-xl-8">
+            <h3 class="text-primary">Especie de patente municipal</h3>
+            <h5 class="card-title">Revise la información de la especie de patente</h5>
+
+            <div class="row small">
+                <div class="col-sm-6 text-truncate">
+                    <em>Número de patente: {{ detalle.patente.numero_patente }}</em>
+                </div>
+                <div class="col-sm-6 text-truncate">
+                    <em>Fecha: {{ detalle.fecha }}</em>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-6 text-truncate">
+                    <em>RUC contribuyente: {{ detalle.patente.contribuyente.ruc }}</em>
+                </div>
+            </div>
+            <div class="row small">
+                {% if detalle.patente.contribuyente.tipocontribuyente.id == 1 %}
+                    <div class="col-sm-12 text-truncate">
+                        <em>Nombres o razón social: {{ detalle.patente.contribuyente.natural.nombres }}</em>
+                    </div>
+                {% else %}
+                    <div class="col-sm-12 text-truncate">
+                        <em>Nombres o razón social: {{ detalle.patente.contribuyente.juridico.razon_social }}</em>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row small">
+                <div class="col-sm-12 text-truncate">
+                    <em>Establecimiento: {{ detalle.patente.establecimiento.nombre }}</em>
+                </div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-12 text-truncate">
+                    <em>Dirección: {{ detalle.patente.establecimiento.direccion.get_all_direccion }}</em>
+                </div>
+            </div>
+            <hr class="my-4"/>
+            <div class="row small">
+                <div class="col-sm-12 text-truncate">
+                    <em>Impuesto: {{ detalle.impuesto }}</em>
+                </div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-12 text-truncate">
+                    <em>Interes: {{ detalle.interes }}</em>
+                </div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-12 text-truncate">
+                    <em>Multa: {{ detalle.multa }}</em>
+                </div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-12 text-truncate">
+                    <em>Servicios administrativos: {{ detalle.servicios_administrativos }}</em>
+                </div>
+            </div>
+            <div class="row small">
+                <div class="col-sm-12 text-truncate">
+                    <em>Total a pagar: <b>{{ detalle.get_total }}</b></em>
+                </div>
+            </div>
+            <hr class="my-4"/>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <a class="btn btn-green btn-icon mr-2"
+                       target="_blank"
+                       href="{% url 'patente:report_especie' detalle.id %}">
+                        <i class="fas fa-print"></i>
+                    </a>
+                    <a class="btn btn-teal btn-icon mr-2"
+                       href="{% url 'patente:report_especie' detalle.id %}"
+                       download="">
+                        <i class="fas fa-download"></i>
+                    </a>
+                </div>
+                <a href="{% url 'patente:lista_catastro' %}" class="btn btn-primary" type="button">Finalizar</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

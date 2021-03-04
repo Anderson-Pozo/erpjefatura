@@ -28,8 +28,6 @@ class Patente(AuditMixin, models.Model):
         return 'Patente Nº {}'.format(self.id)
 
     def get_estado(self):
-        # if (self.suspendida and self.exonerada) is False:
-        #     return '<span class="badge badge-light">Normal</span>'
         if self.suspendida:
             return '<span class="badge badge-danger">Suspendida</span>'
         elif self.exonerada:
@@ -58,10 +56,10 @@ class Patente(AuditMixin, models.Model):
         anio_actual = datetime.now().year
 
         if ultimo_anio == anio_actual:
-            fecha_vencimiento = self.contribuyente.get_fecha_vencimiento().replace(year=anio_actual)
+            fecha_vencimiento = self.contribuyente.get_fecha_vencimiento().replace(year=anio_actual + 1)
             return fecha_vencimiento
         else:
-            fecha_vencimiento = self.contribuyente.get_fecha_vencimiento().replace(year=ultimo_anio+1)
+            fecha_vencimiento = self.contribuyente.get_fecha_vencimiento().replace(year=ultimo_anio + 1)
             return fecha_vencimiento
 
     def get_interes(self):
@@ -136,7 +134,7 @@ class DetallePatente(AuditMixin, models.Model):
     patente = models.ForeignKey(Patente, on_delete=models.CASCADE)
 
     def __str__(self):
-        return 'Detalle patente {}'.format(self.id)
+        return 'Detalle {} - Patente {}'.format(self.id, self.patente.establecimiento.nombre)
 
     def get_total(self):
         total = self.impuesto + self.interes + self.multa + self.servicios_administrativos
@@ -144,6 +142,7 @@ class DetallePatente(AuditMixin, models.Model):
 
     def to_json(self):
         item = model_to_dict(self)
+        item['total'] = self.get_total()
         return item
 
     class Meta:
