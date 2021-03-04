@@ -1,11 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block navlinkinicio %}
-    <a class="nav-link active" href="{% url 'index' %}">
-        Consulta de Patentes
-    </a>
-{% endblock %}
+{% block collapse_consulta %}collapse show{% endblock %}
 
 {% block iconheader %}
     <div class="page-header-icon"><i data-feather="home"></i></div>
@@ -31,6 +27,12 @@
 
 
 {% block centralbody %}
+    <style>
+        h2 .fc-toolbar-title {
+            font-size: 5px;
+            {#padding: 2px 4px;#}
+        }
+    </style>
     {#    {% for i in logs %}#}
     {#        <h1>{{ i.user }}</h1>#}
     {#    {% endfor %}#}
@@ -119,10 +121,10 @@
 {% block extrajs %}
     <script type="text/javascript" src="{% static 'static/jefatura/vista_usuario/datatable.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/full_calendar.js' %}"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/locales/es.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 {% endblock %}
 
