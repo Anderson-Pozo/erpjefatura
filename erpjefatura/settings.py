@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'apps.predio',
     'apps.administrador',
     'apps.usuario',
-    'apps.auditoria'
+    'apps.auditoria',
+    'apps.vista_usuario'
 ]
 
 MIDDLEWARE = [
