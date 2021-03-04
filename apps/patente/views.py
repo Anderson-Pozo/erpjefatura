@@ -43,18 +43,6 @@ class ListaCatastro(ListView):
         return JsonResponse(data, safe=False)
 
 
-# class CrearContribuyente(TemplateView):
-#     template_name = 'patente/apertura/paso1_contribuyente.html'
-#
-#     def get(self, request, *args, **kwargs):
-#         form_natural = NaturalForm(self.request.GET or None, prefix="natural")
-#         form_juridico = JuridicoForm(self.request.GET or None, prefix="juridico")
-#         context = super(CrearContribuyente, self).get_context_data(**kwargs)
-#         context['form_natural'] = form_natural
-#         context['form_juridico'] = form_juridico
-#         return self.render_to_response(context)
-
-
 # Proceso de apertura de patente
 class CrearNatural(CreateView):
     model = Natural

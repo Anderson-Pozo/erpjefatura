@@ -100,32 +100,40 @@ class Juridico(AuditMixin, Contribuyente):
 
 def generate_user_natural(sender, instance, **kwargs):
     try:
-        new_user = User(
-            email=instance.email,
-            username=instance.ruc,
-            first_name=instance.nombres,
-            last_name=instance.apellidos,
-            is_superuser=False,
-            is_active=True,
-        )
-        new_user.set_password(instance.ruc)
-        new_user.save()
+        num = User.objects.filter(username=instance.ruc).count()
+        if num == 0:
+            new_user = User(
+                email=instance.email,
+                username=instance.ruc,
+                first_name=instance.nombres,
+                last_name=instance.apellidos,
+                is_superuser=False,
+                is_active=True,
+            )
+            new_user.set_password(instance.ruc)
+            new_user.save()
+        else:
+            pass
     except Exception as error:
         print(error)
 
 
 def generate_user_juridico(sender, instance, **kwargs):
     try:
-        new_user = User(
-            email=instance.email,
-            username=instance.ruc,
-            first_name=instance.razon_social,
-            last_name='',
-            is_superuser=False,
-            is_active=True,
-        )
-        new_user.set_password(instance.ruc)
-        new_user.save()
+        num = User.objects.filter(username=instance.ruc).count()
+        if num == 0:
+            new_user = User(
+                email=instance.email,
+                username=instance.ruc,
+                first_name=instance.razon_social,
+                last_name='',
+                is_superuser=False,
+                is_active=True,
+            )
+            new_user.set_password(instance.ruc)
+            new_user.save()
+        else:
+            pass
     except Exception as error:
         print(error)
 
