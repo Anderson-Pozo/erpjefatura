@@ -36,36 +36,34 @@ function lista_vista_usuario() {
             url: window.location.pathname,
             type: 'POST',
             data: {
-                'action': 'searchdata'
+                'action': 'search_data',
+                // 'usuario': '1234567891001'
             }, // parametros
             dataSrc: ""
         },
         columns: [
-            {"data": "fecha_ultimo_pago"},
-            {"data": "impuesto"},
-            {"data": "interes"},
-            {"data": "multa"},
-            {"data": "servicios"}
+            {"data": "ruc"},
+            {"data": "nombre_contribuyente"},
+            {"data": "tipocontribuyente"},
+            {"data": "nombre_establecimiento"},
+            {"data": "total_patrimonio"},
+            {"data": "exonerada"},
+            // {"data": "acciones"},
         ],
-
+        columnDefs: [
+            {
+                targets: [-1],
+                class: 'text-center',
+                orderable: true,
+                render: function (data, type, row) {
+                    return row.estado
+                }
+            }
+        ],
         initComplete: function (settings, json) {
             // alert('Datos cargados');
         }
     });
-    $('#tableVistaUsuario tbody').on('click', 'td.details-control',
-        function () {
-            let tr = $(this).closest('tr');
-            let row = table.row(tr);
-
-            if (row.child.isShown()) {
-                row.child.hide();
-                tr.removeClass('shown');
-            } else {
-                row.child(format(row.data())).show();
-                console.log(row.data());
-                tr.addClass('shown');
-            }
-        });
 }
 
 $(document).ready(() => lista_vista_usuario());
