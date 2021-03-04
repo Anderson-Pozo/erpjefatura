@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
             left: 'title',
             end: 'dayGridMonth'
         },
-
         events: [
             {
                 title: "Retrasado",

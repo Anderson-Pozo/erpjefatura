@@ -3,30 +3,30 @@ function lista_vista_usuario() {
         language: {
             'url': 'https://raw.githubusercontent.com/Jhon-Paillacho/ERP-estaticos/main/language.json'
         },
-        dom: "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>>" +
-            "<'row'<'col-sm-12'tr>>" +
-            "<'row'<'col-sm-12 col-md-5'li><'col-sm-12 col-md-7'p>>",
-        buttons: [
-            {
-                extend: 'excelHtml5',
-                text: 'Exportar Excel <i class="fas fa-file-excel"></i>',
-                titleAttr: 'Excel',
-                className: 'btn btn-green btn-flat btn-xs'
-            },
-            {
-                extend: 'pdfHtml5',
-                text: 'Exportar PDF <i class="fas fa-file-pdf"></i>',
-                titleAttr: 'PDF',
-                className: 'btn btn-red btn-flat btn-xs'
-            },
-            {
-                extend: 'print',
-                text: 'Imprimir <i class="fas fa-print"></i>',
-                titleAttr: 'Imprimir',
-                className: 'btn btn-teal btn-flat btn-xs'
-            },
-            // 'excel', 'pdf', 'print'
-        ],
+        // dom: "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>>" +
+        //     "<'row'<'col-sm-12'tr>>" +
+        //     "<'row'<'col-sm-12 col-md-5'li><'col-sm-12 col-md-7'p>>",
+        // buttons: [
+        //     {
+        //         extend: 'excelHtml5',
+        //         text: 'Exportar Excel <i class="fas fa-file-excel"></i>',
+        //         titleAttr: 'Excel',
+        //         className: 'btn btn-green btn-flat btn-xs'
+        //     },
+        //     {
+        //         extend: 'pdfHtml5',
+        //         text: 'Exportar PDF <i class="fas fa-file-pdf"></i>',
+        //         titleAttr: 'PDF',
+        //         className: 'btn btn-red btn-flat btn-xs'
+        //     },
+        //     {
+        //         extend: 'print',
+        //         text: 'Imprimir <i class="fas fa-print"></i>',
+        //         titleAttr: 'Imprimir',
+        //         className: 'btn btn-teal btn-flat btn-xs'
+        //     },
+        //     // 'excel', 'pdf', 'print'
+        // ],
         responsive: true,
         autoWidth: true,
         destroy: true,

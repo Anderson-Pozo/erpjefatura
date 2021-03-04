@@ -9,4 +9,3 @@ from apps.utils.ajax import AjaxList, AjaxCreate, AjaxUpdate, AjaxDelete
 class Index(AjaxList, TemplateView):
     # model = VistaUsuario
     template_name = 'vista_usuario/index.html'
-
