@@ -21,9 +21,9 @@ $(() => {
             {"data": "aldia"},
             {"data": "ruc"},
             {"data": "nombre_contribuyente"},
-            {"data": "tipocontribuyente"},
             {"data": "nombre_establecimiento"},
             {"data": "total_patrimonio"},
+            {"data": "estado"},
             {"data": "acciones"},
         ],
         columnDefs: [

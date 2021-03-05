@@ -43,7 +43,7 @@ class Index(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['fechas'] = DetallePatente.objects.filter(patente__contribuyente__ruc='1002003001111')
+        context['fechas'] = DetallePatente.objects.filter(patente__contribuyente__ruc='0401681414001')
         # print(context)
         return context
 
@@ -53,6 +53,9 @@ class Calendario(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['fechas'] = DetallePatente.objects.filter(patente__contribuyente__ruc='1002003001111')
+        context['fechas'] = DetallePatente.objects.filter(patente__contribuyente__ruc='0401681414001')
         # print(context)
         return context
+
+class Help(TemplateView):
+    template_name = 'vista_usuario/help.html'

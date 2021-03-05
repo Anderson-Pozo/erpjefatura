@@ -7,27 +7,27 @@
         @page {
             size: A4 portrait;
             margin-top: 4.8cm;
-            margin-left: 2cm;
-            margin-right: 2cm;
+            margin-left: 1cm;
+            margin-right: 1cm;
         }
 
         .fecha {
             text-align: left;
-            margin-left: 3.5cm;
+            margin-left: 4.5cm;
             text-transform: uppercase;
         }
 
         .ruc {
-            margin-left: 1.5cm;
+            margin-left: 2.5cm;
             padding-top: 2px;
         }
 
         .direccion {
-            margin-left: 11.5cm;
+            margin-left: 12.5cm;
         }
 
         .fecha_f {
-            margin-left: 11.5cm;
+            margin-left: 12.5cm;
         }
         em{
             font-size: 15px;
@@ -85,8 +85,7 @@
     <p style="padding-top: 13px">
         {{ plusvalia.alcabala.vendedor.nombres }} {{ plusvalia.alcabala.vendedor.apellidos }}
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         {{ plusvalia.alcabala.comprador.nombres }} {{ plusvalia.alcabala.comprador.apellidos }}
     </p>
     <p style="padding-top: -13px">
@@ -95,6 +94,7 @@
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp
         B. {{ plusvalia.alcabala.predio.direccion.barrio.nombre }},
         P. {{ plusvalia.alcabala.predio.direccion.barrio.parroquia.nombre }}
     </p>
@@ -102,7 +102,7 @@
         {{ plusvalia.fecha_escritura }}
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         {{ plusvalia.fecha_tramite }}
     </p>
     <p style="padding-top: 40px">

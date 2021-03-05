@@ -266,11 +266,19 @@
                                     <a class="nav-link" href="{% url 'vista_usuario:calendario' %}">
                                         Calendario
                                     </a>
-{#                                    <a class="nav-link" href="{% url 'vista_usuario:help_contribuyente' %}">#}
-{#                                        Información#}
-{#                                    </a>#}
+                                    <a class="nav-link" href="{% url 'vista_usuario:help' %}">
+                                        Información
+                                    </a>
                                 </nav>
                             </div>
+                            <a class="nav-link" href="{% url 'vista_usuario:calendario' %}">
+                                <div class="nav-link-icon"><i data-feather="calendar"></i></div>
+                                Calendario
+                            </a>
+                            <a class="nav-link" href="{% url 'vista_usuario:help' %}">
+                                <div class="nav-link-icon"><i data-feather="info"></i></div>
+                                Información
+                            </a>
                         {% endif %}
                     </div>
                 </div>
