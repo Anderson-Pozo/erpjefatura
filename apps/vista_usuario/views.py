@@ -6,11 +6,14 @@ from django.http import HttpResponse, JsonResponse
 from apps.patente.models import Patente, DetallePatente
 from apps.establecimiento.models import Establecimiento
 
+from datetime import date
 # Create your views here.
 
 
 class Index(TemplateView):
     template_name = 'vista_usuario/index.html'
+
+    # user = request.user.username
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -28,7 +31,6 @@ class Index(TemplateView):
                 print(data)
             elif action == 'search_establ':
                 data = []
-                # for i in Patente.objects.filter(contribuyente__ruc=user):
                 for i in Establecimiento.objects.filter(patente__contribuyente__ruc=user):
                     data.append(i.to_json())
             elif action == 'search_details':
@@ -43,7 +45,8 @@ class Index(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['fechas'] = DetallePatente.objects.filter(patente__contribuyente__ruc='0401681414001')
+        context['fechas'] = DetallePatente.objects.filter(
+            patente__contribuyente__ruc=self.request.user.username).order_by('-fecha')[0:5]
         # print(context)
         return context
 
@@ -52,10 +55,15 @@ class Calendario(TemplateView):
     template_name = 'vista_usuario/calendario.html'
 
     def get_context_data(self, **kwargs):
+        patentes = Patente.objects.filter(contribuyente__ruc=self.request.user.username)
         context = super().get_context_data(**kwargs)
-        context['fechas'] = DetallePatente.objects.filter(patente__contribuyente__ruc='0401681414001')
+        context['fechas'] = DetallePatente.objects.filter(patente__contribuyente__ruc=self.request.user.username)
+        context['vencimiento'] = date(2021, 2, 27)
+        context['hoy'] = date.today()
+        context['patentes'] = patentes
         # print(context)
         return context
+
 
 class Help(TemplateView):
     template_name = 'vista_usuario/help.html'

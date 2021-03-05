@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block collapse_consulta %}collapse show{% endblock %}
+{#{% block collapse_consulta %}collapse show{% endblock %}#}
 
 {% block iconheader %}
     <div class="page-header-icon"><i data-feather="users"></i></div>
@@ -40,7 +40,7 @@
                                     <a class="nav-link active" id="overview-pill"
                                        href="#overview"
                                        data-toggle="tab" role="tab" aria-controls="overview"
-                                       aria-selected="true">Historial de pagos</a>
+                                       aria-selected="true">Mis patentes</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="activities-pill" href="#activities"
@@ -157,17 +157,20 @@
 
             <div class="row">
                 {#                Calendario#}
-                <div class="col-lg-5 mb-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div id='calendar'></div>
-                        </div>
-                    </div>
-                </div>
+{#                <div class="col-lg-5 mb-4">#}
+{#                    <div class="card mb-4">#}
+{#                        <div class="card-body">#}
+{#                            <div id='calendar'></div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
 
                 <div class="col-lg-7 mb-4">
                     <div class="card mb-4 card-scrollable">
                         <div class="sbp-preview">
+                            <div class="card-header">
+                                Últimos pagos
+                            </div>
                             <div class="sbp-preview-content">
                                 <div class="timeline">
                                     {% for i in fechas %}
@@ -196,46 +199,7 @@
 {% block extrajs %}
     <script type="text/javascript" src="{% static 'static/jefatura/vista_usuario/datatable.js' %}"></script>
     <script type="text/javascript" src="{% static 'static/jefatura/vista_usuario/datatable2.js' %}"></script>
-    {#    <script type="text/javascript" src="{% static 'js/full_calendar.js' %}"></script>#}
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
 
-            var calendarEl = document.getElementById('calendar');
-
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                locale: 'es',
-                views: {
-                    dayGridMonth: { // name of view
-                        titleFormat: {year: 'numeric', month: 'long'}
-                        // other view-specific options here
-                    }
-                },
-                initialView: 'dayGridMonth',
-                // initialDate: '2021-03-03',
-                nextDayThreshold: '00:00:00',
-                headerToolbar: {
-                    left: 'prev',
-                    center: 'title',
-                    right: 'next'
-                },
-                events: [
-                    {% for i in fechas %}
-                        {
-                            title: "Apertura",
-                            start: '{{ i.fecha | date:"Y-m-d" }}',
-                            {#end: "2021-03-10",#}
-                            description: '{{ i.patente.establecimiento.nombre }}',
-                            backgroundColor: '#e03131',
-                            borderColor: '#e03131'
-                        },
-                    {% endfor %}
-                ]
-            });
-            console.log(calendar);
-
-            calendar.render();
-        });
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/locales/es.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.css" rel="stylesheet">

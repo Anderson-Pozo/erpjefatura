@@ -251,26 +251,24 @@
                         {% else %}
                             <div class="sidenav-menu-heading">Consulta</div>
                             <!-- Sidenav Accordion -->
-                            <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
-                               data-target="#collapseConsulta" aria-expanded="true" aria-controls="collapseConsulta">
+                            <a class="nav-link" href="{% url 'vista_usuario:index_contribuyente' %}">
                                 <div class="nav-link-icon"><i class="fas fa-search-dollar"></i></div>
                                 Consulta
-                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="{% block collapse_consulta %}collapse{% endblock %}" id="collapseConsulta"
-                                 data-parent="#accordionSidenav">
-                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                    <a class="nav-link" href="{% url 'vista_usuario:index_contribuyente' %}">
-                                        Consulta de pagos
-                                    </a>
-                                    <a class="nav-link" href="{% url 'vista_usuario:calendario' %}">
-                                        Calendario
-                                    </a>
-                                    <a class="nav-link" href="{% url 'vista_usuario:help' %}">
-                                        Información
-                                    </a>
-                                </nav>
-                            </div>
+{#                            <div class="{% block collapse_consulta %}collapse{% endblock %}" id="collapseConsulta"#}
+{#                                 data-parent="#accordionSidenav">#}
+{#                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">#}
+{#                                    <a class="nav-link" href="{% url 'vista_usuario:index_contribuyente' %}">#}
+{#                                        Consulta de pagos#}
+{#                                    </a>#}
+{#                                    <a class="nav-link" href="{% url 'vista_usuario:calendario' %}">#}
+{#                                        Calendario#}
+{#                                    </a>#}
+{#                                    <a class="nav-link" href="{% url 'vista_usuario:help' %}">#}
+{#                                        Información#}
+{#                                    </a>#}
+{#                                </nav>#}
+{#                            </div>#}
                             <a class="nav-link" href="{% url 'vista_usuario:calendario' %}">
                                 <div class="nav-link-icon"><i data-feather="calendar"></i></div>
                                 Calendario

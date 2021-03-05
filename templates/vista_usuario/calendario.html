@@ -27,13 +27,17 @@
     <div class="row">
         <div class="container mt-n10">
             <div class="card mb-4">
-                    <div class="card-body">
-                        <div id='calendar'></div>
-                    </div>
+                <div class="card-body">
+                    <div id='calendar'></div>
                 </div>
-{#            <div class="row justify-content-center">#}
-{#                #}
-{#            </div>#}
+            </div>
+            <div class="container">
+                {% for patente in patentes %}
+                    <h2> Ultimo pago{{ patente.get_ultimo_pago }} - Esta {{ patente.establecimiento.nombre }}</h2>
+                    <h2> Vencimiento {{ patente.get_vencimiento }} - Esta {{ patente.establecimiento.nombre }}</h2>
+                {% endfor %}
+
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -65,11 +69,20 @@
                         {
                             title: '{{ i.patente.establecimiento.nombre }}',
                             start: '{{ i.fecha | date:"Y-m-d" }}',
-                            {#end: "2021-03-10",#}
                             description: '{{ i.patente.establecimiento.nombre }}',
                             backgroundColor: '#1fc4ea',
                             borderColor: '#1fc4ea'
                         },
+                    {% endfor %}
+                    {% for patente in patentes %}
+                        {
+                            title: 'Pendiente {{ patente.establecimiento.nombre }}',
+                            start: '2021-03-05',
+                            end: '{{ patente.get_vencimiento | date:"Y-m-d" }}',
+                            end: '2021-03-10',
+                            backgroundColor: '#f80606',
+                            borderColor: '#f80606'
+                        }
                     {% endfor %}
                 ]
             });
