@@ -14,9 +14,9 @@ document.addEventListener('DOMContentLoaded', function () {
         // initialDate: '2021-03-03',
         nextDayThreshold: '00:00:00',
         headerToolbar: {
-            right: 'prev,next',
-            left: 'title',
-            end: 'dayGridMonth'
+            left: 'prev',
+            center: 'title',
+            right: 'next'
         },
         events: [
             {

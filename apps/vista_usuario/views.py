@@ -30,7 +30,7 @@ class Index(TemplateView):
             elif action == 'search_establ':
                 data = []
                 # for i in Patente.objects.filter(contribuyente__ruc=user):
-                for i in Establecimiento.objects.filter(patente__contribuyente__ruc='1002003001111'):
+                for i in Establecimiento.objects.filter(patente__contribuyente__ruc=user):
                     data.append(i.to_json())
                 print(data)
             else:

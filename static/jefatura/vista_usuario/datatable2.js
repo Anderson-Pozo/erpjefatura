@@ -1,5 +1,5 @@
-function lista_vista_usuario() {
-    let table = $('#tableVistaUsuario').DataTable({
+function lista_vista_establecimiento() {
+    let table = $('#tableVistaEstablecimiento').DataTable({
         language: {
             'url': 'https://raw.githubusercontent.com/Jhon-Paillacho/ERP-estaticos/main/language.json'
         },
@@ -36,37 +36,25 @@ function lista_vista_usuario() {
             url: window.location.pathname,
             type: 'POST',
             data: {
-                'action': 'search_data',
+                'action': 'search_establ',
                 // 'usuario': '1234567891001'
             }, // parametros
             dataSrc: ""
         },
         columns: [
-            {"data": "ruc"},
-            {"data": "nombre_contribuyente"},
-            {"data": "tipocontribuyente"},
-            {"data": "nombre_establecimiento"},
+            {"data": "nombre"},
+            {"data": "fecha_inicio_actividad"},
             {"data": "total_patrimonio"},
-            {"data": "exonerada"},
-            {"data": "acciones"},
+            {"data": "tipo_actividad"},
+            {"data": "direccion"},
+            {"data": "estado"},
+            // {"data": "acciones"},
         ],
         columnDefs: [
             {
                 targets: [-1],
                 class: 'text-center',
-                orderable: false,
-                render: function (data, type, row) {
-                    let buttons = '<a class="btn btn-datatable btn-icon btn-outline-secondary mr-2"' +
-                        ' onclick="">' +
-                        '<i class="fas fa-funnel-dollar"></i>' +
-                        '</a>';
-                    return buttons;
-                }
-            },
-            {
-                targets: [-2],
-                class: 'text-center',
-                orderable: false,
+                orderable: true,
                 render: function (data, type, row) {
                     if (row.estado) {
                         return '<span class="badge badge-success">Activo</span>';
@@ -82,4 +70,4 @@ function lista_vista_usuario() {
     });
 }
 
-$(document).ready(() => lista_vista_usuario());
+$(document).ready(() => lista_vista_establecimiento());

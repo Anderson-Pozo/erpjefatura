@@ -65,7 +65,7 @@
                                                 <th>Establecimiento</th>
                                                 <th>Capital</th>
                                                 <th>Estado</th>
-                                                {#                                                <th>Acciones</th>#}
+                                                <th>Acciones</th>
                                             </tr>
                                             </thead>
                                             <tfoot>
@@ -76,7 +76,7 @@
                                                 <th>Establecimiento</th>
                                                 <th>Capital</th>
                                                 <th>Estado</th>
-                                                {#                                                <th>Acciones</th>#}
+                                                <th>Acciones</th>
                                             </tr>
                                             </tfoot>
                                         </table>
@@ -86,21 +86,28 @@
                                 <div class="tab-pane" id="activities" role="tabpanel"
                                      aria-labelledby="activities-pill">
                                     <div class="datatable table-responsive">
-                                        <table class="table table-bordered table-hover" id="tableVistaUsuario"
+                                        <table class="table table-bordered table-hover" id="tableVistaEstablecimiento"
                                                width="100%"
                                                cellspacing="0">
                                             <thead>
                                             <tr>
                                                 <th>Nombre</th>
-                                                <th>Actividad</th>
+                                                <th>Inicio actividad</th>
+                                                <th>Patrimonio</th>
+                                                <th>Tipo de actividad</th>
                                                 <th>Dirección</th>
+                                                <th>Estado</th>
+
                                             </tr>
                                             </thead>
                                             <tfoot>
                                             <tr>
                                                 <th>Nombre</th>
-                                                <th>Actividad</th>
+                                                <th>Inicio actividad</th>
+                                                <th>Patrimonio</th>
+                                                <th>Tipo de actividad</th>
                                                 <th>Dirección</th>
+                                                <th>Estado</th>
                                             </tr>
                                             </tfoot>
                                         </table>
@@ -115,7 +122,9 @@
             <div class="row">
                 <div class="col-lg-5 mb-4">
                     <div class="card mb-4">
-                        <div id='calendar'></div>
+                        <div class="card-body">
+                            <div id='calendar'></div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-7 mb-4">
@@ -185,6 +194,7 @@
 
 {% block extrajs %}
     <script type="text/javascript" src="{% static 'static/jefatura/vista_usuario/datatable.js' %}"></script>
+    <script type="text/javascript" src="{% static 'static/jefatura/vista_usuario/datatable2.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/full_calendar.js' %}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/locales/es.js"></script>
