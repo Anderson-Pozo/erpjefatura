@@ -1,32 +1,8 @@
-function lista_vista_usuario() {
+$(() => {
     let table = $('#tableVistaUsuario').DataTable({
         language: {
             'url': 'https://raw.githubusercontent.com/Jhon-Paillacho/ERP-estaticos/main/language.json'
         },
-        // dom: "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>>" +
-        //     "<'row'<'col-sm-12'tr>>" +
-        //     "<'row'<'col-sm-12 col-md-5'li><'col-sm-12 col-md-7'p>>",
-        // buttons: [
-        //     {
-        //         extend: 'excelHtml5',
-        //         text: 'Exportar Excel <i class="fas fa-file-excel"></i>',
-        //         titleAttr: 'Excel',
-        //         className: 'btn btn-green btn-flat btn-xs'
-        //     },
-        //     {
-        //         extend: 'pdfHtml5',
-        //         text: 'Exportar PDF <i class="fas fa-file-pdf"></i>',
-        //         titleAttr: 'PDF',
-        //         className: 'btn btn-red btn-flat btn-xs'
-        //     },
-        //     {
-        //         extend: 'print',
-        //         text: 'Imprimir <i class="fas fa-print"></i>',
-        //         titleAttr: 'Imprimir',
-        //         className: 'btn btn-teal btn-flat btn-xs'
-        //     },
-        //     // 'excel', 'pdf', 'print'
-        // ],
         responsive: true,
         autoWidth: true,
         destroy: true,
@@ -42,12 +18,12 @@ function lista_vista_usuario() {
             dataSrc: ""
         },
         columns: [
+            {"data": "aldia"},
             {"data": "ruc"},
             {"data": "nombre_contribuyente"},
             {"data": "tipocontribuyente"},
             {"data": "nombre_establecimiento"},
             {"data": "total_patrimonio"},
-            {"data": "exonerada"},
             {"data": "acciones"},
         ],
         columnDefs: [
@@ -56,7 +32,7 @@ function lista_vista_usuario() {
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    let buttons = '<a class="btn btn-datatable btn-icon btn-outline-secondary mr-2"' +
+                    let buttons = '<a rel="historial" class="btn btn-datatable btn-icon btn-outline-secondary mr-2"' +
                         ' onclick="">' +
                         '<i class="fas fa-funnel-dollar"></i>' +
                         '</a>';
@@ -68,11 +44,7 @@ function lista_vista_usuario() {
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    if (row.estado) {
-                        return '<span class="badge badge-success">Activo</span>';
-                    } else {
-                        return '<span class="badge badge-danger">Suspendido</span>';
-                    }
+                    return row.estado;
                 }
             }
         ],
@@ -80,6 +52,46 @@ function lista_vista_usuario() {
             // alert('Datos cargados');
         }
     });
-}
 
-$(document).ready(() => lista_vista_usuario());
+    $('#tableVistaUsuario tbody')
+        .on('click', 'a[rel="historial"]', function () {
+            let tr = table.cell($(this).closest('td, li')).index();
+            let data = table.row(tr.row).data();
+            console.log(data);
+
+            $('#tblDet').DataTable({
+                language: {
+                    'url': 'https://raw.githubusercontent.com/Jhon-Paillacho/ERP-estaticos/main/language.json'
+                },
+                responsive: true,
+                autoWidth: false,
+                destroy: true,
+                deferRender: true,
+                order: [[0, "desc"]],
+                //data: data.det,
+                ajax: {
+                    url: window.location.pathname,
+                    type: 'POST',
+                    data: {
+                        'action': 'search_details',
+                        'id': data.id
+                    },
+                    dataSrc: ""
+                },
+                columns: [
+                    {"data": "fecha"},
+                    {"data": "impuesto"},
+                    {"data": "interes"},
+                    {"data": "multa"},
+                    {"data": "servicios_administrativos"},
+                    {"data": "total"},
+                ],
+                initComplete: function (settings, json) {
+
+                }
+            });
+            $('#modalHistorial').modal('show');
+        })
+});
+
+// $(document).ready(() => lista_vista_usuario());

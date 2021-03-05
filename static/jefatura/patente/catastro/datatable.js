@@ -127,22 +127,6 @@ $(() => {
                     {"data": "servicios_administrativos"},
                     {"data": "total"},
                 ],
-                // columnDefs: [
-                //     {
-                //         targets: [-1, -3],
-                //         class: 'text-center',
-                //         render: function (data, type, row) {
-                //             return '$' + parseFloat(data).toFixed(2);
-                //         }
-                //     },
-                //     {
-                //         targets: [-2],
-                //         class: 'text-center',
-                //         render: function (data, type, row) {
-                //             return data;
-                //         }
-                //     },
-                // ],
                 initComplete: function (settings, json) {
 
                 }

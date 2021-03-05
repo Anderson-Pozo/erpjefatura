@@ -27,6 +27,14 @@ class Patente(AuditMixin, models.Model):
     def __str__(self):
         return 'Patente Nº {}'.format(self.id)
 
+    def get_al_dia(self):
+        hoy = date.today()
+        vencimiento = self.get_vencimiento()
+        if hoy > vencimiento:
+            return '<h5><span class="badge badge-danger">Pendiente</span></h5>'
+        else:
+            return '<h5><span class="badge badge-success">Abonado</span></h5>'
+
     def get_estado(self):
         if self.suspendida:
             return '<span class="badge badge-danger">Suspendida</span>'
@@ -43,6 +51,7 @@ class Patente(AuditMixin, models.Model):
         item['total_patrimonio'] = self.establecimiento.total_patrimonio
         item['nombre_contribuyente'] = self.contribuyente.get_nombre(self.contribuyente.ruc)
         item['estado'] = self.get_estado()
+        item['aldia'] = self.get_al_dia()
         return item
 
     def get_impuesto(self):

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block collapse_consulta %}collapse show{% endblock %}
+
+{% block iconheader %}
+    <div class="page-header-icon"><i data-feather="calendar"></i></div>
+{% endblock %}
+
+{% block titleheader %}
+    Calendario de pagos
+{% endblock %}
+
+{% block subtitleheader %}
+    Aquí puede ver las fechas de pago de sus patentes
+{% endblock %}
+
+{% block titleheadercard %}
+    Bienvenido {{ user.first_name }}
+{% endblock %}
+
+{% block date %}
+{% endblock %}
+
+
+{% block centralbody %}
+    <div class="row">
+        <div class="container mt-n10">
+            <div class="card mb-4">
+                    <div class="card-body">
+                        <div id='calendar'></div>
+                    </div>
+                </div>
+{#            <div class="row justify-content-center">#}
+{#                #}
+{#            </div>#}
+        </div>
+    </div>
+{% endblock %}
+
+{% block extrajs %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                locale: 'es',
+                views: {
+                    dayGridMonth: { // name of view
+                        titleFormat: {year: 'numeric', month: 'long'}
+                        // other view-specific options here
+                    }
+                },
+                initialView: 'dayGridMonth',
+                // initialDate: '2021-03-03',
+                nextDayThreshold: '00:00:00',
+                headerToolbar: {
+                    left: 'prev',
+                    center: 'title',
+                    right: 'next'
+                },
+                events: [
+                    {% for i in fechas %}
+                        {
+                            title: '{{ i.patente.establecimiento.nombre }}',
+                            start: '{{ i.fecha | date:"Y-m-d" }}',
+                            {#end: "2021-03-10",#}
+                            description: '{{ i.patente.establecimiento.nombre }}',
+                            backgroundColor: '#1fc4ea',
+                            borderColor: '#1fc4ea'
+                        },
+                    {% endfor %}
+                ]
+            });
+            console.log(calendar);
+
+            calendar.render();
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/locales/es.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.css" rel="stylesheet">
+
+{% endblock %}
+

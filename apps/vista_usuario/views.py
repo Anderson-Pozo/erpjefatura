@@ -10,7 +10,6 @@ from apps.establecimiento.models import Establecimiento
 
 
 class Index(TemplateView):
-    # model = VistaUsuario
     template_name = 'vista_usuario/index.html'
 
     @method_decorator(csrf_exempt)
@@ -32,10 +31,28 @@ class Index(TemplateView):
                 # for i in Patente.objects.filter(contribuyente__ruc=user):
                 for i in Establecimiento.objects.filter(patente__contribuyente__ruc=user):
                     data.append(i.to_json())
-                print(data)
+            elif action == 'search_details':
+                data = []
+                for i in DetallePatente.objects.filter(patente__id=request.POST['id']):
+                    data.append(i.to_json())
             else:
                 data['error'] = 'Ha ocurrido un error'
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['fechas'] = DetallePatente.objects.filter(patente__contribuyente__ruc='1002003001111')
+        # print(context)
+        return context
+
+
+class Calendario(TemplateView):
+    template_name = 'vista_usuario/calendario.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['fechas'] = DetallePatente.objects.filter(patente__contribuyente__ruc='1002003001111')
+        # print(context)
+        return context
