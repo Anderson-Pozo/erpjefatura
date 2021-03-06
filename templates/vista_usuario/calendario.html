@@ -33,7 +33,7 @@
             </div>
             <div class="container">
                 {% for patente in patentes %}
-                    <h2> Ultimo pago{{ patente.get_ultimo_pago }} - Esta {{ patente.establecimiento.nombre }}</h2>
+                    <h2> Ultimo pago {{ patente.get_ultimo_pago }} - Esta {{ patente.establecimiento.nombre }}</h2>
                     <h2> Vencimiento {{ patente.get_vencimiento }} - Esta {{ patente.establecimiento.nombre }}</h2>
                 {% endfor %}
 
@@ -43,6 +43,10 @@
 {% endblock %}
 
 {% block extrajs %}
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/locales/es.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.css" rel="stylesheet">
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
 
@@ -64,36 +68,38 @@
                     center: 'title',
                     right: 'next'
                 },
+                eventRender: function (event, element) {
+                    element.qtip({
+                        content: event.description
+                    });
+                },
                 events: [
                     {% for i in fechas %}
                         {
-                            title: '{{ i.patente.establecimiento.nombre }}',
+                            title: 'Pago: {{ i.patente.establecimiento.nombre }} sdasdasdasdasd',
                             start: '{{ i.fecha | date:"Y-m-d" }}',
                             description: '{{ i.patente.establecimiento.nombre }}',
                             backgroundColor: '#1fc4ea',
-                            borderColor: '#1fc4ea'
+                            borderColor: '#1fc4ea',
                         },
                     {% endfor %}
                     {% for patente in patentes %}
                         {
-                            title: 'Pendiente {{ patente.establecimiento.nombre }}',
-                            start: '2021-03-05',
-                            end: '{{ patente.get_vencimiento | date:"Y-m-d" }}',
-                            end: '2021-03-10',
+                            title: 'Pago pendiente {{ patente.establecimiento.nombre }}',
+                            start: '{{ patente.get_vencimiento | date:"Y-m-d" }}',
+                            end: Date.now(),
+                            description: 'Descpksapdksad',
+                            {#display: 'background',#}
                             backgroundColor: '#f80606',
                             borderColor: '#f80606'
-                        }
+                        },
                     {% endfor %}
-                ]
+                ],
             });
-            console.log(calendar);
-
+            console.log(calendar.events);
             calendar.render();
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/locales/es.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.css" rel="stylesheet">
 
 {% endblock %}
 

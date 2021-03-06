@@ -181,8 +181,9 @@
                                                         data-feather="check"></i>
                                                 </div>
                                             </div>
-                                            <div class="timeline-item-content"> Apertura
+                                            <div class="timeline-item-content"> Pago
                                                 de {{ i.patente.establecimiento.nombre }}
+                                                con total de <b>$ {{ i.get_total }}</b>
                                             </div>
                                         </div>
                                     {% endfor %}

@@ -41,7 +41,7 @@ class User(AuditMixin, AbstractUser):
     REQUIRED_FIELDS = ['email']
 
     def to_json(self):
-        item = model_to_dict(self, exclude=['user_permissions', ])
+        item = model_to_dict(self, exclude=['user_permissions', 'groups',])
         return item
 
     class Meta:
@@ -51,8 +51,12 @@ class User(AuditMixin, AbstractUser):
         return f'{self.first_name}, {self.last_name}'
 
     def avatar_name(self):
-        if self.first_name and self.last_name is not None:
+        if self.first_name and self.last_name:
             return self.first_name[0] + self.last_name[0]
+        elif self.first_name:
+            return self.first_name[0]
+        elif self.last_name:
+            return self.last_name[0]
         else:
             return 'NoN'
 

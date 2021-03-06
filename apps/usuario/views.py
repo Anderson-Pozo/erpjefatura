@@ -9,6 +9,7 @@ from django.contrib.auth import login, logout
 from .forms import LoginForm, UserForm, AccountForm
 from apps.utils.ajax import AjaxList, AjaxCreate, AjaxUpdate, AjaxDelete
 from .models import User, Logs, Grupo, Permisos
+from django.contrib.auth.models import Permission
 
 
 # General views
@@ -20,8 +21,10 @@ class Login(FormView):
     @method_decorator(csrf_protect)
     @method_decorator(never_cache)
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
+        if request.user.is_authenticated and request.user.is_superuser:
             return HttpResponseRedirect(self.get_success_url())
+        elif request.user.is_authenticated and request.user.is_superuser is False:
+            return HttpResponseRedirect(reverse_lazy('vista_usuario:index_contribuyente'))
         else:
             return super(Login, self).dispatch(request, *args, **kwargs)
 
@@ -47,7 +50,7 @@ class Account(UpdateView):
     model = User
     form_class = AccountForm
     template_name = 'usuario/account_user.html'
-    success_url = reverse_lazy('usuario:lista_usuarios')
+    success_url = reverse_lazy('index')
 
 
 class ChangePassword(TemplateView):
@@ -68,6 +71,7 @@ class CrearUsuario(CreateView):
     model = User
     form_class = UserForm
     template_name = 'usuario/admin/crear_usuario.html'
+
     # success_url = reverse_lazy('usuario:lista_usuarios')
 
     def post(self, request, *args, **kwargs):
@@ -76,7 +80,8 @@ class CrearUsuario(CreateView):
             if form.is_valid():
                 # print(form.cleaned_data.get('email'))
                 # print(form.cleaned_data.get('username'))
-                # print(form.cleaned_data.get('user_permissions'))
+                # print('PERMISIONS', form.cleaned_data.get('user_permissions'))
+                # print('GROUPS', form.cleaned_data.get('groups'))
                 new_user = User(
                     email=form.cleaned_data.get('email'),
                     username=form.cleaned_data.get('username'),
@@ -85,8 +90,16 @@ class CrearUsuario(CreateView):
                     is_superuser=form.cleaned_data.get('is_superuser'),
                     is_active=form.cleaned_data.get('is_active'),
                 )
+                perms = []
                 new_user.set_password(form.cleaned_data.get('password1'))
                 new_user.save()
+
+                user = User.objects.last()
+                print('USUARIOOO', user)
+                for perm in form.cleaned_data.get('user_permissions'):
+                    user.user_permissions.add(perm.id)
+                for group in form.cleaned_data.get('groups'):
+                    user.groups.add(group.id)
                 message = f'{self.model.__name__} registrado correctamente'
                 error = 'No hay error'
                 response = JsonResponse({'message': message, 'error': error})
