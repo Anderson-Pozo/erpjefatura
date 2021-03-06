@@ -35,7 +35,8 @@
         <!-- Main page content-->
         <div class="container mt-n10">
             <!-- Knowledge base main category card 1-->
-            <a class="card card-icon lift lift-sm mb-4" href="knowledge-base-category.html">
+            {#            Apertura inf#}
+            <a class="card card-icon lift lift-sm mb-4" data-toggle="modal" data-target="#apertura">
                 <div class="row no-gutters">
                     <div class="col-auto card-icon-aside bg-primary"><i class="text-white-50"
                                                                         data-feather="book-open"></i></div>
@@ -49,8 +50,93 @@
                     </div>
                 </div>
             </a>
+            <div class="modal fade" id="apertura" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalScrollableTitle">Apertura</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Personas no obligadas a llevar contabilidad, deberán</h5>
+                            <hr>
+                            <ol>
+                                <li style="text-align: justify">Inscribirse en los registros de Patente Municipal, que
+                                    para la determinación de este
+                                    impuesto llevará la Dirección Financiera a través de la Jefatura de Rentas
+                                    Municipales
+                                </li>
+                                <li style="text-align: justify">Presentar fotocopias a color y original de la cédula de
+                                    ciudadanía y certificado de
+                                    votación, Registro Unico de Contribuyentes si lo tuviere
+                                </li>
+                                <li style="text-align: justify">Presentar detalle de ingresos y egresos para los que
+                                    poseen RUC;
+                                </li>
+                                <li style="text-align: justify">Presentar la declaración del impuesto a la renta del año
+                                    inmediato anterior si lo
+                                    realizaren;
+                                </li>
+                                <li style="text-align: justify">Presentar la declaración del patrimonio de la actividad
+                                    económica, en los formularios
+                                    de declaración para obtener la patente, emitidos por la Jefatura de Rentas
+                                    Municipales
+                                </li>
+                                <li style="text-align: justify">Presentar un certificado de no adeudar al Municipio.
+                                </li>
+                            </ol>
+
+                            <hr>
+                            <h5>Personas obligadas a llevar contabilidad, deberán</h5>
+                            <hr>
+                            <ol>
+                                <li style="text-align: justify">Inscribirse en los registros de Patente Municipal, que
+                                    para la determinación de este
+                                    impuesto llevará la Dirección de Gestión Financiera a través de la Jefatura de
+                                    Rentas
+                                    Municipales
+                                </li>
+                                <li style="text-align: justify">Presentar la declaración del impuesto a la renta del año
+                                    inmediato anterior
+                                </li>
+                                <li style="text-align: justify">Presentar fotocopias a color y original de la cédula de
+                                    ciudadanía y certificado de
+                                    votación del representante legal, Registro Unico de Contribuyentes
+                                </li>
+                                <li style="text-align: justify">Presentar copia de la constitución de la compañía, para
+                                    el
+                                    caso de las personas
+                                    jurídicas y copia del Nombramiento del Representante Legal actualizado en caso de
+                                    serlo
+                                </li>
+                                <li style="text-align: justify">Cuando estas tengan sucursales y/o agencias presentarán
+                                    los estados financieros de
+                                    situación y resultados consolidados y locales, validados por el SRI, necesarios para
+                                    realizar el cruce de información y dar razonabilidad a la información entregada, la
+                                    misma que deberá dar cumplimiento con las disposiciones establecidas en la Ley
+                                    Orgánica
+                                    de Régimen Tributario Interno y su Reglamento sobre la obligación de llevar
+                                    contabilidad
+                                </li>
+                                <li style="text-align: justify">Presentar la declaración de activos totales de la
+                                    actividad económica en el caso de
+                                    sociedades y personas naturales obligadas a llevar contabilidad para determinar el
+                                    monto
+                                    a pagar correspondiente al impuesto del 1.5 por mil sobre los activos totales
+                                </li>
+                                <li style="text-align: justify">Presentar un certificado de no adeudar al Municipio</li>
+                            </ol>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" type="button" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- Knowledge base main category card 2-->
-            <a class="card card-icon lift lift-sm mb-4" href="knowledge-base-category.html">
+            <a class="card card-icon lift lift-sm mb-4" data-toggle="modal" data-target="#renovacion">
                 <div class="row no-gutters">
                     <div class="col-auto card-icon-aside bg-secondary"><i class="text-white-50"
                                                                           data-feather="clock"></i></div>
@@ -64,7 +150,62 @@
                     </div>
                 </div>
             </a>
-            <a class="card card-icon lift lift-sm mb-4" href="knowledge-base-category.html">
+            <div class="modal fade" id="renovacion" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalScrollableTitle">Renovación</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Obligatoriedad de declarar</h5>
+                            <p style="text-align: justify">Todos los sujetos pasivos del Impuesto de la Patente
+                                Municipal referidos en el Art. 3 de la presente Ordenanza, aún los exonerados del pago
+                                del impuesto, están obligados a presentar la declaración y obtener la Patente Municipal
+                                en los plazos previstos en la presente Ordenanza.</p>
+                            <hr>
+                            <h5>Verificación de la declaración</h5>
+                            <p style="text-align: justify">Todas las declaraciones quedan sujetas a la verificación por
+                                parte
+                                de la Administración
+                                Tributaria Municipal. De existir novedades sobre el resultado de la misma, el sujeto
+                                pasivo será notificado, quien dentro del plazo de ocho días, podrá presentar el reclamo
+                                administrativo correspondiente ante el señor Alcalde o Director Financiero, de
+                                conformidad con las disposiciones contempladas en el Código Orgánico Tributario.</p>
+                            <hr>
+                            <h5>Determinación del Impuesto</h5>
+                            <p style="text-align: justify"> La determinación de la obligación tributaria municipal se
+                                efectuará
+                                por los sistemas de
+                                declaración del sujeto pasivo, por actuación de la Administración Tributaria Municipal y
+                                de modo mixto de conformidad con lo determinado en el Código Orgánico Tributario.</p>
+                            <hr>
+                            <h5>Determinación presuntiva</h5>
+                            <p style="text-align: justify">Tendrá lugar la determinación presuntiva, cuando no sea
+                                posible la
+                                directa, o por falta
+                                de declaración del sujeto pasivo, pese a la notificación particular que para el efecto
+                                hubiese hecho el sujeto activo, en razón de que los documentos que respaldan su
+                                declaración no presten mérito suficiente para acreditarla.
+                            <p style="text-align: justify">En tales casos, la
+                                determinación se fundamentará en los hechos, indicios, circunstancias y demás elementos
+                                ciertos que permitan establecer la configuración del hecho generador y la cuantía del
+                                tributo causado mediante la aplicación de coeficientes que determine la ley respectiva
+                                de conformidad con la norma legal referida anteriormente.</p>
+                            <p style="text-align: justify">Además, para la determinación
+                                presuntiva de la base imponible, se tomará como referencia las actividades económicas
+                                que se encuentren en situación análoga y que hayan obtenido su patente municipal.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" type="button" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Knowledge base main category card 3-->
+            <a class="card card-icon lift lift-sm mb-4" data-toggle="modal" data-target="#exoneracion">
                 <div class="row no-gutters">
                     <div class="col-auto card-icon-aside bg-secondary"><i class="text-white-50"
                                                                           data-feather="folder-minus"></i></div>
@@ -78,8 +219,77 @@
                     </div>
                 </div>
             </a>
-            <!-- Knowledge base main category card 3-->
-            <a class="card card-icon lift lift-sm mb-4" href="knowledge-base-category.html">
+            <div class="modal fade" id="exoneracion" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalScrollableTitle">Exoneración</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Las y los artesanos, a más de lo establecido en el Art. 6, numeral 1, de esta Ordenanza
+                                deberán</h5>
+                            <hr>
+                            <ol>
+                                <li style="text-align: justify">Inscribirse en los registros de patente municipal, que
+                                    para la determinación de este
+                                    impuesto llevará la Dirección Financiera a través de la Jefatura de Rentas
+                                    Municipales
+                                </li>
+                                <li style="text-align: justify">Presentar el certificado de calificación artesanal
+                                    emitido
+                                    por la Junta Nacional de
+                                    Defensa del Artesano, previa verificación e inspección sobre el cumplimiento de las
+                                    condiciones de su actividad económica para fines tributarios de conformidad con lo
+                                    determinado en el artículo 550 del Código Orgánico de Organización Territorial
+                                    Autonomía
+                                    y Descentralización
+                                </li>
+                                <li style="text-align: justify">Presentar un detalle de ingresos y egresos</li>
+                                <li style="text-align: justify">Presentar la declaración del impuesto a la renta del año
+                                    inmediato anterior si lo
+                                    realizaren
+                                </li>
+                                <li style="text-align: justify">Presentar un certificado de no adeudar al Municipio</li>
+                            </ol>
+                            <hr>
+                            <h5 style="text-align: justify">Para las personas naturales que se encuentren amparados por
+                                la Ley del Anciano que hayan
+                                cumplido sesenta y cinco años de edad, deberán</h5>
+                            <hr>
+                            <ol>
+                                <li style="text-align: justify">Inscribirse en los registros de patente municipal, que
+                                    para la determinación de este
+                                    impuesto llevará la Dirección Financiera a través de la Jefatura de Rentas
+                                    Municipales
+                                </li>
+                                <li style="text-align: justify">Presentar fotocopia a color de la cédula de ciudadanía
+                                </li>
+                                <li style="text-align: justify">Presentar detalle de ingresos y egresos para los que
+                                    poseen RUC
+                                </li>
+                                <li style="text-align: justify">Presentar la declaración del impuesto a la renta del año
+                                    inmediato anterior si lo
+                                    realizaren
+                                </li>
+                                <li style="text-align: justify">Presentar un certificado de no adeudar al Municipio</li>
+                            </ol>
+                            <hr>
+                            <h6 style="text-align: justify">Corresponde a la Jefatura de Rentas aceptar y calificar los
+                                documentos presentados, y de
+                                no estar sustentados legalmente, rechazarlos o solicitar aclaraciones de los mismos</h6>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" type="button" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Knowledge base main category card 4-->
+            <a class="card card-icon lift lift-sm mb-4" data-toggle="modal" data-target="#suspencion">
                 <div class="row no-gutters">
                     <div class="col-auto card-icon-aside bg-teal"><i class="text-white-50" data-feather="x"></i>
                     </div>
@@ -92,103 +302,55 @@
                     </div>
                 </div>
             </a>
-            <h4 class="mb-0 mt-5">Reglamento del area de rentas</h4>
-            <hr class="mt-2 mb-4"/>
-            <div class="row">
-                <div class="col-lg-4 mb-4">
-                    <!-- Knowledge base category card 1-->
-                    <a class="card lift lift-sm h-100" href="knowledge-base-category.html">
-                        <div class="card-body py-5">
-                            <h5 class="card-title text-primary mb-2">
-                                <i class="mr-2" data-feather="edit-2"></i>
-                                Brand Guidelines
-                            </h5>
-                            <p class="card-text">Information about what you can and can't do when using our logos and
-                                other assets</p>
+            <div class="modal fade" id="suspencion" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalScrollableTitle">Suspensión</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">×</span></button>
                         </div>
-                        <div class="card-footer">
-                            <div class="small text-muted">3 articles in this category</div>
+                        <div class="modal-body">
+                            <h5>De la suspensión, disolución o liquidación de actividades</h5>
+                            <hr>
+                            <p style="text-align: justify">En caso de que las personas naturales y jurídicas de derecho
+                                privado, sucesiones indivisas, sociedades de hecho y de derecho suspendan, disuelvan o
+                                liquiden sus actividades económicas que causen la obligación del tributo materia de esta
+                                Ordenanza, deberán comunicar a la Jefatura de Rentas Municipales, hasta treinta días
+                                después de finalizadas sus operaciones, cumpliendo el siguiente procedimiento</p>
+                            <h5>Requisitos</h5>
+                            <hr>
+                            <ol>
+                                <li style="text-align: justify">Solicitud valorada de suspensión de la actividad
+                                    económica
+                                </li>
+                                <li style="text-align: justify">Presentación de la copia del pago del impuesto de
+                                    Patente
+                                    Municipal hasta la fecha en
+                                    que notifique a la municipalidad la suspensión, disolución o liquidación de su
+                                    actividad
+                                </li>
+                                <li style="text-align: justify">Certificado de no adeudar a la Municipalidad emitido
+                                    como
+                                    especie valorada
+                                </li>
+                                <li style="text-align: justify">Copia del Registro Unico de Contribuyentes (RUC),
+                                    actualizado el cese de la actividad
+                                    económica
+                                </li>
+                            </ol>
+                            <hr>
+                            <h6 style="text-align: justify">Comprobado dicho caso, la o el Jefe de Rentas Municipales,
+                                procederá a la cancelación de
+                                la inscripción y al registro de la inactividad del establecimiento o actividad
+                                económica; caso contrario se entenderá que la actividad continúa hasta la fecha de su
+                                comunicación y por ende, las obligaciones de pago seguirán vigentes</h6>
                         </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <!-- Knowledge base category card 2-->
-                    <a class="card lift lift-sm h-100" href="knowledge-base-category.html">
-                        <div class="card-body py-5">
-                            <h5 class="card-title text-yellow mb-2">
-                                <i class="mr-2" data-feather="credit-card"></i>
-                                Billing Information
-                            </h5>
-                            <p class="card-text">Troubleshoot billing issues, subscriptions, and updating payment
-                                information</p>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" type="button" data-dismiss="modal">Cerrar</button>
                         </div>
-                        <div class="card-footer">
-                            <div class="small text-muted">2 articles in this category</div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <!-- Knowledge base category card 3-->
-                    <a class="card lift lift-sm h-100" href="knowledge-base-category.html">
-                        <div class="card-body py-5">
-                            <h5 class="card-title text-teal mb-2">
-                                <i class="mr-2" data-feather="code"></i>
-                                API
-                            </h5>
-                            <p class="card-text">Documentation and integration instructions for our API</p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="small text-muted">15 articles in this category</div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <!-- Knowledge base category card 4-->
-                    <a class="card lift lift-sm h-100" href="knowledge-base-category.html">
-                        <div class="card-body py-5">
-                            <h5 class="card-title text-orange mb-2">
-                                <i class="mr-2" data-feather="layers"></i>
-                                Integration
-                            </h5>
-                            <p class="card-text">App integration policies and related content on connecting to our
-                                database</p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="small text-muted">5 articles in this category</div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <!-- Knowledge base category card 5-->
-                    <a class="card lift lift-sm h-100" href="knowledge-base-category.html">
-                        <div class="card-body py-5">
-                            <h5 class="card-title text-secondary mb-2">
-                                <i class="mr-2" data-feather="lock"></i>
-                                Privacy &amp; Content
-                            </h5>
-                            <p class="card-text">Our privacy policy and information on how we track and utilize user
-                                data</p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="small text-muted">2 articles in this category</div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <!-- Knowledge base category card 6-->
-                    <a class="card lift lift-sm h-100" href="knowledge-base-category.html">
-                        <div class="card-body py-5">
-                            <h5 class="card-title text-red mb-2">
-                                <i class="mr-2" data-feather="map"></i>
-                                Miscellaneous
-                            </h5>
-                            <p class="card-text">Other troubleshooting, help, and support articles related to our
-                                products and services</p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="small text-muted">2 articles in this category</div>
-                        </div>
-                    </a>
+                    </div>
                 </div>
             </div>
             <!-- Knowledge base rating-->
