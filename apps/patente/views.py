@@ -17,6 +17,7 @@ from xhtml2pdf import pisa
 
 
 class ListaCatastro(ListView):
+    """ListView que genera un listado de registros de Patente"""
     model = Patente
     template_name = 'patente/catastro/index.html'
 
@@ -25,6 +26,13 @@ class ListaCatastro(ListView):
         return super().dispatch(request, *args, *kwargs)
 
     def post(self, request, *args, **kwargs):
+        """ Método que se ejecuta cuando se realiza una petición POST
+
+        :param request: Petición que realiza el cliente
+        :param args: Lista de argumentos posicionales
+        :param kwargs: Diccionario de parámetros y argumentos
+        :return: Un objeto Json con los registros de Patente y DetallePatente
+        """
         data = {}
         try:
             action = request.POST['action']
@@ -45,6 +53,7 @@ class ListaCatastro(ListView):
 
 # Proceso de apertura de patente
 class CrearNatural(CreateView):
+    """Vista de creación de un contribuyente natural."""
     model = Natural
     form_class = NaturalForm
     template_name = 'patente/apertura/paso1_contribuyente_natural.html'
@@ -52,6 +61,7 @@ class CrearNatural(CreateView):
 
 
 class CrearJuridico(CreateView):
+    """Vista de creación de un contribuyente juridico."""
     model = Juridico
     form_class = JuridicoForm
     template_name = 'patente/apertura/paso1_contribuyente_juridico.html'
@@ -59,6 +69,7 @@ class CrearJuridico(CreateView):
 
 
 class CrearEstablecimiento(CreateView):
+    """Vista de creación de un establecimiento."""
     model = Establecimiento
     form_class = EstablecimientoForm
     template_name = 'patente/apertura/paso2_establecimiento.html'
@@ -66,6 +77,7 @@ class CrearEstablecimiento(CreateView):
 
 
 class CrearPatente(CreateView):
+    """Vista de creación de una patente."""
     model = Patente
     form_class = PatenteForm
     template_name = 'patente/apertura/paso3_patente.html'
@@ -73,6 +85,7 @@ class CrearPatente(CreateView):
 
 
 class RevisionDeclaracion(TemplateView):
+    """TemplateView que muestra los datos asociados a la última patente creada"""
     template_name = "patente/apertura/paso3_revision_declaracion.html"
 
     def get_context_data(self, **kwargs):
@@ -82,11 +95,13 @@ class RevisionDeclaracion(TemplateView):
 
 
 class CreacionEspecie(CreateView):
+    """Vista de creación de un DetallePatente"""
     template_name = 'patente/apertura/paso4_especie.html'
     form_class = DetalleForm
     success_url = reverse_lazy('patente:revision_especie')
 
     def get_context_data(self, **kwargs):
+        """Método que retorna los datos de la última patente hacia el template"""
         context = {
             'patente': Patente.objects.last(),
             'form': self.form_class,
@@ -94,38 +109,26 @@ class CreacionEspecie(CreateView):
         return context
 
     def get(self, request, *args, **kwargs):
+        """Se ejecuta en una petición GET renderizando el template y el contexto"""
         return render(request, self.template_name, self.get_context_data())
 
 
 class RevisionEspecie(TemplateView):
+    """TemplateView que muestra los datos del ultimo Detalle de Patente creado"""
     template_name = "patente/apertura/paso4_revision_especie.html"
 
     def get_context_data(self, **kwargs):
+        """
+        :return: Diccionario con los datos del último registro de DetallePatente
+        """
         context = super().get_context_data(**kwargs)
         context['detalle'] = DetallePatente.objects.last()
         return context
 
 
 # Vista de reportes
-class ReportEspecie(View):
-    def get(self, request, *args, **kwargs):
-        try:
-            template = get_template('patente/reportes/especie_report.html')
-            context = {
-                'detalle': DetallePatente.objects.get(pk=self.kwargs['pk'])
-            }
-            html = template.render(context)
-            response = HttpResponse(content_type='application/pdf')
-            # response['Content-Disposition'] = 'attachment; filename="report.pdf"'
-            pisa_status = pisa.CreatePDF(
-                html, dest=response)
-            return response
-        except:
-            pass
-        return HttpResponseRedirect(reverse_lazy('patente:lista_catastro'))
-
-
 class ReportDeclaracion(View):
+    """Vista que genera un reporte PDF del formulario de declaración de patente"""
     def get(self, request, *args, **kwargs):
         try:
             template = get_template('patente/reportes/declaracion_report.html')
@@ -138,13 +141,33 @@ class ReportDeclaracion(View):
             pisa_status = pisa.CreatePDF(
                 html, dest=response)
             return response
-        except:
-            pass
+        except Exception as error:
+            print(error)
+        return HttpResponseRedirect(reverse_lazy('patente:lista_catastro'))
+
+
+class ReportEspecie(View):
+    """Vista que genera un reporte PDF de la especie de Patente Municipal"""
+    def get(self, request, *args, **kwargs):
+        try:
+            template = get_template('patente/reportes/especie_report.html')
+            context = {
+                'detalle': DetallePatente.objects.get(pk=self.kwargs['pk'])
+            }
+            html = template.render(context)
+            response = HttpResponse(content_type='application/pdf')
+            # response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+            pisa_status = pisa.CreatePDF(
+                html, dest=response)
+            return response
+        except Exception as error:
+            print(error)
         return HttpResponseRedirect(reverse_lazy('patente:lista_catastro'))
 
 
 # Proceso de modificación
 class ActualizarDeclaracion(UpdateView):
+    """UpdateView que actualiza los datos de la clase Patente"""
     model = Patente
     form_class = PatenteForm
     template_name = 'patente/actualizar/1_actualizar_declaracion.html'
@@ -152,6 +175,7 @@ class ActualizarDeclaracion(UpdateView):
 
 
 class RevisionModificada(RevisionDeclaracion):
+    """Vista de revisión de Patente una vez actualizada"""
     template_name = "patente/actualizar/2_revision_declaracion.html"
 
     def get_context_data(self, **kwargs):
@@ -161,6 +185,7 @@ class RevisionModificada(RevisionDeclaracion):
 
 
 class EspecieRenovacion(CreateView):
+    """Vista de revisión de DetallePatente una vez actualizada"""
     template_name = 'patente/actualizar/3_especie_renovada.html'
     form_class = DetalleForm
     success_url = reverse_lazy('patente:rev_especie')
@@ -177,4 +202,5 @@ class EspecieRenovacion(CreateView):
 
 
 class RevisionEspModificada(RevisionEspecie):
+    """Vista para revisión de datos de Especie Patente luego de ser actualizada"""
     template_name = "patente/actualizar/4_rev_especie_modificada.html"

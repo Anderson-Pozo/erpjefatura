@@ -125,7 +125,7 @@ AUTH_USER_MODEL = 'usuario.User'
 
 LANGUAGE_CODE = 'es-co'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Guayaquil'
 
 USE_I18N = True
 

@@ -10,11 +10,10 @@ from apps.auditoria.mixins import AuditMixin
 from apps.utils.calc_months import calcular_meses
 
 
-# Create your models here.
 class Patente(AuditMixin, models.Model):
     """
-    Modelo de Pantente que contiene los datos de la patente
-    municipal y su relación con el establecimiento
+    La clase Patente contiene el modelo de datos de la patente
+    municipal y su relación con el establecimiento y contribuyente
     """
     id = models.AutoField(primary_key=True)
     numero_patente = models.IntegerField('Número de patente', blank=True, null=True)
@@ -25,9 +24,15 @@ class Patente(AuditMixin, models.Model):
     establecimiento = models.ForeignKey(Establecimiento, on_delete=models.CASCADE)
 
     def __str__(self):
+        """
+        :return: El número de la patente como un string
+        """
         return 'Patente Nº {}'.format(self.id)
 
     def get_al_dia(self):
+        """
+        :return: El estado de pago de la patente, penduente o abonado
+        """
         hoy = date.today()
         vencimiento = self.get_vencimiento()
         if hoy > vencimiento:
@@ -36,6 +41,9 @@ class Patente(AuditMixin, models.Model):
             return '<h5><span class="badge badge-success">Abonado</span></h5>'
 
     def get_estado(self):
+        """
+        :return: El estado actual de la patente: suspendidad, exonerada o sin estado
+        """
         if self.suspendida:
             return '<span class="badge badge-danger">Suspendida</span>'
         elif self.exonerada:
@@ -44,6 +52,9 @@ class Patente(AuditMixin, models.Model):
             return '<span class="badge badge-light">Sin estado</span>'
 
     def to_json(self):
+        """
+        :return: Un diccionario de los atributos de la clase Patente
+        """
         item = model_to_dict(self)
         item['ruc'] = self.contribuyente.ruc
         item['tipocontribuyente'] = self.contribuyente.tipocontribuyente.nombre
@@ -55,12 +66,22 @@ class Patente(AuditMixin, models.Model):
         return item
 
     def get_impuesto(self):
+        """
+        :return: El total de impuesto de una clase patente
+        """
         return calcular_impuesto(self.establecimiento.total_patrimonio)
 
     def get_ultimo_pago(self):
+        """
+        :return: La fecha del ultimo pago abonado de la patente
+        """
         return fecha_ultimo_pago(self.id)
 
     def get_vencimiento(self):
+        """
+        :return: La fecha de vencimiento de cada patente en base al noveno dígito de cedula
+        del contribuyente
+        """
         ultimo_anio = self.get_ultimo_pago().year
         anio_actual = datetime.now().year
 
@@ -72,6 +93,9 @@ class Patente(AuditMixin, models.Model):
             return fecha_vencimiento
 
     def get_interes(self):
+        """
+        :return: El total del interes de la patente basado en el cálculo del impuesto
+        """
         fecha_actual = date.today()
         fecha_vencimiento = self.get_vencimiento()
 
@@ -84,6 +108,9 @@ class Patente(AuditMixin, models.Model):
             return format(0.00, '.2f')
 
     def get_multa(self):
+        """
+        :return: El total de la multa que debe pagar el contribuyente en caso de mora
+        """
         fecha_vencimiento = self.get_vencimiento()
         fecha_actual = date.today()
         impuesto = float(self.get_impuesto())
@@ -103,8 +130,8 @@ class Patente(AuditMixin, models.Model):
 
 class DetallePatente(AuditMixin, models.Model):
     """
-    El modelo DetallePatente almacena un historico de los
-    movimientos de patente, ya se apertura o renovación
+    El modelo DetallePatente representa un historico de los
+    movimientos de patente, en caso de apertura o renovación
     """
     id = models.AutoField(primary_key=True)
     fecha = models.DateField('Fecha de tramite', default=now, blank=True, null=True)
@@ -143,13 +170,23 @@ class DetallePatente(AuditMixin, models.Model):
     patente = models.ForeignKey(Patente, on_delete=models.CASCADE)
 
     def __str__(self):
+        """
+        :return: Una cadena de texto que contiene el id del detalle y el nombre del establecimiento
+        asociado a la patente
+        """
         return 'Detalle {} - Patente {}'.format(self.id, self.patente.establecimiento.nombre)
 
     def get_total(self):
+        """
+        :return: La sumatoria de los valores de impuesto, interes, multa y servicios administrativos
+        """
         total = self.impuesto + self.interes + self.multa + self.servicios_administrativos
         return format(total, '.2f')
 
     def to_json(self):
+        """
+        :return: Un diccionario de los atributos de la clase DetallePatente
+        """
         item = model_to_dict(self)
         item['total'] = self.get_total()
         return item
@@ -159,6 +196,11 @@ class DetallePatente(AuditMixin, models.Model):
 
 
 def fecha_ultimo_pago(id_patente):
+    """
+    Función que calcula la fecha del último pago que ha realizado el contribuyente
+    :param id_patente: Identificador del modelo Patente
+    :return: La fecha del último registro encontrado en el DetallePatente
+    """
     try:
         fecha = DetallePatente.objects.filter(patente__id=id_patente).order_by('-fecha')[0]
         return fecha.fecha

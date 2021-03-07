@@ -32,13 +32,13 @@ class Index(TemplateView):
     def get_last_logs():
         try:
             return Logs.objects.all().order_by('-action_time')[0:8]
-        except:
-            pass
+        except Exception as error:
+            print(error)
         return []
 
     @staticmethod
     def get_last_users():
-        return User.objects.all().order_by('last_login')[0:6]
+        return User.objects.all().order_by('-last_login')[0:6]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

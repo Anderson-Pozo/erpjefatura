@@ -126,21 +126,6 @@
                 <div class="card card-header-actions h-100">
                     <div class="card-header">
                         Actividad reciente
-                        <div class="dropdown no-caret">
-                            <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton"
-                                    type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-                                    class="text-gray-500" data-feather="more-vertical"></i></button>
-                            <div class="dropdown-menu dropdown-menu-right animated--fade-in-up"
-                                 aria-labelledby="dropdownMenuButton">
-                                <h6 class="dropdown-header">Filter Activity:</h6>
-                                <a class="dropdown-item" href="#!"><span class="badge badge-green-soft text-green my-1">Commerce</span></a>
-                                <a class="dropdown-item" href="#!"><span class="badge badge-blue-soft text-blue my-1">Reporting</span></a>
-                                <a class="dropdown-item" href="#!"><span
-                                        class="badge badge-yellow-soft text-yellow my-1">Server</span></a>
-                                <a class="dropdown-item" href="#!"><span
-                                        class="badge badge-purple-soft text-purple my-1">Users</span></a>
-                            </div>
-                        </div>
                     </div>
                     <div class="card-body">
                         <div class="timeline timeline-xs">
@@ -155,7 +140,7 @@
                                     </div>
                                     <div class="timeline-item-content">
                                         Objeto {{ lg.object_repr }} {{ lg.get_action_text }} por
-                                        <a class="font-weight-bold text-dark" href="#">
+                                        <a class="font-weight-bold text-dark" style="pointer-events: none">
                                             {{ lg.user }}
                                         </a>
                                     </div>
@@ -180,7 +165,7 @@
                                         </button>
                                     </div>
                                     <div class="d-flex flex-column font-weight-bold">
-                                        <a class="text-dark line-height-normal mb-1" href="#">{{ user }}</a>
+                                        <a class="text-dark line-height-normal mb-1" style="pointer-events: none">{{ user }}</a>
                                         {% if user.is_superuser %}
                                             <div class="small text-muted line-height-normal">Administrador</div>
                                         {% else %}
