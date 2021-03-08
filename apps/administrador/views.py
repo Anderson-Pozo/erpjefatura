@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -40,10 +41,28 @@ class Index(TemplateView):
     def get_last_users():
         return User.objects.all().order_by('-last_login')[0:6]
 
+    @staticmethod
+    def get_valores_patente():
+        data = []
+        year = datetime.now().year
+        month = datetime.now().month + 1
+        total = 0
+        try:
+            for m in range(1, month):
+                for i in DetallePatente.objects.filter(fecha__year=year, fecha__month=m):
+                    total += float(i.get_total())
+                data.append(total)
+                total = 0
+        except:
+            pass
+        return data
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['total'] = self.get_total_impuestos()
         context['logs'] = self.get_last_logs()
         context['users'] = self.get_last_users()
+        context['get_values_graph'] = self.get_valores_patente()
+        context['get_currente_month'] = datetime.now().month - 1
         # print(context)
         return context
