@@ -139,3 +139,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (BASE_DIR, 'static')
+
+# SETTINGS CORREO
+EMAIL_HOST = 'smtp@gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'test.anderson20@gmail.com'
+EMAIL_HOST_PASSWORD = 'A10h0Mora'
+EMAIL_USE_TSL = True
+

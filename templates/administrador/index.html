@@ -44,14 +44,14 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div class="flex-grow-1">
-                                <div class="small font-weight-bold text-primary mb-1">Recaudación patente</div>
-                                <div class="h5">$ {{ total }}</div>
+                                <div class="small font-weight-bold text-success mb-1">Recaudación patente</div>
+                                <div class="h5">$ {{ total_patentes }}</div>
                                 <div class="text-xs font-weight-bold text-success d-inline-flex align-items-center">
-                                    <i class="mr-1" data-feather="trending-up"></i>
-                                    12%
+                                    {#                                    <i class="mr-1" data-feather="trending-up"></i>#}
+                                    {#                                    12%#}
                                 </div>
                             </div>
-                            <div class="ml-2"><i class="fas fa-dollar-sign fa-2x text-gray-200"></i></div>
+                            <div class="ml-2"><i class="fas fa-file-signature fa-2x text-gray-200"></i></div>
                         </div>
                     </div>
                 </div>
@@ -62,64 +62,61 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div class="flex-grow-1">
-                                <div class="small font-weight-bold text-secondary mb-1">Recaudación alcabalas</div>
-                                <div class="h5">$27.00</div>
-                                <div class="text-xs font-weight-bold text-danger d-inline-flex align-items-center">
-                                    <i class="mr-1" data-feather="trending-down"></i>
-                                    3%
-                                </div>
+                                <div class="small font-weight-bold text-success mb-1">Recaudación alcabalas</div>
+                                <div class="h5">$ {{ total_alcabalas }}</div>
+                                {#                                <div class="text-xs font-weight-bold text-danger d-inline-flex align-items-center">#}
+                                {#                                    <i class="mr-1" data-feather="trending-down"></i>#}
+                                {#                                    3%#}
+                                {#                                </div>#}
                             </div>
-                            <div class="ml-2"><i class="fas fa-tag fa-2x text-gray-200"></i></div>
+                            <div class="ml-2"><i class="fas fa-people-arrows fa-2x text-gray-200"></i></div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-xl-3 col-md-6 mb-4">
                 <!-- Dashboard info widget 3-->
-                <div class="card border-top-0 border-bottom-0 border-right-0 border-left-lg border-success h-100">
+                <div class="card card-waves border-top-0 border-bottom-0 border-right-0 border-left-lg border-success h-100">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div class="flex-grow-1">
                                 <div class="small font-weight-bold text-success mb-1">Recaudación plusvalia</div>
-                                <div class="h5">11,291</div>
-                                <div class="text-xs font-weight-bold text-success d-inline-flex align-items-center">
-                                    <i class="mr-1" data-feather="trending-up"></i>
-                                    12%
-                                </div>
+                                <div class="h5">$ {{ total_plusvalias }}</div>
+                                {#                                <div class="text-xs font-weight-bold text-success d-inline-flex align-items-center">#}
+                                {#                                    <i class="mr-1" data-feather="calendar"></i>#}
+                                {#                                    2021#}
+                                {#                                </div>#}
                             </div>
-                            <div class="ml-2"><i class="fas fa-mouse-pointer fa-2x text-gray-200"></i></div>
+                            <div class="ml-2"><i class="fas fa-hand-holding-usd fa-2x text-gray-200"></i></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <!-- Dashboard info widget 4-->
-                <div class="card border-top-0 border-bottom-0 border-right-0 border-left-lg border-info h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-grow-1">
-                                <div class="small font-weight-bold text-info mb-1">Conversion rate</div>
-                                <div class="h5">1.23%</div>
-                                <div class="text-xs font-weight-bold text-danger d-inline-flex align-items-center">
-                                    <i class="mr-1" data-feather="trending-down"></i>
-                                    1%
-                                </div>
-                            </div>
-                            <div class="ml-2"><i class="fas fa-percentage fa-2x text-gray-200"></i></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {#            <div class="col-xl-3 col-md-6 mb-4">#}
+            <!-- Dashboard info widget 4-->
+            {#                <div class="card border-top-0 border-bottom-0 border-right-0 border-left-lg border-info h-100">#}
+            {#                    <div class="card-body">#}
+            {#                        <div class="d-flex align-items-center">#}
+            {#                            <div class="flex-grow-1">#}
+            {#                                <div class="small font-weight-bold text-info mb-1">Conversion rate</div>#}
+            {#                                <div class="h5">1.23%</div>#}
+            {#                                <div class="text-xs font-weight-bold text-danger d-inline-flex align-items-center">#}
+            {#                                    <i class="mr-1" data-feather="trending-down"></i>#}
+            {#                                    1%#}
+            {#                                </div>#}
+            {#                            </div>#}
+            {#                            <div class="ml-2"><i class="fas fa-percentage fa-2x text-gray-200"></i></div>#}
+            {#                        </div>#}
+            {#                    </div>#}
+            {#                </div>#}
+            {#            </div>#}
         </div>
         <div class="card mb-4">
-            <div class="card-header">Recaudación patente municipal año 2021</div>
+            <div class="card-header">Recaudación patente municipal año {{ get_previous_year }} - {% now "Y" %}</div>
             <div class="card-body">
                 <figure class="highcharts-figure">
                     <div id="container"></div>
                 </figure>
-                {#                <div class="chart-area">#}
-                {#                    <canvas id="myAreaChart" width="100%" height="30"></canvas>#}
-                {#                </div>#}
             </div>
         </div>
         <div class="row">
@@ -156,6 +153,7 @@
                 <!-- Pie chart with legend example-->
                 <div class="card mb-4">
                     <div class="card-header">Accesos recientes</div>
+                    <a href="{% url 'administrador:mail' %}">Enviar correo</a>
                     <div class="card-body">
                         {#                        <h1>{{ users.first_name }}</h1>#}
                         {% for user in users %}
@@ -218,7 +216,7 @@
                     'Dic'
                 ],
                 crosshair: true,
-                max: {{ get_currente_month }}
+                {#max: {{ get_current_month }}#}
             },
             yAxis: {
                 min: 0,
@@ -242,10 +240,16 @@
             },
             series: [
                 {
-                    name: 'Dinero recaudado',
-                    showInLegend: false,
+                    name: '{% now "Y" %}',
+                    showInLegend: true,
                     colorByPoint: true,
-                    data: {{ get_values_graph | safe }}
+                    data: {{ get_values_graph_current_year | safe }}
+                },
+                {
+                    name: '{{ get_previous_year }}',
+                    showInLegend: true,
+                    colorByPoint: true,
+                    data: {{ get_values_previous_year }}
                 }
             ]
         });

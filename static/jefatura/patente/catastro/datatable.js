@@ -42,6 +42,7 @@ $(() => {
             dataSrc: ""
         },
         columns: [
+            {"data": "estado_pago"},
             {"data": "ruc"},
             {"data": "nombre_contribuyente"},
             {"data": "tipocontribuyente"},

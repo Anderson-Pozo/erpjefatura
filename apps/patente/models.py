@@ -29,16 +29,16 @@ class Patente(AuditMixin, models.Model):
         """
         return 'Patente Nº {}'.format(self.id)
 
-    def get_al_dia(self):
+    def get_estado_pago(self):
         """
         :return: El estado de pago de la patente, penduente o abonado
         """
         hoy = date.today()
         vencimiento = self.get_vencimiento()
         if hoy > vencimiento:
-            return '<h5><span class="badge badge-danger">Pendiente</span></h5>'
+            return '<h6><span class="badge badge-danger">Pendiente</span></h6>'
         else:
-            return '<h5><span class="badge badge-success">Abonado</span></h5>'
+            return '<h6><span class="badge badge-success">Abonado</span></h6>'
 
     def get_estado(self):
         """
@@ -49,7 +49,7 @@ class Patente(AuditMixin, models.Model):
         elif self.exonerada:
             return '<span class="badge badge-success">Exonerada</span>'
         else:
-            return '<span class="badge badge-light">Sin estado</span>'
+            return '<span class="badge badge-light">-</span>'
 
     def to_json(self):
         """
@@ -62,7 +62,7 @@ class Patente(AuditMixin, models.Model):
         item['total_patrimonio'] = self.establecimiento.total_patrimonio
         item['nombre_contribuyente'] = self.contribuyente.get_nombre(self.contribuyente.ruc)
         item['estado'] = self.get_estado()
-        item['aldia'] = self.get_al_dia()
+        item['estado_pago'] = self.get_estado_pago()
         return item
 
     def get_impuesto(self):

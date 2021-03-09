@@ -18,7 +18,7 @@ $(() => {
             dataSrc: ""
         },
         columns: [
-            {"data": "aldia"},
+            {"data": "estado_pago"},
             {"data": "ruc"},
             {"data": "nombre_contribuyente"},
             {"data": "nombre_establecimiento"},
