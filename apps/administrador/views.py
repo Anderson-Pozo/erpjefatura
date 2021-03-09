@@ -12,6 +12,13 @@ from apps.patente.models import DetallePatente, Patente
 from apps.alcabala.models import Alcabala
 from apps.plusvalia.models import Plusvalia
 from apps.usuario.models import Logs, User
+from django.conf import settings
+
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from django.template.loader import render_to_string
+from django.conf import settings
 
 
 # Create your views here.
@@ -105,13 +112,31 @@ class Index(TemplateView):
 
 
 def send_mail_contri(request):
-    send_mail(
-        'Prueba correo',
-        'Hola vaya a pagar',
-        'test.anderson20@gmail.com',
-        [
-            'anderam92@gmail.com'
-        ],
-        fail_silently=False
-    )
-    return redirect('index')
+    try:
+        mailServer = smtplib.SMTP(settings.EMAIL_HOST, 587)
+        print(mailServer.ehlo())
+        mailServer.starttls()
+        print(mailServer.ehlo())
+        print(mailServer.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD))
+        print('Conectado..')
+
+        message = MIMEMultipart()
+        message['From'] = settings.EMAIL_HOST_USER
+        message['To'] = 'anderam92@gmail.com'
+        message['Subject'] = 'Notificación de pago GAD Municipal Huaca'
+
+        context = render_to_string('administrador/email_temp/noti_pago.html',
+                                   {'user': User.objects.get(username='0401798475')}
+                                   )
+        message.attach(MIMEText(context, 'html'))
+
+        mailServer.sendmail(
+            settings.EMAIL_HOST_USER,
+            'anderam92@gmail.com',
+            message.as_string()
+        )
+
+        print('Correo enviado correctamente')
+        return redirect('index')
+    except Exception as error:
+        print(error)
