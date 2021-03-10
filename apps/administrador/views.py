@@ -1,4 +1,4 @@
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
@@ -12,13 +12,8 @@ from apps.patente.models import DetallePatente, Patente
 from apps.alcabala.models import Alcabala
 from apps.plusvalia.models import Plusvalia
 from apps.usuario.models import Logs, User
-from django.conf import settings
-
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from django.template.loader import render_to_string
-from django.conf import settings
+from .models import send_mail_fun
+import threading
 
 
 # Create your views here.
@@ -88,16 +83,8 @@ class Index(TemplateView):
             print(error)
         return data
 
-    # @staticmethod
-    # def get_patentes_pendientes():
-    #     data = []
-    #     current_date = date.today()
-    #     for patente in Patente.objects.all():
-    #         if current_date > patente.get_vencimiento():
-    #             data.append(patente)
-    #     return data
-
     def get_context_data(self, **kwargs):
+        # mail_thread()
         context = super().get_context_data(**kwargs)
         context['total_patentes'] = self.get_total_impuestos()
         context['total_alcabalas'] = self.get_total_alcabalas()
@@ -112,31 +99,32 @@ class Index(TemplateView):
 
 
 def send_mail_contri(request):
-    try:
-        mailServer = smtplib.SMTP(settings.EMAIL_HOST, 587)
-        print(mailServer.ehlo())
-        mailServer.starttls()
-        print(mailServer.ehlo())
-        print(mailServer.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD))
-        print('Conectado..')
+    return redirect('index')
 
-        message = MIMEMultipart()
-        message['From'] = settings.EMAIL_HOST_USER
-        message['To'] = 'anderam92@gmail.com'
-        message['Subject'] = 'Notificación de pago GAD Municipal Huaca'
 
-        context = render_to_string('administrador/email_temp/noti_pago.html',
-                                   {'user': User.objects.get(username='0401798475')}
-                                   )
-        message.attach(MIMEText(context, 'html'))
+def get_patente():
+    for i in Patente.objects.all():
+        date_v = i.get_vencimiento()
+        datetime_ven = datetime(date_v.year, date_v.month, date_v.day, 8, 0, 1)
+        if datetime.now() > datetime_ven:
+            print('Enviar con reporte de cuanto debe ')
+            date_send = datetime_ven + timedelta(days=15)
+            if datetime.now() == date_send and i.contribuyente.email:
+                # send_mail_fun(i.contribuyente.email)
+                print('Envio correo a: ', i.contribuyente.email)
+            else:
+                pass
+        else:
+            print('Enviar que debe pagar pronto 15 días antes')
+            date_send = datetime_ven - timedelta(days=15)
+            if datetime.now() == date_send and i.contribuyente.email:
+                # send_mail_fun(i.contribuyente.email)
+                print('Envio correo a: ', i.contribuyente.email)
+            else:
+                pass
+        print(i.get_vencimiento())
 
-        mailServer.sendmail(
-            settings.EMAIL_HOST_USER,
-            'anderam92@gmail.com',
-            message.as_string()
-        )
 
-        print('Correo enviado correctamente')
-        return redirect('index')
-    except Exception as error:
-        print(error)
+def mail_thread():
+    thread = threading.Thread(target=get_patente)
+    thread.start()

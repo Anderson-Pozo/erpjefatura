@@ -143,9 +143,6 @@ STATICFILES_DIRS = (BASE_DIR, 'static')
 # SETTINGS CORREO
 EMAIL_USE_TSL = True
 EMAIL_HOST = config('HOST_EMAIL')
-# EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = config('USER_EMAIL')
-# EMAIL_HOST_USER = 'jefaturarentashuaca@gmail.com'
 EMAIL_HOST_PASSWORD = config('USER_EMAIL_PASSWORD')
-# EMAIL_HOST_PASSWORD = 'Gopher.Theme7.Evaporate'
 EMAIL_PORT = 587

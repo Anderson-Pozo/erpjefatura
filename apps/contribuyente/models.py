@@ -1,9 +1,11 @@
 from django.db import models
+from django.db.models import Q
 from django.forms import model_to_dict
 from apps.auditoria.mixins import AuditMixin
 from apps.impuesto.models import get_date_digito
 from django.db.models.signals import post_save
 from apps.usuario.models import User
+from apps.administrador.models import send_mail_fun, send_mail_thread
 
 
 # Create your models here.
@@ -100,18 +102,22 @@ class Juridico(AuditMixin, Contribuyente):
 
 def generate_user_natural(sender, instance, **kwargs):
     try:
-        num = User.objects.filter(username=instance.ruc).count()
-        if num == 0:
+        row = User.objects.filter(
+            Q(username=instance.numero_cedula) |
+            Q(email=instance.email)).count()
+
+        if row == 0:
             new_user = User(
                 email=instance.email,
-                username=instance.ruc,
+                username=instance.numero_cedula,
                 first_name=instance.nombres,
                 last_name=instance.apellidos,
                 is_superuser=False,
                 is_active=True,
             )
-            new_user.set_password(instance.ruc)
+            new_user.set_password(instance.numero_cedula)
             new_user.save()
+            send_mail_thread(instance.email, 1, {'user': instance.nombres + ' ' + instance.apellidos})
         else:
             pass
     except Exception as error:
@@ -120,17 +126,20 @@ def generate_user_natural(sender, instance, **kwargs):
 
 def generate_user_juridico(sender, instance, **kwargs):
     try:
-        num = User.objects.filter(username=instance.ruc).count()
-        if num == 0:
+        row = User.objects.filter(
+            Q(username=instance.cedula_representante) |
+            Q(email=instance.email)).count()
+
+        if row == 0:
             new_user = User(
                 email=instance.email,
-                username=instance.ruc,
+                username=instance.cedula_representante,
                 first_name=instance.razon_social,
                 last_name='',
                 is_superuser=False,
                 is_active=True,
             )
-            new_user.set_password(instance.ruc)
+            new_user.set_password(instance.cedula_representante)
             new_user.save()
         else:
             pass

@@ -22,9 +22,18 @@
         <form action="{% url 'patente:especie_patente' %}" method="POST">
             {% csrf_token %}
             {% if form.errors %}
-                <div class="alert alert-danger">
-                    {{ form.errors }}
-                </div>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="text-danger text-xs">
+                            <li><strong>{{ error|escape }}</strong></li>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="text-danger text-xs">
+                        <li><strong>{{ error|escape }}</strong></li>
+                    </div>
+                {% endfor %}
             {% endif %}
             <div class="card-body p-4 p-md-5">
                 <div class="form-row">
@@ -48,15 +57,15 @@
                             </td>
                             <td class="text-right font-weight-bold">
                                 <input name="impuesto" type="number" class="form-control form-control-sm"
-                                       value="{{ patente.get_impuesto }}">
-{#                                <br>#}
-                                <label>Ultimo pago</label>
-                                <input value="{{ patente.get_ultimo_pago }}">
-                                <br>
-                                <br>
-                                <label>Vencimiento</label>
-                                <input value="{{ patente.get_vencimiento }}">
-                                <br>
+                                       value="{{ patente.get_impuesto }}" required>
+                                {#                                <br>#}
+                                {#                                <label>Ultimo pago</label>#}
+                                {#                                <input value="{{ patente.get_ultimo_pago }}">#}
+                                {#                                <br>#}
+                                {#                                <br>#}
+                                {#                                <label>Vencimiento</label>#}
+                                {#                                <input value="{{ patente.get_vencimiento }}">#}
+                                {#                                <br>#}
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -69,7 +78,8 @@
                                 <input type="number"
                                        name="interes"
                                        value="{{ patente.get_interes }}"
-                                       class="form-control form-control-sm">
+                                       class="form-control form-control-sm"
+                                       required>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -82,7 +92,8 @@
                                 <input type="number"
                                        name="multa"
                                        value="{{ patente.get_multa }}"
-                                       class="form-control form-control-sm">
+                                       class="form-control form-control-sm"
+                                       required>
                             </td>
                             <td>&nbsp;</td>
                         </tr>

@@ -164,7 +164,7 @@ class DetallePatente(AuditMixin, models.Model):
         decimal_places=2,
         default=0.99,
         max_digits=9,
-        blank=True,
+        blank=False,
         null=True
     )
     patente = models.ForeignKey(Patente, on_delete=models.CASCADE)
@@ -180,7 +180,12 @@ class DetallePatente(AuditMixin, models.Model):
         """
         :return: La sumatoria de los valores de impuesto, interes, multa y servicios administrativos
         """
-        total = self.impuesto + self.interes + self.multa + self.servicios_administrativos
+        total = 0
+        try:
+            if self.impuesto or self.interes or self.multa or self.servicios_administrativos:
+                total = self.impuesto + self.interes + self.multa + self.servicios_administrativos
+        except Exception as e:
+            print(e)
         return format(total, '.2f')
 
     def to_json(self):
