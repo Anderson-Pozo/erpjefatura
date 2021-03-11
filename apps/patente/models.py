@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from django.db import models
 from django.forms import model_to_dict
 from django.utils.timezone import now
@@ -84,13 +84,19 @@ class Patente(AuditMixin, models.Model):
         """
         ultimo_anio = self.get_ultimo_pago().year
         anio_actual = datetime.now().year
+        try:
+            if self.get_ultimo_pago() == self.establecimiento.fecha_inicio_actividad:
+                return self.get_ultimo_pago() + timedelta(days=30)
 
-        if ultimo_anio == anio_actual:
-            fecha_vencimiento = self.contribuyente.get_fecha_vencimiento().replace(year=anio_actual + 1)
-            return fecha_vencimiento
-        else:
-            fecha_vencimiento = self.contribuyente.get_fecha_vencimiento().replace(year=ultimo_anio + 1)
-            return fecha_vencimiento
+            if ultimo_anio == anio_actual:
+                fecha_vencimiento = self.contribuyente.get_fecha_vencimiento().replace(year=anio_actual + 1)
+                return fecha_vencimiento
+            else:
+                fecha_vencimiento = self.contribuyente.get_fecha_vencimiento().replace(year=ultimo_anio + 1)
+                return fecha_vencimiento
+        except Exception as e:
+            print(e)
+        return date.today()
 
     def get_interes(self):
         """
@@ -207,7 +213,11 @@ def fecha_ultimo_pago(id_patente):
     :return: La fecha del último registro encontrado en el DetallePatente
     """
     try:
-        fecha = DetallePatente.objects.filter(patente__id=id_patente).order_by('-fecha')[0]
-        return fecha.fecha
+        query = DetallePatente.objects.filter(patente__id=id_patente).count()
+        if query == 0:
+            return Patente.objects.get(id=id_patente).establecimiento.fecha_inicio_actividad
+        else:
+            fecha = DetallePatente.objects.filter(patente__id=id_patente).order_by('-fecha')[0]
+            return fecha.fecha
     except IndexError:
         return date.today()

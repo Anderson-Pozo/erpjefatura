@@ -28,7 +28,7 @@ class Index(TemplateView):
                 data = []
                 for i in Patente.objects.filter(contribuyente__ruc=user):
                     data.append(i.to_json())
-                print(data)
+                # print(data)
             elif action == 'search_establ':
                 data = []
                 for i in Establecimiento.objects.filter(patente__contribuyente__ruc=user):
@@ -46,7 +46,7 @@ class Index(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['fechas'] = DetallePatente.objects.filter(
-            patente__contribuyente__ruc=self.request.user.username).order_by('-fecha')[0:5]
+            patente__contribuyente__ruc=self.request.user.username).order_by('-fecha')[0:3]
         # print(context)
         return context
 

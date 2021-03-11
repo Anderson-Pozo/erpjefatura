@@ -31,13 +31,12 @@
                     <div id='calendar'></div>
                 </div>
             </div>
-            <div class="container">
-                {% for patente in patentes %}
-                    <h2> Ultimo pago {{ patente.get_ultimo_pago }} - Esta {{ patente.establecimiento.nombre }}</h2>
-                    <h2> Vencimiento {{ patente.get_vencimiento }} - Esta {{ patente.establecimiento.nombre }}</h2>
-                {% endfor %}
-
-            </div>
+{#            <div class="container">#}
+{#                {% for patente in patentes %}#}
+{#                    <h2> Ultimo pago {{ patente.get_ultimo_pago }} - Esta {{ patente.establecimiento.nombre }}</h2>#}
+{#                    <h2> Vencimiento {{ patente.get_vencimiento }} - Esta {{ patente.establecimiento.nombre }}</h2>#}
+{#                {% endfor %}#}
+{#            </div>#}
         </div>
     </div>
 {% endblock %}
