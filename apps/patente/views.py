@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse_lazy
-from django.views.generic import ListView, TemplateView, CreateView, View, UpdateView
+from django.views.generic import ListView, TemplateView, CreateView, View, UpdateView, DeleteView
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from apps.contribuyente.models import Natural, Juridico, Contribuyente
 from apps.establecimiento.models import Establecimiento
@@ -49,6 +49,25 @@ class ListaCatastro(ListView):
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
+
+
+class SuspenderPatente(DeleteView):
+    model = Patente
+    template_name = 'patente/catastro/suspender.html'
+    success_url = reverse_lazy('patente:lista_catastro')
+
+    def delete(self, request, *args, **kwargs):
+        if request.is_ajax():
+            modelo = self.get_object()
+            modelo.suspendida = True
+            modelo.save()
+            message = f'{self.model.__name__} fue suspendida'
+            error = 'No hay error'
+            response = JsonResponse({'message': message, 'error': error})
+            response.status_code = 201
+            return response
+        else:
+            return self.success_url
 
 
 # Proceso de apertura de patente

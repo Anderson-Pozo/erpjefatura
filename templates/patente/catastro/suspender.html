@@ -1,0 +1,26 @@
+<div class="modal-dialog modal-sm modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalUsuarioTitle">Suspender patente</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">×</span></button>
+        </div>
+        {% csrf_token %}
+        <div class="modal-body">
+            <div class="text-black-75">
+                ¿Está seguro de suspender la patente de {{ object.establecimiento.nombre }} perteneciente a
+                {{ object.contribuyente.ruc }}?
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button onclick="close_modal_elimination();"
+                    class="btn btn-light" type="button">
+                Cerrar
+            </button>
+            <button onclick="suspender_patente({{ object.pk }})"
+                    class="btn btn-red" type="button">
+                Suspender
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-$(() => {
+function lista_catastro() {
     let tbl_catastro = $('#tableCatastro').DataTable({
         language: {
             'url': 'https://raw.githubusercontent.com/Jhon-Paillacho/ERP-estaticos/main/language.json'
@@ -80,6 +80,13 @@ $(() => {
                                     </div>
                                     Historial
                                 </a>
+                                <button onclick="open_modal_elimination('/patente/suspender/${row.id}')" 
+                                    class="dropdown-item btn-light">
+                                    <div class="dropdown-item-icon">
+                                        <i class="fas fa-minus-circle"></i>
+                                    </div>
+                                    Suspender
+                                </button>
                             </div>
                         </div>`;
                 }
@@ -134,4 +141,30 @@ $(() => {
             });
             $('#myModelDet').modal('show');
         })
+}
+
+function suspender_patente(pk) {
+    $.ajax({
+        data: {
+            csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
+        },
+        url: '/patente/suspender/' + pk + '/',
+        type: 'post',
+        success: function (response) {
+            show_notification_success(response.message);
+            close_modal_elimination();
+            // window.location.replace("/patente/lista_catastro");
+            lista_catastro();
+            setInterval(function () {
+                $('#tableCatastro').ajax.reload();
+            }, 5000);
+        },
+        error: function (error) {
+            show_notification_error(error.responseJSON.message);
+        }
+    });
+}
+
+$(() => {
+    lista_catastro()
 })
