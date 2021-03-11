@@ -57,24 +57,29 @@
 </head>
 <body>
 <div class="fecha">
-    <p>Fecha: {{ patente.fecha }}</p>
+    <p>{{ patente.fecha }}</p>
     {% if patente.contribuyente.tipocontribuyente.id == 1 %}
-        <p>Nombres o razón social: {{ patente.contribuyente.natural.nombres }}</p>
+        <p>{{ patente.contribuyente.natural.nombres }}&nbsp{{ patente.contribuyente.natural.apellidos }}</p>
     {% else %}
-        <p>Nombres o razón social: {{ patente.contribuyente.juridico.razon_social }}</p>
+        <p>{{ patente.contribuyente.juridico.razon_social }}</p>
     {% endif %}
 </div>
 <br>
-<div class="ruc">
-    <p>Nº cédula: {{ patente.contribuyente.ruc }}</p>
-    <p>RUC Contribuyente: {{ patente.contribuyente.ruc }}</p>
-    <p>Nacionalidad: Ecuatoriana</p>
+<div class="ruc" style="padding-top: -10px">
+    {% if patente.contribuyente.tipocontribuyente.id == 1 %}
+        <p>{{ patente.contribuyente.natural.numero_cedula }}</p>
+    {% else %}
+        <p>{{ patente.contribuyente.juridico.cedula_representante }}</p>
+    {% endif %}
+    <p style="padding-top: 10px">{{ patente.contribuyente.ruc }}</p>
+    <p style="padding-top: 10px">
+        {{ patente.contribuyente.natural.nacionalidad}}</p>
 </div>
 
 <div class="direccion">
-    <p>Dirección: {{ patente.establecimiento.direccion.get_all_direccion }}</p>
-    <p style="padding-top: 20px">
-        Establecimiento: {{ patente.establecimiento.nombre }}
+    <p>{{ patente.establecimiento.direccion.get_all_direccion }}</p>
+    <p style="padding-top: 17px">
+        {{ patente.establecimiento.nombre }}
     </p>
 </div>
 
@@ -124,9 +129,9 @@
     {% endif %}
 </div>
 
-<div class="row-fecha">
+<div class="row-fecha" style="padding-top: 5px">
     <p>Primera vez</p>
-    <p>{{ patente.establecimiento.fecha_inicio_actividad }}</p>
+    <p style="padding-top: 10px">{{ patente.establecimiento.fecha_inicio_actividad }}</p>
 </div>
 
 <div class="row-contabilidad">

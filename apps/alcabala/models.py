@@ -130,6 +130,9 @@ class Alcabala(AuditMixin, models.Model):
         zona = self.predio.direccion.barrio.zona
         return zona
 
+    def get_valor_compra(self):
+        return format(self.valor_compra_venta, '.2f')
+
     def to_json(self):
         item = model_to_dict(self)
         item['comprador'] = '{} {}'.format(self.comprador.nombres, self.comprador.apellidos)

@@ -16,12 +16,15 @@ class AlcabalaForm(forms.ModelForm):
         model = Alcabala
         fields = '__all__'
         error_messages = {
-            # 'vendedor': {
-            #     'required': 'El vendedor es obligatorio'
-            # },
-            # 'comprador': {
-            #     'required': 'El comprador es obligatorio'
-            # },
+            'vendedor': {
+                'required': 'El vendedor es obligatorio'
+            },
+            'comprador': {
+                'required': 'El comprador es obligatorio'
+            },
+            'predio': {
+                'required': 'Debe de seleccionar la clave catastral'
+            },
             'descripcion_tramite': {
                 'required': 'La descripción del tramite es obligatoria'
             },

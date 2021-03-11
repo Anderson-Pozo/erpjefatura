@@ -31,7 +31,6 @@ $(function () {
         //1 diferencia bruta
         let dif_bruta = val_precio_venta - val_precio_adquisicion
         i_diferencia_bruta.val(parseFloat(dif_bruta.toFixed(2)));
-
         //2 diferencia neta
         let dif_neta = dif_bruta
         i_diferencia_neta.val(parseFloat(dif_neta.toFixed(2)));

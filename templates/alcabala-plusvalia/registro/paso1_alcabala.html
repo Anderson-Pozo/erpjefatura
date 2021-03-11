@@ -12,10 +12,20 @@
           method="POST">
         {% csrf_token %}
         {% if form.errors %}
-            <div class="alert alert-danger">
-                {{ form.errors }}
-            </div>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="text-danger text-xs">
+                        <li><strong>{{ error|escape }}</strong></li>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="text-danger text-xs">
+                    <li><strong>{{ error|escape }}</strong></li>
+                </div>
+            {% endfor %}
         {% endif %}
+        <br>
         <!-- Form Row-->
         <div class="form-row">
             <!-- Form Group (first name)-->
@@ -34,7 +44,7 @@
         <div class="form-row">
             <!-- Form Group (first name)-->
             <div class="form-group col-md-6">
-                <label class="small mb-1" for="inputFirstName">Propietario</label>
+                <label class="small mb-1" for="inputFirstName">Vendedor</label>
                 <select class="form-control table-responsive-sm" id="search_vendedor">
                 </select>
                 <input name="vendedor" hidden>

@@ -1,6 +1,6 @@
 from django import forms
 from datetime import datetime, date
-from .models import Plusvalia
+from .models import Plusvalia, Alcabala
 
 
 class PlusvaliaForm(forms.ModelForm):
@@ -94,6 +94,7 @@ class PlusvaliaForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control form-control-sm',
                     'required': True,
+                    'value' : Alcabala.objects.last().valor_compra_venta
                 }
             ),
             'precio_adquisicion': forms.NumberInput(

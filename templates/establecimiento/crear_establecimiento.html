@@ -12,13 +12,23 @@
                     <div id="errors"></div>
                     <br>
                     <form id="form_establecimientos" action="{% url 'establecimiento:crear_establecimiento' %}"
-                        method="POST">
+                          method="POST">
                         {% csrf_token %}
                         {% if form.errors %}
-                        <div class="alert alert-danger">
-                            {{ form.errors }}
-                        </div>
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <div class="text-danger text-xs">
+                                        <li><strong>{{ error|escape }}</strong></li>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <div class="text-danger text-xs">
+                                    <li><strong>{{ error|escape }}</strong></li>
+                                </div>
+                            {% endfor %}
                         {% endif %}
+                        <br>
                         <!-- Form Group (username)-->
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -64,10 +74,12 @@
 
                         <div class="modal-footer">
                             <button onclick="close_modal_creation();"
-                                    class="btn btn-red" type="button">Cerrar</button>
+                                    class="btn btn-red" type="button">Cerrar
+                            </button>
                             <button onclick="crear_establecimientos();"
                                     class="btn btn-green"
-                                type="button">Guardar</button>
+                                    type="button">Guardar
+                            </button>
                         </div>
                     </form>
                 </div>
