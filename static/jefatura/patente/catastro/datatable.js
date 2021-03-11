@@ -62,7 +62,7 @@ $(() => {
                         id="dropdownPeople1" type="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
                         <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownPeople1">
-                                <a class="dropdown-item btn-light" href="/patente/revision_modificada/${row.id}">
+                                <a class="dropdown-item btn-light" href="/patente/especie_renovacion/${row.id}">
                                     <div class="dropdown-item-icon">
                                         <i class="fas fa-sync-alt"></i>
                                     </div>

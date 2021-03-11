@@ -72,7 +72,6 @@ class Contribuyente(models.Model):
 NACIONALIDADES = (
     ('Ecuatoriana', 'Ecuatoriana'),
     ('Colombiana', 'Colombiana'),
-    ('Venezonalana', 'Venezolana'),
 )
 
 
@@ -87,6 +86,9 @@ class Natural(AuditMixin, Contribuyente):
     def get_nombre(self):
         return '{} {}'.format(self.nombres, self.apellidos)
 
+    def __str__(self):
+        return '{} {}'.format(self.nombres, self.apellidos)
+
 
 class Juridico(AuditMixin, Contribuyente):
     razon_social = models.CharField('Razon social', max_length=50, blank=False, null=True)
@@ -97,6 +99,9 @@ class Juridico(AuditMixin, Contribuyente):
     correo_representante = models.EmailField('Correo del representante', max_length=50, blank=True, null=True)
 
     def get_nombre(self):
+        return '{}'.format(self.razon_social)
+
+    def __str__(self):
         return '{}'.format(self.razon_social)
 
 
@@ -117,7 +122,7 @@ def generate_user_natural(sender, instance, **kwargs):
             )
             new_user.set_password(instance.numero_cedula)
             new_user.save()
-            send_mail_thread(instance.email, 1, {'user': instance.nombres + ' ' + instance.apellidos})
+            # send_mail_thread(instance.email, 1, {'user': instance.nombres + ' ' + instance.apellidos})
         else:
             pass
     except Exception as error:
@@ -147,5 +152,5 @@ def generate_user_juridico(sender, instance, **kwargs):
         print(error)
 
 
-post_save.connect(generate_user_natural, sender=Natural)
-post_save.connect(generate_user_juridico, sender=Juridico)
+# post_save.connect(generate_user_natural, sender=Natural)
+# post_save.connect(generate_user_juridico, sender=Juridico)

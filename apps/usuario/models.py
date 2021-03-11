@@ -31,7 +31,7 @@ class UserManager(BaseUserManager):
 class User(AuditMixin, AbstractUser):
     username = models.CharField('Nombre usuario', max_length=13, unique=True,
                                 help_text='Debe colocar su número de RUC o su cédula')
-    email = models.EmailField('Correo electrónico', max_length=60, unique=True)
+    email = models.EmailField('Correo electrónico', max_length=60, unique=True, null=True)
     first_name = models.CharField('Nombres', max_length=100, blank=True, null=True)
     last_name = models.CharField('Apellidos', max_length=100, blank=True, null=True)
     is_active = models.BooleanField(default=True)
@@ -105,7 +105,7 @@ class Logs(LogEntry):
         current_date = date.today()
         past_date = self.action_time.date()
         days = (current_date - past_date).days
-        if days == 0:
+        if days == 0 or -1:
             return 'Hoy'
         elif days == 1:
             return '{} día'.format(days)

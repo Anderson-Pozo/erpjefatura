@@ -27,7 +27,7 @@ class Patente(AuditMixin, models.Model):
         """
         :return: El número de la patente como un string
         """
-        return 'Patente Nº {}'.format(self.id)
+        return 'Patente Nº {} - {}'.format(self.id, self.establecimiento.nombre)
 
     def get_estado_pago(self):
         """
