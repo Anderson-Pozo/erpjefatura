@@ -1,4 +1,4 @@
-function lista_catastro() {
+$(() => {
     let tbl_catastro = $('#tableCatastro').DataTable({
         language: {
             'url': 'https://raw.githubusercontent.com/Jhon-Paillacho/ERP-estaticos/main/language.json'
@@ -48,7 +48,7 @@ function lista_catastro() {
             {"data": "tipocontribuyente"},
             {"data": "nombre_establecimiento"},
             {"data": "total_patrimonio"},
-            {"data": "exonerada"},
+            {"data": "estado"},
             {"data": "acciones"},
         ],
         columnDefs: [
@@ -80,6 +80,13 @@ function lista_catastro() {
                                     </div>
                                     Historial
                                 </a>
+                                <button onclick="open_modal_edition('/patente/editar/${row.id}')" 
+                                    class="dropdown-item btn-light">
+                                    <div class="dropdown-item-icon">
+                                        <i class="fas fa-edit"></i>
+                                    </div>
+                                    Editar
+                                </button>
                                 <button onclick="open_modal_elimination('/patente/suspender/${row.id}')" 
                                     class="dropdown-item btn-light">
                                     <div class="dropdown-item-icon">
@@ -94,10 +101,6 @@ function lista_catastro() {
             {
                 targets: [-2],
                 class: 'text-center',
-                orderable: true,
-                render: function (data, type, row) {
-                    return row.estado
-                }
             }
         ],
     });
@@ -106,7 +109,7 @@ function lista_catastro() {
         .on('click', 'a[rel="details"]', function () {
             let tr = tbl_catastro.cell($(this).closest('td, li')).index();
             let data = tbl_catastro.row(tr.row).data();
-            console.log(data);
+            // console.log(data);
 
             $('#tblDet').DataTable({
                 language: {
@@ -141,23 +144,20 @@ function lista_catastro() {
             });
             $('#myModelDet').modal('show');
         })
-}
+});
+
 
 function suspender_patente(pk) {
     $.ajax({
         data: {
-            csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
+            csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val(),
         },
         url: '/patente/suspender/' + pk + '/',
         type: 'post',
         success: function (response) {
             show_notification_success(response.message);
             close_modal_elimination();
-            // window.location.replace("/patente/lista_catastro");
-            lista_catastro();
-            setInterval(function () {
-                $('#tableCatastro').ajax.reload();
-            }, 5000);
+            $('#tableCatastro').DataTable().ajax.reload(null, false);
         },
         error: function (error) {
             show_notification_error(error.responseJSON.message);
@@ -165,6 +165,27 @@ function suspender_patente(pk) {
     });
 }
 
-$(() => {
-    lista_catastro()
-})
+function editar_patente(){
+    let data = new FormData($('#form_edition').get(0));
+    $.ajax({
+        url: $('#form_edition').attr('action'),
+        type: $('#form_edition').attr('method'),
+        data: data,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            show_notification_success(response.message);
+            close_modal_edition();
+            $('#tableCatastro').DataTable().ajax.reload(null, false);
+        },
+        error: function (error) {
+            show_notification_error(error.responseJSON.message);
+            show_errors_edition(error);
+        }
+    })
+}
+
+// $(() => {
+//     lista_catastro()
+// })

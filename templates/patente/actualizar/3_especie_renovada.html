@@ -47,8 +47,14 @@
                                 <div class="small mb-1">Impuesto patente anual</div>
                             </td>
                             <td class="text-right font-weight-bold">
-                                <input name="impuesto" type="number" class="form-control form-control-sm"
-                                       value="{{ patente.get_impuesto }}">
+                                {% if patente.exonerada %}
+                                    {{ form.impuesto }}
+                                {% else %}
+                                    <input name="impuesto" type="number"
+                                           class="form-control form-control-sm"
+                                           value="{{ patente.get_impuesto }}"
+                                           required>
+                                {% endif %}
                             </td>
                             <td>&nbsp;</td>
                         </tr>

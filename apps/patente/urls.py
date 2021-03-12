@@ -4,6 +4,8 @@ from .views import *
 urlpatterns = [
     path('lista_catastro/', ListaCatastro.as_view(), name='lista_catastro'),
     path('suspender/<int:pk>/', SuspenderPatente.as_view(), name='suspender'),
+    path('editar/<int:pk>/', EditarPatente.as_view(), name='editar'),
+
     path('crear_contribuyente/natural/', CrearNatural.as_view(), name='crear_natural'),
     path('crear_contribuyente/juridico/', CrearJuridico.as_view(), name='crear_juridico'),
     path('crear_establecimiento/', CrearEstablecimiento.as_view(), name='crear_establecimiento'),

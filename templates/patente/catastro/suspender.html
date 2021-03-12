@@ -17,10 +17,17 @@
                     class="btn btn-light" type="button">
                 Cerrar
             </button>
-            <button onclick="suspender_patente({{ object.pk }})"
-                    class="btn btn-red" type="button">
-                Suspender
-            </button>
+            {% if object.suspendida %}
+                <button onclick="suspender_patente({{ object.pk }})"
+                        class="btn btn-green" type="button">
+                    Activar
+                </button>
+            {% else %}
+                <button onclick="suspender_patente({{ object.pk }})"
+                        class="btn btn-red" type="button">
+                    Suspender
+                </button>
+            {% endif %}
         </div>
     </div>
 </div>
