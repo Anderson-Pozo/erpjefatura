@@ -77,6 +77,16 @@ class Patente(AuditMixin, models.Model):
         """
         return fecha_ultimo_pago(self.id)
 
+    def get_anio_anterior(self):
+        """
+        :return: Primera vez en caso de ser apertura y el año anterior en caso
+        de renovación
+        """
+        if self.get_ultimo_pago() == self.establecimiento.fecha_inicio_actividad:
+            return 'Primera vez'
+        else:
+            return self.get_ultimo_pago().year
+
     def get_vencimiento(self):
         """
         :return: La fecha de vencimiento de cada patente en base al noveno dígito de cedula
@@ -171,7 +181,7 @@ class DetallePatente(AuditMixin, models.Model):
         default=0.99,
         max_digits=9,
         blank=False,
-        null=True
+        null=False
     )
     patente = models.ForeignKey(Patente, on_delete=models.CASCADE)
 

@@ -2,15 +2,15 @@ from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse_lazy
-from django.views.generic import ListView, TemplateView, CreateView, View, UpdateView
+from django.views.generic import ListView, TemplateView, CreateView, View, UpdateView, DeleteView
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
-from apps.contribuyente.models import Natural, Juridico, Contribuyente
+from apps.contribuyente.models import *
 from apps.establecimiento.models import Establecimiento
 from apps.contribuyente.forms import ContribuyenteNaturalForm as NaturalForm, ContribuyenteJuridicoForm as JuridicoForm
 from apps.establecimiento.forms import EstablecimientoForm
-from apps.utils.ajax import AjaxList
+from apps.utils.ajax import AjaxList, AjaxUpdate
 from .models import Patente, DetallePatente
-from .forms import PatenteForm, DetalleForm
+from .forms import *
 
 from django.template.loader import get_template
 from xhtml2pdf import pisa
@@ -49,6 +49,35 @@ class ListaCatastro(ListView):
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
+
+
+class SuspenderPatente(DeleteView):
+    model = Patente
+    template_name = 'patente/catastro/suspender.html'
+    success_url = reverse_lazy('patente:lista_catastro')
+
+    def delete(self, request, *args, **kwargs):
+        if request.is_ajax():
+            modelo = self.get_object()
+            if modelo.suspendida:
+                modelo.suspendida = False
+            else:
+                modelo.suspendida = True
+            modelo.save()
+            message = f'{self.model.__name__} fue suspendida'
+            error = 'No hay error'
+            response = JsonResponse({'message': message, 'error': error})
+            response.status_code = 201
+            return response
+        else:
+            return self.success_url
+
+
+class EditarPatente(AjaxUpdate, UpdateView):
+    model = Patente
+    form_class = PatenteForm
+    template_name = 'patente/catastro/editar.html'
+    success_url = reverse_lazy('patente:lista_catastro')
 
 
 # Proceso de apertura de patente

@@ -1,12 +1,5 @@
 from django.urls import path
-from .views import ListaContribuyenteNatural, \
-    CrearContribuyenteNatural, \
-    EditarContribuyenteNatural, \
-    EliminarContribuyenteNatural, \
-    ListaContribuyenteJuridico, \
-    CrearContribuyenteJuridico, \
-    EditarContribuyenteJuridico, \
-    EliminarContribuyenteJuridico
+from .views import *
 
 urlpatterns = [
     path('natural/',

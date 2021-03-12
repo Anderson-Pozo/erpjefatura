@@ -60,7 +60,7 @@ function lista_usuarios() {
                         '</button>';
                     buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange" ' +
                         ' onclick="open_modal_elimination(\'/usuario/eliminar/' + row.id + '/\')">' +
-                        '<i class="fas fa-trash"></i>' +
+                        '<i class="fas fa-user-minus"></i>' +
                         '</button>';
                     return buttons;
                 }
