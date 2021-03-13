@@ -1,6 +1,5 @@
 import os
 from datetime import date
-
 import django
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'erpjefatura.settings')
