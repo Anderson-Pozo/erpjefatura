@@ -4,9 +4,9 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, TemplateView, CreateView, UpdateView, DeleteView, View
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
-from apps.utils.ajax import AjaxList, AjaxCreate, AjaxUpdate, AjaxDelete
+from apps.utils.ajax import *
 from .forms import AlcabalaForm
-from .models import Alcabala, Comprador, Vendedor, Predio
+from .models import Alcabala, Persona, Predio
 
 from django.template.loader import get_template
 from xhtml2pdf import pisa
@@ -40,13 +40,7 @@ class GetPersonas(View):
             action = request.POST['action']
             if action == 'autoselect':
                 data = []
-                for i in Comprador.objects.filter(numero_cedula__icontains=request.POST['term'])[0:5]:
-                    item = i.to_json()
-                    item['text'] = i.nombres + ' ' + i.apellidos
-                    data.append(item)
-            elif action == 'getvendedor':
-                data = []
-                for i in Vendedor.objects.filter(numero_cedula__icontains=request.POST['term'])[0:5]:
+                for i in Persona.objects.filter(numero_cedula__icontains=request.POST['term'])[0:5]:
                     item = i.to_json()
                     item['text'] = i.nombres + ' ' + i.apellidos
                     data.append(item)
@@ -87,7 +81,7 @@ class ReportAlcabala(View):
             pisa_status = pisa.CreatePDF(
                 html, dest=response)
             return response
-        except:
-            pass
+        except Exception as e:
+            print(e)
         return HttpResponseRedirect(reverse_lazy('plusvalia:revision_plusvalia'))
 

@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'apps.alcabala',
     'apps.patente',
     'apps.plusvalia',
-    'apps.predio',
     'apps.administrador',
     'apps.usuario',
     'apps.auditoria',

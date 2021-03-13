@@ -1,8 +1,6 @@
 from django import forms
 from datetime import datetime
-from .models import Alcabala, Comprador, Vendedor, Predio
-from django.forms import Form, ModelChoiceField, Select, CharField, TextInput
-from apps.direccion.models import Direccion
+from .models import Alcabala
 
 
 class AlcabalaForm(forms.ModelForm):

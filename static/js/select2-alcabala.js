@@ -76,7 +76,7 @@ $(function () {
             data: function (params) {
                 var queryParameters = {
                     term: params.term,
-                    action: 'getvendedor'
+                    action: 'autoselect'
                 }
                 return queryParameters;
             },

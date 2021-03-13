@@ -35,7 +35,7 @@ class User(AuditMixin, AbstractUser):
     last_name = models.CharField('Apellidos', max_length=100, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    objects = UserManager()
+    # objects = UserManager()
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']

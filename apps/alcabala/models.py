@@ -1,16 +1,12 @@
 from django.db import models
 from django.forms import model_to_dict
-from apps.predio.models import Predio
 from apps.auditoria.mixins import AuditMixin
+from apps.direccion.models import Direccion
 
 
-# Create your models here.
-class Comprador(AuditMixin, models.Model):
-    """
-    Clase Comprador permite guardar la información de numero de cédula, nombres, apellidos, casado del comprador
-    """
+class Persona(AuditMixin, models.Model):
     id = models.AutoField(primary_key=True)
-    numero_cedula = models.CharField('Número de cédula comprador', max_length=10, blank=True, null=True)
+    numero_cedula = models.CharField('Número de cédula', max_length=10, blank=True, null=True, unique=True)
     nombres = models.CharField('Nombres', max_length=50, blank=True, null=True)
     apellidos = models.CharField('Apellidos', max_length=50, blank=True, null=True)
     casado = models.BooleanField('Casado', default=False, blank=True, null=True)
@@ -22,41 +18,38 @@ class Comprador(AuditMixin, models.Model):
         return '{} {}'.format(self.nombres, self.apellidos)
 
     class Meta:
-        db_table = "comprador"
-
-    # def __str__(self):
-    #     return self.nombres + ' ' + self.apellidos
+        db_table = "persona"
 
     def to_json(self):
         item = model_to_dict(self)
         return item
 
 
-class Vendedor(AuditMixin, models.Model):
+class Predio(AuditMixin, models.Model):
     """
-    Clase Vendedor permite guardar la información de numero de cédula, nombres, apellidos, casado del vendedor
+    Clase Predio que contiene los campos de la entidad
+    Predio y su relación con dirección
     """
     id = models.AutoField(primary_key=True)
-    numero_cedula = models.CharField('Número de cédula vendedor', max_length=10, blank=True, null=True)
-    nombres = models.CharField('Nombres', max_length=50, blank=True, null=True)
-    apellidos = models.CharField('Apellidos', max_length=50, blank=True, null=True)
-    casado = models.BooleanField('Casado', default=False, blank=True, null=True)
+    clave_catastral = models.CharField('Clave catastral', max_length=25, blank=True, null=True)
+    avaluo_comercial = models.FloatField('Avaluo comercial', blank=True, null=True)
+    area_terreno = models.FloatField('Área del terreno', blank=True, null=True)
+    direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
 
-    class Meta:
-        db_table = "vendedor"
+    def get_zona(self):
+        zona = self.direccion.barrio.zona
+        return zona
 
     def __str__(self):
-        return '{} {}'.format(self.nombres, self.apellidos)
-
-    def get_nombres(self):
-        return '{} {}'.format(self.nombres, self.apellidos)
-
-    # def __str__(self):
-    #     return self.nombres + ' ' + self.apellidos
+        return self.clave_catastral
 
     def to_json(self):
         item = model_to_dict(self)
+        item['zona'] = self.get_zona()
         return item
+
+    class Meta:
+        db_table = "predio"
 
 
 class Alcabala(AuditMixin, models.Model):
@@ -117,8 +110,8 @@ class Alcabala(AuditMixin, models.Model):
         blank=False,
         null=True
     )
-    comprador = models.ForeignKey(Comprador, on_delete=models.CASCADE)
-    vendedor = models.ForeignKey(Vendedor, on_delete=models.CASCADE)
+    comprador = models.ForeignKey(Persona, on_delete=models.CASCADE, related_name='comprador')
+    vendedor = models.ForeignKey(Persona, on_delete=models.CASCADE, related_name='vendedor')
     predio = models.ForeignKey(Predio, on_delete=models.CASCADE)
 
     def get_total(self):
