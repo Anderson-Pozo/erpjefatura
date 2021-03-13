@@ -94,7 +94,6 @@ class PlusvaliaForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control form-control-sm',
                     'required': True,
-                    'value' : Alcabala.objects.last().valor_compra_venta
                 }
             ),
             'precio_adquisicion': forms.NumberInput(

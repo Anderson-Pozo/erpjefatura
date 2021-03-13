@@ -2,7 +2,6 @@ from datetime import datetime, date
 from django.db import models
 from django.forms import model_to_dict
 from django.contrib.auth.models import AbstractUser, BaseUserManager, Group, Permission
-from django.contrib.admin.models import LogEntry
 from apps.utils.format_date import current_date_format
 from apps.auditoria.mixins import AuditMixin
 
@@ -36,6 +35,7 @@ class User(AuditMixin, AbstractUser):
     last_name = models.CharField('Apellidos', max_length=100, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    objects = UserManager()
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
@@ -67,7 +67,6 @@ class Grupo(Group):
 
     def to_json(self):
         item = model_to_dict(self, exclude=['permissions', ])
-        # item['permissions'] = {x: x for x in self.permissions.name}
         return item
 
 
@@ -78,43 +77,4 @@ class Permisos(Permission):
     def to_json(self):
         item = model_to_dict(self)
         item['content_type'] = self.content_type.name
-        return item
-
-
-class Logs(LogEntry):
-    class Meta:
-        proxy = True
-
-    def get_action_color(self):
-        if self.action_flag == 1:
-            return 'timeline-item-marker-indicator bg-green'
-        elif self.action_flag == 2:
-            return 'timeline-item-marker-indicator bg-yellow'
-        else:
-            return 'timeline-item-marker-indicator bg-red'
-
-    def get_action_text(self):
-        if self.action_flag == 1:
-            return 'creado'
-        elif self.action_flag == 2:
-            return 'modificado'
-        else:
-            return 'eliminado'
-
-    def get_days(self):
-        current_date = date.today()
-        past_date = self.action_time.date()
-        days = (current_date - past_date).days
-        if days == 0 or -1:
-            return 'Hoy'
-        elif days == 1:
-            return '{} día'.format(days)
-        else:
-            return '{} días'.format(days)
-        # return days
-
-    def to_json(self):
-        item = model_to_dict(self)
-        item['user'] = self.user.__str__()
-        item['date'] = current_date_format(self.action_time)
         return item

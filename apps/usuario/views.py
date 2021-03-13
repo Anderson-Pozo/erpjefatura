@@ -7,8 +7,9 @@ from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.generic import FormView, TemplateView, ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth import login, logout
 from .forms import LoginForm, UserForm, AccountForm
-from apps.utils.ajax import AjaxList, AjaxCreate, AjaxUpdate, AjaxDelete
-from .models import User, Logs, Grupo, Permisos
+from apps.utils.ajax import *
+from .models import User, Grupo, Permisos
+from apps.administrador.models import Logs
 from django.contrib.auth.models import Permission
 
 

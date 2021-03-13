@@ -11,8 +11,9 @@ from django.views.generic import TemplateView
 from apps.patente.models import DetallePatente, Patente
 from apps.alcabala.models import Alcabala
 from apps.plusvalia.models import Plusvalia
-from apps.usuario.models import Logs, User
-from .models import send_mail_fun
+from apps.usuario.models import User
+from .models import Logs
+from .mails import send_mail_fun
 import threading
 
 

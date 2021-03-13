@@ -5,7 +5,7 @@ from apps.auditoria.mixins import AuditMixin
 from apps.impuesto.models import get_date_digito
 from django.db.models.signals import post_save
 from apps.usuario.models import User
-from apps.administrador.models import send_mail_fun, send_mail_thread
+from apps.administrador.mails import send_mail_fun, send_mail_thread
 
 
 # Create your models here.

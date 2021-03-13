@@ -1,45 +1,44 @@
-import threading
-
-from django.db import models
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from django.template.loader import render_to_string
-from django.conf import settings
+from django.contrib.admin.models import LogEntry
+from datetime import datetime, date
+from django.forms import model_to_dict
+from apps.utils.format_date import current_date_format
+from apps.auditoria.mixins import AuditMixin
 
 
-# Create your models here.
-def send_mail_fun(destinatario, tipo, data):
-    try:
-        mailServer = smtplib.SMTP(settings.EMAIL_HOST, 587)
-        print(mailServer.ehlo())
-        mailServer.starttls()
-        print(mailServer.ehlo())
-        print(mailServer.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD))
-        print('Conectado..')
+class Logs(LogEntry):
+    class Meta:
+        proxy = True
 
-        message = MIMEMultipart()
-        message['From'] = settings.EMAIL_HOST_USER
-        message['To'] = destinatario
-        message['Subject'] = 'Jefatura de Rentas GAD Municipal Huaca'
+    def get_action_color(self):
+        if self.action_flag == 1:
+            return 'timeline-item-marker-indicator bg-green'
+        elif self.action_flag == 2:
+            return 'timeline-item-marker-indicator bg-yellow'
+        else:
+            return 'timeline-item-marker-indicator bg-red'
 
-        if tipo == 1:
-            context = render_to_string('administrador/email_temp/bienvenida.html', data)
-        elif tipo == 2:
-            context = render_to_string('administrador/email_temp/noti_pago.html')
+    def get_action_text(self):
+        if self.action_flag == 1:
+            return 'creado'
+        elif self.action_flag == 2:
+            return 'modificado'
+        else:
+            return 'eliminado'
 
-        message.attach(MIMEText(context, 'html'))
+    def get_days(self):
+        current_date = date.today()
+        past_date = self.action_time.date()
+        days = (current_date - past_date).days
+        if days == 0 or -1:
+            return 'Hoy'
+        elif days == 1:
+            return '{} día'.format(days)
+        else:
+            return '{} días'.format(days)
+        # return days
 
-        mailServer.sendmail(
-            settings.EMAIL_HOST_USER,
-            destinatario,
-            message.as_string()
-        )
-        print('Correo enviado correctamente')
-    except Exception as error:
-        print(error)
-
-
-def send_mail_thread(arg1, arg2, arg3):
-    thread = threading.Thread(target=send_mail_fun, args=(arg1, arg2, arg3))
-    thread.start()
+    def to_json(self):
+        item = model_to_dict(self)
+        item['user'] = self.user.__str__()
+        item['date'] = current_date_format(self.action_time)
+        return item
