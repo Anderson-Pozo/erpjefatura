@@ -1,9 +1,28 @@
 from django.contrib import admin
-from .models import Contribuyente, TipoContribuyente, Natural, Juridico
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
+from .models import TipoContribuyente, Natural, Juridico
 
-# Register your models here.
-admin.site.register(Contribuyente)
+
+class JuridicoResource(resources.ModelResource):
+    class Meta:
+        model = Juridico
+
+
+class JuridicoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = JuridicoResource
+
+
+class NaturaResource(resources.ModelResource):
+    class Meta:
+        model = Natural
+
+
+class NaturalAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = NaturaResource
+
+
 admin.site.register(TipoContribuyente)
-admin.site.register(Natural)
-admin.site.register(Juridico)
+admin.site.register(Natural, NaturalAdmin)
+admin.site.register(Juridico, JuridicoAdmin)
 

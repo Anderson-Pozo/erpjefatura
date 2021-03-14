@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'import_export'
+]
+
+INSTALLED_APPS += [
     'apps.contribuyente',
     'apps.direccion',
     'apps.establecimiento',
@@ -48,7 +52,7 @@ INSTALLED_APPS = [
     'apps.administrador',
     'apps.usuario',
     'apps.auditoria',
-    'apps.vista_usuario'
+    'apps.vista_usuario',
 ]
 
 MIDDLEWARE = [
