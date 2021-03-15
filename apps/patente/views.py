@@ -73,11 +73,26 @@ class SuspenderPatente(DeleteView):
             return self.success_url
 
 
-class EditarPatente(AjaxUpdate, UpdateView):
+class EditarPatente(DeleteView):
     model = Patente
-    form_class = PatenteForm
-    template_name = 'patente/catastro/editar.html'
+    template_name = 'patente/catastro/exonerar.html'
     success_url = reverse_lazy('patente:lista_catastro')
+
+    def delete(self, request, *args, **kwargs):
+        if request.is_ajax():
+            modelo = self.get_object()
+            if modelo.exonerada:
+                modelo.exonerada = False
+            else:
+                modelo.exonerada = True
+            modelo.save()
+            message = f'{self.model.__name__} fue exonerada'
+            error = 'No hay error'
+            response = JsonResponse({'message': message, 'error': error})
+            response.status_code = 201
+            return response
+        else:
+            return self.success_url
 
 
 # Proceso de apertura de patente

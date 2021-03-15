@@ -28,6 +28,18 @@ $(() => {
         ],
         columnDefs: [
             {
+                targets: [0],
+                class: 'text-center',
+                orderable: true,
+                render: function (data, type, row) {
+                    if (row.estado_pago){
+                        return `<h6><span class="badge badge-success">Abonado</span></h6>`;
+                    }else {
+                        return `<h6><span class="badge badge-danger">Pendiente</span></h6>`
+                    }
+                }
+            },
+            {
                 targets: [-1],
                 class: 'text-center',
                 orderable: false,

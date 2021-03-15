@@ -1,41 +1,36 @@
 <div class="modal-dialog modal-sm modal-dialog-scrollable" role="document">
-    <div class="modal-content border-red">
+    <div class="modal-content border-cyan">
         <div class="modal-header">
-            <h5 class="modal-title" id="modalSuspenderTitle">Suspender patente</h5>
+            <h5 class="modal-title" id="modalExonerarTitle">Exonerar patente</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
                     aria-hidden="true">×</span></button>
         </div>
         {% csrf_token %}
         <div class="modal-body">
             <div class="text-black-75">
-                {% if object.suspendida %}
-                    La patente ya se encuentra suspendida
+                {% if object.exonerada %}
+                    La patente ya se encuentra exonerada
                 {% else %}
                     {% if object.get_estado_pago %}
-                        ¿Está seguro de suspender la patente de {{ object.establecimiento.nombre }} perteneciente a
+                        ¿Está seguro de exonerar la patente de {{ object.establecimiento.nombre }} perteneciente a
                         {{ object.contribuyente.ruc }}?
                     {% else %}
-                        Esta patente tiene un pago pendiente, abone el pago y luego puede realizar la suspensión
+                        Esta patente tiene un pago pendiente, abone el pago y luego puede realizar la exoneración
                         <a href="{% url 'patente:especie_renovacion' object.pk %}">Realizar pago</a>
                     {% endif %}
                 {% endif %}
             </div>
         </div>
         <div class="modal-footer">
-            <button onclick="close_modal_elimination();"
+            <button onclick="close_modal_edition();"
                     class="btn btn-light" type="button">
                 Cerrar
             </button>
-            {% if object.suspendida %}
-                <button onclick="suspender_patente({{ object.pk }})"
-                        class="btn btn-green" type="button">
-                    Reactivar
-                </button>
-            {% else %}
+            {% if object.exonerada is not True %}
                 {% if object.get_estado_pago %}
-                    <button onclick="suspender_patente({{ object.pk }})"
-                            class="btn btn-red" type="button">
-                        Suspender
+                    <button onclick="exonerar_patente({{ object.pk }})"
+                            class="btn btn-green" type="button">
+                        Exonerar
                     </button>
                 {% endif %}
             {% endif %}

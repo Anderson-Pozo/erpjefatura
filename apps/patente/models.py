@@ -36,9 +36,9 @@ class Patente(AuditMixin, models.Model):
         hoy = date.today()
         vencimiento = self.get_vencimiento()
         if hoy > vencimiento:
-            return '<h6><span class="badge badge-danger">Pendiente</span></h6>'
+            return False
         else:
-            return '<h6><span class="badge badge-success">Abonado</span></h6>'
+            return True
 
     def get_estado(self):
         """
