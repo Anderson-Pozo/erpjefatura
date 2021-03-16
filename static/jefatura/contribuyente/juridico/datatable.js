@@ -89,10 +89,6 @@ function lista_contribuyentes() {
                         ' onclick="open_modal_edition(\'/contribuyente/juridico/editar/' + row.id + '/\')">' +
                         '<i class="fas fa-edit"></i>' +
                         '</button>';
-                    buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange" ' +
-                        ' onclick="open_modal_elimination(\'/contribuyente/juridico/eliminar/' + row.id + '/\')">' +
-                        '<i class="fas fa-trash"></i>' +
-                        '</button>';
                     return buttons;
                 }
             },

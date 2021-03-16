@@ -103,6 +103,11 @@ function lista_plusvalia() {
         ],
         columnDefs: [
             {
+                targets: [1, 2, 3, 4, 5],
+                class: 'text-center',
+                width: "17%"
+            },
+            {
                 targets: [-1],
                 class: 'text-center',
                 orderable: false,

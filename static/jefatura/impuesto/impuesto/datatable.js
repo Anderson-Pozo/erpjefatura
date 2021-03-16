@@ -51,6 +51,11 @@ function lista_impuesto() {
         ],
         columnDefs: [
             {
+                targets: [0, 1, 2, 3, 4],
+                class: 'text-center',
+                width: "17%"
+            },
+            {
                 targets: [-1],
                 class: 'text-center',
                 orderable: false,
@@ -58,10 +63,6 @@ function lista_impuesto() {
                     let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2"' +
                         ' onclick="open_modal_edition(\'/impuesto/impuesto/editar/' + row.id + '/\')">' +
                         '<i class="fas fa-edit"></i>' +
-                        '</button>';
-                    buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange" ' +
-                        ' onclick="open_modal_elimination(\'/impuesto/impuesto/eliminar/' + row.id + '/\')">' +
-                        '<i class="fas fa-trash"></i>' +
                         '</button>';
                     return buttons;
                 }

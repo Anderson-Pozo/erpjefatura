@@ -83,10 +83,6 @@ function lista_contribuyentes_naturales(){
                                 ' onclick="open_modal_edition(\'/contribuyente/natural/editar/' + row.id +'/\')">' +
                                 '<i class="fas fa-edit"></i>' +
                                 '</button>';
-                buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange" ' +
-                            ' onclick="open_modal_elimination(\'/contribuyente/natural/eliminar/' + row.id +'/\')">' +
-                            '<i class="fas fa-trash"></i>' +
-                            '</button>';
                 return buttons;
             }
         },

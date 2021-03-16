@@ -48,21 +48,11 @@ function lista_multa() {
         ],
 
         columnDefs: [
-            //     {
-            //         targets: [-1],
-            //         class: 'text-center',
-            //         orderable: false,
-            //         render: function (data, type, row) {
-            //             let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2">' +
-            //                 '<i class="fas fa-edit"></i>' +
-            //                 '</button>';
-            //             buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange">' +
-            //                 '<i class="fas fa-trash"></i>' +
-            //                 '</button>';
-            //             return buttons;
-            //         }
-            //     },
-            // ],
+            {
+                targets: [0, 1],
+                class: 'text-center',
+                width: "40%"
+            },
             {
                 targets: [-1],
                 class: 'text-center',
@@ -71,10 +61,6 @@ function lista_multa() {
                     let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2"' +
                         ' onclick="open_modal_edition(\'/impuesto/multa/editar/' + row.id + '/\')">' +
                         '<i class="fas fa-edit"></i>' +
-                        '</button>';
-                    buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange" ' +
-                        ' onclick="open_modal_elimination(\'/impuesto/multa/eliminar/' + row.id + '/\')">' +
-                        '<i class="fas fa-trash"></i>' +
                         '</button>';
                     return buttons;
                 }
