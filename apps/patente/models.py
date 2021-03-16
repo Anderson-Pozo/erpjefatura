@@ -149,6 +149,7 @@ class Patente(AuditMixin, models.Model):
             return format(total, '.2f')
         except Exception as e:
             print(e)
+        return 0.0
 
     class Meta:
         db_table = "patente"
