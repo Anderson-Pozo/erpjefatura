@@ -89,7 +89,12 @@ function lista_alcabala() {
             {"data": "vendedor"},
             {"data": "acciones"},
         ],
-                columnDefs: [
+        columnDefs: [
+            {
+                targets: [1, 2, 3, 4],
+                class: 'text-center',
+                width: "20%"
+            },
             {
                 targets: [-1],
                 class: 'text-center',

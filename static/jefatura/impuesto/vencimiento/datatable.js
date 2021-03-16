@@ -49,9 +49,9 @@ function lista_vencimiento() {
         ],
         columnDefs: [
             {
-                targets: [0],
+                targets: [0,1,2],
                 class: 'text-center',
-                width: "20%"
+                width: "30%"
             },
             {
                 targets: [-1],
@@ -61,10 +61,6 @@ function lista_vencimiento() {
                     let buttons = '<button class="btn btn-datatable btn-icon btn-outline-yellow mr-2"' +
                         ' onclick="open_modal_edition(\'/impuesto/vencimiento/editar/' + row.id + '/\')">' +
                         '<i class="fas fa-edit"></i>' +
-                        '</button>';
-                    buttons += '<button class="btn btn-datatable btn-icon btn-outline-orange" ' +
-                        ' onclick="open_modal_elimination(\'/impuesto/vencimiento/eliminar/' + row.id + '/\')">' +
-                        '<i class="fas fa-trash"></i>' +
                         '</button>';
                     return buttons;
                 }
