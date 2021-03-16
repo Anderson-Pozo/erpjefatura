@@ -24,7 +24,7 @@ def send_mail_fun(destinatario, tipo, data):
         if tipo == 1:
             context = render_to_string('administrador/email_temp/bienvenida.html', data)
         elif tipo == 2:
-            context = render_to_string('administrador/email_temp/noti_pago.html')
+            context = render_to_string('administrador/email_temp/notificacion.html', data)
 
         message.attach(MIMEText(context, 'html'))
 

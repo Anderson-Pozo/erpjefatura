@@ -17,6 +17,12 @@ function open_modal_elimination(url) {
     });
 }
 
+function open_modal_correo(url) {
+    $('#correo').load(url, function () {
+        $(this).modal('show');
+    });
+}
+
 //Cerrar modales
 function close_modal_creation() {
     $('#creacion').modal('hide');
@@ -28,4 +34,8 @@ function close_modal_edition() {
 
 function close_modal_elimination() {
     $('#eliminacion').modal('hide');
+}
+
+function close_modal_correo() {
+    $('#correo').modal('hide');
 }

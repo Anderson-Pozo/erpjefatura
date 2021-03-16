@@ -4,10 +4,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView, CreateView, View, UpdateView, DeleteView
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
-from apps.contribuyente.models import *
-from apps.establecimiento.models import Establecimiento
+from apps.contribuyente.models import Natural, Juridico
 from apps.contribuyente.forms import ContribuyenteNaturalForm as NaturalForm, ContribuyenteJuridicoForm as JuridicoForm
 from apps.establecimiento.forms import EstablecimientoForm
+from apps.administrador.mails import send_mail_thread
+from apps.establecimiento.models import Establecimiento
 from apps.utils.ajax import AjaxList, AjaxUpdate
 from .models import Patente, DetallePatente
 from .forms import *
@@ -73,7 +74,7 @@ class SuspenderPatente(DeleteView):
             return self.success_url
 
 
-class EditarPatente(DeleteView):
+class ExonerarPatente(DeleteView):
     model = Patente
     template_name = 'patente/catastro/exonerar.html'
     success_url = reverse_lazy('patente:lista_catastro')
@@ -91,6 +92,49 @@ class EditarPatente(DeleteView):
             response = JsonResponse({'message': message, 'error': error})
             response.status_code = 201
             return response
+        else:
+            return self.success_url
+
+
+class EnviarCorreo(TemplateView):
+    template_name = 'patente/catastro/enviar_correo.html'
+    success_url = reverse_lazy('patente:lista_catastro')
+
+    # def get(self, request, *args, **kwargs):
+    #     patente = Patente.objects.get(id=self.kwargs['pk'])
+    #     return render(request, self.template_name, {'patente': patente})
+
+    def get_context_data(self, **kwargs):
+        # context = super().get_context_data(**kwargs)
+        context = {
+            'patente': Patente.objects.get(id=self.kwargs['pk'])
+        }
+        # context['patente'] = Patente.objects.get(id=self.kwargs['pk'])
+        return context
+
+    # def get_context_data(self, **kwargs):
+    #     """Método que retorna los datos de la última patente hacia el template"""
+    #     context = {
+    #         'patente': Patente.objects.last(),
+    #         'form': self.form_class,
+    #     }
+    #     return context
+
+    def post(self, request, *args, **kwargs):
+        if request.is_ajax():
+            try:
+                print(request.POST.get('email'))
+                email_destino = request.POST.get('email')
+                fecha_vencimiento = request.POST.get('fecha_vencimiento')
+                total = request.POST.get('total_em')
+                send_mail_thread(email_destino, 2, {'fecha': fecha_vencimiento, 'total': total})
+                message = ' Correo enviado correctamente'
+                error = 'No hay error'
+                response = JsonResponse({'message': message, 'error': error})
+                response.status_code = 201
+                return response
+            except Exception as e:
+                print(e)
         else:
             return self.success_url
 

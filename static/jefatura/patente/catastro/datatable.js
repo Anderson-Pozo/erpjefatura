@@ -106,6 +106,13 @@ $(() => {
                                     </div>
                                     Suspender
                                 </button>
+                                <button onclick="open_modal_correo('/patente/enviar_correo/${row.id}')" 
+                                    class="dropdown-item btn-light">
+                                    <div class="dropdown-item-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    Enviar notif.
+                                </button>
                             </div>
                         </div>`;
                 }
@@ -195,6 +202,22 @@ function exonerar_patente(pk){
     });
 }
 
-// $(() => {
-//     lista_catastro()
-// })
+function enviar_correo() {
+    let form = $('#form_correo');
+    let data = new FormData(form.get(0));
+    $.ajax({
+        url: form.attr('action'),
+        type: form.attr('method'),
+        data: data,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            close_modal_correo();
+            show_notification_success(response.mensaje);
+        },
+        error: function (error) {
+            show_notification_error(error.responseJSON.mensaje);
+            show_errors_creation(error);
+        }
+    })
+}

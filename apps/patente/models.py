@@ -140,6 +140,16 @@ class Patente(AuditMixin, models.Model):
         else:
             return format(0.00, '.2f')
 
+    def get_total_parcial(self):
+        try:
+            impuesto = 0.0 if self.exonerada > 0 else float(self.get_impuesto())
+            interes = float(self.get_interes())
+            multa = float(self.get_multa())
+            total = impuesto + interes + multa
+            return format(total, '.2f')
+        except Exception as e:
+            print(e)
+
     class Meta:
         db_table = "patente"
 

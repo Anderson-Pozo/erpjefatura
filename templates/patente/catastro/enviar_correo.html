@@ -1,0 +1,54 @@
+<div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content border-cyan">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalSuspenderTitle">Enviar notificación de pago</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">×</span></button>
+        </div>
+        {% csrf_token %}
+        <div class="modal-body">
+            <div class="text-black-75">
+                <form id="form_correo" method="POST" action="{% url 'patente:enviar_correo' patente.id %}">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="small mb-1" for="password1">Correo electrónico</label>
+                            <input class="form-control form-control-sm"
+                                   type="email"
+                                   name="email"
+                                   value="{{ patente.contribuyente.email }}"
+                                   required
+                            >
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="small mb-1" for="password2">Fecha de vencimiento</label>
+                            <input  name="fecha_vencimiento"
+                                    class="form-control form-control-sm"
+                                    value="{{ patente.get_vencimiento }}"
+                                    readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="small mb-1" for="password2">Total a pagar</label>
+                            <input name="total_em"
+                                   class="form-control form-control-sm"
+                                   value="{{ patente.get_total_parcial }}"
+                                   readonly>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="close_modal_correo();"
+                                class="btn btn-light" type="button">
+                            Cerrar
+                        </button>
+                        <button onclick="enviar_correo();"
+                                class="btn btn-green" type="button">
+                            Enviar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
