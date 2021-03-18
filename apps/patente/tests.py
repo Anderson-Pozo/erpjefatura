@@ -6,7 +6,6 @@ from apps.contribuyente.models import Contribuyente, TipoContribuyente
 from apps.direccion.models import Direccion, Barrio, Parroquia
 
 
-# Create your tests here.
 class PatenteTest(TestCase):
     def setUp(self) -> None:
         tp_contribuyente_test = TipoContribuyente.objects.create(
@@ -32,7 +31,7 @@ class PatenteTest(TestCase):
         establecimiento_test = Establecimiento.objects.create(
             nombre='Carniceria Manuel',
             descripcion_actividad='Carnes de venta',
-            fecha_inicio_actividad=date.today(),
+            fecha_inicio_actividad=date(2020, 12, 5),
             total_patrimonio=1258.25,
             tipo_venta='Comercial',
             situacion_legal='Propio',
@@ -48,7 +47,8 @@ class PatenteTest(TestCase):
             estado=True,
             tipocontribuyente=tp_contribuyente_test
         )
-        Patente.objects.create(
+        patente_test = Patente.objects.create(
+            id=1,
             numero_patente=451289,
             fecha=date.today(),
             exonerada=True,
@@ -56,11 +56,24 @@ class PatenteTest(TestCase):
             contribuyente=contribuyente_test,
             establecimiento=establecimiento_test
         )
+        DetallePatente.objects.create(
+            fecha=date.today(),
+            impuesto=25.00,
+            interes=0.00,
+            multa=0.00,
+            servicios_administrativos=0.99,
+            patente=patente_test
+        )
 
     def test_patente_estado(self):
         patente = Patente.objects.get(numero_patente=451289)
         self.assertEqual(patente.get_estado(), '<span class="badge badge-danger">Suspendida</span>')
 
-    def test_patente_impuesto(self):
-        patente = Patente.objects.get(numero_patente=451289)
-        self.assertEqual(patente.get_impuesto(), 25.25)
+    def test_get_ultimo_pago(self):
+        query = DetallePatente.objects.filter(patente__id=1).count()
+        if query == 0:
+            fecha = Patente.objects.get(id=1).establecimiento.fecha_inicio_actividad
+            self.assertEqual(fecha, date(2020, 12, 5))
+        else:
+            row = DetallePatente.objects.filter(patente__id=1).order_by('-fecha')[0]
+            self.assertEqual(row.fecha, date.today())

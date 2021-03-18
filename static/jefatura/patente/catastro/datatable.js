@@ -213,10 +213,11 @@ function enviar_correo() {
         contentType: false,
         success: function (response) {
             close_modal_correo();
-            show_notification_success(response.mensaje);
+            show_notification_success(response.message);
         },
         error: function (error) {
-            show_notification_error(error.responseJSON.mensaje);
+            // console.log(error);
+            show_notification_error(error.responseJSON.message);
             show_errors_creation(error);
         }
     })

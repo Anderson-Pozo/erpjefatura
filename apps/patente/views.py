@@ -100,39 +100,31 @@ class EnviarCorreo(TemplateView):
     template_name = 'patente/catastro/enviar_correo.html'
     success_url = reverse_lazy('patente:lista_catastro')
 
-    # def get(self, request, *args, **kwargs):
-    #     patente = Patente.objects.get(id=self.kwargs['pk'])
-    #     return render(request, self.template_name, {'patente': patente})
-
     def get_context_data(self, **kwargs):
-        # context = super().get_context_data(**kwargs)
         context = {
             'patente': Patente.objects.get(id=self.kwargs['pk'])
         }
-        # context['patente'] = Patente.objects.get(id=self.kwargs['pk'])
         return context
-
-    # def get_context_data(self, **kwargs):
-    #     """Método que retorna los datos de la última patente hacia el template"""
-    #     context = {
-    #         'patente': Patente.objects.last(),
-    #         'form': self.form_class,
-    #     }
-    #     return context
 
     def post(self, request, *args, **kwargs):
         if request.is_ajax():
             try:
-                print(request.POST.get('email'))
                 email_destino = request.POST.get('email')
-                fecha_vencimiento = request.POST.get('fecha_vencimiento')
-                total = request.POST.get('total_em')
-                send_mail_thread(email_destino, 2, {'fecha': fecha_vencimiento, 'total': total})
-                message = ' Correo enviado correctamente'
-                error = 'No hay error'
-                response = JsonResponse({'message': message, 'error': error})
-                response.status_code = 201
-                return response
+                patente_id = request.POST.get('id_patente')
+                if email_destino and patente_id:
+                    data = {'patente': Patente.objects.get(id=patente_id)}
+                    send_mail_thread(email_destino, 2, data)
+                    message = ' Correo enviado correctamente'
+                    error = 'No hay error'
+                    response = JsonResponse({'message': message, 'error': error})
+                    response.status_code = 201
+                    return response
+                else:
+                    message = f'Algo salió mal, no se pudo enviar el correo'
+                    error = 'Error al procesar envio'
+                    response = JsonResponse({'message': message, 'error': error})
+                    response.status_code = 400
+                    return response
             except Exception as e:
                 print(e)
         else:

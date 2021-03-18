@@ -19,13 +19,17 @@
                                    value="{{ patente.contribuyente.email }}"
                                    required
                             >
+                            <input name="id_patente"
+                                   value="{{ patente.id }}"
+                                   hidden
+                            >
                         </div>
                         <div class="form-group col-md-6">
                             <label class="small mb-1" for="password2">Fecha de vencimiento</label>
-                            <input  name="fecha_vencimiento"
-                                    class="form-control form-control-sm"
-                                    value="{{ patente.get_vencimiento }}"
-                                    readonly>
+                            <input name="fecha_vencimiento"
+                                   class="form-control form-control-sm"
+                                   value="{{ patente.get_vencimiento }}"
+                                   readonly>
                         </div>
                     </div>
                     <div class="form-row">
@@ -43,7 +47,7 @@
                             Cerrar
                         </button>
                         <button onclick="enviar_correo();"
-                                class="btn btn-green" type="button">
+                                class="btn btn-green" type="submit">
                             Enviar
                         </button>
                     </div>

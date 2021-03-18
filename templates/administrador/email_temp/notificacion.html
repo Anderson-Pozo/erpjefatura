@@ -270,9 +270,10 @@
                                         <div class="txtTinyMce-wrapper"
                                              style="line-height: 1.5; font-size: 12px; font-family: Tahoma, Verdana, Segoe, sans-serif; color: #393d47; mso-line-height-alt: 18px;">
                                             <p style="font-size: 14px; line-height: 1.5; word-break: break-word; text-align: center; font-family: Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 21px; margin: 0;">
-                                                Señor contribuyente Anderson Pozo con el RUC 0401798475001
-                                                su fecha limite de pago fue el <b>{{ fecha }}</b> y tiene un valor pendiente de
-                                                pago de <b>{{ total }} $</b> sin contar servicios administrativos
+                                                Señor contribuyente propietario de <b>{{ patente.establecimiento.nombre }}</b>
+                                                con el RUC <b>{{ patente.contribuyente.ruc }}</b> su fecha límite de pago de la
+                                                patente fue el <b>{{ patente.get_vencimiento }}</b> por tanto tiene un valor pendiente de
+                                                pago de <b>{{ patente.get_total_parcial }}$</b> sin contar servicios administrativos.
                                             </p>
                                         </div>
                                     </div>
