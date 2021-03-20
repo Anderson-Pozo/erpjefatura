@@ -78,7 +78,7 @@ class PatenteTest(TestCase):
             tipo_actividad=tp_actividad_test,
             direccion=direccion_test
         )
-        contribuyente_test = Contribuyente.objects.create(
+        contribuyente_test = Natural.objects.create(
             ruc='0401798475001',
             email='anderam92@gmail.com',
             tlf_celular='0965250869',
