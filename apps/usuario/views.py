@@ -79,10 +79,6 @@ class CrearUsuario(CreateView):
         if request.is_ajax():
             form = self.form_class(request.POST)
             if form.is_valid():
-                # print(form.cleaned_data.get('email'))
-                # print(form.cleaned_data.get('username'))
-                # print('PERMISIONS', form.cleaned_data.get('user_permissions'))
-                # print('GROUPS', form.cleaned_data.get('groups'))
                 new_user = User(
                     email=form.cleaned_data.get('email'),
                     username=form.cleaned_data.get('username'),
@@ -92,12 +88,11 @@ class CrearUsuario(CreateView):
                     is_active=form.cleaned_data.get('is_active'),
                     is_staff=form.cleaned_data.get('is_staff'),
                 )
-                perms = []
                 new_user.set_password(form.cleaned_data.get('password1'))
                 new_user.save()
 
                 user = User.objects.last()
-                print('USUARIOOO', user)
+
                 for perm in form.cleaned_data.get('user_permissions'):
                     user.user_permissions.add(perm.id)
                 for group in form.cleaned_data.get('groups'):
@@ -117,11 +112,47 @@ class CrearUsuario(CreateView):
             return redirect('usuario:lista_usuarios')
 
 
-class EditarUsuario(AjaxUpdate, UpdateView):
+class EditarUsuario(UpdateView):
     model = User
     form_class = UserForm
     template_name = 'usuario/admin/editar_usuario.html'
     success_url = reverse_lazy('usuario:lista_usuarios')
+
+    def post(self, request, *args, **kwargs):
+        if request.is_ajax():
+            form = self.form_class(request.POST, instance=self.get_object())
+            user = self.get_object()
+            print(user.username)
+            if form.is_valid():
+                user.email = form.cleaned_data.get('email')
+                user.username = form.cleaned_data.get('username')
+                user.first_name = form.cleaned_data.get('first_name')
+                user.last_name = form.cleaned_data.get('last_name')
+                user.is_superuser = form.cleaned_data.get('is_superuser')
+                user.is_active = form.cleaned_data.get('is_active')
+                user.is_staff = form.cleaned_data.get('is_staff')
+
+                user.set_password(form.cleaned_data.get('password1'))
+
+                permisos = form.cleaned_data.get('user_permissions')
+                grupos = form.cleaned_data.get('groups')
+                user.user_permissions.set(permisos)
+                user.groups.set(grupos)
+                user.save()
+
+                message = f'{self.model.__name__} actualizado correctamente'
+                error = 'No hay error'
+                response = JsonResponse({'message': message, 'error': error})
+                response.status_code = 201
+                return response
+            else:
+                message = f'{self.model.__name__} no se ha podido actualizar'
+                error = form.errors
+                response = JsonResponse({'message': message, 'error': error})
+                response.status_code = 404
+                return response
+        else:
+            return redirect('usuario:lista_usuarios')
 
 
 class EliminarUsuario(AjaxDelete, DeleteView):
