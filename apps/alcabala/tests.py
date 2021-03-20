@@ -63,3 +63,7 @@ class AlcabalaTest(TestCase):
     def test_get_valor_compra_alcabala(self):
         alcabala = Alcabala.objects.get(id=1)
         self.assertEqual(format(alcabala.valor_compra_venta, '.2f'), format(15256.52, '.2f'))
+
+    def test_get_dict_model(self):
+        alcabala = Alcabala.objects.get(id=1)
+        self.assertEqual(type(alcabala.to_json()), type({}))

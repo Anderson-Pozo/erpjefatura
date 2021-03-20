@@ -111,9 +111,11 @@ class EnviarCorreo(TemplateView):
             try:
                 email_destino = request.POST.get('email')
                 patente_id = request.POST.get('id_patente')
+
                 if email_destino and patente_id:
                     data = {'patente': Patente.objects.get(id=patente_id)}
                     send_mail_thread(email_destino, 2, data)
+                    print('Correo enviado')
                     message = ' Correo enviado correctamente'
                     error = 'No hay error'
                     response = JsonResponse({'message': message, 'error': error})

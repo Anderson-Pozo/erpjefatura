@@ -29,16 +29,16 @@ class Patente(AuditMixin, models.Model):
         """
         return 'Patente Nº {} - {}'.format(self.id, self.establecimiento.nombre)
 
-    def get_estado_pago(self):
+    def get_pago_esta_vencido(self):
         """
-        :return: El estado de pago de la patente, penduente o abonado
+        :return: True or False en caso de que el pago esté vencido
         """
         hoy = date.today()
         vencimiento = self.get_vencimiento()
         if hoy > vencimiento:
-            return False
-        else:
             return True
+        else:
+            return False
 
     def get_estado(self):
         """
@@ -60,9 +60,10 @@ class Patente(AuditMixin, models.Model):
         item['tipocontribuyente'] = self.contribuyente.tipocontribuyente.nombre
         item['nombre_establecimiento'] = self.establecimiento.nombre
         item['total_patrimonio'] = self.establecimiento.total_patrimonio
-        item['nombre_contribuyente'] = self.contribuyente.get_nombre(self.contribuyente.ruc)
+        item['nombre_contribuyente'] = self.contribuyente.get_nombre()
         item['estado'] = self.get_estado()
-        item['estado_pago'] = self.get_estado_pago()
+        item['estado_pago'] = self.get_pago_esta_vencido()
+        item['dias_retraso'] = self.get_dias_retraso().days if self.get_pago_esta_vencido() else 0
         return item
 
     def get_impuesto(self):
@@ -76,6 +77,11 @@ class Patente(AuditMixin, models.Model):
         :return: La fecha del ultimo pago abonado de la patente
         """
         return fecha_ultimo_pago(self.id)
+
+    def get_dias_retraso(self):
+        f1 = self.get_vencimiento()
+        today = date.today()
+        return today - f1
 
     def get_anio_anterior(self):
         """

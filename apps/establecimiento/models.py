@@ -62,7 +62,7 @@ class Establecimiento(AuditMixin, models.Model):
     total_patrimonio = models.DecimalField(
         'Total de patrimonio',
         decimal_places=2,
-        default=0.00,
+        default=1.00,
         max_digits=10,
         blank=False,
         null=True

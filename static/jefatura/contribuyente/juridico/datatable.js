@@ -125,28 +125,6 @@ function lista_contribuyentes() {
         });
 }
 
-function show_childs(variable) {
-    console.log(JSON.parse(variable));
-
-    // let table = $('#tableContribuyenteJuridico').DataTable();
-    // $('#tableContribuyenteJuridico tbody').
-    //     on('click', 'td.details-control',
-    //     function () {
-    //         let tr = $(this).closest('tr');
-    //         let row = table.row( tr );
-    //
-    //         if ( row.child.isShown() ) {
-    //             row.child.hide();
-    //             tr.removeClass('shown');
-    //         }
-    //         else {
-    //             row.child( format(row.data()) ).show();
-    //             console.log(row.data());
-    //             tr.addClass('shown');
-    //         }
-    // } );
-}
-
 function crear_contribuyente_juridico() {
     let data = new FormData($('#form_creation').get(0));
     $.ajax({
@@ -181,10 +159,7 @@ function editar_contribuyente_juridico() {
         success: (response) => {
             show_notification_success(response.message);
             close_modal_edition();
-            // lista_contribuyentes();
-            $(document).ready(() => lista_contribuyentes());
-            // setTimeout(window.location.reload(),1000);
-            // window.location.reload();
+            $('#tableContribuyenteJuridico').DataTable().ajax.reload(null, false);
         },
         error: (error) => {
             show_notification_error(error.responseJSON.message);

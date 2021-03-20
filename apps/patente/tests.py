@@ -2,8 +2,47 @@ from datetime import date
 from django.test import TestCase
 from apps.patente.models import Patente, DetallePatente
 from apps.establecimiento.models import Establecimiento, TipoActividad
-from apps.contribuyente.models import Contribuyente, TipoContribuyente
+from apps.contribuyente.models import Contribuyente, TipoContribuyente, Natural, Juridico
 from apps.direccion.models import Direccion, Barrio, Parroquia
+
+
+class ContribuyenteTest(TestCase):
+    def setUp(self) -> None:
+        tp_contribuyente_test = TipoContribuyente.objects.create(
+            nombre='Natural',
+            obligado_contabilidad=False
+        )
+        tp_contribuyente_juridico = TipoContribuyente.objects.create(
+            nombre='Juridico',
+            obligado_contabilidad=True
+        )
+        Natural.objects.create(
+            ruc='0401798475001',
+            email='anderam92@gmail.com',
+            tlf_celular='0965250869',
+            tlf_convencional='2973486',
+            nombres='Anderson Manuel',
+            apellidos='Prado Fuertes',
+            estado=True,
+            tipocontribuyente=tp_contribuyente_test
+        )
+        Juridico.objects.create(
+            ruc='0401798475777',
+            email='andrram92@gmail.com',
+            tlf_celular='0965250869',
+            tlf_convencional='2973486',
+            cedula_representante='0401798477',
+            razon_social='Cooperativa Huaca',
+            tipocontribuyente=tp_contribuyente_juridico
+        )
+
+    def test_get_nombre_natural(self):
+        contribuyente = Contribuyente.objects.get(ruc='0401798475001')
+        self.assertEqual(contribuyente.get_nombre_contri(), 'Anderson Manuel Prado Fuertes')
+
+    def test_get_nombre_juridico(self):
+        contribuyente_juridico = Contribuyente.objects.get(ruc='0401798475777')
+        self.assertEqual(contribuyente_juridico.get_nombre_contri(), 'Cooperativa Huaca')
 
 
 class PatenteTest(TestCase):
@@ -77,3 +116,7 @@ class PatenteTest(TestCase):
         else:
             row = DetallePatente.objects.filter(patente__id=1).order_by('-fecha')[0]
             self.assertEqual(row.fecha, date.today())
+
+    def test_get_dict_model(self):
+        patente = Patente.objects.get(numero_patente=451289)
+        self.assertEqual(type(patente.to_json()), type({}))

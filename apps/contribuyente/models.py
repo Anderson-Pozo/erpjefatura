@@ -56,11 +56,11 @@ class Contribuyente(models.Model):
     def __str__(self):
         return self.ruc
 
-    def get_nombre(self, ruc):
+    def get_nombre(self):
         if self.tipocontribuyente.id == 1:
-            return Natural.objects.get(ruc=ruc).get_nombre()
+            return Natural.objects.get(ruc=self.ruc).__str__()
         else:
-            return Juridico.objects.get(ruc=ruc).get_nombre()
+            return Juridico.objects.get(ruc=self.ruc).__str__()
 
     def get_fecha_vencimiento(self):
         return get_date_digito(self.ruc[8], self.tipocontribuyente.obligado_contabilidad)
@@ -83,9 +83,6 @@ class Natural(AuditMixin, Contribuyente):
     adulto = models.BooleanField('Tercera edad', blank=True, null=True, default=False)
     artesano = models.BooleanField('Artesano', blank=True, null=True, default=False)
 
-    def get_nombre(self):
-        return '{} {}'.format(self.nombres, self.apellidos)
-
     def __str__(self):
         return '{} {}'.format(self.nombres, self.apellidos)
 
@@ -97,9 +94,6 @@ class Juridico(AuditMixin, Contribuyente):
     apellidos_representante = models.CharField('Apellidos del representante', max_length=50, blank=False, null=True)
     telefono_representante = models.CharField('Teléfono del representante', max_length=10, blank=True, null=True)
     correo_representante = models.EmailField('Correo del representante', max_length=50, blank=True, null=True)
-
-    def get_nombre(self):
-        return '{}'.format(self.razon_social)
 
     def __str__(self):
         return '{}'.format(self.razon_social)

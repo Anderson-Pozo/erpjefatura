@@ -58,9 +58,9 @@ $(() => {
                 orderable: true,
                 render: function (data, type, row) {
                     if (row.estado_pago){
-                        return `<h6><span class="badge badge-success">Abonado</span></h6>`;
+                        return `<h6><span class="badge badge-danger">Pendiente <span class="badge badge-white">${row.dias_retraso}</span></span></h6>`
                     }else {
-                        return `<h6><span class="badge badge-danger">Pendiente</span></h6>`
+                        return `<h6><span class="badge badge-success">Abonado</span></h6>`;
                     }
                 }
             },
@@ -69,7 +69,7 @@ $(() => {
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    return `<div class="row"></div><div class="dropdown no-caret">
+                    let menuOpt = `<div class="row"></div><div class="dropdown no-caret">
                         <button class="btn btn-transparent-dark btn-datatable dropdown-toggle"
                         id="dropdownPeople1" type="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
@@ -105,16 +105,19 @@ $(() => {
                                         <i class="fas fa-minus-circle"></i>
                                     </div>
                                     Suspender
-                                </button>
-                                <button onclick="open_modal_correo('/patente/enviar_correo/${row.id}')" 
+                                </button>`;
+                    if (row.estado_pago){
+                        menuOpt += `<button onclick="open_modal_correo('/patente/enviar_correo/${row.id}')" 
                                     class="dropdown-item btn-light">
                                     <div class="dropdown-item-icon">
                                         <i class="fas fa-envelope"></i>
                                     </div>
-                                    Enviar notif.
-                                </button>
-                            </div>
-                        </div>`;
+                                    Notificar
+                                </button>`;
+                    }
+                    menuOpt += `</div></div>`
+
+                    return menuOpt;
                 }
             },
             {
