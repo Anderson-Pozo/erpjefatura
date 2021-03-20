@@ -2,17 +2,57 @@ from datetime import date
 from django.test import TestCase
 from apps.patente.models import Patente, DetallePatente
 from apps.establecimiento.models import Establecimiento, TipoActividad
-from apps.contribuyente.models import Contribuyente, TipoContribuyente, Natural, Juridico
-from apps.direccion.models import Direccion, Barrio, Parroquia
+from apps.contribuyente.models import *
+from apps.direccion.models import *
+from apps.impuesto.models import *
+from scripts.db_impuesto import multa, vencimiento, impuestos
+
+
+class ImpuestoTest(TestCase):
+    capital = float(550.55)
+
+    def setUp(self) -> None:
+        for v in vencimiento:
+            Vencimiento.objects.create(
+                digito=v[0],
+                no_obligado=v[1],
+                obligado=v[2]
+            )
+        for i in impuestos:
+            Impuesto.objects.create(
+                numero=i[0],
+                fraccion_basica=i[1],
+                fraccion_excedente=i[2],
+                impuesto_fraccion_basica=i[3],
+                porcentaje_fraccion_excedente=i[4]
+            )
+        for m in multa:
+            Multa.objects.create(
+                porcentaje=m[0],
+                fecha=m[1],
+            )
+
+    def test_calcular_impuesto(self):
+        row = Impuesto.objects.get(fraccion_basica__lt=self.capital, fraccion_excedente__gte=self.capital)
+        diferencia = self.capital - row.fraccion_basica
+        suma = float(row.impuesto_fraccion_basica) + (diferencia * float(row.porcentaje_fraccion_excedente))
+        self.assertEqual(format(suma, '.2f'), format(10.00, '.2f'))
+
+    def test_get_fraccion(self):
+        row = Impuesto.objects.get(fraccion_basica__lt=self.capital, fraccion_excedente__gte=self.capital)
+        fraccion = row.fraccion_basica
+        self.assertEqual(fraccion, 0)
 
 
 class ContribuyenteTest(TestCase):
     def setUp(self) -> None:
         tp_contribuyente_test = TipoContribuyente.objects.create(
+            id=1,
             nombre='Natural',
             obligado_contabilidad=False
         )
         tp_contribuyente_juridico = TipoContribuyente.objects.create(
+            id=2,
             nombre='Juridico',
             obligado_contabilidad=True
         )
@@ -38,11 +78,11 @@ class ContribuyenteTest(TestCase):
 
     def test_get_nombre_natural(self):
         contribuyente = Contribuyente.objects.get(ruc='0401798475001')
-        self.assertEqual(contribuyente.get_nombre_contri(), 'Anderson Manuel Prado Fuertes')
+        self.assertEqual(contribuyente.get_nombre(), 'Anderson Manuel Prado Fuertes')
 
     def test_get_nombre_juridico(self):
         contribuyente_juridico = Contribuyente.objects.get(ruc='0401798475777')
-        self.assertEqual(contribuyente_juridico.get_nombre_contri(), 'Cooperativa Huaca')
+        self.assertEqual(contribuyente_juridico.get_nombre(), 'Cooperativa Huaca')
 
 
 class PatenteTest(TestCase):

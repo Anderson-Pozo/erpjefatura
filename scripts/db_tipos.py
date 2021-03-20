@@ -9,7 +9,7 @@ from apps.contribuyente.models import TipoContribuyente
 from apps.establecimiento.models import TipoActividad
 
 tipos_contribuyente = [
-    ['Natural'], ['Jurídica'],
+    [1, 'Natural'], [2, 'Jurídica'],
 ]
 
 tipos_actividad = [
@@ -23,7 +23,8 @@ def db_tipo_contribuyente():
     if TipoContribuyente.objects.all().count() == 0:
         for i in tipos_contribuyente:
             TipoContribuyente.objects.create(
-                nombre=i[0]
+                id=i[0],
+                nombre=i[1]
             )
         print('Script Tipo Contribuyente ejecutado ...')
     else:
