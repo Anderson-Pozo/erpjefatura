@@ -90,6 +90,7 @@ class CrearUsuario(CreateView):
                     last_name=form.cleaned_data.get('last_name'),
                     is_superuser=form.cleaned_data.get('is_superuser'),
                     is_active=form.cleaned_data.get('is_active'),
+                    is_staff=form.cleaned_data.get('is_staff'),
                 )
                 perms = []
                 new_user.set_password(form.cleaned_data.get('password1'))
@@ -127,6 +128,7 @@ class EliminarUsuario(AjaxDelete, DeleteView):
     model = User
     template_name = 'usuario/admin/eliminar.html'
     success_url = reverse_lazy('usuario:lista_usuarios')
+    estado = User.is_active
 
 
 # Logs Module

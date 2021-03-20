@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django import forms
-from apps.usuario.models import User
+from apps.usuario.models import User, Grupo
 
 
 class LoginForm(AuthenticationForm):
@@ -62,7 +62,6 @@ class LoginForm(AuthenticationForm):
 
 
 class UserForm(forms.ModelForm):
-
     password1 = forms.CharField(
         label='Contraseña',
         widget=forms.PasswordInput(
@@ -95,6 +94,7 @@ class UserForm(forms.ModelForm):
             'last_name',
             'is_superuser',
             'is_active',
+            'is_staff',
             'groups',
             'user_permissions'
         }
@@ -130,6 +130,12 @@ class UserForm(forms.ModelForm):
                 }
             ),
             'is_active': forms.CheckboxInput(
+                attrs={
+                    'class': 'custom-control-input',
+                    'type': 'checkbox',
+                }
+            ),
+            'is_staff': forms.CheckboxInput(
                 attrs={
                     'class': 'custom-control-input',
                     'type': 'checkbox',

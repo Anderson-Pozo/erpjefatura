@@ -44,8 +44,10 @@
                                     {{ form.is_superuser }}
                                     <label class="custom-control-label" for="id_is_superuser">Es superusuario</label>
                                 </div>
-                            </div>
-                            <div class="form-group col-md-6">
+                                <div class="custom-control custom-checkbox">
+                                    {{ form.is_staff }}
+                                    <label class="custom-control-label" for="id_is_staff">Es empleado</label>
+                                </div>
                                 <div class="custom-control custom-checkbox">
                                     {{ form.is_active }}
                                     <label class="custom-control-label" for="id_is_active">Es activo</label>
@@ -55,10 +57,12 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label class="small mb-1" for="groups">Grupo</label>
+                                <p class="text-xs">Use ctrl para seleccionar</p>
                                 {{ form.groups }}
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="small mb-1" for="permisos">Permisos de usuario</label>
+                                <p class="text-xs">Use ctrl para seleccionar</p>
                                 {{ form.user_permissions }}
                             </div>
                         </div>

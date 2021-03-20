@@ -1,14 +1,14 @@
 <div class="modal-dialog modal-sm modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalUsuarioTitle">Eliminar usuario</h5>
+                <h5 class="modal-title" id="modalUsuarioTitle">Deshabilitar usuario</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">×</span></button>
             </div>
             {% csrf_token %}
             <div class="modal-body">
                 <div class="text-black-75">
-                    ¿Está seguro de eliminar el usuario {{ object.first_name }} ?
+                    ¿Está seguro de deshabilitar al usuario {{ object.first_name }} ?
                 </div>
             </div>
             <div class="modal-footer">
@@ -18,7 +18,7 @@
                 </button>
                 <button onclick="eliminar_usuario({{ object.pk }})"
                         class="btn btn-red" type="button">
-                    Eliminar
+                    Deshabilitar
                 </button>
             </div>
         </div>

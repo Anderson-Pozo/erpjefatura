@@ -1,94 +1,100 @@
 <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalUsuarioTitle">Usuario</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">×</span></button>
-            </div>
-            <div class="modal-body">
-                <div class="card mb-4">
-                    <div class="card-header">Datos de usuario</div>
-                    <div class="card-body">
-                        <div id="errors"></div>
-                        <br>
-{#                        <form method="post" action="{% url 'usuario:crear_usuario' %}">#}
-{#                            {% csrf_token %}#}
-{#                            {{ form.as_p }}#}
-{#                            <button type="submit">Crera</button>#}
-{#                        </form>#}
-                        <form id="form_usuario" action="{% url 'usuario:crear_usuario' %}" method="POST">
-                            {% csrf_token %}
-                            <!-- Form Row-->
-                            <div class="form-row">
-                                <!-- Form Group correo-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="nombres">Nombres</label>
-                                    {{ form.first_name }}
-                                </div>
-                                <!-- Form Group (phone number)-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="apellidos">Apellidos</label>
-                                    {{ form.last_name }}
-                                </div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalUsuarioTitle">Usuario</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+            <div class="card mb-4">
+                <div class="card-header">Datos de usuario</div>
+                <div class="card-body">
+                    <div id="errors"></div>
+                    <br>
+                    {#                        <form method="post" action="{% url 'usuario:crear_usuario' %}">#}
+                    {#                            {% csrf_token %}#}
+                    {#                            {{ form.as_p }}#}
+                    {#                            <button type="submit">Crera</button>#}
+                    {#                        </form>#}
+                    <form id="form_usuario" action="{% url 'usuario:crear_usuario' %}" method="POST">
+                        {% csrf_token %}
+                        <!-- Form Row-->
+                        <div class="form-row">
+                            <!-- Form Group correo-->
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="nombres">Nombres</label>
+                                {{ form.first_name }}
                             </div>
-                            <!-- Form Group (username)-->
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
+                            <!-- Form Group (phone number)-->
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="apellidos">Apellidos</label>
+                                {{ form.last_name }}
+                            </div>
+                        </div>
+                        <!-- Form Group (username)-->
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
                                 <label class="small mb-1" for="username">Nombre de usuario</label>
                                 <label class="small mb-1" for="sdsdf">{{ form.username.hel_text }}</label>
-                                    {{ form.username }}
+                                {{ form.username }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="ruc">Correo electrónico</label>
+                                {{ form.email }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="custom-control custom-checkbox">
+                                    {{ form.is_superuser }}
+                                    <label class="custom-control-label" for="id_is_superuser">Es superusuario</label>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="ruc">Correo electrónico</label>
-                                    {{ form.email }}
+                                <div class="custom-control custom-checkbox">
+                                    {{ form.is_staff }}
+                                    <label class="custom-control-label" for="id_is_staff">Es empleado</label>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    {{ form.is_active }}
+                                    <label class="custom-control-label" for="id_is_active">Es activo</label>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <div class="custom-control custom-checkbox">
-                                        {{ form.is_superuser }}
-                                        <label class="custom-control-label" for="id_is_superuser">Es superusuario</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <div class="custom-control custom-checkbox">
-                                        {{ form.is_active }}
-                                        <label class="custom-control-label" for="id_is_active">Es activo</label>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="groups">Grupo</label>
+                                <p class="text-xs">Use ctrl para seleccionar</p>
+                                {{ form.groups }}
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="groups">Grupo</label>
-                                    {{ form.groups }}
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="permisos">Permisos de usuario</label>
-                                    {{ form.user_permissions }}
-                                </div>
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="permisos">Permisos de usuario</label>
+                                <p class="text-xs">Use ctrl para seleccionar</p>
+                                {{ form.user_permissions }}
                             </div>
-                            <div class="form-row">
-                                <!-- Form Group (contraseña)-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="password1">Contraseña</label>
-                                    {{ form.password1 }}
-                                </div>
-                                <!-- Form Group (confirmar contraseña)-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="password2">Confirme la contraseña</label>
-                                    {{ form.password2 }}
-                                </div>
+                        </div>
+                        <div class="form-row">
+                            <!-- Form Group (contraseña)-->
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="password1">Contraseña</label>
+                                {{ form.password1 }}
                             </div>
-                            <div class="modal-footer">
-                                <button onclick="close_modal_creation();"
-                                        class="btn btn-red" type="button"
-                                    >Cerrar</button>
-                                <button onclick="crear_usuario();"
-                                    class="btn btn-primary" type="button">Guardar</button>
+                            <!-- Form Group (confirmar contraseña)-->
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="password2">Confirme la contraseña</label>
+                                {{ form.password2 }}
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button onclick="close_modal_creation();"
+                                    class="btn btn-red" type="button"
+                            >Cerrar
+                            </button>
+                            <button onclick="crear_usuario();"
+                                    class="btn btn-primary" type="button">Guardar
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>

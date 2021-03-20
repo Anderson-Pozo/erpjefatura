@@ -113,6 +113,7 @@ def generate_user_natural(sender, instance, **kwargs):
                 last_name=instance.apellidos,
                 is_superuser=False,
                 is_active=True,
+                is_staff=False
             )
             new_user.set_password(instance.numero_cedula)
             new_user.save()
@@ -137,6 +138,7 @@ def generate_user_juridico(sender, instance, **kwargs):
                 last_name='',
                 is_superuser=False,
                 is_active=True,
+                is_staff=False
             )
             new_user.set_password(instance.cedula_representante)
             new_user.save()
