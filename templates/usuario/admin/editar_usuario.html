@@ -1,89 +1,102 @@
 <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalUsuarioTitle">Usuario</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">×</span></button>
-            </div>
-            <div class="modal-body">
-                <div class="card mb-4">
-                    <div class="card-header">Datos de usuario</div>
-                    <div class="card-body">
-                        <div id="errors_edition"></div>
-                        <br>
-                        <form id="form_edition" action="{% url 'usuario:editar_usuario' object.pk %}" method="POST">
-                            {% csrf_token %}
-                            <!-- Form Row-->
-                            <div class="form-row">
-                                <!-- Form Group correo-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="nombres">Nombres</label>
-                                    {{ form.first_name }}
-                                </div>
-                                <!-- Form Group (phone number)-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="apellidos">Apellidos</label>
-                                    {{ form.last_name }}
-                                </div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalUsuarioTitle">Usuario</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+            <div class="card mb-4">
+                <div class="card-header">Datos de usuario</div>
+                <div class="card-body">
+                    <div id="errors_edition"></div>
+                    <br>
+                    <form id="form_edition" action="{% url 'usuario:editar_usuario' object.pk %}" method="POST">
+                        {% csrf_token %}
+                        <!-- Form Row-->
+                        <div class="form-row">
+                            <!-- Form Group correo-->
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="nombres">Nombres</label>
+                                {{ form.first_name }}
                             </div>
-                            <!-- Form Group (username)-->
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
+                            <!-- Form Group (phone number)-->
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="apellidos">Apellidos</label>
+                                {{ form.last_name }}
+                            </div>
+                        </div>
+                        <!-- Form Group (username)-->
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
                                 <label class="small mb-1" for="username">Nombre de usuario</label>
                                 <label class="small mb-1" for="sdsdf">{{ form.username.hel_text }}</label>
-                                    {{ form.username }}
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="ruc">Correo electrónico</label>
-                                    {{ form.email }}
+                                {{ form.username }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="ruc">Correo electrónico</label>
+                                {{ form.email }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="custom-control custom-checkbox">
+                                    {{ form.is_superuser }}
+                                    <label class="custom-control-label" for="id_is_superuser">Es superusuario</label>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <div class="custom-control custom-checkbox">
-                                        {{ form.is_superuser }}
-                                        <label class="custom-control-label" for="id_is_superuser">Es superusuario</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <div class="custom-control custom-checkbox">
-                                        {{ form.is_active }}
-                                        <label class="custom-control-label" for="id_is_active">Es activo</label>
-                                    </div>
+                            <div class="form-group col-md-6">
+                                <div class="custom-control custom-checkbox">
+                                    {{ form.is_active }}
+                                    <label class="custom-control-label" for="id_is_active">Es activo</label>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="groups">Grupo</label>
-                                    {{ form.groups }}
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="permisos">Permisos de usuario</label>
-                                    {{ form.user_permissions }}
-                                </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="groups">Grupo</label>
+                                {{ form.groups }}
                             </div>
-                            <div class="form-row">
-                                <!-- Form Group (nombres)-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="password1">Contraseña</label>
-                                    {{ form.password1 }}
-                                </div>
-                                <!-- Form Group (apellidos)-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="password2">Confirme la contraseña</label>
-                                    {{ form.password2 }}
-                                </div>
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="permisos">Permisos de usuario</label>
+                                {{ form.user_permissions }}
                             </div>
-                            <div class="modal-footer">
-                                <button onclick="close_modal_edition();"
-                                        class="btn btn-red" type="button"
-                                    >Cerrar</button>
-                                <button onclick="editar_usuario();"
-                                    class="btn btn-primary" type="button">Guardar</button>
+                        </div>
+                        <div class="form-row">
+                            <!-- Form Group (nombres)-->
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="password1">Contraseña</label>
+                                {#                                    {{ form.password1 }}#}
+                                <input  class="form-control"
+                                        name="password1"
+                                        type="password"
+                                        value="{{ object.password }}">
                             </div>
-                        </form>
-                    </div>
+                            <!-- Form Group (apellidos)-->
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="password2">Confirme la contraseña</label>
+{#                                {{ form.password2 }}#}
+                                <input  class="form-control"
+                                        name="password2"
+                                        type="password"
+                                        value="{{ object.password }}">
+                            </div>
+{#                            <div>#}
+{#                                <input value="{{ object.password }}" type="password">#}
+{#                            </div>#}
+                        </div>
+                        <div class="modal-footer">
+                            <button onclick="close_modal_edition();"
+                                    class="btn btn-red" type="button"
+                            >Cerrar
+                            </button>
+                            <button onclick="editar_usuario();"
+                                    class="btn btn-primary" type="button">Guardar
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>

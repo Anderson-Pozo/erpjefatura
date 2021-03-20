@@ -35,10 +35,10 @@ class User(AuditMixin, AbstractUser):
     last_name = models.CharField('Apellidos', max_length=100, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    # objects = UserManager()
+    objects = UserManager()
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email']
+    REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
 
     def to_json(self):
         item = model_to_dict(self, exclude=['user_permissions', 'groups',])
