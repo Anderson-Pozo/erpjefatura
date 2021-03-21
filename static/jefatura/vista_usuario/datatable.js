@@ -105,5 +105,3 @@ $(() => {
             $('#modalHistorial').modal('show');
         })
 });
-
-// $(document).ready(() => lista_vista_usuario());

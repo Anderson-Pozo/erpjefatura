@@ -57,7 +57,7 @@ class Index(TemplateView):
     @staticmethod
     def get_last_logs():
         try:
-            return Logs.objects.all().order_by('-action_time')[0:8]
+            return Logs.objects.all().order_by('-action_time')[0:10]
         except Exception as error:
             print(error)
         return []

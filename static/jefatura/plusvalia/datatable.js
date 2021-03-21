@@ -141,12 +141,6 @@ function lista_plusvalia() {
         });
 }
 
-function show_childs(variable) {
-    console.log(JSON.parse(variable));
-
-}
-
-
 $(document).ready(function () {
     lista_plusvalia();
 })

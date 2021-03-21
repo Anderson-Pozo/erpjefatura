@@ -1,4 +1,4 @@
-function lista_logs() {
+$(() =>  {
     $('#tableLogs').DataTable({
         language: {
             'url': 'https://raw.githubusercontent.com/Jhon-Paillacho/ERP-estaticos/main/language.json'
@@ -65,8 +65,4 @@ function lista_logs() {
         // alert('Datos cargados');
     }
     });
-}
-
-$(document).ready(function () {
-    lista_logs();
 });
