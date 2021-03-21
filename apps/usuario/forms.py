@@ -183,6 +183,7 @@ class AccountForm(forms.ModelForm):
             'username',
             'first_name',
             'last_name',
+            'path_avatar'
         }
         widgets = {
             'email': forms.EmailInput(
@@ -208,6 +209,12 @@ class AccountForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control',
                     'placeholder': 'Ingrese sus apellidos'
+                }
+            ),
+            'path_avatar': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Ingrese el correo electrónico',
                 }
             ),
         }

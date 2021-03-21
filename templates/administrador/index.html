@@ -159,9 +159,15 @@
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <div class="d-flex align-items-center flex-shrink-0 mr-3">
                                     <div class="avatar avatar-xl mr-3 bg-gray-200">
-                                        <button class="btn btn-green btn-icon" type="button">
-                                            {{ user.avatar_name }}
-                                        </button>
+                                        {% if user.path_avatar %}
+                                            <img class="avatar-img img-fluid"
+                                                     src="{{ user.path_avatar }}" alt="">
+{#                                            <img class="img-fluid" src="{{ user.path_avatar }}"/>#}
+                                        {% else %}
+                                            <button class="btn btn-green btn-icon" type="button">
+                                                {{ user.avatar_name }}
+                                            </button>
+                                        {% endif %}
                                     </div>
                                     <div class="d-flex flex-column font-weight-bold">
                                         <a class="text-dark line-height-normal mb-1"
