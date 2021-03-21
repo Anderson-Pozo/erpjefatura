@@ -219,7 +219,6 @@ function enviar_correo() {
             show_notification_success(response.message);
         },
         error: function (error) {
-            // console.log(error);
             show_notification_error(error.responseJSON.message);
             show_errors_creation(error);
         }
