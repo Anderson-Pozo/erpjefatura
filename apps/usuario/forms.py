@@ -211,3 +211,25 @@ class AccountForm(forms.ModelForm):
                 }
             ),
         }
+
+
+class GrupoForm(forms.ModelForm):
+    class Meta:
+        model = Grupo
+        fields = {
+            'name',
+            'permissions',
+        }
+        widgets = {
+            'name': forms.TextInput(
+                attrs={
+                    'class': 'form-control form-control-sm',
+                    'placeholder': 'Ingrese el nombre del grupo'
+                }
+            ),
+            'permissions': forms.SelectMultiple(
+                attrs={
+                    'class': 'form-control'
+                }
+            )
+        }

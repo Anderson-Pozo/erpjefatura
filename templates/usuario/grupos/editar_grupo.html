@@ -1,0 +1,43 @@
+<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalUsuarioTitle"> Editar Grupo</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+            <div class="card mb-4">
+                <div class="card-header">Datos del grupo</div>
+                <div class="card-body">
+                    <div id="errors"></div>
+                    <br>
+                    <form id="form_edition" action="{% url 'usuario:editar_grupo' object.pk %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="groups">Nombre del grupo</label>
+                                {{ form.name }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="small mb-1" for="permisos">Permisos de usuario</label>
+                                <p class="text-xs">Use ctrl para seleccionar</p>
+                                {{ form.permissions }}
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button onclick="close_modal_edition();"
+                                    class="btn btn-red" type="button"
+                            >Cerrar
+                            </button>
+                            <button onclick="editar_grupo();"
+                                    class="btn btn-primary" type="button">Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

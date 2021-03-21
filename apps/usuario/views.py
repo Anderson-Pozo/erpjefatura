@@ -6,7 +6,7 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.generic import FormView, TemplateView, ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth import login, logout
-from .forms import LoginForm, UserForm, AccountForm
+from .forms import LoginForm, UserForm, AccountForm, GrupoForm
 from apps.utils.ajax import *
 from .models import User, Grupo, Permisos
 from apps.administrador.models import Logs
@@ -172,6 +172,7 @@ class ListaLogs(AjaxList, ListView):
         return super().dispatch(request, *args, *kwargs)
 
 
+# Group module
 class ListaGrupo(AjaxList, ListView):
     model = Grupo
     template_name = 'usuario/grupos/lista_grupo.html'
@@ -179,6 +180,20 @@ class ListaGrupo(AjaxList, ListView):
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, *kwargs)
+
+
+class CrearGrupo(AjaxCreate, CreateView):
+    model = Grupo
+    form_class = GrupoForm
+    template_name = 'usuario/grupos/crear_grupo.html'
+    success_url = reverse_lazy('usuario:lista_grupo')
+
+
+class EditarGrupo(AjaxUpdate, UpdateView):
+    model = Grupo
+    form_class = GrupoForm
+    template_name = 'usuario/grupos/editar_grupo.html'
+    success_url = reverse_lazy('usuario:lista_grupo')
 
 
 class ListaPermisos(AjaxList, ListView):
