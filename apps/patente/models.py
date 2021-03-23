@@ -276,14 +276,14 @@ def generate_user(sender, instance, **kwargs):
             )
             new_user.set_password(instance.contribuyente.ruc)
             new_user.save()
-            if instance.contribuyente.email:
-                send_mail_thread(instance.contribuyente.email, 1,
-                                 {'user': first_name_c + ' ' + last_name_c}
-                                 )
+            # if instance.contribuyente.email:
+            #     send_mail_thread(instance.contribuyente.email, 1,
+            #                      {'user': first_name_c + ' ' + last_name_c}
+            #                      )
         else:
             pass
     except Exception as e:
         print(e)
 
 
-post_save.connect(generate_user, sender=Patente)
+# post_save.connect(generate_user, sender=Patente)

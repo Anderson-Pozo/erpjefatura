@@ -1,14 +1,9 @@
 from django.db import models
-from django.db.models import Q
 from django.forms import model_to_dict
 from apps.auditoria.mixins import AuditMixin
 from apps.impuesto.models import get_date_digito
-from django.db.models.signals import post_save
 from apps.usuario.models import User
-from apps.administrador.mails import send_mail_fun, send_mail_thread
 
-
-# Create your models here.
 
 OPCIONES_TIPO = (
     ('Natural', 'Natural'),
@@ -97,56 +92,3 @@ class Juridico(AuditMixin, Contribuyente):
 
     def __str__(self):
         return '{}'.format(self.razon_social)
-
-
-def generate_user_natural(sender, instance, **kwargs):
-    try:
-        row = User.objects.filter(
-            Q(username=instance.numero_cedula) |
-            Q(email=instance.email)).count()
-
-        if row == 0:
-            new_user = User(
-                email=instance.email,
-                username=instance.numero_cedula,
-                first_name=instance.nombres,
-                last_name=instance.apellidos,
-                is_superuser=False,
-                is_active=True,
-                is_staff=False
-            )
-            new_user.set_password(instance.numero_cedula)
-            new_user.save()
-            # send_mail_thread(instance.email, 1, {'user': instance.nombres + ' ' + instance.apellidos})
-        else:
-            pass
-    except Exception as error:
-        print(error)
-
-
-def generate_user_juridico(sender, instance, **kwargs):
-    try:
-        row = User.objects.filter(
-            Q(username=instance.cedula_representante) |
-            Q(email=instance.email)).count()
-
-        if row == 0:
-            new_user = User(
-                email=instance.email,
-                username=instance.cedula_representante,
-                first_name=instance.razon_social,
-                last_name='',
-                is_superuser=False,
-                is_active=True,
-                is_staff=False
-            )
-            new_user.set_password(instance.cedula_representante)
-            new_user.save()
-        else:
-            pass
-    except Exception as error:
-        print(error)
-
-
-# post_save.connect(generate_user_natural, sender=Natural)
-# post_save.connect(generate_user_juridico, sender=Juridico)
