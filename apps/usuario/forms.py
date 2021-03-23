@@ -13,11 +13,11 @@ class LoginForm(AuthenticationForm):
     username = forms.CharField(
         required=True,
         max_length=13,
-        label='Ingrese su número de cédula',
-        help_text='Ingrese su número de cédula de 10 dígitos',
+        label='Ingrese su número de RUC',
+        help_text='Ingrese el número completo de su RUC',
         error_messages={
-            'required': 'Número de cédula es requerido',
-            'maxlength': 'El número de cédula debe tener 10 dígitos'
+            'required': 'Número de RUC es requerido',
+            'maxlength': 'El número de RUC debe tener 13 dígitos'
         },
         widget=forms.TextInput(
             attrs={
@@ -25,7 +25,7 @@ class LoginForm(AuthenticationForm):
                 'autocomplete': 'off',
                 'pattern': '[0-9]+',
                 'minlength': '10',
-                'placeholder': 'Ingrese su número de cédula',
+                'placeholder': 'Ingrese su número de RUC',
             }
         )
     )
@@ -56,7 +56,7 @@ class LoginForm(AuthenticationForm):
 
     error_messages = {
         'invalid_login': (
-            "Ingrese un número de cédula y contraseña válidos"
+            "Ingrese un número de RUC y contraseña válidos"
         ),
     }
 
