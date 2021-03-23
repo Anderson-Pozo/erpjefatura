@@ -71,31 +71,25 @@
                             </div>
                             <!-- Form Row        -->
                             <div class="form-row">
-                                <!-- Form Group (tipo de persona)-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="tipoPersona">Tipo de persona</label>
-                                    {{ form.tipocontribuyente }}
-                                </div>
                                 <!-- Form Group (nacionalidad)-->
                                 <div class="form-group col-md-6">
                                     <label class="small mb-1" for="ingreseNacionalidad">Nacionalidad</label>
                                     {{ form.nacionalidad }}
                                 </div>
-                            </div>
-                            <!-- Form Row-->
-                            <div class="form-row">
+                                {{ form.tipocontribuyente }}
                                 <!-- Form Group correo-->
                                 <div class="form-group col-md-6">
                                     <label class="small mb-1" for="email">Correo electrónico</label>
                                     {{ form.email }}
                                 </div>
+                            </div>
+                            <!-- Form Row-->
+                            <div class="form-row">
                                 <!-- Form Group (telefono celular)-->
                                 <div class="form-group col-md-6">
                                     <label class="small mb-1" for="telefonocelular">Teléfono celular</label>
                                     {{ form.tlf_celular }}
                                 </div>
-                            </div>
-                            <div class="form-row">
                                 <!-- Form Group (telefono convencional)-->
                                 <div class="form-group col-md-6">
                                     <label class="small mb-1" for="telefonoconvencional">Teléfono convencional</label>

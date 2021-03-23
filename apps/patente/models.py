@@ -1,10 +1,14 @@
 from datetime import date, datetime, timedelta
 from django.db import models
+from django.db.models import Q
+from django.db.models.signals import post_save
 from django.forms import model_to_dict
 from django.utils.timezone import now
+from apps.usuario.models import User
+from apps.impuesto.models import Impuesto, calcular_impuesto, calc_meses_multa
+from apps.administrador.mails import send_mail_thread
 from apps.contribuyente.models import Contribuyente
 from apps.establecimiento.models import Establecimiento
-from apps.impuesto.models import Impuesto, calcular_impuesto, calc_meses_multa
 from apps.auditoria.mixins import AuditMixin
 
 from apps.utils.calc_months import calcular_meses
@@ -248,3 +252,38 @@ def fecha_ultimo_pago(id_patente):
             return fecha.fecha
     except IndexError:
         return date.today()
+
+
+def generate_user(sender, instance, **kwargs):
+    try:
+        if instance.contribuyente.tipocontribuyente.id == 1:
+            first_name_c = instance.contribuyente.natural.nombres
+            last_name_c = instance.contribuyente.natural.apellidos
+        else:
+            first_name_c = instance.contribuyente.juridico.razon_social
+            last_name_c = ''
+
+        row = User.objects.filter(username=instance.contribuyente.ruc).count()
+        if row == 0:
+            new_user = User(
+                email=instance.contribuyente.email,
+                username=instance.contribuyente.ruc,
+                first_name=first_name_c,
+                last_name=last_name_c,
+                is_superuser=False,
+                is_active=True,
+                is_staff=False
+            )
+            new_user.set_password(instance.contribuyente.ruc)
+            new_user.save()
+            if instance.contribuyente.email:
+                send_mail_thread(instance.contribuyente.email, 1,
+                                 {'user': first_name_c + ' ' + last_name_c}
+                                 )
+        else:
+            pass
+    except Exception as e:
+        print(e)
+
+
+post_save.connect(generate_user, sender=Patente)

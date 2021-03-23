@@ -99,7 +99,8 @@ class ContribuyenteNaturalForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control',
                     'required': True,
-                    'readonly': True
+                    'readonly': True,
+                    'hidden': True
                 }
             ),
             'adulto': forms.CheckboxInput(
@@ -184,7 +185,8 @@ class ContribuyenteJuridicoForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control',
                     'required': True,
-                    'readonly': True
+                    'readonly': True,
+                    'hidden': True
                 }
             ),
             'cedula_representante': forms.TextInput(
@@ -212,14 +214,12 @@ class ContribuyenteJuridicoForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control',
                     'placeholder': 'Ingrese el número de teléfono del representante',
-                    'required': True,
                 }
             ),
             'correo_representante': forms.TextInput(
                 attrs={
                     'class': 'form-control',
                     'placeholder': 'Ingrese el correo del representante',
-                    'required': True,
                 }
             ),
         }

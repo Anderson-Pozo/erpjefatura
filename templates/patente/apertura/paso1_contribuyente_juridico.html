@@ -33,17 +33,12 @@
                     {{ form.ruc }}
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label class="small mb-1" for="tipo_persona">Tipo de persona</label>
-                    {{ form.tipocontribuyente }}
-                </div>
-            </div>
             <!-- Form Row-->
             <div class="form-row">
                 <!-- Form Group correo-->
+                {{ form.tipocontribuyente }}
                 <div class="form-group col-md-6">
-                    <label class="small mb-1" for="email">Correo Electrónico</label>
+                    <label class="small mb-1" for="email">Correo electrónico</label>
                     {{ form.email }}
                 </div>
                 <!-- Form Group (phone number)-->

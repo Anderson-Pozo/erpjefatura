@@ -28,7 +28,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AuditMixin, AbstractUser):
-    username = models.CharField('Nombre usuario', max_length=10, unique=True,
+    username = models.CharField('Nombre usuario', max_length=13, unique=True,
                                 help_text='Debe colocar su número de RUC o su cédula')
     email = models.EmailField('Correo electrónico', max_length=25, unique=False, null=True)
     first_name = models.CharField('Nombres', max_length=30, blank=True, null=True)

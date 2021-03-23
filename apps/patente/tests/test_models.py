@@ -33,13 +33,19 @@ class ImpuestoTest(TestCase):
             )
 
     def test_calcular_impuesto(self):
-        row = Impuesto.objects.get(fraccion_basica__lt=self.capital, fraccion_excedente__gte=self.capital)
+        row = Impuesto.objects.get(
+            fraccion_basica__lt=self.capital,
+            fraccion_excedente__gte=self.capital
+        )
         diferencia = self.capital - row.fraccion_basica
         suma = float(row.impuesto_fraccion_basica) + (diferencia * float(row.porcentaje_fraccion_excedente))
         self.assertEqual(format(suma, '.2f'), format(10.00, '.2f'))
 
     def test_get_fraccion(self):
-        row = Impuesto.objects.get(fraccion_basica__lt=self.capital, fraccion_excedente__gte=self.capital)
+        row = Impuesto.objects.get(
+            fraccion_basica__lt=self.capital,
+            fraccion_excedente__gte=self.capital
+        )
         fraccion = row.fraccion_basica
         self.assertEqual(fraccion, 0)
 
