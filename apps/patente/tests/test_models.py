@@ -157,6 +157,6 @@ class PatenteTest(TestCase):
             row = DetallePatente.objects.filter(patente__id=1).order_by('-fecha')[0]
             self.assertEqual(row.fecha, date.today())
 
-    def test_get_dict_model(self):
-        patente = Patente.objects.get(numero_patente=451289)
-        self.assertEqual(type(patente.to_json()), type({}))
+    def test_get_detalle_total(self):
+        detalle = DetallePatente.objects.get(patente__numero_patente=451289)
+        self.assertEqual(detalle.get_total(), format(25.99, '.2f'))

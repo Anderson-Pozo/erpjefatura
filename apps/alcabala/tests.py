@@ -2,6 +2,7 @@ from datetime import date
 from django.test import TestCase
 from apps.alcabala.models import Alcabala, Persona, Predio
 from apps.direccion.models import Direccion, Barrio, Parroquia
+from apps.plusvalia.models import Plusvalia
 
 
 class AlcabalaTest(TestCase):
@@ -37,7 +38,7 @@ class AlcabalaTest(TestCase):
             apellidos='Rivera Cevallos',
             casado=False
         )
-        Alcabala.objects.create(
+        alcabala_test = Alcabala.objects.create(
             id=1,
             fecha=date(2020, 11, 15),
             descripcion_tramite='Compra venta',
@@ -50,6 +51,17 @@ class AlcabalaTest(TestCase):
             comprador=comprador_test,
             vendedor=vendedor_test,
             predio=predio_test
+        )
+        Plusvalia.objects.create(
+            id=1,
+            fecha_tramite=date(2010, 5, 25),
+            fecha_escritura=date(2020, 6, 15),
+            precio_venta=18563.8,
+            precio_adquisicion=20000.59,
+            rebaja_desvalorizacion=5000.00,
+            rebaja_mejoras=15.56,
+            utilidad_imponible=5.00,
+            alcabala=alcabala_test
         )
 
     def test_get_zona_alcabala(self):
@@ -64,6 +76,15 @@ class AlcabalaTest(TestCase):
         alcabala = Alcabala.objects.get(id=1)
         self.assertEqual(format(alcabala.valor_compra_venta, '.2f'), format(15256.52, '.2f'))
 
-    def test_get_dict_model(self):
+    def test_get_dict_model_alcabala(self):
         alcabala = Alcabala.objects.get(id=1)
         self.assertEqual(type(alcabala.to_json()), type({}))
+
+    def test_get_total_plusvalia(self):
+        plusvalia = Plusvalia.objects.get(id=1)
+        self.assertEqual(plusvalia.get_total(), format(270.56, '.2f'))
+
+    def test_get_dict_model_plusvalia(self):
+        plusvalia = Plusvalia.objects.get(id=1)
+        self.assertEqual(type(plusvalia.to_json()), type({}))
+
