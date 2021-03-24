@@ -11,12 +11,12 @@
                 {% if object.exonerada %}
                     La patente ya se encuentra exonerada
                 {% else %}
-                    {% if object.get_estado_pago %}
-                        ¿Está seguro de exonerar la patente de {{ object.establecimiento.nombre }} perteneciente a
-                        {{ object.contribuyente.ruc }}?
-                    {% else %}
+                    {% if object.get_pago_esta_vencido %}
                         Esta patente tiene un pago pendiente, abone el pago y luego puede realizar la exoneración
                         <a href="{% url 'patente:especie_renovacion' object.pk %}">Realizar pago</a>
+                    {% else %}
+                        ¿Está seguro de exonerar la patente de {{ object.establecimiento.nombre }} perteneciente a
+                        {{ object.contribuyente.ruc }}?
                     {% endif %}
                 {% endif %}
             </div>
@@ -26,8 +26,8 @@
                     class="btn btn-light" type="button">
                 Cerrar
             </button>
-            {% if object.exonerada is not True %}
-                {% if object.get_estado_pago %}
+            {% if object.exonerada is False %}
+                {% if object.get_pago_esta_vencido is False %}
                     <button onclick="exonerar_patente({{ object.pk }})"
                             class="btn btn-green" type="button">
                         Exonerar

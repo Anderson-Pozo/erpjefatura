@@ -8,16 +8,17 @@ from apps.contribuyente.models import Natural, Juridico
 from apps.contribuyente.forms import ContribuyenteNaturalForm as NaturalForm, ContribuyenteJuridicoForm as JuridicoForm
 from apps.establecimiento.forms import EstablecimientoForm
 from apps.administrador.mails import send_mail_thread
+from .models import Patente, DetallePatente
 from apps.establecimiento.models import Establecimiento
 from apps.utils.ajax import AjaxList, AjaxUpdate
-from .models import Patente, DetallePatente
+from apps.usuario.mixins import AdminMixin
 from .forms import *
 
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 
 
-class ListaCatastro(ListView):
+class ListaCatastro(AdminMixin, ListView):
     """ListView que genera un listado de registros de Patente"""
     model = Patente
     template_name = 'patente/catastro/index.html'
@@ -52,7 +53,7 @@ class ListaCatastro(ListView):
         return JsonResponse(data, safe=False)
 
 
-class SuspenderPatente(DeleteView):
+class SuspenderPatente(AdminMixin, DeleteView):
     model = Patente
     template_name = 'patente/catastro/suspender.html'
     success_url = reverse_lazy('patente:lista_catastro')
@@ -74,7 +75,7 @@ class SuspenderPatente(DeleteView):
             return self.success_url
 
 
-class ExonerarPatente(DeleteView):
+class ExonerarPatente(AdminMixin, DeleteView):
     model = Patente
     template_name = 'patente/catastro/exonerar.html'
     success_url = reverse_lazy('patente:lista_catastro')
@@ -96,7 +97,7 @@ class ExonerarPatente(DeleteView):
             return self.success_url
 
 
-class EnviarCorreo(TemplateView):
+class EnviarCorreo(AdminMixin, TemplateView):
     template_name = 'patente/catastro/enviar_correo.html'
     success_url = reverse_lazy('patente:lista_catastro')
 
@@ -134,7 +135,7 @@ class EnviarCorreo(TemplateView):
 
 
 # Proceso de apertura de patente
-class CrearNatural(CreateView):
+class CrearNatural(AdminMixin, CreateView):
     """Vista de creación de un contribuyente natural."""
     model = Natural
     form_class = NaturalForm
@@ -142,7 +143,7 @@ class CrearNatural(CreateView):
     success_url = reverse_lazy('patente:crear_establecimiento')
 
 
-class CrearJuridico(CreateView):
+class CrearJuridico(AdminMixin, CreateView):
     """Vista de creación de un contribuyente juridico."""
     model = Juridico
     form_class = JuridicoForm
@@ -150,7 +151,7 @@ class CrearJuridico(CreateView):
     success_url = reverse_lazy('patente:crear_establecimiento')
 
 
-class CrearEstablecimiento(CreateView):
+class CrearEstablecimiento(AdminMixin, CreateView):
     """Vista de creación de un establecimiento."""
     model = Establecimiento
     form_class = EstablecimientoForm
@@ -158,7 +159,7 @@ class CrearEstablecimiento(CreateView):
     success_url = reverse_lazy('patente:crear_patente')
 
 
-class CrearPatente(CreateView):
+class CrearPatente(AdminMixin, CreateView):
     """Vista de creación de una patente."""
     model = Patente
     form_class = PatenteForm
@@ -166,7 +167,7 @@ class CrearPatente(CreateView):
     success_url = reverse_lazy('patente:revision_declaracion')
 
 
-class RevisionDeclaracion(TemplateView):
+class RevisionDeclaracion(AdminMixin, TemplateView):
     """TemplateView que muestra los datos asociados a la última patente creada"""
     template_name = "patente/apertura/revision_declaracion.html"
 
@@ -176,7 +177,7 @@ class RevisionDeclaracion(TemplateView):
         return context
 
 
-class CreacionEspecie(CreateView):
+class CreacionEspecie(AdminMixin, CreateView):
     """Vista de creación de un DetallePatente"""
     template_name = 'patente/apertura/crear_especie.html'
     form_class = DetalleForm
@@ -195,7 +196,7 @@ class CreacionEspecie(CreateView):
         return render(request, self.template_name, self.get_context_data())
 
 
-class RevisionEspecie(TemplateView):
+class RevisionEspecie(AdminMixin, TemplateView):
     """TemplateView que muestra los datos del ultimo Detalle de Patente creado"""
     template_name = "patente/apertura/revision_especie.html"
 
@@ -209,7 +210,7 @@ class RevisionEspecie(TemplateView):
 
 
 # Proceso de renovación de patente
-class EspecieRenovacion(CreateView):
+class EspecieRenovacion(AdminMixin, CreateView):
     """Vista de revisión de DetallePatente una vez actualizada"""
     template_name = 'patente/renovacion/renovar_especie.html'
     form_class = DetalleForm
@@ -232,7 +233,7 @@ class RevisionEspModificada(RevisionEspecie):
 
 
 # Vista de reportes
-class ReportDeclaracion(View):
+class ReportDeclaracion(AdminMixin, View):
     """Vista que genera un reporte PDF del formulario de declaración de patente"""
     def get(self, request, *args, **kwargs):
         try:
@@ -251,7 +252,7 @@ class ReportDeclaracion(View):
         return HttpResponseRedirect(reverse_lazy('patente:lista_catastro'))
 
 
-class ReportEspecie(View):
+class ReportEspecie(AdminMixin, View):
     """Vista que genera un reporte PDF de la especie de Patente Municipal"""
     def get(self, request, *args, **kwargs):
         try:
