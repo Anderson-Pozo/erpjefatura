@@ -2,13 +2,14 @@ from datetime import date
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, TemplateView
 from django.http import HttpResponse, JsonResponse
 from apps.patente.models import Patente, DetallePatente
 from apps.establecimiento.models import Establecimiento
 
 
-class Index(TemplateView):
+class Index(LoginRequiredMixin, TemplateView):
     template_name = 'consulta/index.html'
 
     # user = request.user.username
@@ -48,7 +49,7 @@ class Index(TemplateView):
         return context
 
 
-class Calendario(TemplateView):
+class Calendario(LoginRequiredMixin, TemplateView):
     template_name = 'consulta/calendario.html'
 
     def get_context_data(self, **kwargs):
@@ -61,5 +62,5 @@ class Calendario(TemplateView):
         return context
 
 
-class Informacion(TemplateView):
+class Informacion(LoginRequiredMixin, TemplateView):
     template_name = 'consulta/informacion.html'
