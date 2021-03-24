@@ -6,10 +6,10 @@ from django.http import HttpResponse, JsonResponse
 from apps.utils.ajax import AjaxList, AjaxCreate, AjaxUpdate, AjaxDelete
 from .forms import EstablecimientoForm
 from .models import Establecimiento
+from apps.usuario.mixins import AdminMixin
 
 
-# Create your views here.
-class ListaEstablecimiento(AjaxList, ListView):
+class ListaEstablecimiento(AdminMixin, AjaxList, ListView):
     model = Establecimiento
     template_name = 'establecimiento/index.html'
 
@@ -18,14 +18,14 @@ class ListaEstablecimiento(AjaxList, ListView):
         return super().dispatch(request, *args, *kwargs)
 
 
-class CrearEstablecimiento(AjaxCreate, CreateView):
+class CrearEstablecimiento(AdminMixin, AjaxCreate, CreateView):
     model = Establecimiento
     template_name = 'establecimiento/crear_establecimiento.html'
     form_class = EstablecimientoForm
     success_url = reverse_lazy('establecimiento:lista_establecimiento')
 
 
-class EditarEstablecimiento(AjaxUpdate, UpdateView):
+class EditarEstablecimiento(AdminMixin, AjaxUpdate, UpdateView):
     model = Establecimiento
     form_class = EstablecimientoForm
     template_name = 'establecimiento/editar_establecimiento.html'

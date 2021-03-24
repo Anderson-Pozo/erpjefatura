@@ -18,7 +18,6 @@ class GetDirecciones(View):
             action = request.POST['action']
             if action == 'get_direccion':
                 data = []
-                # Q(income__gte=5000) | Q(income__isnull=True)
                 for i in Direccion.objects.filter(
                         Q(barrio__nombre__contains=request.POST['term']) |
                         Q(calle_principal__contains=request.POST['term']) |

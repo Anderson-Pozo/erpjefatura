@@ -7,10 +7,10 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from apps.utils.ajax import AjaxList, AjaxCreate, AjaxUpdate, AjaxDelete
 from .forms import ContribuyenteNaturalForm, ContribuyenteJuridicoForm
 from .models import Natural, Juridico, Contribuyente
+from apps.usuario.mixins import AdminMixin
 
 
-# Create your views here.
-class ListaContribuyenteNatural(AjaxList, ListView):
+class ListaContribuyenteNatural(AdminMixin, AjaxList, ListView):
     model = Natural
     template_name = 'contribuyente/natural/index.html'
 
@@ -19,28 +19,28 @@ class ListaContribuyenteNatural(AjaxList, ListView):
         return super().dispatch(request, *args, *kwargs)
 
 
-class CrearContribuyenteNatural(AjaxCreate, CreateView):
+class CrearContribuyenteNatural(AdminMixin, AjaxCreate, CreateView):
     model = Natural
     form_class = ContribuyenteNaturalForm
     template_name = 'contribuyente/natural/crear_contribuyente.html'
     success_url = reverse_lazy('contribuyente:lista_contribuyente_natural')
 
 
-class EditarContribuyenteNatural(AjaxUpdate, UpdateView):
+class EditarContribuyenteNatural(AdminMixin, AjaxUpdate, UpdateView):
     model = Natural
     form_class = ContribuyenteNaturalForm
     template_name = 'contribuyente/natural/editar_contribuyente.html'
     success_url = reverse_lazy('contribuyente:lista_contribuyente_natural')
 
 
-class EliminarContribuyenteNatural(AjaxDelete, DeleteView):
+class EliminarContribuyenteNatural(AdminMixin, AjaxDelete, DeleteView):
     model = Natural
     template_name = 'contribuyente/natural/eliminar.html'
     success_url = reverse_lazy('contribuyente:lista_contribuyente_natural')
 
 
 # Clases del contribuyente juridico
-class ListaContribuyenteJuridico(AjaxList, ListView):
+class ListaContribuyenteJuridico(AdminMixin, AjaxList, ListView):
     model = Juridico
     template_name = 'contribuyente/juridico/index.html'
 
@@ -49,21 +49,21 @@ class ListaContribuyenteJuridico(AjaxList, ListView):
         return super().dispatch(request, *args, *kwargs)
 
 
-class CrearContribuyenteJuridico(AjaxCreate, CreateView):
+class CrearContribuyenteJuridico(AdminMixin, AjaxCreate, CreateView):
     model = Juridico
     form_class = ContribuyenteJuridicoForm
     template_name = 'contribuyente/juridico/crear.html'
     success_url = reverse_lazy('contribuyente:lista_contribuyente_juridico')
 
 
-class EditarContribuyenteJuridico(AjaxUpdate, UpdateView):
+class EditarContribuyenteJuridico(AdminMixin, AjaxUpdate, UpdateView):
     model = Juridico
     form_class = ContribuyenteJuridicoForm
     template_name = 'contribuyente/juridico/editar.html'
     success_url = reverse_lazy('contribuyente:lista_contribuyente_juridico')
 
 
-class EliminarContribuyenteJuridico(AjaxDelete, DeleteView):
+class EliminarContribuyenteJuridico(AdminMixin, AjaxDelete, DeleteView):
     model = Juridico
     template_name = 'contribuyente/juridico/eliminar.html'
     success_url = reverse_lazy('contribuyente:lista_contribuyente_juridico')
