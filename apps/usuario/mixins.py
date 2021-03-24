@@ -18,8 +18,6 @@ class AdminMixin(LoginRequiredMixin, object):
             if request.user.is_superuser is False:
                 messages.error(request, 'No tiene permiso para acceder a esta vista')
                 return redirect('vista_usuario:index_contribuyente')
-        # else:
-        #     return redirect('login')
         return super().dispatch(request, *args, **kwargs)
 
 

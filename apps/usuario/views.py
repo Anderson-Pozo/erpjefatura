@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.generic import FormView, TemplateView, ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth import login, logout
@@ -10,7 +11,6 @@ from .forms import LoginForm, UserForm, AccountForm, GrupoForm
 from apps.utils.ajax import *
 from .models import User, Grupo, Permisos
 from apps.administrador.models import Logs
-from django.contrib.auth.models import Permission
 from .mixins import PermissionRequiredMixinUser, AdminMixin
 
 
@@ -45,19 +45,19 @@ class RecoveryPassword(TemplateView):
     template_name = 'usuario/recovery_password.html'
 
 
-class Account(UpdateView):
+class Account(LoginRequiredMixin, UpdateView):
     model = User
     form_class = AccountForm
     template_name = 'usuario/account_user.html'
     success_url = reverse_lazy('index')
 
 
-class ChangePassword(TemplateView):
+class ChangePassword(LoginRequiredMixin, TemplateView):
     template_name = 'usuario/change_password.html'
 
 
 # Admin views
-class ListaUsuarios(PermissionRequiredMixinUser, AjaxList, ListView):
+class ListaUsuarios(AdminMixin, AjaxList, ListView):
     model = User
     template_name = 'usuario/admin/lista_usuarios.html'
 
@@ -66,7 +66,7 @@ class ListaUsuarios(PermissionRequiredMixinUser, AjaxList, ListView):
         return super().dispatch(request, *args, *kwargs)
 
 
-class CrearUsuario(CreateView):
+class CrearUsuario(AdminMixin, CreateView):
     model = User
     form_class = UserForm
     template_name = 'usuario/admin/crear_usuario.html'
@@ -110,7 +110,7 @@ class CrearUsuario(CreateView):
             return redirect('usuario:lista_usuarios')
 
 
-class EditarUsuario(UpdateView):
+class EditarUsuario(AdminMixin, UpdateView):
     model = User
     form_class = UserForm
     template_name = 'usuario/admin/editar_usuario.html'
@@ -154,7 +154,7 @@ class EditarUsuario(UpdateView):
             return redirect('usuario:lista_usuarios')
 
 
-class EliminarUsuario(AjaxDelete, DeleteView):
+class EliminarUsuario(AdminMixin, AjaxDelete, DeleteView):
     model = User
     template_name = 'usuario/admin/eliminar.html'
     success_url = reverse_lazy('usuario:lista_usuarios')
@@ -181,21 +181,21 @@ class ListaGrupo(AdminMixin, AjaxList, ListView):
         return super().dispatch(request, *args, *kwargs)
 
 
-class CrearGrupo(AjaxCreate, CreateView):
+class CrearGrupo(AdminMixin, AjaxCreate, CreateView):
     model = Grupo
     form_class = GrupoForm
     template_name = 'usuario/grupos/crear_grupo.html'
     success_url = reverse_lazy('usuario:lista_grupo')
 
 
-class EditarGrupo(AjaxUpdate, UpdateView):
+class EditarGrupo(AdminMixin, AjaxUpdate, UpdateView):
     model = Grupo
     form_class = GrupoForm
     template_name = 'usuario/grupos/editar_grupo.html'
     success_url = reverse_lazy('usuario:lista_grupo')
 
 
-class ListaPermisos(AjaxList, ListView):
+class ListaPermisos(AdminMixin, AjaxList, ListView):
     model = Permisos
     template_name = 'usuario/permisos/lista_permisos.html'
 
