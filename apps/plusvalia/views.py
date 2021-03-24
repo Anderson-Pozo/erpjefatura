@@ -1,18 +1,19 @@
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, TemplateView, CreateView, View
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from apps.utils.ajax import AjaxList
+from apps.usuario.mixins import AdminMixin
 from .forms import PlusvaliaForm
 from .models import Plusvalia, Alcabala
-from django.shortcuts import render
 
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 
 
-class ListaPlusvalia(AjaxList, ListView):
+class ListaPlusvalia(AdminMixin, AjaxList, ListView):
     model = Plusvalia
     template_name = 'alcabala-plusvalia/index-plusvalia.html'
 
@@ -21,7 +22,7 @@ class ListaPlusvalia(AjaxList, ListView):
         return super().dispatch(request, *args, *kwargs)
 
 
-class CrearPlusvalia(CreateView):
+class CrearPlusvalia(AdminMixin, CreateView):
     model = Plusvalia
     form_class = PlusvaliaForm
     template_name = 'alcabala-plusvalia/registro/paso2_plusvalia.html'
@@ -38,7 +39,7 @@ class CrearPlusvalia(CreateView):
         return render(request, self.template_name, self.get_context_data())
 
 
-class RevisionPlusvalia(TemplateView):
+class RevisionPlusvalia(AdminMixin, TemplateView):
     template_name = "alcabala-plusvalia/registro/paso4_revision2.html"
 
     def get_context_data(self, **kwargs):
@@ -47,7 +48,7 @@ class RevisionPlusvalia(TemplateView):
         return context
 
 
-class ReportPlusvalia(View):
+class ReportPlusvalia(AdminMixin, View):
     def get(self, request, *args, **kwargs):
         try:
             template = get_template('alcabala-plusvalia/reportes/report_plusvalia.html')

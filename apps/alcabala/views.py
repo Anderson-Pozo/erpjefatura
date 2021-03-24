@@ -2,9 +2,10 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import ListView, TemplateView, CreateView, UpdateView, DeleteView, View
+from django.views.generic import ListView, TemplateView, CreateView, View
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from apps.utils.ajax import *
+from apps.usuario.mixins import AdminMixin
 from .forms import AlcabalaForm
 from .models import Alcabala, Persona, Predio
 
@@ -12,7 +13,7 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 
 
-class ListaAlcabala(AjaxList, ListView):
+class ListaAlcabala(AdminMixin, AjaxList, ListView):
     model = Alcabala
     template_name = 'alcabala-plusvalia/index-alcabala.html'
 
@@ -21,14 +22,14 @@ class ListaAlcabala(AjaxList, ListView):
         return super().dispatch(request, *args, *kwargs)
 
 
-class CrearAlcabala(CreateView):
+class CrearAlcabala(AdminMixin, CreateView):
     model = Alcabala
     form_class = AlcabalaForm
     template_name = 'alcabala-plusvalia/registro/paso1_alcabala.html'
     success_url = reverse_lazy('plusvalia:crear_plusvalia')
 
 
-class RevisionAlcabala(TemplateView):
+class RevisionAlcabala(AdminMixin, TemplateView):
     template_name = "alcabala-plusvalia/registro/paso3_revision1.html"
     form_class = AlcabalaForm
     success_url = reverse_lazy('plusvalia:revision_plusvalia')
@@ -39,7 +40,7 @@ class RevisionAlcabala(TemplateView):
         return context
 
 
-class ReportAlcabala(View):
+class ReportAlcabala(AdminMixin, View):
     def get(self, request, *args, **kwargs):
         try:
             template = get_template('alcabala-plusvalia/reportes/report_alcabala.html')
@@ -57,7 +58,7 @@ class ReportAlcabala(View):
         return HttpResponseRedirect(reverse_lazy('plusvalia:revision_plusvalia'))
 
 
-class GetPersonas(View):
+class GetPersonas(AdminMixin, View):
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
