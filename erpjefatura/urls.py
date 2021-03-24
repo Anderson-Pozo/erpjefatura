@@ -41,8 +41,7 @@ urlpatterns += [
     path('alcabala/', include(('apps.alcabala.urls', 'alcabala'))),
     path('plusvalia/', include(('apps.plusvalia.urls', 'plusvalia'))),
     path('direccion/', include(('apps.direccion.urls', 'direccion'))),
-    path('vista_usuario/', include(('apps.vista_usuario.urls', 'vista_usuario'))),
-    path('administrador/', include(('apps.administrador.urls', 'administrador')))
+    path('consulta/', include(('apps.vista_usuario.urls', 'consulta'))),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

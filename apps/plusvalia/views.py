@@ -1,13 +1,12 @@
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import ListView, TemplateView, CreateView, UpdateView, DeleteView, View
+from django.views.generic import ListView, TemplateView, CreateView, View
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
-from apps.utils.ajax import AjaxList, AjaxCreate, AjaxUpdate, AjaxDelete
+from apps.utils.ajax import AjaxList
 from .forms import PlusvaliaForm
 from .models import Plusvalia, Alcabala
 from django.shortcuts import render
-
 
 from django.template.loader import get_template
 from xhtml2pdf import pisa

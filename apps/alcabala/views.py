@@ -28,35 +28,6 @@ class CrearAlcabala(CreateView):
     success_url = reverse_lazy('plusvalia:crear_plusvalia')
 
 
-class GetPersonas(View):
-
-    @method_decorator(csrf_exempt)
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs, ):
-        data = {}
-        try:
-            action = request.POST['action']
-            if action == 'autoselect':
-                data = []
-                for i in Persona.objects.filter(numero_cedula__icontains=request.POST['term'])[0:5]:
-                    item = i.to_json()
-                    item['text'] = i.nombres + ' ' + i.apellidos
-                    data.append(item)
-            elif action == 'getpredio':
-                data = []
-                for i in Predio.objects.filter(clave_catastral__icontains=request.POST['term'])[0:5]:
-                    item = i.to_json()
-                    item['text'] = i.clave_catastral
-                    data.append(item)
-            else:
-                data['error'] = 'Ha ocurrido un error'
-        except Exception as e:
-            data['error'] = str(e)
-        return JsonResponse(data, safe=False)
-
-
 class RevisionAlcabala(TemplateView):
     template_name = "alcabala-plusvalia/registro/paso3_revision1.html"
     form_class = AlcabalaForm
@@ -84,4 +55,33 @@ class ReportAlcabala(View):
         except Exception as e:
             print(e)
         return HttpResponseRedirect(reverse_lazy('plusvalia:revision_plusvalia'))
+
+
+class GetPersonas(View):
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs, ):
+        data = {}
+        try:
+            action = request.POST['action']
+            if action == 'autoselect':
+                data = []
+                for i in Persona.objects.filter(numero_cedula__icontains=request.POST['term'])[0:5]:
+                    item = i.to_json()
+                    item['text'] = i.nombres + ' ' + i.apellidos
+                    data.append(item)
+            elif action == 'getpredio':
+                data = []
+                for i in Predio.objects.filter(clave_catastral__icontains=request.POST['term'])[0:5]:
+                    item = i.to_json()
+                    item['text'] = i.clave_catastral
+                    data.append(item)
+            else:
+                data['error'] = 'Ha ocurrido un error'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
 

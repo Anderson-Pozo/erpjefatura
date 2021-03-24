@@ -30,9 +30,3 @@ class EditarEstablecimiento(AjaxUpdate, UpdateView):
     form_class = EstablecimientoForm
     template_name = 'establecimiento/editar_establecimiento.html'
     success_url = reverse_lazy('establecimiento:lista_establecimiento')
-
-
-class EliminarEstablecimiento(AjaxDelete, DeleteView):
-    model = Establecimiento
-    template_name = 'establecimiento/eliminar.html'
-    success_url = reverse_lazy('establecimiento:lista_establecimiento')

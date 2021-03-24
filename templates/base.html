@@ -254,29 +254,15 @@
                         {% else %}
                             <div class="sidenav-menu-heading">Consulta</div>
                             <!-- Sidenav Accordion -->
-                            <a class="nav-link" href="{% url 'vista_usuario:index_contribuyente' %}">
+                            <a class="nav-link" href="{% url 'consulta:index_consulta' %}">
                                 <div class="nav-link-icon"><i class="fas fa-search-dollar"></i></div>
                                 Consulta
                             </a>
-                            {#                            <div class="{% block collapse_consulta %}collapse{% endblock %}" id="collapseConsulta"#}
-                            {#                                 data-parent="#accordionSidenav">#}
-                            {#                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">#}
-                            {#                                    <a class="nav-link" href="{% url 'vista_usuario:index_contribuyente' %}">#}
-                            {#                                        Consulta de pagos#}
-                            {#                                    </a>#}
-                            {#                                    <a class="nav-link" href="{% url 'vista_usuario:calendario' %}">#}
-                            {#                                        Calendario#}
-                            {#                                    </a>#}
-                            {#                                    <a class="nav-link" href="{% url 'vista_usuario:help' %}">#}
-                            {#                                        Información#}
-                            {#                                    </a>#}
-                            {#                                </nav>#}
-                            {#                            </div>#}
-                            <a class="nav-link" href="{% url 'vista_usuario:calendario' %}">
+                            <a class="nav-link" href="{% url 'consulta:calendario' %}">
                                 <div class="nav-link-icon"><i data-feather="calendar"></i></div>
                                 Calendario
                             </a>
-                            <a class="nav-link" href="{% url 'vista_usuario:help' %}">
+                            <a class="nav-link" href="{% url 'consulta:informacion' %}">
                                 <div class="nav-link-icon"><i data-feather="info"></i></div>
                                 Información
                             </a>

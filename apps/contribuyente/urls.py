@@ -20,7 +20,7 @@ urlpatterns = [
          )
 ]
 
-# URL Implicit views
+# URL Juridico
 urlpatterns += [
     path('juridico/',
          ListaContribuyenteJuridico.as_view(),

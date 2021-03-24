@@ -76,20 +76,6 @@ class PlusvaliaForm(forms.ModelForm):
                     'type': 'date',
                 }
             ),
-            # 'valor_escritura': forms.NumberInput(
-            #     attrs={
-            #         'class': 'form-control',
-            #         'placeholder': 'Ingrese el valor inicial',
-            #         'required': True,
-            #     }
-            # ),
-            # 'valor_notaria': forms.NumberInput(
-            #     attrs={
-            #         'class': 'form-control',
-            #         'placeholder': 'Ingrese el valor actual',
-            #         'required': True,
-            #     }
-            # ),
             'precio_venta': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm',

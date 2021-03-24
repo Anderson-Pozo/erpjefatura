@@ -18,12 +18,10 @@ urlpatterns = [
     path('revision_especie/', RevisionEspecie.as_view(), name='revision_especie'),
 ]
 
-# URL Actualizar el estado de la patente
+# URL Renovar patente
 urlpatterns += [
-    path('actualizar_declaracion/<int:pk>', ActualizarDeclaracion.as_view(), name='actualizar_declaracion'),
-    path('revision_modificada/<int:pk>', RevisionModificada.as_view(), name='revision_modificada'),
-    path('especie_renovacion/<int:pk>', EspecieRenovacion.as_view(), name='especie_renovacion'),
-    path('rev_especie/', RevisionEspModificada.as_view(), name='rev_especie'),
+    path('renovacion/especie/<int:pk>', EspecieRenovacion.as_view(), name='especie_renovacion'),
+    path('renovacion/revision/', RevisionEspModificada.as_view(), name='rev_especie'),
 ]
 
 # URL Reportes

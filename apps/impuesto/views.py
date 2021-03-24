@@ -1,17 +1,12 @@
-import json
-from django.core.serializers import serialize
-from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.http import HttpResponse, JsonResponse
+from django.views.generic import ListView, CreateView, UpdateView
 from .models import Impuesto, Vencimiento, Multa
 from .forms import MultaForm, ImpuestoForm, VencimientoForm
-from apps.utils.ajax import AjaxList, AjaxCreate, AjaxUpdate, AjaxDelete
+from apps.utils.ajax import AjaxList, AjaxCreate, AjaxUpdate
 
 
-# Create your views here.
 class ListaVencimiento(AjaxList, ListView):
     model = Vencimiento
     template_name = 'impuesto/vencimiento/index.html'
@@ -28,13 +23,7 @@ class EditarVencimiento(AjaxUpdate, UpdateView):
     success_url = reverse_lazy('impuesto:lista_vencimiento')
 
 
-class EliminarVencimiento(AjaxDelete, DeleteView):
-    model = Vencimiento
-    template_name = 'impuesto/vencimiento/eliminar.html'
-    success_url = reverse_lazy('impuesto:lista_vencimiento')
-
-
-# Clases MuLta
+# Clases Multa
 class ListaMulta(AjaxList, ListView):
     model = Multa
     template_name = 'impuesto/multa/index.html'
@@ -58,12 +47,6 @@ class EditarMulta(AjaxUpdate, UpdateView):
     success_url = reverse_lazy('impuesto:lista_multa')
 
 
-class EliminarMulta(AjaxDelete, DeleteView):
-    model = Multa
-    template_name = 'impuesto/multa/eliminar.html'
-    success_url = reverse_lazy('impuesto:lista_multa')
-
-
 # Clases impuesto
 class ListaImpuesto(AjaxList, ListView):
     model = Impuesto
@@ -79,16 +62,3 @@ class EditarImpuesto(AjaxUpdate, UpdateView):
     form_class = ImpuestoForm
     template_name = 'impuesto/impuesto/editar_impuesto.html'
     success_url = reverse_lazy('impuesto:lista_impuesto')
-
-
-class EliminarImpuesto(AjaxDelete, DeleteView):
-    model = Impuesto
-    template_name = 'impuesto/impuesto/eliminar.html'
-    success_url = reverse_lazy('impuesto:lista_impuesto')
-
-
-# class test(ListView):
-#     model = Impuesto
-
-    # def get(self, request, *args, **kwargs):
-        # Impuesto.objects.get(fraccion_basica)

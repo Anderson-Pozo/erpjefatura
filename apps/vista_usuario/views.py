@@ -1,3 +1,4 @@
+from datetime import date
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -6,12 +7,9 @@ from django.http import HttpResponse, JsonResponse
 from apps.patente.models import Patente, DetallePatente
 from apps.establecimiento.models import Establecimiento
 
-from datetime import date
-# Create your views here.
-
 
 class Index(TemplateView):
-    template_name = 'vista_usuario/index.html'
+    template_name = 'consulta/index.html'
 
     # user = request.user.username
 
@@ -51,7 +49,7 @@ class Index(TemplateView):
 
 
 class Calendario(TemplateView):
-    template_name = 'vista_usuario/calendario.html'
+    template_name = 'consulta/calendario.html'
 
     def get_context_data(self, **kwargs):
         patentes = Patente.objects.filter(contribuyente__ruc=self.request.user.username)
@@ -60,9 +58,8 @@ class Calendario(TemplateView):
         context['vencimiento'] = date(2021, 2, 27)
         context['hoy'] = date.today()
         context['patentes'] = patentes
-        # print(context)
         return context
 
 
-class Help(TemplateView):
-    template_name = 'vista_usuario/help.html'
+class Informacion(TemplateView):
+    template_name = 'consulta/informacion.html'
