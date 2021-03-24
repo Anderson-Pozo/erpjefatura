@@ -17,8 +17,7 @@ from .mails import send_mail_fun
 import threading
 
 
-# Create your views here.
-class Index(TemplateView):
+class Index(LoginRequiredMixin, TemplateView):
     template_name = 'administrador/index.html'
     year = datetime.now().year
     month = datetime.now().month

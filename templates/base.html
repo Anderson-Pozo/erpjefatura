@@ -64,30 +64,30 @@
                 </div>
             </li>
             <!-- Messages Dropdown-->
-{#            <li class="nav-item dropdown no-caret d-none d-sm-block mr-3 dropdown-notifications">#}
-{#                <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownMessages"#}
-{#                   href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true"#}
-{#                   aria-expanded="false"><i data-feather="mail"></i></a>#}
-{#                <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"#}
-{#                     aria-labelledby="navbarDropdownMessages">#}
-{#                    <h6 class="dropdown-header dropdown-notifications-header">#}
-{#                        <i class="mr-2" data-feather="mail"></i>#}
-{#                        Message Center#}
-{#                    </h6>#}
-{#                    <!-- Example Message 1  -->#}
-{#                    <a class="dropdown-item dropdown-notifications-item" href="#!">#}
-{#                        <img class="dropdown-notifications-item-img"#}
-{#                             src="assets/img/illustrations/profiles/profile-2.png"/>#}
-{#                        <div class="dropdown-notifications-item-content">#}
-{#                            <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet#}
-{#                            </div>#}
-{#                            <div class="dropdown-notifications-item-content-details">Thomas Wilcox · 58m</div>#}
-{#                        </div>#}
-{#                    </a>#}
-{#                    <!-- Footer Link-->#}
-{#                    <a class="dropdown-item dropdown-notifications-footer" href="#!">Read All Messages</a>#}
-{#                </div>#}
-{#            </li>#}
+            {#            <li class="nav-item dropdown no-caret d-none d-sm-block mr-3 dropdown-notifications">#}
+            {#                <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownMessages"#}
+            {#                   href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true"#}
+            {#                   aria-expanded="false"><i data-feather="mail"></i></a>#}
+            {#                <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"#}
+            {#                     aria-labelledby="navbarDropdownMessages">#}
+            {#                    <h6 class="dropdown-header dropdown-notifications-header">#}
+            {#                        <i class="mr-2" data-feather="mail"></i>#}
+            {#                        Message Center#}
+            {#                    </h6>#}
+            {#                    <!-- Example Message 1  -->#}
+            {#                    <a class="dropdown-item dropdown-notifications-item" href="#!">#}
+            {#                        <img class="dropdown-notifications-item-img"#}
+            {#                             src="assets/img/illustrations/profiles/profile-2.png"/>#}
+            {#                        <div class="dropdown-notifications-item-content">#}
+            {#                            <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet#}
+            {#                            </div>#}
+            {#                            <div class="dropdown-notifications-item-content-details">Thomas Wilcox · 58m</div>#}
+            {#                        </div>#}
+            {#                    </a>#}
+            {#                    <!-- Footer Link-->#}
+            {#                    <a class="dropdown-item dropdown-notifications-footer" href="#!">Read All Messages</a>#}
+            {#                </div>#}
+            {#            </li>#}
             <!-- User Dropdown-->
             <li class="nav-item dropdown no-caret mr-3 mr-lg-0 dropdown-user">
                 <a class="btn btn-icon btn-transparent-dark dropdown-toggle"
@@ -95,7 +95,7 @@
                    role="button" data-toggle="dropdown" aria-haspopup="true"
                    aria-expanded="false">
                     {% if user.path_avatar %}
-                        <img class="img-fluid" src="{{ user.path_avatar }}" />
+                        <img class="img-fluid" src="{{ user.path_avatar }}"/>
                     {% else %}
                         <button class="btn btn-green btn-icon" type="button">{{ user.avatar_name }}</button>
                     {% endif %}
@@ -258,20 +258,20 @@
                                 <div class="nav-link-icon"><i class="fas fa-search-dollar"></i></div>
                                 Consulta
                             </a>
-{#                            <div class="{% block collapse_consulta %}collapse{% endblock %}" id="collapseConsulta"#}
-{#                                 data-parent="#accordionSidenav">#}
-{#                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">#}
-{#                                    <a class="nav-link" href="{% url 'vista_usuario:index_contribuyente' %}">#}
-{#                                        Consulta de pagos#}
-{#                                    </a>#}
-{#                                    <a class="nav-link" href="{% url 'vista_usuario:calendario' %}">#}
-{#                                        Calendario#}
-{#                                    </a>#}
-{#                                    <a class="nav-link" href="{% url 'vista_usuario:help' %}">#}
-{#                                        Información#}
-{#                                    </a>#}
-{#                                </nav>#}
-{#                            </div>#}
+                            {#                            <div class="{% block collapse_consulta %}collapse{% endblock %}" id="collapseConsulta"#}
+                            {#                                 data-parent="#accordionSidenav">#}
+                            {#                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">#}
+                            {#                                    <a class="nav-link" href="{% url 'vista_usuario:index_contribuyente' %}">#}
+                            {#                                        Consulta de pagos#}
+                            {#                                    </a>#}
+                            {#                                    <a class="nav-link" href="{% url 'vista_usuario:calendario' %}">#}
+                            {#                                        Calendario#}
+                            {#                                    </a>#}
+                            {#                                    <a class="nav-link" href="{% url 'vista_usuario:help' %}">#}
+                            {#                                        Información#}
+                            {#                                    </a>#}
+                            {#                                </nav>#}
+                            {#                            </div>#}
                             <a class="nav-link" href="{% url 'vista_usuario:calendario' %}">
                                 <div class="nav-link-icon"><i data-feather="calendar"></i></div>
                                 Calendario
@@ -528,6 +528,22 @@
         <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
                 crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script>
+            function show_error_perm(message) {
+                Swal.fire({
+                    title: 'Acceso denegado',
+                    text: message,
+                    icon: 'warning',
+                })
+            }
+            {% if messages %}
+                let message_html = ''
+                {% for message in messages %}
+                    message_html += '{{ message }}'
+                {% endfor %}
+            {% endif %}
+            show_error_perm(message_html);
+        </script>
 
     {% endblock %}
     {% block extrajs %}

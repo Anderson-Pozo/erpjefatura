@@ -37,3 +37,5 @@ function show_errors_edition(errors) {
     }
     $('#errors_edition').append(error);
 }
+
+

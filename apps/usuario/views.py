@@ -11,6 +11,7 @@ from apps.utils.ajax import *
 from .models import User, Grupo, Permisos
 from apps.administrador.models import Logs
 from django.contrib.auth.models import Permission
+from .mixins import PermissionRequiredMixinUser, AdminMixin
 
 
 # General views
@@ -22,12 +23,9 @@ class Login(FormView):
     @method_decorator(csrf_protect)
     @method_decorator(never_cache)
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.is_superuser:
+        if request.user.is_authenticated:
             return HttpResponseRedirect(self.get_success_url())
-        elif request.user.is_authenticated and request.user.is_superuser is False:
-            return HttpResponseRedirect(reverse_lazy('vista_usuario:index_contribuyente'))
-        else:
-            return super(Login, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         remember_me = form.cleaned_data['remember_me']
@@ -59,7 +57,7 @@ class ChangePassword(TemplateView):
 
 
 # Admin views
-class ListaUsuarios(AjaxList, ListView):
+class ListaUsuarios(PermissionRequiredMixinUser, AjaxList, ListView):
     model = User
     template_name = 'usuario/admin/lista_usuarios.html'
 
@@ -122,7 +120,7 @@ class EditarUsuario(UpdateView):
         if request.is_ajax():
             form = self.form_class(request.POST, instance=self.get_object())
             user = self.get_object()
-            print(user.username)
+
             if form.is_valid():
                 user.email = form.cleaned_data.get('email')
                 user.username = form.cleaned_data.get('username')
@@ -132,8 +130,9 @@ class EditarUsuario(UpdateView):
                 user.is_active = form.cleaned_data.get('is_active')
                 user.is_staff = form.cleaned_data.get('is_staff')
 
-                user.set_password(form.cleaned_data.get('password1'))
-
+                row_password = form.cleaned_data.get('password1')
+                if row_password != user.password:
+                    user.set_password(row_password)
                 permisos = form.cleaned_data.get('user_permissions')
                 grupos = form.cleaned_data.get('groups')
                 user.user_permissions.set(permisos)
@@ -163,7 +162,7 @@ class EliminarUsuario(AjaxDelete, DeleteView):
 
 
 # Logs Module
-class ListaLogs(AjaxList, ListView):
+class ListaLogs(AdminMixin, AjaxList, ListView):
     model = Logs
     template_name = 'usuario/admin/lista_logs.html'
 
@@ -173,7 +172,7 @@ class ListaLogs(AjaxList, ListView):
 
 
 # Group module
-class ListaGrupo(AjaxList, ListView):
+class ListaGrupo(AdminMixin, AjaxList, ListView):
     model = Grupo
     template_name = 'usuario/grupos/lista_grupo.html'
 
