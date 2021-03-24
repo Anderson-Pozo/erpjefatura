@@ -514,8 +514,12 @@
         <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
                 crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    {% endblock %}
+    {% block extrajs %}
+    {% endblock %}
+    {% block mensajes %}
         <script>
-            function show_error_perm(message) {
+            function show_success_perm(message) {
                 Swal.fire({
                     title: 'Acceso denegado',
                     text: message,
@@ -530,9 +534,6 @@
             {% endif %}
             show_error_perm(message_html);
         </script>
-
-    {% endblock %}
-    {% block extrajs %}
     {% endblock %}
     </body>
 {% endblock %}

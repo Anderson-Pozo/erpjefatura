@@ -1,12 +1,14 @@
 from django.http import JsonResponse, HttpResponseRedirect
+from django.contrib import messages
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import PasswordChangeForm
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.generic import FormView, TemplateView, ListView, CreateView, UpdateView, DeleteView
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, update_session_auth_hash
 from .forms import LoginForm, UserForm, AccountForm, GrupoForm
 from apps.utils.ajax import *
 from .models import User, Grupo, Permisos
@@ -52,8 +54,22 @@ class Account(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('index')
 
 
-class ChangePassword(LoginRequiredMixin, TemplateView):
+class ChangePassword(LoginRequiredMixin, FormView):
     template_name = 'usuario/change_password.html'
+    form_class = PasswordChangeForm
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'La contraseña ha sido actualizada', extra_tags='success')
+            return redirect('usuario:change_password')
+        return render(request, self.template_name, {'form': form})
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(request.user)
+        return render(request, self.template_name, {'form': form})
 
 
 # Admin views
