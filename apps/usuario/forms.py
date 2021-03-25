@@ -220,6 +220,28 @@ class AccountForm(forms.ModelForm):
         }
 
 
+class RecoverPasswordForm(forms.Form):
+    numero_ruc = forms.CharField(
+        required=True,
+        max_length=13,
+        label='Ingrese su número de RUC',
+        help_text='Ingrese el número completo de su RUC',
+        error_messages={
+            'required': 'Número de RUC es requerido',
+            'maxlength': 'El número de RUC debe tener 13 dígitos'
+        },
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'autocomplete': 'off',
+                'pattern': '[0-9]+',
+                'minlength': '10',
+                'placeholder': 'Ingrese su número de RUC',
+            }
+        )
+    )
+
+
 class GrupoForm(forms.ModelForm):
     class Meta:
         model = Grupo

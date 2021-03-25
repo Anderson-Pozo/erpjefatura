@@ -1,3 +1,5 @@
+import string
+import random
 from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -9,11 +11,12 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.generic import FormView, TemplateView, ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth import login, logout, update_session_auth_hash
-from .forms import LoginForm, UserForm, AccountForm, GrupoForm
+from .forms import LoginForm, UserForm, AccountForm, GrupoForm, RecoverPasswordForm
 from apps.utils.ajax import *
 from .models import User, Grupo, Permisos
 from apps.administrador.models import Logs
 from .mixins import PermissionRequiredMixinUser, AdminMixin
+from apps.administrador.mails import send_mail_thread
 
 
 # General views
@@ -43,8 +46,34 @@ def logout_user(request):
     return HttpResponseRedirect('/accounts/login/')
 
 
-class RecoveryPassword(TemplateView):
+class RecoveryPassword(FormView):
     template_name = 'usuario/recovery_password.html'
+    form_class = RecoverPasswordForm
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            ruc = form.cleaned_data.get('numero_ruc')
+            user = User.objects.filter(username=ruc).exists()
+            if user:
+                usuario = User.objects.get(username=ruc)
+                random_string = "".join(random.choice(string.ascii_letters) for i in range(3))
+
+                new_password = usuario.username + random_string
+                usuario.set_password(new_password)
+                usuario.save()
+
+                if usuario.email:
+                    send_mail_thread(usuario.email, 3, {'new_password': new_password})
+                messages.info(request, 'Contraseña actualizada, revise su correo')
+            else:
+                messages.info(request, 'RUC no encontrado')
+            return redirect('recover_password')
+        return render(request, self.template_name, {'form': form})
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
 
 
 class Account(LoginRequiredMixin, UpdateView):

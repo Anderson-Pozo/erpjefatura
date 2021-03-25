@@ -25,6 +25,8 @@ def send_mail_fun(destinatario, tipo, data):
             context = render_to_string('administrador/email_temp/bienvenida.html', data)
         elif tipo == 2:
             context = render_to_string('administrador/email_temp/notificacion.html', data)
+        elif tipo == 3:
+            context = render_to_string('administrador/email_temp/recover_password.html', data)
 
         message.attach(MIMEText(context, 'html'))
 
