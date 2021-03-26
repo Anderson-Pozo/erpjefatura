@@ -2,160 +2,181 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Imprimir formulario</title>
+    <title>Formulario liquidación </title>
     <style>
         @page {
             size: A4 portrait;
-            margin-top: 4.8cm;
-            margin-left: 1cm;
-            margin-right: 1cm;
+            @frame field_parroquia {
+            -pdf-frame-content: parroquia;
+            left: 5.5cm; top: 4.8cm;
+            }
+            @frame field_urbana {
+            -pdf-frame-content: urbana;
+            left: 14.6cm; top: 4.8cm;
+            }
+            @frame field_rural {
+            -pdf-frame-content: rural;
+            left: 18.5cm; top: 4.8cm;
+            }
+            @frame field_vendedor {
+            -pdf-frame-content: vendedor;
+            left: 3.6cm; top: 7.1cm;
+            }
+            @frame field_comprador {
+            -pdf-frame-content: comprador;
+            left: 12.3cm; top: 7.1cm;
+            }
+            @frame field_dir_vendedor {
+            -pdf-frame-content: dir_vendedor;
+            left: 3.6cm; top: 7.8cm;
+            }
+            @frame field_dir_comprador {
+            -pdf-frame-content: dir_comprador;
+            left: 12.3cm; top: 7.8cm;
+            }
+            @frame field_fecha_escritura {
+            -pdf-frame-content: fecha_escritura;
+            left: 3.6cm; top: 8.5cm;
+            }
+            @frame field_fecha_tramite {
+            -pdf-frame-content: fecha_tramite;
+            left: 12.3cm; top: 8.5cm;
+            }
+             @frame field_precio_adquisicion {
+            -pdf-frame-content: precio_adquisicion;
+            left: 5.2cm; top: 10.6cm;
+            }
+            @frame field_precio_venta {
+            -pdf-frame-content: precio_venta;
+            left: 13.9cm; top: 10.6cm;
+            }
+            @frame field_p_venta {
+            -pdf-frame-content: p_venta;
+            left: 13.5cm; top: 12.7cm;
+            }
+            @frame field_p_adquisicion {
+            -pdf-frame-content: p_adquisicion;
+            left: 13.5cm; top: 13.4cm;
+            }
+            @frame field_diferencia_bruta {
+            -pdf-frame-content: diferencia_bruta;
+            left: 13.5cm; top: 14.1cm;
+            }
+            @frame field_rebaja_mejoras {
+            -pdf-frame-content: rebaja_mejoras;
+            left: 13.5cm; top: 14.8cm;
+            }
+            @frame field_diferencia_neta {
+            -pdf-frame-content: diferencia_neta;
+            left: 13.5cm; top: 15.5cm;
+            }
+            @frame field_tenencia {
+            -pdf-frame-content: tenencia;
+            left: 13.5cm; top: 16.2cm;
+            }
+            @frame field_r_moneda {
+            -pdf-frame-content: r_moneda;
+            left: 13.5cm; top: 16.9cm;
+            }
+            @frame field_r_desvalorizacion {
+            -pdf-frame-content: r_desvalorizacion;
+            left: 13.5cm; top: 17.6cm;
+            }
+            @frame field_utilidad_imponible {
+            -pdf-frame-content: utilidad_imponible;
+            left: 13.5cm; top: 18.3cm;
+            }
+            @frame field_total {
+            -pdf-frame-content: total;
+            left: 13.5cm; top: 19cm;
+            }
+            @frame field_fecha_footer {
+            -pdf-frame-content: fecha_footer;
+            left: 13.5cm; top: 20.9cm;
+            }
         }
-
-        .fecha {
-            text-align: left;
-            margin-left: 4.5cm;
-            text-transform: uppercase;
-        }
-
-        .ruc {
-            margin-left: 2.5cm;
-            padding-top: 2px;
-        }
-
-        .direccion {
-            margin-left: 12.5cm;
-        }
-
-        .fecha_f {
-            margin-left: 12.5cm;
-        }
-        em{
-            font-size: 15px;
-            font-style: normal;
-        }
-
-        .row-capital {
-            margin-left: 8cm;
-        }
-
-        .row-situacion {
-            margin-left: 7cm;
-        }
-
-        .row-fecha {
-            margin-left: 9cm;
-        }
-
-        .row-contabilidad {
-            margin-left: 8cm;
-        }
-
-        .activos {
-            margin-left: 5cm;
-        }
-
         p {
             font-size: 15px;
         }
     </style>
 </head>
 <body>
-<div class="fecha">
-    <p>
-        Parroquia: {{ plusvalia.alcabala.predio.direccion.barrio.parroquia.nombre }}
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        zona: {{ plusvalia.alcabala.predio.direccion.barrio.zona }}
-    </p>
-    {#    {% if plusvalia.alcabala.predio.direccion.barrio.zona == 'Urbana' %}#}
-    {#        <p style="padding-top: 10px">#}
-    {#           X#}
-    {#        </p>#}
-    {#    {% else plusvalia.alcabala.predio.direccion.barrio.zona == 'Rural' %}#}
-    {#        <p style="padding-top: 10px">#}
-    {#        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp#}
-    {#        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp#}
-    {#        X#}
-    {#    {% endif %}#}
-    {#    </p>#}
-</div>
-<br>
-<div class="ruc">
-    <p style="padding-top: 13px">
-        {{ plusvalia.alcabala.vendedor.nombres }} {{ plusvalia.alcabala.vendedor.apellidos }}
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        {{ plusvalia.alcabala.comprador.nombres }} {{ plusvalia.alcabala.comprador.apellidos }}
-    </p>
-    <p style="padding-top: -13px">
-        B. {{ plusvalia.alcabala.predio.direccion.barrio.nombre }},
-        P. {{ plusvalia.alcabala.predio.direccion.barrio.parroquia.nombre }}
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp
-        B. {{ plusvalia.alcabala.predio.direccion.barrio.nombre }},
-        P. {{ plusvalia.alcabala.predio.direccion.barrio.parroquia.nombre }}
-    </p>
-    <p style="padding-top: -13px">
-        {{ plusvalia.fecha_escritura }}
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        {{ plusvalia.fecha_tramite }}
-    </p>
-    <p style="padding-top: 40px">
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        {{ plusvalia.precio_adquisicion }}
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        {{ plusvalia.precio_venta }}
-    </p>
+
+<div id="parroquia">
+    <p>{{ plusvalia.alcabala.predio.direccion.barrio.parroquia.nombre }}</p>
 </div>
 
-<div class="direccion">
-    <p style="padding-top: 40px">
-         {{ plusvalia.precio_venta }}
-    </p>
-    <p style="padding-top: -10px">
-        {{ plusvalia.precio_adquisicion }}
-    </p>
-    <p style="padding-top: -15px">
-        {{ plusvalia.diferencia_bruta }}
-    </p>
-    <p style="padding-top: -15px">
-        {{ plusvalia.rebaja_mejoras }}
-    </p>
-    <p style="padding-top: -15px">
-        {{ plusvalia.diferencia_neta }}
-    </p>
-    <p style="padding-top: -15px">
-        {{ plusvalia.tenencia }}
-    </p>
-    <p style="padding-top: -15px">
-        {{ plusvalia.base_rebajar_moneda }}
-    </p>
-    <p style="padding-top: -15px">
-        {{ plusvalia.rebaja_desvalorizacion }}
-    </p>
-    <p style="padding-top: -15px">
-        {{ plusvalia.utilidad_imponible }}
-    </p>
-    <p style="padding-top: -15px">
-        {{ plusvalia.get_total }}
-    </p>
+{% if plusvalia.alcabala.predio.direccion.barrio.zona == 'Urbana' %}
+    <div id="urbana">
+        <p>X</p>
+    </div>
+{% else %}
+    <div id="rural">
+        <p>X</p>
+    </div>
+{% endif %}
+
+<div id="vendedor">
+    <p>{{ plusvalia.alcabala.vendedor.nombres }} {{ plusvalia.alcabala.vendedor.apellidos }}</p>
+</div>
+<div id="comprador">
+    <p>{{ plusvalia.alcabala.comprador.nombres }} {{ plusvalia.alcabala.comprador.apellidos }}</p>
 </div>
 
-<div class="fecha_f">
-     <p style="padding-top: 40px">
-         {{ plusvalia.fecha_tramite }}
-     </p>
+<div id="dir_vendedor">
+    <p>{{ plusvalia.alcabala.predio.direccion.get_all_direccion|truncatechars:45 }}</p>
+</div>
+<div id="dir_comprador">
+    <p>{{ plusvalia.alcabala.predio.direccion.get_all_direccion|truncatechars:45 }}</p>
+</div>
 
+<div id="fecha_escritura">
+    <p>{{ plusvalia.fecha_escritura }}</p>
+</div>
+<div id="fecha_tramite">
+    <p>{{ plusvalia.fecha_tramite }}</p>
+</div>
+
+<div id="precio_adquisicion">
+    <p>{{ plusvalia.precio_adquisicion }}</p>
+</div>
+<div id="precio_venta">
+    <p>{{ plusvalia.precio_venta }}</p>
+</div>
+
+<div id="p_venta">
+    <p>{{ plusvalia.precio_venta }}</p>
+</div>
+<div id="p_adquisicion">
+    <p>{{ plusvalia.precio_adquisicion }}</p>
+</div>
+<div id="diferencia_bruta">
+    <p>{{ plusvalia.diferencia_bruta }}</p>
+</div>
+<div id="rebaja_mejoras">
+    <p>{{ plusvalia.rebaja_mejoras }}</p>
+</div>
+<div id="diferencia_neta">
+    <p>{{ plusvalia.diferencia_neta }}</p>
+</div>
+<div id="tenencia">
+    <p>{{ plusvalia.tenencia }}</p>
+</div>
+<div id="r_moneda">
+    <p>{{ plusvalia.base_rebajar_moneda }}</p>
+</div>
+<div id="r_desvalorizacion">
+    <p>{{ plusvalia.rebaja_desvalorizacion }}</p>
+</div>
+<div id="utilidad_imponible">
+    <p>{{ plusvalia.utilidad_imponible }}</p>
+</div>
+<div id="total">
+    <p>{{ plusvalia.get_total }}</p>
+</div>
+
+<div id="fecha_footer">
+    <p>{% now "j F Y" %}</p>
 </div>
 </body>
 </html>
