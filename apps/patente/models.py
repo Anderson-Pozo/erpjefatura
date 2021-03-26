@@ -82,6 +82,12 @@ class Patente(AuditMixin, models.Model):
         """
         return fecha_ultimo_pago(self.id)
 
+    def get_anio_declaracion(self):
+        """
+        :return: El año del inicio de actividad del establecimiento 
+        """
+        return self.establecimiento.fecha_inicio_actividad.year
+
     def get_dias_retraso(self):
         f1 = self.get_vencimiento()
         today = date.today()
@@ -284,6 +290,5 @@ def generate_user(sender, instance, **kwargs):
             pass
     except Exception as e:
         print(e)
-
 
 # post_save.connect(generate_user, sender=Patente)

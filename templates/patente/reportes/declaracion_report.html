@@ -6,48 +6,87 @@
     <style>
         @page {
             size: A4 portrait;
-            margin-top: 5.5cm;
-            margin-left: 2cm;
-            margin-right: 2cm;
+        {#margin-top: 5.5cm;#}
+        {#margin-left: 2cm;#}
+        {#margin-right: 2cm;#}
+            @frame field_fecha {
+            -pdf-frame-content: fecha;
+            left: 3.8cm;
+            top: 5.5cm;
+        }
+        @frame field_nombres {
+        -pdf-frame-content:nombres;
+        left: 3.8cm; top: 6.5cm;
+        }
+        @frame field_cedula {
+        -pdf-frame-content:cedula;
+        left: 9.5cm; top: 8.3cm;
+        }
+        @frame field_ruc {
+        -pdf-frame-content:ruc;
+        left: 9.5cm; top: 9.6cm;
+        }
+        @frame field_nacionalidad {
+        -pdf-frame-content:nacionalidad;
+        left: 9.5cm; top: 10.9cm;
+        }
+        @frame field_direccion {
+        -pdf-frame-content:direccion;
+        left: 6.5cm; top: 12.2cm;
+        }
+        @frame field_establecimiento {
+        -pdf-frame-content:establecimiento;
+        left: 6.5cm; top: 13.5cm;
+        }
+        @frame field_tipo_actividad {
+        -pdf-frame-content:tipo_actividad;
+        left: 7.0cm; top: 14.8cm;
+        }
+        @frame field_anio_declaracion {
+        -pdf-frame-content:anio_declaracion;
+        left: 16.7cm; top: 14.8cm;
+        }
+        @frame field_capital {
+        -pdf-frame-content:capital;
+        left: 10.0cm; top: 16.1cm;
+        }
+        @frame field_supervisado {
+        -pdf-frame-content:supervisado;
+        left: 16.7cm; top: 16.1cm;
+        }
+        @frame field_propio {
+        -pdf-frame-content:propio;
+        left: 9cm; top: 17.4cm;
+        }
+        @frame field_arrendado {
+        -pdf-frame-content:arrendado;
+        left: 13cm; top: 17.4cm;
+        }
+        @frame field_anticresis {
+        -pdf-frame-content:anticresis;
+        left: 17.2cm; top: 17.4cm;
+        }
+        @frame field_patente_anterior {
+        -pdf-frame-content:patente_anterior;
+        left: 11cm; top: 18.7cm;
+        }
+        @frame field_inicio_actividad {
+        -pdf-frame-content:inicio_actividad;
+        left: 11cm; top: 20cm;
+        }
+        @frame field_obligado {
+        -pdf-frame-content:obligado;
+        left: 10.3cm; top: 21.3cm;
+        }
+        @frame field_no_obligado {
+        -pdf-frame-content:no_obligado;
+        left: 13cm; top: 21.3cm;
+        }
+        @frame field_activos_totales {
+        -pdf-frame-content:activos_totales;
+        left: 7cm; top: 22.6cm;
         }
 
-        .fecha {
-            text-align: left;
-            margin-left: 1.5cm;
-            text-transform: uppercase;
-        }
-
-        .ruc {
-            margin-left: 7.5cm;
-            padding-top: 2px;
-        }
-
-        .direccion {
-            margin-left: 4.5cm;
-        }
-
-        .row-actividad {
-            margin-left: 5cm;
-        }
-
-        .row-capital {
-            margin-left: 8cm;
-        }
-
-        .row-situacion {
-            margin-left: 7cm;
-        }
-
-        .row-fecha {
-            margin-left: 9cm;
-        }
-
-        .row-contabilidad {
-            margin-left: 8cm;
-        }
-
-        .activos {
-            margin-left: 5cm;
         }
 
         p {
@@ -56,100 +95,92 @@
     </style>
 </head>
 <body>
-<div class="fecha">
-    <p>{{ patente.fecha }}</p>
-    {% if patente.contribuyente.tipocontribuyente.id == 1 %}
-        <p>{{ patente.contribuyente.natural.nombres }}&nbsp{{ patente.contribuyente.natural.apellidos }}</p>
-    {% else %}
-        <p>{{ patente.contribuyente.juridico.razon_social }}</p>
-    {% endif %}
+<div id="fecha">
+    <p>{% now "j F Y" %}</p>
 </div>
-<br>
-<div class="ruc" style="padding-top: -10px">
-    {% if patente.contribuyente.tipocontribuyente.id == 1 %}
+
+{% if patente.contribuyente.tipocontribuyente.id == 1 %}
+    <div id="nombres">
+        <p>{{ patente.contribuyente.natural.nombres }} {{ patente.contribuyente.natural.apellidos }}</p>
+    </div>
+    <div id="cedula">
         <p>{{ patente.contribuyente.natural.numero_cedula }}</p>
-    {% else %}
+    </div>
+    <div id="nacionalidad">
+        <p>{{ patente.contribuyente.natural.nacionalidad }}</p>
+    </div>
+{% else %}
+    <div id="nombres">
+        <p>{{ patente.contribuyente.juridico.razon_social }}</p>
+    </div>
+    <div id="cedula">
         <p>{{ patente.contribuyente.juridico.cedula_representante }}</p>
-    {% endif %}
-    <p style="padding-top: 10px">{{ patente.contribuyente.ruc }}</p>
-    <p style="padding-top: 10px">
-        {{ patente.contribuyente.natural.nacionalidad}}</p>
+    </div>
+    <div id="nacionalidad">
+        <p>-</p>
+    </div>
+{% endif %}
+
+<div id="ruc">
+    <p>{{ patente.contribuyente.ruc }}</p>
 </div>
 
-<div class="direccion">
+<div id="direccion">
     <p>{{ patente.establecimiento.direccion.get_all_direccion }}</p>
-    <p style="padding-top: 17px">
-        {{ patente.establecimiento.nombre }}
-    </p>
+</div>
+<div id="establecimiento">
+    <p>{{ patente.establecimiento.nombre }}</p>
 </div>
 
-{#<p>Número de patente: {{ patente.numero_patente }}</p>#}
-<div class="row-actividad">
-    <p>
-        {{ patente.establecimiento.tipo_actividad }}
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp
-        2020
-    </p>
+<div id="tipo_actividad">
+    <p>{{ patente.establecimiento.tipo_actividad }}</p>
+</div>
+<div id="anio_declaracion">
+    <p>{{ patente.get_anio_declaracion }}</p>
 </div>
 
-<div class="row-capital">
-    <p style="padding-top: 15px">
-        {{ patente.establecimiento.total_patrimonio }}
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        {{ patente.establecimiento.total_patrimonio }}
-    </p>
+<div id="capital">
+    <p>{{ patente.establecimiento.total_patrimonio }}</p>
+</div>
+<div id="supervisado">
+    <p>{{ patente.establecimiento.total_patrimonio }}</p>
 </div>
 
-<div class="row-situacion">
-    {% if patente.establecimiento.situacion_legal == 'Propio' %}
-        <p style="padding-top: 10px">
-            X
-        </p>
-    {% elif patente.establecimiento.situacion_legal == 'Arrendado' %}
-        <p style="padding-top: 10px">
-            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-            &nbsp;
-            X
-        </p>
-    {% else %}
-        <p style="padding-top: 10px">
-            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-            X
-        </p>
-    {% endif %}
-</div>
+{% if patente.establecimiento.situacion_legal == 'Propio' %}
+    <div id="propio">
+        <p>X</p>
+    </div>
+{% elif patente.establecimiento.situacion_legal == 'Arrendado' %}
+    <div id="arrendado">
+        <p>X</p>
+    </div>
+{% else %}
+    <div id="anticresis">
+        <p>X</p>
+    </div>
+{% endif %}
 
-<div class="row-fecha" style="padding-top: 5px">
+<div id="patente_anterior">
     <p>{{ patente.get_anio_anterior }}</p>
-    <p style="padding-top: 10px">{{ patente.establecimiento.fecha_inicio_actividad }}</p>
+</div>
+<div id="inicio_actividad">
+    <p>{{ patente.establecimiento.fecha_inicio_actividad }}</p>
 </div>
 
-<div class="row-contabilidad">
-    {% if patente.contribuyente.tipocontribuyente.obligado_contabilidad %}
-        <p style="padding-top: 15px">
-            X
-        </p>
-    {% else %}
-        <p style="padding-top: 15px">
-            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-            X
-        </p>
-    {% endif %}
+{% if patente.contribuyente.tipocontribuyente.obligado_contabilidad %}
+    <div id="obligado">
+        <p>X</p>
+    </div>
+{% else %}
+    <div id="no_obligado">
+        <p>X</p>
+    </div>
+{% endif %}
+
+
+<div id="activos_totales">
+    <p>{{ patente.establecimiento.total_patrimonio }}</p>
 </div>
 
-<div class="activos">
-{#    <p>1250 $</p>#}
-</div>
 </body>
 </html>

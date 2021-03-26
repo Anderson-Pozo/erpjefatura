@@ -60,7 +60,6 @@ class Alcabala(AuditMixin, models.Model):
     """
     id = models.AutoField(primary_key=True)
     fecha = models.DateField('Fecha', blank=True, null=True)
-    # numero = models.IntegerField('Numero', blank=True, null=True)
     descripcion_tramite = models.TextField('Descripcion del tramite', max_length=300, blank=True, null=True)
     valor_compra_venta = models.DecimalField(
         'Valor de la compra-venta',

@@ -6,133 +6,120 @@
     <style>
         @page {
             size: A4 portrait;
-            margin-top: 6.7cm;
-            margin-left: 2cm;
-            margin-right: 2cm;
+            @frame field_num_especie {
+                -pdf-frame-content: numero_especie;
+                left: 4.6cm; top: 6.7cm;
+            }
+            @frame field_nombres {
+                -pdf-frame-content:nombres;
+                left: 4.6cm; top: 7.4cm;
+            }
+            @frame field_razon_social {
+                -pdf-frame-content:razon_social;
+                left: 4.6cm; top: 8.1cm;
+            }
+            @frame field_direccion {
+                -pdf-frame-content:direccion;
+                left: 4.6cm; top: 8.8cm;
+            }
+            @frame field_fecha {
+                -pdf-frame-content:fecha;
+                left: 13cm; top: 6.7cm;
+            }
+            @frame field_cedula {
+                -pdf-frame-content:cedula;
+                left: 13cm; top: 7.4cm;
+            }
+            @frame field_ruc {
+                -pdf-frame-content:ruc;
+                left: 13cm; top: 8.1cm;
+            }
+            @frame field_anio {
+                -pdf-frame-content:anio;
+                left: 15cm; top: 8.8cm;
+            }
+            @frame field_impuesto {
+                -pdf-frame-content:impuesto;
+                left: 9cm; top: 9.5cm;
+            }
+            @frame field_interes {
+                -pdf-frame-content:interes;
+                left: 9cm; top: 10.2cm;
+            }
+            @frame field_multa {
+                -pdf-frame-content:multa;
+                left: 9cm; top: 10.9cm;
+            }
+            @frame field_multa {
+                -pdf-frame-content:activos_totales;
+                left: 9cm; top: 11.6cm;
+            }
+            @frame field_multa {
+                -pdf-frame-content:serv_administrativos;
+                left: 9cm; top: 12.3cm;
+            }
+            @frame field_total {
+                -pdf-frame-content:total;
+                left: 9cm; top: 13cm;
+            }
         }
-
-        .persona {
-            margin-left: 2cm;
-        }
-        .impuesto {
-            margin-left: 10cm;
-        }
-        .interes {
-            margin-left: 10cm;
-        }
-        .multa {
-            margin-left: 10cm;
-        }
-        .servicios {
-            margin-left: 10cm;
-        }
-        .total {
-            margin-left: 10cm;
-        }
-        .razon {
-            margin-left: 1.5cm;
-        }
-        .direccion {
-            margin-left: 2cm;
-        }
-        .nombre {
-            margin-left: 1cm;
-        }
-
         p {
             font-size: 15px;
-        }
-        em{
-            font-size: 15px;
-            font-style: normal;
         }
     </style>
 </head>
 <body>
-<div class="persona">
-    <p>
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        {{ detalle.patente.numero_patente }}
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        {{ detalle.patente.fecha }}
-    </p>
-    <div class="nombre" style="padding: -15px">
-        <em>
-            {% if detalle.patente.contribuyente.tipocontribuyente.id == 1 %}
-                <div>
-                <em>
-                    {{ detalle.patente.contribuyente.natural.get_nombre }}
-                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-                    &nbsp &nbsp &nbsp &nbsp
-                    {{ detalle.patente.contribuyente.natural.numero_cedula }}</em>
-                </div>
-            {% else %}
-                <div>
-                    <em>{{ detalle.patente.contribuyente.juridico.nombres_representante }}
-                        {{ detalle.patente.contribuyente.juridico.apellidos_representante}}
-                        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-                        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-                        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-                        {{ detalle.patente.contribuyente.juridico.cedula_representante }}</em>
-                </div>
-            {% endif %}
-        </em>
+<div id="numero_especie">
+    <p>{{ detalle.patente.numero_patente }}</p>
+</div>
+<div id="fecha">
+    <p>{% now "j F Y" %}</p>
+</div>
+{% if detalle.patente.contribuyente.tipocontribuyente.id == 1 %}
+    <div id="nombres">
+        <p>{{ detalle.patente.contribuyente.natural.get_nombre }}</p>
     </div>
-    <div class="razon" style="padding: 15px">
-        <em>
-        {{ detalle.patente.establecimiento.nombre }}
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        {{ detalle.patente.contribuyente.ruc }}
-        </em>
+    <div id="cedula">
+        <p>{{ detalle.patente.contribuyente.natural.numero_cedula }}</p>
     </div>
-    <div class="direccion" style="padding: -5px">
-        <em>
-        {{ detalle.patente.establecimiento.direccion.get_all_direccion }}
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        {% now "Y" %}
-    </em>
+{% else %}
+    <div id="nombres">
+        <p>{{ detalle.patente.contribuyente.juridico.razon_social }}</p>
     </div>
+    <div id="cedula">
+        <p>{{ detalle.patente.contribuyente.juridico.cedula_representante }}</p>
+    </div>
+{% endif %}
 
+<div id="razon_social">
+    <p>{{ detalle.patente.establecimiento.nombre }}</p>
 </div>
-<div class="impuesto" style="padding-top: 11px">
-    <em>
-        Impuesto: {{ detalle.impuesto }}
-    </em>
+<div id="direccion">
+    <p>{{ detalle.patente.establecimiento.direccion.get_all_direccion }}</p>
 </div>
-<div class="interes" style="padding: 5px">
-    <em>
-        Interes: {{ detalle.interes }}
-    </em>
+<div id="ruc">
+    <p>{{ detalle.patente.contribuyente.ruc }}</p>
 </div>
-<div class="multa" style="padding: 5px">
-    <em>
-        Multa: {{ detalle.multa }}
-    </em>
+<div id="anio">
+    <p>{% now "Y" %}</p>
 </div>
-<div class="multa" style="padding: 3px">
-    <em>
-        ----
-    </em>
+<div id="impuesto">
+    <p>{{ detalle.impuesto }}</p>
 </div>
-<div class="servicios" style="padding: 3px">
-    <em>
-        Servicios administrativos: {{ detalle.servicios_administrativos }}
-    </em>
+<div id="interes">
+    <p>{{ detalle.interes }}</p>
 </div>
-<div class="total" style="padding: 3px">
-    <em>
-        Total a pagar: {{ detalle.get_total }}
-    </em>
+<div id="multa">
+    <p>{{ detalle.multa }}</p>
 </div>
-
+<div id="activos_totales">
+    <p>-</p>
+</div>
+<div id="serv_administrativos">
+    <p>{{ detalle.servicios_administrativos }}</p>
+</div>
+<div id="total">
+    <p>{{ detalle.get_total }}</p>
+</div>
 </body>
 </html>
