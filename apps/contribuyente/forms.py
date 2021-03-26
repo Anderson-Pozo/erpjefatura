@@ -181,6 +181,12 @@ class ContribuyenteJuridicoForm(forms.ModelForm):
                     'placeholder': 'Ingrese el correo electrónico',
                 }
             ),
+            'nacionalidad': forms.Select(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Ingrese la nacionalidad',
+                }
+            ),
             'tipocontribuyente': forms.Select(
                 attrs={
                     'class': 'form-control',

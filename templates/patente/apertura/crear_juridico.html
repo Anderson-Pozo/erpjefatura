@@ -35,19 +35,25 @@
             </div>
             <!-- Form Row-->
             <div class="form-row">
+                <!-- Form Group (nacionalidad)-->
+                <div class="form-group col-md-6">
+                    <label class="small mb-1" for="ingreseNacionalidad">Nacionalidad</label>
+                    {{ form.nacionalidad }}
+                </div>
                 <!-- Form Group correo-->
                 {{ form.tipocontribuyente }}
                 <div class="form-group col-md-6">
                     <label class="small mb-1" for="email">Correo electrónico</label>
                     {{ form.email }}
                 </div>
+
+            </div>
+            <div class="form-row">
                 <!-- Form Group (phone number)-->
                 <div class="form-group col-md-6">
                     <label class="small mb-1" for="telefono_celular">Teléfono Celular</label>
                     {{ form.tlf_celular }}
                 </div>
-            </div>
-            <div class="form-row">
                 <div class="form-group col-md-6">
                     <label class="small mb-1" for="telefono_convencional">Teléfono Convencional</label>
                     {{ form.tlf_convencional }}

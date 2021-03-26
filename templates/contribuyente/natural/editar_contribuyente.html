@@ -46,11 +46,12 @@
                             </div>
                             <!-- Form Row        -->
                             <div class="form-row">
-                                <!-- Form Group (tipo de persona)-->
+                                <!-- Form Group correo-->
                                 <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="tipoPersona">Tipo de persona</label>
-                                    {{ form.tipocontribuyente }}
+                                    <label class="small mb-1" for="email">Correo electrónico</label>
+                                    {{ form.email }}
                                 </div>
+                                {{ form.tipocontribuyente }}
                                 <!-- Form Group (nacionalidad)-->
                                 <div class="form-group col-md-6">
                                     <label class="small mb-1" for="ingreseNacionalidad">Nacionalidad</label>
@@ -59,25 +60,17 @@
                             </div>
                             <!-- Form Row-->
                             <div class="form-row">
-                                <!-- Form Group correo-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="email">Correo electrónico</label>
-                                    {{ form.email }}
-                                </div>
                                 <!-- Form Group (telefono celular)-->
                                 <div class="form-group col-md-6">
                                     <label class="small mb-1" for="telefonocelular">Teléfono celular</label>
                                     {{ form.tlf_celular }}
                                 </div>
-                            </div>
-                            <div class="form-row">
                                 <!-- Form Group (telefono convencional)-->
                                 <div class="form-group col-md-6">
                                     <label class="small mb-1" for="telefonoconvencional">Teléfono convencional</label>
                                     {{ form.tlf_convencional }}
                                 </div>
                             </div>
-{#                            {{ form.as_p }}#}
                             <div class="modal-footer">
                                 <button onclick="close_modal_edition();"
                                         class="btn btn-red" type="button"

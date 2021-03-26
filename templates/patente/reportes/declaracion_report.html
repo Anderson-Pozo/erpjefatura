@@ -106,9 +106,6 @@
     <div id="cedula">
         <p>{{ patente.contribuyente.natural.numero_cedula }}</p>
     </div>
-    <div id="nacionalidad">
-        <p>{{ patente.contribuyente.natural.nacionalidad }}</p>
-    </div>
 {% else %}
     <div id="nombres">
         <p>{{ patente.contribuyente.juridico.razon_social }}</p>
@@ -116,10 +113,11 @@
     <div id="cedula">
         <p>{{ patente.contribuyente.juridico.cedula_representante }}</p>
     </div>
-    <div id="nacionalidad">
-        <p>-</p>
-    </div>
 {% endif %}
+
+<div id="nacionalidad">
+    <p>{{ patente.contribuyente.nacionalidad }}</p>
+</div>
 
 <div id="ruc">
     <p>{{ patente.contribuyente.ruc }}</p>

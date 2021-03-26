@@ -1,104 +1,107 @@
 <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalContribuyenteTitle">Contribuyente jurídico</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">×</span></button>
-            </div>
-            <div class="modal-body">
-                <div class="card mb-4">
-                    <div class="card-header">Editar registro</div>
-                    <div class="card-body">
-                        <div id="errors_edition"></div>
-                        <br>
-                        <form id="form_edition_juridico" action="{% url 'contribuyente:editar_contribuyente_juridico' object.pk %}" method="POST">
-                            {% csrf_token %}
-                            {% if form.errors %}
-                                <div class="alert alert-danger">
-                                    {{ form.errors }}
-                                </div>
-                            {% endif %}
-                            <!-- Form Group (username)-->
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                <label class="small mb-1" for="razon_social">Razón social</label>
-                                    {{ form.razon_social }}
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="ruc">RUC</label>
-                                    {{ form.ruc }}
-                                </div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalContribuyenteTitle">Contribuyente jurídico</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+            <div class="card mb-4">
+                <div class="card-header">Editar registro</div>
+                <div class="card-body">
+                    <div id="errors_edition"></div>
+                    <br>
+                    <form id="form_edition_juridico"
+                          action="{% url 'contribuyente:editar_contribuyente_juridico' object.pk %}" method="POST">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                            <div class="alert alert-danger">
+                                {{ form.errors }}
                             </div>
+                        {% endif %}
+                        <!-- Form Group (username)-->
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label class="small mb-1" for="tipo_persona">Tipo de persona</label>
-                                {{ form.tipocontribuyente }}
+                                <label class="small mb-1" for="razon_social">Razón social</label>
+                                {{ form.razon_social }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="ruc">RUC</label>
+                                {{ form.ruc }}
                             </div>
                         </div>
-                            <!-- Form Row-->
-                            <div class="form-row">
-                                <!-- Form Group correo-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="email">Correo Electrónico</label>
-                                    {{ form.email }}
-                                </div>
-                                <!-- Form Group (phone number)-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="telefono_celular">Teléfono Celular</label>
-                                    {{ form.tlf_celular }}
-                                </div>
+                        <div class="form-row">
+                            <!-- Form Group (nacionalidad)-->
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="ingreseNacionalidad">Nacionalidad</label>
+                                {{ form.nacionalidad }}
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="telefono_convencional">Teléfono Convencional</label>
-                                    {{ form.tlf_convencional }}
-                                </div>
+                            {{ form.tipocontribuyente }}
+                            <!-- Form Group correo-->
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="email">Correo Electrónico</label>
+                                {{ form.email }}
                             </div>
-                            <br>
-                            <div class="text-primary">
-                                Datos del representante legal
+                        </div>
+                        <!-- Form Row-->
+                        <div class="form-row">
+                            <!-- Form Group (phone number)-->
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="telefono_celular">Teléfono Celular</label>
+                                {{ form.tlf_celular }}
                             </div>
-                            <hr>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="cedula_representante">Número de cédula</label>
-                                    {{ form.cedula_representante }}
-                                </div>
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="telefono_convencional">Teléfono Convencional</label>
+                                {{ form.tlf_convencional }}
                             </div>
-                            <div class="form-row">
-                                <!-- Form Group (nombres)-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="nombres_representante">Nombres</label>
-                                    {{ form.nombres_representante }}
-                                </div>
-                                <!-- Form Group (apellidos)-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="apellidos_representante">Apellidos</label>
-                                    {{ form.apellidos_representante }}
-                                </div>
+                        </div>
+                        <br>
+                        <div class="text-primary">
+                            Datos del representante legal
+                        </div>
+                        <hr>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="cedula_representante">Número de cédula</label>
+                                {{ form.cedula_representante }}
                             </div>
-                            <div class="form-row">
-                                <!-- Form Group (telefono representante)-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="nombres_representante">Teléfono</label>
-                                    {{ form.telefono_representante }}
-                                </div>
-                                <!-- Form Group (email representante)-->
-                                <div class="form-group col-md-6">
-                                    <label class="small mb-1" for="email_representante">Correo electrónico</label>
-                                    {{ form.correo_representante }}
-                                </div>
+                        </div>
+                        <div class="form-row">
+                            <!-- Form Group (nombres)-->
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="nombres_representante">Nombres</label>
+                                {{ form.nombres_representante }}
                             </div>
-                            <div class="modal-footer">
-                                <button onclick="close_modal_edition();"
-                                        class="btn btn-red" type="button"
-                                    >Cerrar</button>
-                                <button onclick="editar_contribuyente_juridico();"
-                                    class="btn btn-primary" type="button">Guardar cambios</button>
+                            <!-- Form Group (apellidos)-->
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="apellidos_representante">Apellidos</label>
+                                {{ form.apellidos_representante }}
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="form-row">
+                            <!-- Form Group (telefono representante)-->
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="nombres_representante">Teléfono</label>
+                                {{ form.telefono_representante }}
+                            </div>
+                            <!-- Form Group (email representante)-->
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1" for="email_representante">Correo electrónico</label>
+                                {{ form.correo_representante }}
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button onclick="close_modal_edition();"
+                                    class="btn btn-red" type="button"
+                            >Cerrar
+                            </button>
+                            <button onclick="editar_contribuyente_juridico();"
+                                    class="btn btn-primary" type="button">Guardar cambios
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>

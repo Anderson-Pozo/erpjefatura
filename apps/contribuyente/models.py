@@ -30,6 +30,12 @@ class TipoContribuyente(AuditMixin, models.Model):
         db_table = "tipo_contribuyente"
 
 
+NACIONALIDADES = (
+    ('Ecuatoriana', 'Ecuatoriana'),
+    ('Colombiana', 'Colombiana'),
+)
+
+
 class Contribuyente(models.Model):
     """
     Clase Contribuyente almacena los datos informativos del contribuyente, y su relacion con la tabla
@@ -38,6 +44,7 @@ class Contribuyente(models.Model):
     id = models.AutoField(primary_key=True)
     ruc = models.CharField('Ruc ', max_length=13, blank=False, null=True, unique=True)
     email = models.EmailField('Email', max_length=50, blank=True, null=True)
+    nacionalidad = models.CharField('Nacionalidad', max_length=20, blank=True, null=True, choices=NACIONALIDADES)
     tlf_celular = models.CharField('Celular', max_length=10, blank=True, null=True)
     tlf_convencional = models.CharField('Telefono convencional', max_length=10, blank=True, null=True)
     estado = models.BooleanField('Activo/Inactivo', blank=True, null=True, default=True)
@@ -64,15 +71,8 @@ class Contribuyente(models.Model):
         db_table = "contribuyente"
 
 
-NACIONALIDADES = (
-    ('Ecuatoriana', 'Ecuatoriana'),
-    ('Colombiana', 'Colombiana'),
-)
-
-
 class Natural(AuditMixin, Contribuyente):
     numero_cedula = models.CharField('Número de cédula', max_length=10, blank=False, null=True, unique=True)
-    nacionalidad = models.CharField('Nacionalidad', max_length=20, blank=True, null=True, choices=NACIONALIDADES)
     nombres = models.CharField('Nombres', max_length=50, blank=False, null=True)
     apellidos = models.CharField('Apellidos', max_length=50, blank=False, null=True)
     adulto = models.BooleanField('Tercera edad', blank=True, null=True, default=False)
