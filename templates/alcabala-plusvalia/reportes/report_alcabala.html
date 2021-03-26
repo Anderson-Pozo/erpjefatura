@@ -6,38 +6,62 @@
     <style>
         @page {
             size: A4 portrait;
-            margin-top: 3.7cm;
-            margin-left: 1cm;
-            margin-right: 1cm;
-        }
-
-        .persona {
-            text-align: left;
-            margin-left: 0.5cm;
-        {#text-transform: uppercase;#}
-        }
-
-        .impuestos {
-            margin-left: 11.5cm;
-        }
-        .proviciales {
-            margin-left: 11.5cm;
-        }
-        .escolares {
-            margin-left: 11.5cm;
-        }
-        .prevencion {
-            margin-left: 11.5cm;
-        }
-        .agua {
-            margin-left: 11.5cm;
-        }
-        .total {
-            margin-left: 11.5cm;
-        }
-        em{
-            font-size: 15px;
-            font-style: normal;
+            @frame field_fecha {
+            -pdf-frame-content: fecha;
+            left: 11cm; top: 3.4cm;
+            }
+            @frame field_vendedor {
+            -pdf-frame-content: vendedor;
+            left: 3.5cm; top: 4.7cm; width: 5.5cm;
+            }
+            @frame field_comprador {
+            -pdf-frame-content: comprador;
+            left: 12.3cm; top: 4.7cm; width: 5.5cm;
+            }
+            @frame field_descripcion {
+            -pdf-frame-content: descripcion;
+            left: 4.6cm; top: 5.9cm;
+            }
+            @frame field_compra_venta {
+            -pdf-frame-content: valor_compra_venta;
+            left: 16.4cm; top: 5.9cm;
+            }
+            @frame field_direccion {
+            -pdf-frame-content: direccion;
+            left: 6.8cm; top: 6.6cm;
+            }
+            @frame field_clave_catastral {
+            -pdf-frame-content: clave_catastral;
+            left: 1.6cm; top: 7.7cm;
+            }
+            @frame field_avaluo {
+            -pdf-frame-content: avaluo;
+            left: 9.7cm; top: 7.7cm;
+            }
+            @frame field_impuesto {
+            -pdf-frame-content: impuesto;
+            left: 12.5cm; top: 10.7cm;
+            }
+            @frame field_provincial {
+            -pdf-frame-content: i_provincial;
+            left: 12.5cm; top: 11.3cm;
+            }
+            @frame field_escolar {
+            -pdf-frame-content: i_escolar;
+            left: 12.5cm; top: 11.9cm;
+            }
+            @frame field_prevencion {
+            -pdf-frame-content: prevencion;
+            left: 12.5cm; top: 12.5cm;
+            }
+            @frame field_agua {
+            -pdf-frame-content: agua;
+            left: 12.5cm; top: 13.1cm;
+            }
+            @frame field_total {
+            -pdf-frame-content: total;
+            left: 12.5cm; top: 13.7cm;
+            }
         }
         p {
             font-size: 15px;
@@ -45,93 +69,60 @@
     </style>
 </head>
 <body>
-<div class="persona" style="padding-top: -10px">
-    <p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        Fecha: {{ alcabala.fecha }}</p>
-    <p style="padding-top: 10px">
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp
-        {{ alcabala.vendedor.nombres }} {{ alcabala.vendedor.apellidos }}
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp
-        {{ alcabala.comprador.nombres }} {{ alcabala.comprador.apellidos }}</p>
-    <p style="padding-top: 5px">
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        {{ alcabala.descripcion_tramite }}
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        {{ alcabala.valor_compra_venta }}
-    </p>
-    <p style="padding-top: -18px">
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        B. {{ alcabala.predio.direccion.barrio.nombre }}
-        de la P.{{ alcabala.predio.direccion.barrio.parroquia.nombre }}
-    </p>
-    <p style="padding-top: 5px">
-        {{ alcabala.predio.clave_catastral }}
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        {{ alcabala.valor_compra_venta }}
-    </p>
+<div id="fecha">
+    <p>{{ alcabala.fecha }}</p>
 </div>
-<br>
 
-<div class="impuestos"  style="padding-top: 55px">
-    <em>
-        {{ alcabala.impuesto_alcabalas }}
-    </em>
+<div id="vendedor">
+    {% if alcabala.vendedor.casado %}
+        <p>{{ alcabala.vendedor.nombres }} {{ alcabala.vendedor.apellidos }} y Conyugue</p>
+    {% else %}
+        <p>{{ alcabala.vendedor.nombres }} {{ alcabala.vendedor.apellidos }}</p>
+    {% endif %}
 </div>
-<div class="proviciales" style="padding-top: 5px">
-    <em>
-        {{ alcabala.alcabalas_provinciales }}
-    </em>
+<div id="comprador">
+    {% if alcabala.comprador.casado %}
+        <p>{{ alcabala.comprador.nombres }} {{ alcabala.comprador.apellidos }} y Conyugue</p>
+    {% else %}
+        <p>{{ alcabala.comprador.nombres }} {{ alcabala.comprador.apellidos }}</p>
+    {% endif %}
 </div>
-<div class="escolares" style="padding-top: 5px">
-    <em>
-        {{ alcabala.fondos_escolares }}
-    </em>
+
+<div id="descripcion">
+    <p>{{ alcabala.descripcion_tramite }}</p>
 </div>
-<div class="prevencion" style="padding-top: 2px">
-    <em>
-        {{ alcabala.fondos_prevencion_riesgos }}
-    </em>
+<div id="valor_compra_venta">
+    <p>$ {{ alcabala.valor_compra_venta }}</p>
 </div>
-<div class="agua" style="padding-top: 2px">
-    <em>
-        {{ alcabala.agua_potable }}
-    </em>
+<div id="direccion">
+    <p>{{ alcabala.predio.direccion.get_all_direccion }}</p>
 </div>
-<div class="total" style="padding-top: 2px">
-    <em>
-        {{ alcabala.get_total }}
-    </em>
+
+<div id="clave_catastral">
+    <p>{{ alcabala.predio.clave_catastral }}</p>
 </div>
+<div id="avaluo">
+    <p>{{ alcabala.valor_compra_venta }}</p>
 </div>
+
+<div id="impuesto">
+    <p>{{ alcabala.impuesto_alcabalas }}</p>
+</div>
+<div id="i_provincial">
+    <p>{{ alcabala.alcabalas_provinciales }}</p>
+</div>
+<div id="i_escolar">
+    <p>{{ alcabala.fondos_escolares }}</p>
+</div>
+<div id="prevencion">
+    <p>{{ alcabala.fondos_prevencion_riesgos }}</p>
+</div>
+<div id="agua">
+    <p>{{ alcabala.agua_potable }}</p>
+</div>
+<div id="total">
+    <p>{{ alcabala.get_total }}</p>
+</div>
+
 </body>
 </html>
