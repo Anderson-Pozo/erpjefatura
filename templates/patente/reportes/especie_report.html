@@ -8,59 +8,59 @@
             size: A4 portrait;
             @frame field_num_especie {
                 -pdf-frame-content: numero_especie;
-                left: 4.6cm; top: 6.7cm;
+                left: 4.6cm; top: 7.4cm;
             }
             @frame field_nombres {
                 -pdf-frame-content:nombres;
-                left: 4.6cm; top: 7.4cm;
+                left: 4.6cm; top: 8.1cm;
             }
             @frame field_razon_social {
                 -pdf-frame-content:razon_social;
-                left: 4.6cm; top: 8.1cm;
+                left: 4.6cm; top: 8.8cm;
             }
             @frame field_direccion {
                 -pdf-frame-content:direccion;
-                left: 4.6cm; top: 8.8cm;
+                left: 4.6cm; top: 9.5cm;
             }
             @frame field_fecha {
                 -pdf-frame-content:fecha;
-                left: 13cm; top: 6.7cm;
+                left: 14.5cm; top: 7.4cm;
             }
             @frame field_cedula {
                 -pdf-frame-content:cedula;
-                left: 13cm; top: 7.4cm;
+                left: 14.5cm; top: 8.1cm;
             }
             @frame field_ruc {
                 -pdf-frame-content:ruc;
-                left: 13cm; top: 8.1cm;
+                left: 14.5cm; top: 8.8cm;
             }
             @frame field_anio {
                 -pdf-frame-content:anio;
-                left: 15cm; top: 8.8cm;
+                left: 15.4cm; top: 9.5cm;
             }
             @frame field_impuesto {
                 -pdf-frame-content:impuesto;
-                left: 9cm; top: 9.5cm;
+                left: 9cm; top: 10.2cm;
             }
             @frame field_interes {
                 -pdf-frame-content:interes;
-                left: 9cm; top: 10.2cm;
-            }
-            @frame field_multa {
-                -pdf-frame-content:multa;
                 left: 9cm; top: 10.9cm;
             }
             @frame field_multa {
-                -pdf-frame-content:activos_totales;
+                -pdf-frame-content:multa;
                 left: 9cm; top: 11.6cm;
             }
             @frame field_multa {
-                -pdf-frame-content:serv_administrativos;
+                -pdf-frame-content:activos_totales;
                 left: 9cm; top: 12.3cm;
+            }
+            @frame field_multa {
+                -pdf-frame-content:serv_administrativos;
+                left: 9cm; top: 13cm;
             }
             @frame field_total {
                 -pdf-frame-content:total;
-                left: 9cm; top: 13cm;
+                left: 9cm; top: 13.7cm;
             }
         }
         p {
@@ -95,7 +95,7 @@
     <p>{{ detalle.patente.establecimiento.nombre }}</p>
 </div>
 <div id="direccion">
-    <p>{{ detalle.patente.establecimiento.direccion.get_all_direccion }}</p>
+    <p>{{ detalle.patente.establecimiento.direccion.get_all_direccion|truncatechars:42 }}</p>
 </div>
 <div id="ruc">
     <p>{{ detalle.patente.contribuyente.ruc }}</p>
