@@ -78,17 +78,32 @@ class Natural(AuditMixin, Contribuyente):
     adulto = models.BooleanField('Tercera edad', blank=True, null=True, default=False)
     artesano = models.BooleanField('Artesano', blank=True, null=True, default=False)
 
+    def to_json(self):
+        item = model_to_dict(self)
+        item['nombres'] = self.nombres.title()
+        item['apellidos'] = self.apellidos.title()
+        item['tipocontribuyente'] = self.tipocontribuyente.nombre
+        return item
+
     def __str__(self):
-        return '{} {}'.format(self.nombres, self.apellidos)
+        return '{} {}'.format(self.nombres, self.apellidos).title()
 
 
 class Juridico(AuditMixin, Contribuyente):
-    razon_social = models.CharField('Razon social', max_length=50, blank=False, null=True)
+    razon_social = models.CharField('Razon social', max_length=70, blank=False, null=True)
     cedula_representante = models.CharField('Cédula del representante', max_length=10, blank=False, null=True)
     nombres_representante = models.CharField('Nombres del representante', max_length=50, blank=False, null=True)
     apellidos_representante = models.CharField('Apellidos del representante', max_length=50, blank=False, null=True)
     telefono_representante = models.CharField('Teléfono del representante', max_length=10, blank=True, null=True)
     correo_representante = models.EmailField('Correo del representante', max_length=50, blank=True, null=True)
 
+    def to_json(self):
+        item = model_to_dict(self)
+        item['razon_social'] = self.razon_social.title()
+        item['nombres_representante'] = self.nombres_representante.title()
+        item['apellidos_representante'] = self.apellidos_representante.title()
+        item['tipocontribuyente'] = self.tipocontribuyente.nombre
+        return item
+
     def __str__(self):
-        return '{}'.format(self.razon_social)
+        return '{}'.format(self.razon_social).title()

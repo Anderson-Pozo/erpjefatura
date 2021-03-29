@@ -53,7 +53,6 @@ class EstablecimientoForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control',
                     'placeholder': 'Ingrese la descripción',
-                    'required': True,
                 }
             ),
             'fecha_inicio_actividad': forms.DateInput(

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Imprimir formulario</title>
+    <title>Patente municipal</title>
     <style>
         @page {
             size: A4 portrait;
@@ -77,14 +77,14 @@
 </div>
 {% if detalle.patente.contribuyente.tipocontribuyente.id == 1 %}
     <div id="nombres">
-        <p>{{ detalle.patente.contribuyente.natural.get_nombre }}</p>
+        <p>{{ detalle.patente.contribuyente.natural.get_nombre|upper }}</p>
     </div>
     <div id="cedula">
         <p>{{ detalle.patente.contribuyente.natural.numero_cedula }}</p>
     </div>
 {% else %}
     <div id="nombres">
-        <p>{{ detalle.patente.contribuyente.juridico.razon_social }}</p>
+        <p>{{ detalle.patente.contribuyente.juridico.razon_social|upper }}</p>
     </div>
     <div id="cedula">
         <p>{{ detalle.patente.contribuyente.juridico.cedula_representante }}</p>
@@ -92,10 +92,12 @@
 {% endif %}
 
 <div id="razon_social">
-    <p>{{ detalle.patente.establecimiento.nombre }}</p>
+    <p>{{ detalle.patente.establecimiento.nombre|upper }}</p>
 </div>
 <div id="direccion">
-    <p>{{ detalle.patente.establecimiento.direccion.get_all_direccion|truncatechars:42 }}</p>
+    <p style="font-size: 13px">
+        {{ detalle.patente.establecimiento.direccion.get_all_direccion|upper|truncatechars:44 }}
+    </p>
 </div>
 <div id="ruc">
     <p>{{ detalle.patente.contribuyente.ruc }}</p>

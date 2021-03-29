@@ -56,13 +56,13 @@ class Establecimiento(AuditMixin, models.Model):
     una patente municipal
     """
     id = models.AutoField(primary_key=True)
-    nombre = models.CharField('Nombre del establecimiento', max_length=50, blank=False, null=True)
-    descripcion_actividad = models.TextField('Descripcion actividad comercial', max_length=300, blank=False, null=True)
+    nombre = models.CharField('Nombre del establecimiento', max_length=70, blank=False, null=True)
+    descripcion_actividad = models.TextField('Descripcion actividad comercial', max_length=300, blank=True, null=True)
     fecha_inicio_actividad = models.DateField('Fecha de inicio de actividad comercial', blank=False, null=True)
     total_patrimonio = models.DecimalField(
         'Total de patrimonio',
         decimal_places=2,
-        default=1.00,
+        default=0.00,
         max_digits=10,
         blank=False,
         null=True
@@ -78,6 +78,7 @@ class Establecimiento(AuditMixin, models.Model):
 
     def to_json(self):
         item = model_to_dict(self)
+        item['nombre'] = self.nombre.title()
         item['tipo_actividad'] = self.tipo_actividad.tipo_actividad
         item['direccion'] = self.direccion.get_all_direccion()
         return item

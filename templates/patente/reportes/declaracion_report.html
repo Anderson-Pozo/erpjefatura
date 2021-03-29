@@ -97,14 +97,14 @@
 
 {% if patente.contribuyente.tipocontribuyente.id == 1 %}
     <div id="nombres">
-        <p>{{ patente.contribuyente.natural.nombres }} {{ patente.contribuyente.natural.apellidos }}</p>
+        <p>{{ patente.contribuyente.natural.nombres|upper }} {{ patente.contribuyente.natural.apellidos|upper }}</p>
     </div>
     <div id="cedula">
         <p>{{ patente.contribuyente.natural.numero_cedula }}</p>
     </div>
 {% else %}
     <div id="nombres">
-        <p>{{ patente.contribuyente.juridico.razon_social }}</p>
+        <p>{{ patente.contribuyente.juridico.razon_social|upper }}</p>
     </div>
     <div id="cedula">
         <p>{{ patente.contribuyente.juridico.cedula_representante }}</p>
@@ -112,7 +112,7 @@
 {% endif %}
 
 <div id="nacionalidad">
-    <p>{{ patente.contribuyente.nacionalidad }}</p>
+    <p>{{ patente.contribuyente.nacionalidad|upper }}</p>
 </div>
 
 <div id="ruc">
@@ -120,14 +120,14 @@
 </div>
 
 <div id="direccion">
-    <p>{{ patente.establecimiento.direccion.get_all_direccion }}</p>
+    <p>{{ patente.establecimiento.direccion.get_all_direccion|upper|truncatechars:60 }}</p>
 </div>
 <div id="establecimiento">
-    <p>{{ patente.establecimiento.nombre }}</p>
+    <p>{{ patente.establecimiento.nombre|upper }}</p>
 </div>
 
 <div id="tipo_actividad">
-    <p>{{ patente.establecimiento.tipo_actividad }}</p>
+    <p>{{ patente.establecimiento.tipo_actividad|upper }}</p>
 </div>
 <div id="anio_declaracion">
     <p>{{ patente.get_anio_declaracion }}</p>

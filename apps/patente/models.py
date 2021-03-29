@@ -62,7 +62,7 @@ class Patente(AuditMixin, models.Model):
         item = model_to_dict(self)
         item['ruc'] = self.contribuyente.ruc
         item['tipocontribuyente'] = self.contribuyente.tipocontribuyente.nombre
-        item['nombre_establecimiento'] = self.establecimiento.nombre
+        item['nombre_establecimiento'] = self.establecimiento.nombre.title()
         item['total_patrimonio'] = self.establecimiento.total_patrimonio
         item['nombre_contribuyente'] = self.contribuyente.get_nombre()
         item['estado'] = self.get_estado()

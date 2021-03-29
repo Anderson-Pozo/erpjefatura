@@ -19,9 +19,9 @@ class GetDirecciones(View):
             if action == 'get_direccion':
                 data = []
                 for i in Direccion.objects.filter(
-                        Q(barrio__nombre__contains=request.POST['term']) |
-                        Q(calle_principal__contains=request.POST['term']) |
-                        Q(barrio__parroquia__nombre__contains=request.POST['term']))[0:10]:
+                        Q(barrio__nombre__icontains=request.POST['term']) |
+                        Q(calle_principal__icontains=request.POST['term']) |
+                        Q(barrio__parroquia__nombre__icontains=request.POST['term']))[0:10]:
                     item = i.to_json()
                     item['text'] = i.get_select2()
                     data.append(item)
