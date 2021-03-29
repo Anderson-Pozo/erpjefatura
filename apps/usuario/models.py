@@ -33,7 +33,7 @@ class User(AuditMixin, AbstractUser):
     email = models.EmailField('Correo electrónico', max_length=25, unique=False, null=True)
     first_name = models.CharField('Nombres', max_length=30, blank=True, null=True)
     last_name = models.CharField('Apellidos', max_length=30, blank=True, null=True)
-    path_avatar = models.CharField('Avatar URL', max_length=100, blank=True, null=True)
+    image = models.ImageField(upload_to='profile/%Y/%m/%d', blank=True, null=True)
     is_active = models.BooleanField('Es activo', default=True)
     is_staff = models.BooleanField('Es empleado', default=False)
     objects = UserManager()

@@ -143,6 +143,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (BASE_DIR, 'static')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # SETTINGS CORREO
 EMAIL_USE_TSL = True
 EMAIL_HOST = config('HOST_EMAIL')

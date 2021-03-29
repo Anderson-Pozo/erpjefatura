@@ -183,7 +183,8 @@ class AccountForm(forms.ModelForm):
             'username',
             'first_name',
             'last_name',
-            'path_avatar'
+            'image'
+            # 'path_avatar'
         }
         widgets = {
             'email': forms.EmailInput(
@@ -211,12 +212,18 @@ class AccountForm(forms.ModelForm):
                     'placeholder': 'Ingrese sus apellidos'
                 }
             ),
-            'path_avatar': forms.TextInput(
+            'image': forms.FileInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Ingrese el correo electrónico',
+                    'type': 'file',
                 }
             ),
+            # 'path_avatar': forms.TextInput(
+            #     attrs={
+            #         'class': 'form-control',
+            #         'placeholder': 'Ingrese el correo electrónico',
+            #     }
+            # ),
         }
 
 

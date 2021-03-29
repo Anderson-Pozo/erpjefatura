@@ -42,6 +42,6 @@ urlpatterns += [
     path('plusvalia/', include(('apps.plusvalia.urls', 'plusvalia'))),
     path('direccion/', include(('apps.direccion.urls', 'direccion'))),
     path('consulta/', include(('apps.vista_usuario.urls', 'consulta'))),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()
