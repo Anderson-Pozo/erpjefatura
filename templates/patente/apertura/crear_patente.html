@@ -13,24 +13,25 @@
                 <div class="text-danger text-xs">
                     <li><strong>{{ error|escape }}</strong></li>
                 </div>
+                <br>
             {% endfor %}
         {% endfor %}
         {% for error in form.non_field_errors %}
             <div class="text-danger text-xs">
                 <li><strong>{{ error|escape }}</strong></li>
             </div>
+            <br>
         {% endfor %}
     {% endif %}
-    <br>
     <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-3">
             <label class="small mb-1" for="fecha">Número de patente</label>
             {{ form.numero_patente }}
         </div>
-        <div class="form-group col-md-6">
-            <label class="small mb-1" for="fechaInicioActividad">Fecha</label>
-            {{ form.fecha }}
-        </div>
+{#        <div class="form-group col-md-6">#}
+{#            <label class="small mb-1" for="fechaInicioActividad">Fecha</label>#}
+{#            {{ form.fecha }}#}
+{#        </div>#}
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">

@@ -57,9 +57,11 @@ $(() => {
                 class: 'text-center',
                 orderable: true,
                 render: function (data, type, row) {
-                    if (row.estado_pago){
-                        return `<h6><span class="badge badge-danger">Pendiente <span class="badge badge-white">${row.dias_retraso}</span></span></h6>`
-                    }else {
+                    if (row.estado_pago) {
+                        return `<h6>
+                                <span class="badge badge-danger" >Pendiente <span 
+                                class="badge badge-white">${row.dias_retraso}</span></span></h6>`;
+                    } else {
                         return `<h6><span class="badge badge-success">Abonado</span></h6>`;
                     }
                 }
@@ -106,7 +108,7 @@ $(() => {
                                     </div>
                                     Suspender
                                 </button>`;
-                    if (row.estado_pago){
+                    if (row.estado_pago) {
                         menuOpt += `<button onclick="open_modal_correo('/patente/enviar_correo/${row.id}')" 
                                     class="dropdown-item btn-light">
                                     <div class="dropdown-item-icon">
@@ -187,7 +189,7 @@ function suspender_patente(pk) {
     });
 }
 
-function exonerar_patente(pk){
+function exonerar_patente(pk) {
     $.ajax({
         data: {
             csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val(),
