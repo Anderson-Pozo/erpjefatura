@@ -216,6 +216,8 @@ class AccountForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control',
                     'type': 'file',
+                    'accept': "image/*",
+                    'hidden': True
                 }
             ),
             # 'path_avatar': forms.TextInput(

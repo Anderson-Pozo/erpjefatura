@@ -94,8 +94,8 @@
                    id="navbarDropdownUserImage" href="javascript:void(0);"
                    role="button" data-toggle="dropdown" aria-haspopup="true"
                    aria-expanded="false">
-                    {% if user.path_avatar %}
-                        <img class="img-fluid" src="{{ user.path_avatar }}"/>
+                    {% if user.image %}
+                        <img class="img-fluid" src="{{ user.image.url }}"/>
                     {% else %}
                         <button class="btn btn-green btn-icon" type="button">{{ user.avatar_name }}</button>
                     {% endif %}

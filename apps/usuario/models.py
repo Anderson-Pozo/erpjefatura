@@ -42,7 +42,7 @@ class User(AuditMixin, AbstractUser):
     REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
 
     def to_json(self):
-        item = model_to_dict(self, exclude=['user_permissions', 'groups',])
+        item = model_to_dict(self, exclude=['user_permissions', 'groups', 'image',])
         return item
 
     class Meta:

@@ -27,7 +27,7 @@
             <nav class="nav nav-borders">
                 <a class="nav-link active ml-0" href="{% url 'usuario:account' object.pk %}">Perfil</a>
                 <a class="nav-link" href="{% url 'usuario:change_password' %}">Cambiar contraseña</a>
-{#                <a class="nav-link" href="#">Notificaciones</a>#}
+                {#                <a class="nav-link" href="#">Notificaciones</a>#}
             </nav>
             <hr class="mt-0 mb-4"/>
             <div class="row">
@@ -37,67 +37,27 @@
                         <div class="card-header">Foto de perfil</div>
 
                         <div class="card-body text-center">
-                            <div id="demo" class="carousel slide" data-ride="carousel">
 
-                                <!-- Indicators -->
-                                <ul class="carousel-indicators">
-                                    <li data-target="#demo" data-slide-to="0" class="active"></li>
-                                    <li data-target="#demo" data-slide-to="1"></li>
-                                    <li data-target="#demo" data-slide-to="2"></li>
-                                    <li data-target="#demo" data-slide-to="3"></li>
-                                    <li data-target="#demo" data-slide-to="4"></li>
-                                </ul>
-
-                                <!-- The slideshow -->
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img style="width: 80%;"
-                                             alt="Perfil 1"
-                                             onclick="select_avatar($(this));"
-                                             src="{% static 'assets/img/illustrations/profiles/profile-1.png' %}">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img style="width: 80%"
-                                             id="img2"
-                                             alt="Perfil 2"
-                                             onclick="select_avatar($(this));"
-                                             src="{% static 'assets/img/illustrations/profiles/profile-2.png' %}">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img style="width: 80%"
-                                             alt="Perfil 3"
-                                             onclick="select_avatar($(this));"
-                                             src="{% static 'assets/img/illustrations/profiles/profile-3.png' %}">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img style="width: 80%"
-                                             alt="Perfil 4"
-                                             onclick="select_avatar($(this));"
-                                             src="{% static 'assets/img/illustrations/profiles/profile-4.png' %}">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img style="width: 80%"
-                                             alt="Perfil 5"
-                                             onclick="select_avatar($(this));"
-                                             src="{% static 'assets/img/illustrations/profiles/profile-5.png' %}">
-                                    </div>
-                                </div>
-
-                                <!-- Left and right controls -->
-                                <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                                    <span class="carousel-control-prev-icon"></span>
-                                </a>
-                                <a class="carousel-control-next" href="#demo" data-slide="next">
-                                    <span class="carousel-control-next-icon"></span>
-                                </a>
-                            </div>
                             <!-- Profile picture image-->
-                            {#                            <img class="img-account-profile rounded-circle mb-2"#}
-                            {#                                 src="{% static 'assets/img/illustrations/profiles/profile-2.png' %}" alt=""/>#}
-                            {#                            <!-- Profile picture help block-->#}
-                            {#                            <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>#}
+                            {% if user.image %}
+                                <img class="img-account-profile rounded-circle mb-2"
+                                     src="{{ user.image.url }}"
+                                     alt=""
+                                     id="image_profile"
+                                     name="image_profile"
+                                />
+                            {% else %}
+                                <img class="img-account-profile rounded-circle mb-2"
+                                     src="{% static 'assets/img/illustrations/profiles/default_avatar.png' %}"
+                                     alt=""
+                                     id="image_profile"
+                                     name="image_profile"
+                                />
+                            {% endif %}
+                            <!-- Profile picture help block-->
+                            <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                             <!-- Profile picture upload button-->
-                            {#                            <input class="btn btn-primary" type="file" placeholder="Subir imagen">#}
+
                             {#                            <label class="btn btn-primary">#}
                             {#                                <input type="file"/>#}
                             {#                                Subir imagen#}
@@ -112,11 +72,6 @@
                     <div class="card card-header-actions mx-auto">
                         <div class="card-header">
                             Detalles de la cuenta
-                            <div>
-                                <button class="btn btn-white btn-icon mr-2">
-                                    <img id="header_avatar" class="img-fluid" src="{{ user.path_avatar }}"/>
-                                </button>
-                            </div>
                         </div>
                         <div class="card-body">
                             {% if form.errors %}
@@ -124,14 +79,12 @@
                                     {{ form.errors }}
                                 </div>
                             {% endif %}
-                            <form action="{% url 'usuario:account' object.pk %}" method="POST">
+                            <form action="{% url 'usuario:account' object.pk %}" method="POST"
+                                  enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <!-- Form Group (username)-->
                                 <div class="form-group">
-                                    {#                                    <div class="form-group col-md-6">#}
-                                    {#                                        #}
-                                    {#                                    </div>#}
-                                    <label class="small mb-1" for="numeroCedula">Número de cédula</label>
+                                    <label class="small mb-1" for="numeroCedula">Número de RUC</label>
                                     {{ form.username }}
                                 </div>
                                 <!-- Form Row-->
@@ -149,8 +102,12 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <label class="small mb-1" for="ingreseApellidos">Imagen</label>
-                                        {{ form.image }}
+                                        {#                                        <label class="small mb-1" for="ingreseApellidos">Imagen</label>#}
+                                        <label class="btn btn-green">
+                                            {{ form.image }}
+                                            {#                                            <input type="file" hidden/>#}
+                                            Subir Imagen
+                                        </label>
                                     </div>
                                 </div>
                                 <!-- Form Group (email address)-->
@@ -162,7 +119,7 @@
                                     </div>
                                 </div>
                                 <!-- Save changes button-->
-                                <button class="btn btn-primary" type="submit">Guardar</button>
+                                <button class="btn btn-primary" type="submit">Guardar cambios</button>
                             </form>
                         </div>
                     </div>
@@ -175,21 +132,26 @@
 {% block extrajs %}
     <script>
         $(() => {
-            let i_avatar = $('input[name="path_avatar"]');
-
-            i_avatar.on('change', () => {
-                // $('#header_avatar').attr('src', 'assets/img/illustrations/profiles/profile-5.png');
+            $('#id_image').change((e) => {
+                addImage(e);
             });
+
+            function addImage(e) {
+                let file = e.target.files[0],
+                    imageType = /image.*/;
+
+                if (!file.type.match(imageType))
+                    return;
+
+                let reader = new FileReader();
+                reader.onload = fileOnload;
+                reader.readAsDataURL(file);
+            }
+
+            function fileOnload(e) {
+                let result = e.target.result;
+                $('#image_profile').attr("src", result);
+            }
         });
-
-        function select_avatar(obj) {
-            let i_avatar = $('#id_path_avatar');
-            let source = obj.attr('src');
-            let title = obj.attr('alt');
-            i_avatar.val(source);
-
-            $('#src_image').val(title);
-            $('#header_avatar').attr('src', source);
-        }
     </script>
 {% endblock %}
