@@ -184,7 +184,6 @@ class AccountForm(forms.ModelForm):
             'first_name',
             'last_name',
             'image'
-            # 'path_avatar'
         }
         widgets = {
             'email': forms.EmailInput(
@@ -219,14 +218,17 @@ class AccountForm(forms.ModelForm):
                     'accept': "image/*",
                     'hidden': True
                 }
-            ),
-            # 'path_avatar': forms.TextInput(
-            #     attrs={
-            #         'class': 'form-control',
-            #         'placeholder': 'Ingrese el correo electrónico',
-            #     }
-            # ),
+            )
         }
+
+    def clean_image(self):
+        image = self.cleaned_data.get('image', False)
+        if image:
+            if image.size > 0.128*1024*1024:
+                raise forms.ValidationError('La imagen no debe exceder 128 Kb')
+            return image
+        else:
+            raise forms.ValidationError('Asegurese que el archivo sea de tipo imagen')
 
 
 class RecoverPasswordForm(forms.Form):
