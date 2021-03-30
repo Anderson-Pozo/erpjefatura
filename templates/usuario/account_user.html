@@ -25,12 +25,12 @@
         <div class="container mt-4">
             <!-- Account page navigation-->
             <nav class="nav nav-borders">
-                <a class="nav-link active ml-0" href="{% url 'usuario:account' object.pk %}">Perfil</a>
+                <a class="nav-link active ml-0" href="{% url 'usuario:account' %}">Perfil</a>
                 <a class="nav-link" href="{% url 'usuario:change_password' %}">Cambiar contraseña</a>
                 {#                <a class="nav-link" href="#">Notificaciones</a>#}
             </nav>
             <hr class="mt-0 mb-4"/>
-            <form action="{% url 'usuario:account' object.pk %}" method="POST"
+            <form action="{% url 'usuario:account' %}" method="POST"
                   enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row">
@@ -151,5 +151,23 @@
                 $('#image_profile').attr("src", result);
             }
         });
+    </script>
+{% endblock %}
+{% block mensajes %}
+    <script>
+        function show_success_action(message) {
+            Swal.fire({
+                title: 'Acción procesada correctamente',
+                text: message,
+                icon: 'success',
+            })
+        }
+        {% if messages %}
+            let message_html = ''
+            {% for message in messages %}
+                message_html += '{{ message }}'
+            {% endfor %}
+        {% endif %}
+        show_success_action(message_html);
     </script>
 {% endblock %}

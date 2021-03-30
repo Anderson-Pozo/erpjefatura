@@ -2,7 +2,7 @@ from django.urls import path, re_path
 from .views import *
 
 urlpatterns = [
-    path('account/<int:pk>/', Account.as_view(), name='account'),
+    path('account/', Account.as_view(), name='account'),
     path('change_password/', ChangePassword.as_view(), name='change_password'),
 ]
 

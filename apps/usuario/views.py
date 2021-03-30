@@ -80,7 +80,16 @@ class Account(LoginRequiredMixin, UpdateView):
     model = User
     form_class = AccountForm
     template_name = 'usuario/account_user.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('usuario:account')
+
+    def get_object(self, queryset=None):
+        obj = self.model.objects.get(pk=self.request.user.pk)
+        return obj
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, 'Datos actualizados correctamente')
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class ChangePassword(LoginRequiredMixin, FormView):
