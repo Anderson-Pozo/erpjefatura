@@ -14,17 +14,21 @@ alcabalas y plusvalias.
 ### Instalación
 1. Clonar el repositorio
     ```sh
-   git clone https://github.com/Anderson-Pozo/erpjefatura.git
+   $ git clone https://github.com/Anderson-Pozo/erpjefatura.git
    ```
 2. Crear entorno virtual
     ```sh
-    virtualenv venv
+    $ virtualenv venv
     ```
-3. Instalar requerimientos
+3. Activar entorno virtual en Windows
     ```sh
-    pip install -r requirements.txt
+   $ venv\Scripts\activate
+   ```
+4. Instalar requerimientos
+    ```sh
+    $ pip install -r requirements.txt
     ```
-4. Crear la base de datos en PostgreSQL
+5. Crear la base de datos en PostgreSQL
     ```sh
    CREATE DATABASE IF NOT EXISTS MY_DATABASE;
    ```
@@ -44,16 +48,16 @@ siguiente contenido
    ```
 6. Aplicar las migraciones desde el directorio principal
     ```sh
-   python manage.py makemigrations
-   python manage.py migrate
+   $ python manage.py makemigrations
+   $ python manage.py migrate
    ``` 
 7. Crear superusuario administrador
     ```sh
-   python manage.py createsuperuser
+   $ python manage.py createsuperuser
    ```
 8. Ejecutar la aplicación
     ```sh
-   python manage.py runserver
+   $ python manage.py runserver
    ```
 9. Abrir el navegador en la dirección [localhost:8000](http://localhost:8000/)
 
