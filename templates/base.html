@@ -506,8 +506,8 @@
                 {% for message in messages %}
                     message_html += '{{ message }}'
                 {% endfor %}
+                show_error_perm(message_html);
             {% endif %}
-            show_error_perm(message_html);
         </script>
     {% endblock %}
     </body>

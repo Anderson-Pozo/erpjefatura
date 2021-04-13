@@ -112,28 +112,28 @@ class DetalleForm(forms.ModelForm):
             ),
             'impuesto': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control form-control-sm text-right font-weight-600',
                     'required': True,
                     'step': '0.01'
                 }
             ),
             'interes': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control form-control-sm text-right font-weight-600',
                     'required': True,
                     'step': '0.01'
                 }
             ),
             'multa': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control form-control-sm text-right font-weight-600',
                     'required': True,
                     'step': '0.01'
                 }
             ),
             'servicios_administrativos': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control form-control-sm text-right font-weight-600',
                     'required': True,
                     'step': '0.01'
                 }

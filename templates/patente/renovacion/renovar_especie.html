@@ -51,7 +51,7 @@
                                     {{ form.impuesto }}
                                 {% else %}
                                     <input name="impuesto" type="number"
-                                           class="form-control form-control-sm"
+                                           class="form-control form-control-sm text-right font-weight-600"
                                            value="{{ patente.get_impuesto }}"
                                            required>
                                 {% endif %}
@@ -67,7 +67,7 @@
                                 <input type="number"
                                        name="interes"
                                        value="{{ patente.get_interes }}"
-                                       class="form-control form-control-sm">
+                                       class="form-control form-control-sm text-right font-weight-600">
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -80,7 +80,7 @@
                                 <input type="number"
                                        name="multa"
                                        value="{{ patente.get_multa }}"
-                                       class="form-control form-control-sm">
+                                       class="form-control form-control-sm text-right font-weight-600">
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -102,11 +102,8 @@
                             </td>
                             <td class="text-right pb-0">
                                 <div class="h5 mb-0 font-weight-700 text-green" id="total">
-                                    {#                                    $2059.75#}
-                                    {#                                    <input name="total" type="number">#}
                                 </div>
                             </td>
-                            <td>&nbsp;</td>
                         </tr>
                         </tbody>
                     </table>
