@@ -291,4 +291,4 @@ def generate_user(sender, instance, **kwargs):
     except Exception as e:
         print(e)
 
-# post_save.connect(generate_user, sender=Patente)
+post_save.connect(generate_user, sender=Patente)

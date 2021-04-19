@@ -42,7 +42,7 @@ class PatenteForm(forms.ModelForm):
             'numero_patente': forms.NumberInput(
                 # format='%Y-%m-%d',
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-control form-control-sm',
                     'required': True,
                     'type': 'number',
                 }

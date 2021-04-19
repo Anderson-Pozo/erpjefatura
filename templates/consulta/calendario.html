@@ -75,7 +75,7 @@
                 events: [
                     {% for i in fechas %}
                         {
-                            title: 'Pago: {{ i.patente.establecimiento.nombre }} sdasdasdasdasd',
+                            title: 'Pago: {{ i.patente.establecimiento.nombre }}',
                             start: '{{ i.fecha | date:"Y-m-d" }}',
                             description: '{{ i.patente.establecimiento.nombre }}',
                             backgroundColor: '#1fc4ea',
@@ -87,7 +87,7 @@
                             title: 'Pago pendiente {{ patente.establecimiento.nombre }}',
                             start: '{{ patente.get_vencimiento | date:"Y-m-d" }}',
                             end: Date.now(),
-                            description: 'Descpksapdksad',
+                            description: 'Description',
                             {#display: 'background',#}
                             backgroundColor: '#f80606',
                             borderColor: '#f80606'
