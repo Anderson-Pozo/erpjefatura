@@ -42,7 +42,7 @@ jobs:
         PGPASSWORD=test1234 psql --username=test --host=localhost --list jefaturatest
     - name: Setup dbcreate permission
       run: |
-        sudo -u postgres ALTER USER test CREATEDB
+        sudo -u postgres psql --command="ALTER USER test CREATEDB" --command="\du"
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
