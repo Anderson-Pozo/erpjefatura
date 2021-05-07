@@ -1,5 +1,5 @@
 from django.test import TestCase
-from apps.usuario.models import User, Grupo, Permisos
+from apps.usuario.models import User
 
 
 class TestUser(TestCase):
