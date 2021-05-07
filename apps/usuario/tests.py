@@ -10,7 +10,6 @@ class TestUser(TestCase):
             email='anderam92@test.com',
             first_name='Anderson Ramiro',
             last_name='Pozo Imbaquingo',
-            path_avatar='http://anderson_avatar.jpg',
             is_active=True,
             is_staff=False,
             is_superuser=True,
