@@ -14,12 +14,12 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      DB_ENGINE=django.db.backends.postgresql_psycopg2
-      DB_NAME=jefaturatest
-      DB_USER=test
-      DB_PASSWORD=test1234
-      DB_HOST=localhost
-      DB_PORT=5432
+      DB_ENGINE: django.db.backends.postgresql_psycopg2
+      DB_NAME: jefaturatest
+      DB_USER: test
+      DB_PASSWORD: test1234
+      DB_HOST: localhost
+      DB_PORT: 5432
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.7
