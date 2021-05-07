@@ -47,12 +47,15 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: All test
+      run: |
+        python3 manage.py test
     - name: Testing module patente
       run: |
         python3 manage.py test apps.patente.tests.test_models --verbosity 2
     - name: Testing module alcabala plusvalia
       run: |
-        python 3 manage.py test apps.alcabala.tests --verbosity 2
+        python3 manage.py test apps.alcabala.tests --verbosity 2
     - name: Testing user module
       run: |
-        python 3 manage.py test apps.usuario.tests --verbosity 2
+        python3 manage.py test apps.usuario.tests --verbosity 2
