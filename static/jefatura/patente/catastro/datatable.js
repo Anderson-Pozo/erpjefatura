@@ -81,16 +81,12 @@ $(() => {
                                     </div>
                                     Renovar
                                 </a>
-                                <button class="dropdown-item btn-light" type="button" 
-                                    onclick="window.open('/patente/report_declaracion/${row.id}',
-                                    'popUpWindow',
-                                    'height=700,width=600,left=350,top=100,resizable=yes,' +
-                                    'scrollbars=yes,toolbar=yes,menubar=no,location=yes,directories=no, status=yes');">
+                                <a class="dropdown-item btn-light" href="/patente/report_declaracion/${row.id}" target="_blank">
                                     <div class="dropdown-item-icon">
                                         <i class="fas fa-print"></i>
                                     </div>
                                     Declaración
-                                </button>
+                                </a>
                                 <a rel="details" class="dropdown-item btn-light">
                                     <div class="dropdown-item-icon">
                                         <i class="fas fa-funnel-dollar"></i>
