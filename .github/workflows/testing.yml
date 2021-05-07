@@ -56,6 +56,3 @@ jobs:
     - name: Testing module alcabala plusvalia
       run: |
         python3 manage.py test apps.alcabala.tests --verbosity 2
-    - name: Run secret test
-      run: |
-        echo ${{ secrets.DB_NAME }}
