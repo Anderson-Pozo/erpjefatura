@@ -1,7 +1,7 @@
 from .base import *
 
 DEBUG = True
-ALLOWED_HOSTS = ['erpjefaturav1.herokuapp.com']
+ALLOWED_HOSTS = ['erpjefatura.herokuapp.com']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
