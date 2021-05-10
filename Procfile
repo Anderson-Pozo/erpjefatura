@@ -1,0 +1,1 @@
+web: gunicorn erpjefatura.wsgi
