@@ -49,6 +49,8 @@ jobs:
     - name: Make migrations
       run: |
         python3 manage.py makemigrations
+    - name: Make migrate
+      run: |
         python3 manage.py migrate
     - name: Testing patente module
       run: |
