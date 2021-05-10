@@ -3,8 +3,7 @@ from apps.usuario.models import User
 
 
 class TestUser(TestCase):
-    @classmethod
-    def setUpTestData(cls):
+    def setUp(self) -> None:
         User.objects.create(
             username='0401798475',
             email='anderam92@test.com',

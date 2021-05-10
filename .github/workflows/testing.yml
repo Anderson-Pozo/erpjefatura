@@ -50,9 +50,12 @@ jobs:
       run: |
         python3 manage.py makemigrations
         python3 manage.py migrate
-    - name: Testing module patente
+    - name: Testing patente module
       run: |
         python3 manage.py test apps.patente.tests.test_models --verbosity 2
-    - name: Testing module alcabala plusvalia
+    - name: Testing alcabala plusvalia module
       run: |
         python3 manage.py test apps.alcabala.tests --verbosity 2
+    - name: Testing user module
+      run: |
+        python3 manage.py test apps.usuario.tests --verbosity 2

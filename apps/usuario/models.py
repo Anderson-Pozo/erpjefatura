@@ -1,8 +1,6 @@
-from datetime import datetime, date
 from django.db import models
 from django.forms import model_to_dict
 from django.contrib.auth.models import AbstractUser, BaseUserManager, Group, Permission
-from apps.utils.format_date import current_date_format
 from apps.auditoria.mixins import AuditMixin
 
 
@@ -42,7 +40,7 @@ class User(AuditMixin, AbstractUser):
     REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
 
     def to_json(self):
-        item = model_to_dict(self, exclude=['user_permissions', 'groups', 'image',])
+        item = model_to_dict(self, exclude=['user_permissions', 'groups', 'image', ])
         return item
 
     class Meta:
