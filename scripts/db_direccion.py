@@ -2,7 +2,7 @@ import os
 from datetime import date
 import django
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'erpjefatura.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'erpjefatura.settings.local')
 django.setup()
 
 from apps.direccion.models import Parroquia
