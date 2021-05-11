@@ -2,7 +2,7 @@ import os
 from datetime import date
 import django
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'erpjefatura.settings.local')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'erpjefatura.settings.production')
 django.setup()
 
 from apps.contribuyente.models import TipoContribuyente
