@@ -181,7 +181,7 @@
                                 </nav>
                             </div>
                             <!-- Sidenav Menu Heading-->
-                            <div class="sidenav-menu-heading">USUARIOS</div>
+                            <div class="sidenav-menu-heading">SEGURIDAD</div>
                             <!-- Sidenav Accordion -->
                             <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
                                data-target="#collapseDashboards" aria-expanded="true"
@@ -190,23 +190,23 @@
                                 Seguridad
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="{% block collapse_usuarios %}collapse{% endblock %}" id="collapseDashboards"
-                                 data-parent="#accordionSidenav">
-                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                    <a class="nav-link" href="{% url 'usuario:lista_usuarios' %}">
-                                        Usuarios
-                                    </a>
-                                    <a class="nav-link" href="{% url 'usuario:lista_grupo' %}">
-                                        Grupos
-                                    </a>
-{#                                    <a class="nav-link" href="{% url 'usuario:lista_permisos' %}">#}
-{#                                        Permisos#}
-{#                                    </a>#}
-                                    <a class="nav-link" href="{% url 'usuario:lista_logs' %}">
-                                        Logs de usuario
-                                    </a>
-                                </nav>
-                            </div>
+                                <div class="{% block collapse_usuarios %}collapse{% endblock %}" id="collapseDashboards"
+                                     data-parent="#accordionSidenav">
+                                    <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
+                                        <a class="nav-link" href="{% url 'usuario:lista_usuarios' %}">
+                                            Usuarios
+                                        </a>
+                                        <a class="nav-link" href="{% url 'usuario:lista_grupo' %}">
+                                            Grupos
+                                        </a>
+    {#                                    <a class="nav-link" href="{% url 'usuario:lista_permisos' %}">#}
+    {#                                        Permisos#}
+    {#                                    </a>#}
+                                        <a class="nav-link" href="{% url 'usuario:lista_logs' %}">
+                                            Logs de usuario
+                                        </a>
+                                    </nav>
+                                </div>
                         {% else %}
                             <div class="sidenav-menu-heading">Consulta</div>
                             <!-- Sidenav Accordion -->
