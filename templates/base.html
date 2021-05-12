@@ -44,25 +44,6 @@
                 data-feather="menu"></i></button>
         <!-- Navbar Items-->
         <ul class="navbar-nav align-items-center ml-auto">
-            <!-- Navbar Search Dropdown-->
-            <!-- * * Note: * * Visible only below the md breakpoint-->
-            <li class="nav-item dropdown no-caret mr-3 d-md-none">
-                <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="searchDropdown" href="#" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="search"></i></a>
-                <!-- Dropdown - Search-->
-                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--fade-in-up"
-                     aria-labelledby="searchDropdown">
-                    <form class="form-inline mr-auto w-100">
-                        <div class="input-group input-group-joined input-group-solid">
-                            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search"
-                                   aria-describedby="basic-addon2"/>
-                            <div class="input-group-append">
-                                <div class="input-group-text"><i data-feather="search"></i></div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </li>
             <!-- User Dropdown-->
             <li class="nav-item dropdown no-caret mr-3 mr-lg-0 dropdown-user">
                 <a class="btn btn-icon btn-transparent-dark dropdown-toggle"
@@ -218,9 +199,9 @@
                                     <a class="nav-link" href="{% url 'usuario:lista_grupo' %}">
                                         Grupos
                                     </a>
-                                    <a class="nav-link" href="{% url 'usuario:lista_permisos' %}">
-                                        Permisos
-                                    </a>
+{#                                    <a class="nav-link" href="{% url 'usuario:lista_permisos' %}">#}
+{#                                        Permisos#}
+{#                                    </a>#}
                                     <a class="nav-link" href="{% url 'usuario:lista_logs' %}">
                                         Logs de usuario
                                     </a>
@@ -316,146 +297,12 @@
                                                             </p>
                                                         </div>
                                                     </div>
-                                                    {#                                            <div class="col-xl-4 col-xxl-12 text-center"><img class="img-fluid" src="assets/img/illustrations/at-work.svg" style="max-width: 26rem" /></div>#}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             {% endblock %}
-
-                            <!-- Example Colored Cards for Dashboard Demo-->
-                            <div class="row">
-                                <div class="col-xxl-3 col-lg-6">
-                                    <div class="card bg-primary text-white mb-4">
-                                        <div class="card-body">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="mr-3">
-                                                    <div class="text-white-75 small">Earnings (Monthly)</div>
-                                                    <div class="text-lg font-weight-bold">$40,000</div>
-                                                </div>
-                                                <i class="feather-xl text-white-50" data-feather="calendar"></i>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <a class="small text-white stretched-link" href="#">View Report</a>
-                                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-3 col-lg-6">
-                                    <div class="card bg-warning text-white mb-4">
-                                        <div class="card-body">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="mr-3">
-                                                    <div class="text-white-75 small">Earnings (Annual)</div>
-                                                    <div class="text-lg font-weight-bold">$215,000</div>
-                                                </div>
-                                                <i class="feather-xl text-white-50" data-feather="dollar-sign"></i>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <a class="small text-white stretched-link" href="#">View Report</a>
-                                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-3 col-lg-6">
-                                    <div class="card bg-success text-white mb-4">
-                                        <div class="card-body">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="mr-3">
-                                                    <div class="text-white-75 small">Task Completion</div>
-                                                    <div class="text-lg font-weight-bold">24</div>
-                                                </div>
-                                                <i class="feather-xl text-white-50" data-feather="check-square"></i>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <a class="small text-white stretched-link" href="#">View Tasks</a>
-                                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xxl-3 col-lg-6">
-                                    <div class="card bg-danger text-white mb-4">
-                                        <div class="card-body">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="mr-3">
-                                                    <div class="text-white-75 small">Pending Requests</div>
-                                                    <div class="text-lg font-weight-bold">17</div>
-                                                </div>
-                                                <i class="feather-xl text-white-50" data-feather="message-circle"></i>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer d-flex align-items-center justify-content-between">
-                                            <a class="small text-white stretched-link" href="#">View Requests</a>
-                                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Example Charts for Dashboard Demo-->
-                            <div class="row">
-                                <div class="col-xl-6 mb-4">
-                                    <div class="card card-header-actions h-100">
-                                        <div class="card-header">
-                                            Earnings Breakdown
-                                            <div class="dropdown no-caret">
-                                                <button class="btn btn-transparent-dark btn-icon dropdown-toggle"
-                                                        id="areaChartDropdownExample" type="button"
-                                                        data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false"><i class="text-gray-500"
-                                                                                 data-feather="more-vertical"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right animated--fade-in-up"
-                                                     aria-labelledby="areaChartDropdownExample">
-                                                    <a class="dropdown-item" href="#!">Last 12 Months</a>
-                                                    <a class="dropdown-item" href="#!">Last 30 Days</a>
-                                                    <a class="dropdown-item" href="#!">Last 7 Days</a>
-                                                    <a class="dropdown-item" href="#!">This Month</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#!">Custom Range</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="chart-area">
-                                                <canvas id="myAreaChart" width="100%" height="30"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 mb-4">
-                                    <div class="card card-header-actions h-100">
-                                        <div class="card-header">
-                                            Monthly Revenue
-                                            <div class="dropdown no-caret">
-                                                <button class="btn btn-transparent-dark btn-icon dropdown-toggle"
-                                                        id="areaChartDropdownExample" type="button"
-                                                        data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false"><i class="text-gray-500"
-                                                                                 data-feather="more-vertical"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right animated--fade-in-up"
-                                                     aria-labelledby="areaChartDropdownExample">
-                                                    <a class="dropdown-item" href="#!">Last 12 Months</a>
-                                                    <a class="dropdown-item" href="#!">Last 30 Days</a>
-                                                    <a class="dropdown-item" href="#!">Last 7 Days</a>
-                                                    <a class="dropdown-item" href="#!">This Month</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#!">Custom Range</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="chart-bar">
-                                                <canvas id="myBarChart" width="100%" height="30"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     {% endblock %}
                 </main>
