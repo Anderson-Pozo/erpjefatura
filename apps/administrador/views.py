@@ -61,7 +61,7 @@ class Index(LoginRequiredMixin, TemplateView):
     @staticmethod
     def get_last_users():
         try:
-            return User.objects.all().order_by('-last_login')[0:6]
+            return User.objects.filter(last_login__isnull=False).order_by('-last_login')[0:6]
         except Exception as error:
             print(error)
         return []
