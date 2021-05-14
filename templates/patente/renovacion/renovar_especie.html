@@ -6,16 +6,15 @@
 
 {% block body_card %}
     <div class="card invoice">
-        <div class="card-header p-4 p-md-5 border-bottom-0 bg-gradient-primary-to-secondary text-white-50">
+        <div class="card-header p-2 p-md-5 border-bottom-0 bg-gradient-primary-to-secondary text-white-50">
+             <div class="col-12 col-lg-auto text-center text-lg-right">
+                <div class="h5 text-white">Nº patente: {{ patente.numero_patente }}</div>
+            </div>
             <div class="row justify-content-between align-items-center">
-                <div class="col-12 col-lg-auto mb-5 mb-lg-0 text-center text-lg-left">
-                    <div class="h2 text-white mb-0">{{ patente.establecimiento.nombre }}</div>
+                <div class="col-12 col-lg-auto mb-0 mb-lg-0 text-center text-lg-left">
+                    <div class="h3 text-white mb-0">{{ patente.establecimiento.nombre }}</div>
                     {{ patente.establecimiento.direccion.get_all_direccion }}
-                </div>
-                <div class="col-12 col-lg-auto text-center text-lg-right">
-                    <!-- Invoice details-->
-                    <div class="h4 text-white">RUC: {{ patente.contribuyente.ruc }}</div>
-                    Nº patente {{ patente.numero_patente }}
+                    <div class="h5 text-white">RUC: {{ patente.contribuyente.ruc }}</div>
                 </div>
             </div>
         </div>

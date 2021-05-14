@@ -13,6 +13,15 @@ class PersonaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = PersonaResource
 
 
+class PredioResource(resources.ModelResource):
+    class Meta:
+        model = Predio
+
+
+class PredioAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = PredioResource
+
+
 admin.site.register(Alcabala)
-admin.site.register(Predio)
+admin.site.register(Predio, PredioAdmin)
 admin.site.register(Persona, PersonaAdmin)

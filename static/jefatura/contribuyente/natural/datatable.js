@@ -48,32 +48,10 @@ function lista_contribuyentes_naturales(){
         { "data": "apellidos"},
         { "data": "tlf_celular"},
         // { "data": "tipocontribuyente"},
-        { "data": "estado"},
+        { "data": "email"},
         { "data": "acciones"},
     ],
     columnDefs: [
-        // {
-        //     targets: [0],
-        //     orderable: true,
-        //     render: function (data, type, row) {
-        //         return '<p>' + row.nombres + '</p>';
-        //     }
-        // },
-        // {
-        //     targets: [-2],
-        //     class: 'text-center',
-        //     orderable: true,
-        //     render: function (data, type, row) {
-        //         if (row.tipocontribuyente == 'Natural'){
-        //             return '<div class="badge badge-success badge-pill">' + row.tipocontribuyente + '</div></td>';
-        //             // return 'Natural'
-        //         }
-        //         if (row.tipocontribuyente == 'Jurídica') {
-        //             return '<div class="badge badge-indigo badge-pill">' + row.tipocontribuyente +'</div></td>';
-        //             // return 'Jurídico'
-        //         }
-        //     }
-        // },
         {
             targets: [-1],
             class: 'text-center',
@@ -86,18 +64,18 @@ function lista_contribuyentes_naturales(){
                 return buttons;
             }
         },
-        {
-            targets: [-2],
-            class: 'text-center',
-            orderable: false,
-            render: function (data, type, row) {
-                if (row.estado){
-                    return '<span class="badge badge-success">Activo</span>';
-                }else {
-                    return '<span class="badge badge-danger">Suspendido</span>';
-                }
-            }
-        }
+        // {
+        //     targets: [-2],
+        //     class: 'text-center',
+        //     orderable: false,
+        //     render: function (data, type, row) {
+        //         if (row.estado){
+        //             return '<span class="badge badge-success">Activo</span>';
+        //         }else {
+        //             return '<span class="badge badge-danger">Suspendido</span>';
+        //         }
+        //     }
+        // }
     ],
     initComplete: function(settings, json) {
         // alert('Datos cargados');

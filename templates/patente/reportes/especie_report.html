@@ -92,7 +92,7 @@
 {% endif %}
 
 <div id="razon_social">
-    <p>{{ detalle.patente.establecimiento.nombre|upper }}</p>
+    <p style="font-size: 13.5px">{{ detalle.patente.establecimiento.nombre|upper|truncatechars:42 }}</p>
 </div>
 <div id="direccion">
     <p style="font-size: 13px">
