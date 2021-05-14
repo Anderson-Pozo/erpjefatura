@@ -29,7 +29,7 @@ class Logs(LogEntry):
         current_date = date.today()
         past_date = self.action_time.date()
         days = (current_date - past_date).days
-        if days == 0 or -1:
+        if days <= 0:
             return 'Hoy'
         elif days == 1:
             return '{} día'.format(days)
