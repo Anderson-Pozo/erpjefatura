@@ -1,6 +1,10 @@
 function format(d) {
     return '<table cellpadding="5" cellspacing="0" style="padding-left:50px; border: hidden">' +
         '<tr>' +
+        '<td>Cedula representante:</td>' +
+        '<td>' + d.cedula_representante + '</td>' +
+        '</tr>' +
+        '<tr>' +
         '<td>Nombres representante:</td>' +
         '<td>' + d.nombres_representante + '</td>' +
         '</tr>' +
@@ -9,7 +13,7 @@ function format(d) {
         '<td>' + d.apellidos_representante + '</td>' +
         '</tr>' +
         '<tr>' +
-        '<td>Email representante:</td>' +
+        '<td>Correo representante:</td>' +
         '<td>' + d.correo_representante + '</td>' +
         '</tr>' +
         '</table>';
@@ -76,7 +80,7 @@ function lista_contribuyentes() {
             {"data": "tlf_celular"},
             {"data": "email"},
             {"data": "nombres_representante"},
-            {"data": "estado"},
+            // {"data": "estado"},
             {"data": "acciones"},
         ],
         columnDefs: [
@@ -92,18 +96,18 @@ function lista_contribuyentes() {
                     return buttons;
                 }
             },
-            {
-                targets: [-2],
-                class: 'text-center',
-                orderable: false,
-                render: function (data, type, row) {
-                    if (row.estado) {
-                        return '<span class="badge badge-success">Activo</span>';
-                    } else {
-                        return '<span class="badge badge-danger">Suspendido</span>';
-                    }
-                }
-            }
+            // {
+            //     targets: [-2],
+            //     class: 'text-center',
+            //     orderable: false,
+            //     render: function (data, type, row) {
+            //         if (row.estado) {
+            //             return '<span class="badge badge-success">Activo</span>';
+            //         } else {
+            //             return '<span class="badge badge-danger">Suspendido</span>';
+            //         }
+            //     }
+            // }
         ],
         initComplete: function (settings, json) {
             // alert('Datos cargados');
