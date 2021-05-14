@@ -23,13 +23,6 @@ Listado de establecimientos
 {% block centralbody %}
 <div class="container mt-n10">
     <div class="card mb-4">
-{#        <div class="card-header">#}
-{#            <button onclick="open_modal_creation('{% url 'establecimiento:crear_establecimiento' %}')"#}
-{#                    class="btn btn-primary" type="button" data-toggle="modal"#}
-{#                    data-target="#creacion">#}
-{#                    Crear registro#}
-{#            </button>#}
-{#        </div>#}
         <div class="card-body">
             <div class="datatable">
                 <table class="table table-bordered table-hover" id="tableEstablecimientos" width="100%" cellspacing="0">
@@ -40,7 +33,6 @@ Listado de establecimientos
                             <th>Patrimonio</th>
                             <th>Tipo de actividad</th>
                             <th>Dirección</th>
-                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -51,7 +43,6 @@ Listado de establecimientos
                             <th>Patrimonio</th>
                             <th>Tipo de actividad</th>
                             <th>Dirección</th>
-                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </tfoot>
