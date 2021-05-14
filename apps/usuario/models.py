@@ -47,7 +47,7 @@ class User(AuditMixin, AbstractUser):
         db_table = "usuario"
 
     def __str__(self):
-        return f'{self.first_name}, {self.last_name}'
+        return f'{self.first_name} {self.last_name}'
 
     def avatar_name(self):
         if self.first_name and self.last_name:
