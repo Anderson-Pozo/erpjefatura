@@ -65,20 +65,21 @@
             </div>
         </div>
         <!-- Save changes button-->
-        <div class="card-body p-4 p-md-5">
+        <div class="card-body p-4 ml-5 mr-5 p-md-5">
             <!-- Invoice table-->
             <div class="table-responsive">
                 <table class="table table-borderless mb-0">
                     <thead class="border-bottom">
                     <tr class="small mb-1">
-                        <th scope="col">Impuestos</th>
+                        <th class="text-left" scope="col">Impuestos</th>
+                        <th>&nbsp;</th>
                         <th class="text-right" colspan="4" scope="col">Montos</th>
                     </tr>
                     </thead>
                     <tbody>
                     <!-- Invoice item 1-->
                     <tr class="border-bottom">
-                        <td>
+                        <td colspan="2">
                             <div class="small mb-1">Valor del compra venta</div>
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
@@ -87,7 +88,7 @@
                     </tr>
                     <!-- Invoice item 2-->
                     <tr class="border-bottom">
-                        <td>
+                        <td colspan="2">
                             <div class="small mb-1">Impuesto alcabala</div>
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
@@ -96,7 +97,7 @@
                     </tr>
                     <!-- Invoice item 3-->
                     <tr class="border-bottom">
-                        <td>
+                        <td colspan="2">
                             <div class="small mb-1">Alcabala provincial</div>
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
@@ -104,7 +105,7 @@
                         </td>
                     </tr>
                     <tr class="border-bottom">
-                        <td>
+                        <td colspan="2">
                             <div class="small mb-1">Fondos escolares</div>
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
@@ -112,16 +113,15 @@
                         </td>
                     </tr>
                     <tr class="border-bottom">
-                        <td>
+                        <td colspan="2">
                             <div class="small mb-1">Prevención de riesgos</div>
-
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
                             {{ form.fondos_prevencion_riesgos }}
                         </td>
                     </tr>
                     <tr class="border-bottom">
-                        <td>
+                        <td colspan="2">
                             <div class="small mb-1">Agua potable</div>
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
@@ -130,7 +130,7 @@
                     </tr>
                     <!-- Invoice total-->
                     <tr>
-                        <td class="text-right pb-0">
+                        <td class="text-right pb-0" colspan="2">
                             <div class="text-uppercase small font-weight-700 text-muted">
                                 Total a pagar:
                             </div>

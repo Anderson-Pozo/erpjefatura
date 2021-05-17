@@ -73,42 +73,42 @@ class AlcabalaForm(forms.ModelForm):
             ),
             'valor_compra_venta': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control form-control-sm text-right font-weight-600',
                     'placeholder': 'Ingrese el valor de compra-venta',
                     'required': True,
                 }
             ),
             'impuesto_alcabalas': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control form-control-sm text-right font-weight-600',
                     'placeholder': 'Ingrese el impuesto de alcabalas',
                     'required': True,
                 }
             ),
             'alcabalas_provinciales': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control form-control-sm text-right font-weight-600',
                     'placeholder': 'Ingrese el valor de las alcabalas provinciales',
                     'required': True,
                 }
             ),
             'fondos_escolares': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control form-control-sm text-right font-weight-600',
                     'placeholder': 'Ingrese el valor de los fondos escolares',
                     'required': True,
                 }
             ),
             'fondos_prevencion_riesgos': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control form-control-sm text-right font-weight-600',
                     'placeholder': 'Ingrese el valor de los fondos de prevención de riesgos',
                     'required': True,
                 }
             ),
             'agua_potable': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control form-control-sm text-right font-weight-600',
                     'placeholder': 'Ingrese el valor del agua potable',
                     'required': True,
                 }
