@@ -90,27 +90,27 @@ class PlusvaliaForm(forms.ModelForm):
             ),
             'diferencia_bruta': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control form-control-sm text-right font-weight-600',
                     'required': True,
                     'readonly': True
                 }
             ),
             'rebaja_mejoras': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control form-control-sm text-right font-weight-600',
                     'required': True,
                 }
             ),
             'diferencia_neta': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control form-control-sm text-right font-weight-600',
                     'required': True,
                     'readonly': True
                 }
             ),
             'tenencia': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control form-control-sm text-right font-weight-600',
                     'required': True,
                     'type': 'number',
                     'readonly': True
@@ -118,21 +118,21 @@ class PlusvaliaForm(forms.ModelForm):
             ),
             'base_rebajar_moneda': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control form-control-sm text-right font-weight-600',
                     'required': True,
                     'type': 'number'
                 }
             ),
             'rebaja_desvalorizacion': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control form-control-sm text-right font-weight-600',
                     'required': True,
                     'type': 'number'
                 }
             ),
             'utilidad_imponible': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control form-control-sm text-right font-weight-600',
                     'required': True,
                 }
             ),

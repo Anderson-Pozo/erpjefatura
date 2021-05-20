@@ -72,7 +72,7 @@
                 {#                {{ alcabala.valor_compra_venta}}#}
             </div>
         </div>
-        <div class="card-body p-4 p-md-5">
+        <div class="card-body p-4 ml-4 p-md-5">
             <!-- Invoice table-->
             <div class="table-responsive">
                 <table class="table table-borderless mb-0">
@@ -138,14 +138,14 @@
                         </td>
                         <td class="text-right font-weight-bold" colspan="4">
                             {% if alcabala.get_zona == 'Urbana' %}
-                                <input class="form-control form-control-sm"
+                                <input class="form-control form-control-sm text-right font-weight-600"
                                        name="utilidad_imponible"
                                        type="number"
                                        value="5.00"
                                        readonly
                                 >
                             {% else %}
-                                <input class="form-control form-control-sm"
+                                <input class="form-control form-control-sm text-right font-weight-600"
                                        name="utilidad_imponible"
                                        type="number"
                                        value="0.00"
