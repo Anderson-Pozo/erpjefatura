@@ -2,11 +2,23 @@ from .middleware import RequestMiddleware
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
+list_models = ['Juridico',
+               'Natural',
+               'Establecimiento',
+               'TipoActividad',
+               'Impuesto',
+               'Multa',
+               'Vencimiento',
+               'Alcabala',
+               'Plusvalia',
+               'Patente',
+               'DetallePatente',
+               'Grupo',
+               'User']
+
 
 @receiver(post_save)
 def audit_log(sender, instance, created, raw, **kwargs):
-    list_models = []
-    # list_models = ['Juridico', ]
 
     if sender.__name__ not in list_models:
         return
@@ -20,8 +32,6 @@ def audit_log(sender, instance, created, raw, **kwargs):
 
 @receiver(post_delete)
 def audit_delete_log(sender, instance, **kwargs):
-    list_models = []
-    # list_models = ['Juridico', ]
 
     if sender.__name__ not in list_models:
         return
@@ -34,7 +44,6 @@ def get_user():
     thread_local = RequestMiddleware.thread_local
     if hasattr(thread_local, 'user'):
         user = thread_local.user
-        print(user)
     else:
         user = None
     return user
