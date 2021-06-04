@@ -2,6 +2,8 @@ from .middleware import RequestMiddleware
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
+# list_models = []
+
 list_models = ['Juridico',
                'Natural',
                'Establecimiento',
@@ -24,6 +26,9 @@ def audit_log(sender, instance, created, raw, **kwargs):
         return
 
     user = get_user()
+
+    if user is None:
+        return
     if created:
         instance.save_addition(user)
     elif not raw:
@@ -37,6 +42,10 @@ def audit_delete_log(sender, instance, **kwargs):
         return
 
     user = get_user()
+
+    if user is None:
+        return
+
     instance.save_deletion(user)
 
 
