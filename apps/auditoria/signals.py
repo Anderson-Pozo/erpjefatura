@@ -20,7 +20,7 @@ list_models = ['Juridico',
 
 
 @receiver(post_save)
-def audit_log(sender, instance, created, raw, **kwargs):
+def audit_log(sender, instance, created, raw, update_fields, **kwargs):
 
     if sender.__name__ not in list_models:
         return
@@ -32,6 +32,8 @@ def audit_log(sender, instance, created, raw, **kwargs):
     if created:
         instance.save_addition(user)
     elif not raw:
+        # Guardar mensaje con los campos editados
+        print('FIELDS', update_fields)
         instance.save_edition(user)
 
 
@@ -53,6 +55,8 @@ def get_user():
     thread_local = RequestMiddleware.thread_local
     if hasattr(thread_local, 'user'):
         user = thread_local.user
+        if user.is_anonymous:
+            user = None
     else:
         user = None
     return user
