@@ -68,6 +68,6 @@ class Direccion(AuditMixin, models.Model):
     def to_json(self):
         item = model_to_dict(self)
         return item
-
+    
     class Meta:
         db_table = "direccion"

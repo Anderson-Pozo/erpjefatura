@@ -60,7 +60,7 @@ class User(AuditMixin, AbstractUser):
             return 'NoN'
 
 
-class Grupo(Group):
+class Grupo(AuditMixin, Group):
     class Meta:
         proxy = True
 
@@ -69,7 +69,7 @@ class Grupo(Group):
         return item
 
 
-class Permisos(Permission):
+class Permisos(AuditMixin, Permission):
     class Meta:
         proxy = True
 

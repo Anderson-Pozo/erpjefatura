@@ -21,6 +21,15 @@ class AdminMixin(LoginRequiredMixin, object):
         return super().dispatch(request, *args, **kwargs)
 
 
+class StaffMixin(LoginRequiredMixin, object):
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if request.user.is_staff:
+                messages.error(request, 'No tiene permiso para acceder a esta vista')
+                return redirect('index')
+        return super().dispatch(request, *args, **kwargs)
+
+
 class PermissionRequiredMixinUser(object):
     """
         This class validate if user has all permission in views

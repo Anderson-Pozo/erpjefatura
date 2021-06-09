@@ -15,7 +15,7 @@ from .forms import LoginForm, UserForm, AccountForm, GrupoForm, RecoverPasswordF
 from apps.utils.ajax import *
 from .models import User, Grupo, Permisos
 from apps.administrador.models import Logs
-from .mixins import PermissionRequiredMixinUser, AdminMixin
+from .mixins import AdminMixin, StaffMixin
 from apps.administrador.mails import send_mail_thread
 
 
